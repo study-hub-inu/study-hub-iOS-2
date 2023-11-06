@@ -196,7 +196,7 @@ final class NicknameViewController: UIViewController {
     // MARK: - makeUI
     func makeUI(){
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-40)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-35)
             make.centerX.equalToSuperview()
         }
         
@@ -426,6 +426,10 @@ final class NicknameViewController: UIViewController {
             departmentVC.gender = gender
             departmentVC.nickname = nicknameTextField.text
 
+            let backButton = UIBarButtonItem()
+            backButton.tintColor = .white
+            navigationItem.backBarButtonItem = backButton
+            
             navigationController?.pushViewController(departmentVC, animated: true)
         }
     }

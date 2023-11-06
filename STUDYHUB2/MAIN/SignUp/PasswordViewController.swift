@@ -227,7 +227,7 @@ final class PasswordViewController: UIViewController {
   // MARK: - makeUI
   func makeUI(){
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-40)
+      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-35)
       make.centerX.equalToSuperview()
     }
     
@@ -363,6 +363,11 @@ final class PasswordViewController: UIViewController {
     
     nicknameVC.email = email
     nicknameVC.password = password
+      
+    let backButton = UIBarButtonItem()
+    backButton.tintColor = .white
+    navigationItem.backBarButtonItem = backButton
+      
     navigationController?.pushViewController(nicknameVC, animated: true)
     
   }
@@ -375,7 +380,10 @@ final class PasswordViewController: UIViewController {
       
       // Change the color of the passwordTextFielddividerLine based on the validation result
       passwordTextFielddividerLine.backgroundColor = isValidPassword ? .green : .red
-        
+//        if passwordTextFielddividerLine.backgroundColor == .red{
+//            nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+//            nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
+//        }
         if isValidPassword {
             canuseLabel.isHidden = false
             cannotuseLabel.isHidden = true

@@ -1,21 +1,27 @@
 import UIKit
 
-class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
+class DepartmentselectViewController: UIViewController, UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource {
     
 //    weak var delegate: DepartmentSelectionDelegate?
-
+    // Your table view
+    let tableView = UITableView()
     
     private let deleteButton = UIButton(type: .system)
     private let searchResultButton = UIButton(type: .system)
-    
-    // DepartmentselectViewController 클래스 내에 프로퍼티 추가
-    var selectedDepartments: [String] = [] // 선택된 학과를 저장할 배열
     var departmentButtons: [UIButton] = [] // 선택된 학과를 나타내는 버튼을 저장할 배열
+
     
     private let headerContentStackView = UIStackView()
     private let searchBar = UISearchBar()
     private let infoLabel1 = UILabel()
     private let infoLabel2 = UILabel()
+    
+    // Your available departments
+     let availableDepartments = ["컴퓨터공학과", "정보통신공학과", "임베디드시스템공학과"]
+     
+     // For storing the matching results
+     var matchingDepartments: [String] = []
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -74,7 +80,13 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
         headerContentStackView.axis = .vertical
         headerContentStackView.spacing = 16
         headerContentStackView.translatesAutoresizingMaskIntoConstraints = false
-
+        
+//        // Create the search icon button
+//        let searchIconButton = UIButton(type: .system)
+//        searchIconButton.setImage(UIImage(systemName: "magnifyingglass"), for: .normal)
+//        searchIconButton.tintColor = .black
+//        searchIconButton.addTarget(self, action: #selector(searchIconButtonTapped), for: .touchUpInside)
+//        searchIconButton.translatesAutoresizingMaskIntoConstraints = false
         
         // Search Bar
         searchBar.placeholder = "관련학과를 입력해주세요"
@@ -82,6 +94,13 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
         searchBar.delegate = self // Set the delegate to self
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         headerContentStackView.addArrangedSubview(searchBar)
+        
+        // Set up the table view
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        headerContentStackView.addArrangedSubview(tableView)
+     
         
         // Create labels for additional information
         infoLabel1.text = "- 해당 스터디와 관련된 학과를 선택해주세요"
@@ -97,7 +116,9 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
         // Add the info labels to the header content stack view
         headerContentStackView.addArrangedSubview(infoLabel1)
         headerContentStackView.addArrangedSubview(infoLabel2)
-        
+    
+
+
         // Create a scroll view to make the content scrollable
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -129,10 +150,7 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
 //            searchIconButton.trailingAnchor.constraint(equalTo: searchBar.trailingAnchor),
 //            searchIconButton.widthAnchor.constraint(equalToConstant: 20),
 //            searchIconButton.heightAnchor.constraint(equalToConstant: 20),
-//
-            // Info labels constraints
-            infoLabel1.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor, constant: 50),
-            infoLabel2.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor, constant: 20),
+
             
             // Header content stack view constraints
             headerContentStackView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -140,6 +158,15 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
             headerContentStackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             headerContentStackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             headerContentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            
+            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: -10),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                        
+//            infoLabel1.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor, constant: 50),
+//            infoLabel2.leadingAnchor.constraint(equalTo: searchBar.leadingAnchor, constant: 20),
+        
             
             // Scroll view constraints
             scrollView.topAnchor.constraint(equalTo: headerStackView.bottomAnchor, constant: 16),
@@ -155,21 +182,34 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
         headerContentStackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor).isActive = true
     }
     
-    // UISearchBarDelegate에서 검색 버튼을 누를 때 호출되는 메서드
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if let searchText = searchBar.text, !searchText.isEmpty {
-            // 입력된 텍스트가 비어 있지 않으면 버튼을 만듭니다.
-            createSearchButton(withText: searchText)
-            
-            // 검색 바 초기화
-            searchBar.text = ""
-            
-            // 라벨 삭제
-            infoLabel1.removeFromSuperview()
-            infoLabel2.removeFromSuperview()
-        }
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        matchingDepartments = availableDepartments.filter { $0.contains(searchText) }
+        tableView.reloadData()
+        
+        // Toggle the visibility of info labels based on search bar text
+        infoLabel1.isHidden = !searchText.isEmpty
+        infoLabel2.isHidden = !searchText.isEmpty
+    }
+    
+    @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return matchingDepartments.count
     }
 
+    @objc(tableView:cellForRowAtIndexPath:) internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = matchingDepartments[indexPath.row]
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedDepartment = matchingDepartments[indexPath.row]
+        createSearchButton(withText: selectedDepartment)
+        searchBar.text = ""
+        matchingDepartments.removeAll()
+        tableView.reloadData()
+    }
+
+    
     func createSearchButton(withText text: String) {
         // 버튼 생성
         // Stack view for the newStudyLabel and viewAllButton
@@ -222,18 +262,8 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
         deleteButton.removeFromSuperview()
         
     }
-    
+ 
 
-//    @objc func doneButtonTapped() {
-////        print("선택된 학과: \(searchResultButton.currentTitle)")
-//        if searchResultButton.currentTitle != nil {
-//                // 첫 번째 버튼의 제목을 가져와 선택된 학과로 사용합니다.
-////                print("선택된 학과: \(searchResultButton.currentTitle)")
-////                print("선택된 학과: \(searchResultButton.currentTitle)")
-//            }
-//        dismiss(animated: true, completion: nil)
-//    }
-   
     
     @objc func doneButtonTapped() {
         if let selectedDepartment = searchResultButton.currentTitle {
@@ -242,7 +272,7 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
 
             // CreateStudyViewController의 categoryStackView에 버튼을 추가
             createVC.addDepartmentButton(selectedDepartment)
-            
+
             // CreateStudyViewController를 표시
             present(createVC, animated: true, completion: nil)
         }
@@ -261,3 +291,4 @@ class DepartmentselectViewController: UIViewController, UISearchBarDelegate {
         self.dismiss(animated: true, completion: nil)
     }
 }
+

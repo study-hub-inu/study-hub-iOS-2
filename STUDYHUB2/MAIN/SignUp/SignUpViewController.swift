@@ -165,7 +165,7 @@ final class SignUpViewController: UIViewController {
     // MARK: - makeUI
     func makeUI(){
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(-35)
             make.centerX.equalTo(view)
         }
         
@@ -475,6 +475,11 @@ final class SignUpViewController: UIViewController {
                         if validResult {
                             let passwordVC = PasswordViewController()
                             passwordVC.email = email
+                            
+                            let backButton = UIBarButtonItem()
+                            backButton.tintColor = .white
+                            self.navigationItem.backBarButtonItem = backButton
+                            
                             self.navigationController?.pushViewController(passwordVC, animated: true)
                         } else {
                             
