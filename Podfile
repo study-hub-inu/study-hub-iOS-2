@@ -11,7 +11,7 @@ target 'STUDYHUB2' do
     inherit! :search_paths
     # Pods for testing
   end
-
+pod 'FSCalendar'
   target 'STUDYHUB2UITests' do
     # Pods for testing
   end

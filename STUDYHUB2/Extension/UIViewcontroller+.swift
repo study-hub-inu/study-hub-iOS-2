@@ -2,7 +2,8 @@
 //  UIViewcontrollerExtention.swift
 //  STUDYHUB2
 //
-
+//  Created by 최용헌 on 2023/10/12.
+//
 
 import UIKit
 
@@ -41,26 +42,35 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
   
   // 날짜 선택하는 버튼
   func createDateButton(selector: Selector) -> UIButton {
-    let button = UIButton()
-    button.setTitle("선택하기", for: .normal)
-    button.contentHorizontalAlignment = .left
-    button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
-    button.setTitleColor(UIColor(hexCode: "#A1AAB0"), for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-    button.backgroundColor = .white
-    button.layer.borderWidth = 1
-    button.layer.borderColor = UIColor(hexCode: "#D8DCDE").cgColor
-    button.layer.cornerRadius = 2
-    button.addTarget(self, action: selector, for: .touchUpInside)
-    
-    return button
+      // 버튼 초기화
+      let button = UIButton()
+      
+      // 버튼에 이미지 설정
+      let image = UIImage(named: "RightArrow")
+      button.setImage(image, for: .normal)
+      
+      // 버튼의 이미지 위치 조절
+      button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 320, bottom: 0, right: 10)
+      
+      // 버튼의 나머지 속성 설정
+      button.setTitle("선택하기", for: .normal)
+      button.contentHorizontalAlignment = .left
+      button.setTitleColor(UIColor(hexCode: "#A1AAB0"), for: .normal)
+      button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+      button.backgroundColor = .white
+      button.layer.borderWidth = 1
+      button.layer.borderColor = UIColor(hexCode: "#D8DCDE").cgColor
+      button.layer.cornerRadius = 5
+      button.addTarget(self, action: selector, for: .touchUpInside)
+      
+      return button
   }
-  
+
   // info
   func createTextField(title: String) -> UITextField {
     let textField = UITextField()
     let placeholderTextAttributes: [NSAttributedString.Key: Any] = [
-      .foregroundColor: UIColor.gray,
+      .foregroundColor: UIColor.bg50,
       .font: UIFont.systemFont(ofSize: 14)
     ]
     
@@ -73,7 +83,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     textField.borderStyle = .roundedRect
     textField.layer.cornerRadius = 5
     textField.layer.borderColor = UIColor.lightGray.cgColor
-    textField.layer.borderWidth = 1.0
+    textField.layer.borderWidth = 0.5
     textField.delegate = self
     return textField
   }
@@ -90,7 +100,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     let stackView = UIStackView()
     stackView.axis = axis
     stackView.spacing = spacing
-
+    
     return stackView
   }
   
@@ -109,7 +119,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     return button
   }
   
-  // 날짜 변경함수
+  // MARK: - 날짜 변경 함수
   func convertToFormat(dateString: String) -> String {
     let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "yyyy년 MM월 dd일" // 입력된 날짜의 형식
@@ -119,16 +129,16 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     return dateFormatter.string(from: date)
   }
   
-  // UITextField가 선택될 때 호출되는 메서드
+  // MARK: -  UITextField가 선택될 때 호출되는 메서드
   public func textFieldDidBeginEditing(_ textField: UITextField) {
-      textField.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 검은색으로 변경
-      textField.layer.borderWidth = 1.0 // 테두리 두께 설정
+    textField.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 검은색으로 변경
+    textField.layer.borderWidth = 1.0 // 테두리 두께 설정
   }
-
-  // UITextField가 선택 해제될 때 호출되는 메서드
+  
+  // MARK: - UITextField가 선택 해제될 때 호출되는 메서드
   public func textFieldDidEndEditing(_ textField: UITextField) {
-      textField.layer.borderColor = UIColor.clear.cgColor // 테두리 색상을 초기화 (투명)
-      textField.layer.borderWidth = 0.0 // 테두리 두께 초기화
+    textField.layer.borderColor = UIColor.clear.cgColor // 테두리 색상을 초기화 (투명)
+    textField.layer.borderWidth = 0.0 // 테두리 두께 초기화
   }
   
   public func textViewDidBeginEditing(_ textView: UITextView) {
@@ -149,4 +159,41 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     textView.layer.borderWidth = 1.0 // 테두리 두께 초기화
   }
   
+  // MARK: - toast message, 이미지가 뒤에 나오고 있음 앞으로 빼기
+  func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
+    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
+                                           y: self.view.frame.size.height-100,
+                                           width: 300,
+                                           height: 35))
+    
+    toastLabel.backgroundColor = UIColor.g100
+    toastLabel.textColor = UIColor.g10
+    toastLabel.font = font
+    toastLabel.textAlignment = .center;
+    toastLabel.text = message
+    toastLabel.alpha = 1.0
+    toastLabel.layer.cornerRadius = 10;
+    toastLabel.clipsToBounds  =  true
+    
+    if let text = toastLabel.text {
+      
+      let imageAttachment = NSTextAttachment()
+      imageAttachment.image = UIImage(named: "WarningImg")
+
+      let attributedString = NSMutableAttributedString(string: text)
+      attributedString.append(NSAttributedString(attachment: imageAttachment))
+
+      toastLabel.attributedText = attributedString
+    }
+    
+    self.view.addSubview(toastLabel)
+    UIView.animate(withDuration: 10.0, delay: 0.1,
+                   options: .curveEaseOut, animations: {
+      toastLabel.alpha = 0.0
+    }, completion: {(isCompleted) in
+      toastLabel.removeFromSuperview()
+    })
+  }
 }
+
+

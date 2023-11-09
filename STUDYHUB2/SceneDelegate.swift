@@ -26,10 +26,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     } else {
   
       // 로그인하지 않은 경우 LoginViewController 표시
-      let loginViewController = LoginViewController()
-      let navigationController = UINavigationController(rootViewController: loginViewController)
+      if #available(iOS 16.0, *) {
+        let loginViewController = LoginViewController()
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        window?.rootViewController = navigationController
+
+      } else {
+        let loginViewController = PostedStudyViewController()
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        window?.rootViewController = navigationController
+      }
    
-      window?.rootViewController = navigationController
     }
     
     window?.makeKeyAndVisible()

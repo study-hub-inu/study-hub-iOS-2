@@ -2,13 +2,14 @@ import UIKit
 
 import SnapKit
 
-class CreateStudyViewController: UIViewController {
-  
+// 캘린더 커스텀하기, 캘린더 선택 버튼 수정
+final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   let tokenManager = TokenManager.shared
-  private var selectedDepartments: [String] = [] // 선택된 학과를 저장할 배열
   var genderType: String?
   var contactMethod: String?
+  var selectedMajor: String?
   var postDataSender: SendPostData?
+
   // 선택한 학과를 저장할 프로퍼티
   var selectedDepartment: String? {
     didSet {
@@ -19,6 +20,8 @@ class CreateStudyViewController: UIViewController {
     }
   }
   
+  var selectDate: String? = ""
+
   // MARK: - UI설정
   private lazy var completeButton: UIButton = {
     let completeButton = UIButton()
@@ -65,24 +68,25 @@ class CreateStudyViewController: UIViewController {
   private lazy var periodStackView = createStackView(axis: .vertical,
                                                      spacing: 16)
   
-  private lazy var startDateButton = createDateButton(selector: #selector(startDateButtonTapped))
-  private lazy var endDateButton = createDateButton(selector: #selector(endDateButtonTapped))
+  private lazy var startDateButton = createDateButton(selector: #selector(calendarButtonTapped))
+  private lazy var endDateButton = createDateButton(selector: #selector(calendarButtonTapped))
   
   private lazy var chatLinkTextField = createTextField(title: "채팅방 링크를 첨부해 주세요")
-
+  
+  
   private lazy var studyproduceTextView: UITextView = {
     let tv = UITextView()
     tv.text = "스터디에 대해 알려주세요\n (운영 방법, 대면 여부,벌금,공부 인증 방법 등)"
     tv.textColor = UIColor.lightGray
     tv.font = UIFont.systemFont(ofSize: 15)
-    tv.layer.borderWidth = 1.0
+    tv.layer.borderWidth = 0.5
     tv.layer.borderColor = UIColor.lightGray.cgColor
     tv.layer.cornerRadius = 5.0
     tv.delegate = self
-    tv.adjustUITextViewHeight()
+    tv.textViewDidChange(tv)
     return tv
   }()
-
+  
   private lazy var fineAmountTextField = createTextField(title: "금액을 알려주세요")
   
   private lazy var studymemberTextField = createTextField(title: "스터디 인원을 알려주세요")
@@ -141,10 +145,12 @@ class CreateStudyViewController: UIViewController {
                                                         spacing: 16)
   
   private lazy var studytitleLabel = createLabel(title: "스터디 제목",
-                                                 textColor: .black, fontSize: 18)
+                                                 textColor: .black,
+                                                 fontSize: 18)
   
   private lazy var studyproduceLabel = createLabel(title: "내용",
-                                                   textColor: .black, fontSize: 18)
+                                                   textColor: .black,
+                                                   fontSize: 18)
   
   private let studyinfoStackViewDividerLine: UIView = {
     let studyinfoStackViewDividerLine = UIView()
@@ -155,6 +161,20 @@ class CreateStudyViewController: UIViewController {
   private lazy var associatedepartLabel = createLabel(title: "관련 학과 선택",
                                                       textColor: .black,
                                                       fontSize: 18)
+  private lazy var selectMajorLabel: BasePaddingLabel = {
+    let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
+    label.textColor = .bg80
+    label.font = UIFont.systemFont(ofSize: 14)
+    return label
+  }()
+  
+  private lazy var cancelButton: UIButton = {
+    let button = UIButton()
+    let img = UIImage(named: "DeleteImg")
+    button.setImage(img, for: .normal)
+    button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+    return button
+  }()
   
   private lazy var periodLabel = createLabel(title: "기간",
                                              textColor: .black,
@@ -250,6 +270,10 @@ class CreateStudyViewController: UIViewController {
     return associatedepartButton
   }()
   
+  private lazy var countAlert = createLabel(title: "1명부터 가능해요(본인 제외)",
+                                    textColor: .r50,
+                                    fontSize: 12)
+  
   let scrollView = UIScrollView()
   
   // MARK: - viewDidLoad
@@ -260,7 +284,7 @@ class CreateStudyViewController: UIViewController {
     setUpLayout()
     makeUI()
   }
-
+  
   // MARK: - setUpLayout
   func setUpLayout(){
     headerStackView.addArrangedSubview(backButton)
@@ -277,7 +301,7 @@ class CreateStudyViewController: UIViewController {
     view.addGestureRecognizer(tapGesture)
     
     chatLinkDividerLine.heightAnchor.constraint(equalToConstant: 10).isActive = true
-   
+    
     chatLinkTextField.clearButtonMode = .always
     chatLinkStackView.addArrangedSubview(chatLinkLabel)
     chatLinkStackView.addArrangedSubview(descriptionLabel)
@@ -303,7 +327,7 @@ class CreateStudyViewController: UIViewController {
     
     categoryStackView.addArrangedSubview(associatedepartStackView)
     categoryStackView.addArrangedSubview(departmentButtonStackView)
-
+    
     associatedepartStackView.addArrangedSubview(associatedepartLabel)
     associatedepartStackView.addArrangedSubview(associatedepartButton)
     
@@ -322,7 +346,7 @@ class CreateStudyViewController: UIViewController {
     studymemberStackView.addArrangedSubview(genderLabel)
     studymemberStackView.addArrangedSubview(description5Label)
     studymemberStackView.addArrangedSubview(genderButtonsStackView)
-
+    
     meetButtonsStackView.distribution = .fillEqually
     meetButtonsStackView.addArrangedSubview(mixmeetButton)
     meetButtonsStackView.addArrangedSubview(contactButton)
@@ -343,6 +367,8 @@ class CreateStudyViewController: UIViewController {
     studymethodStackView.addArrangedSubview(finefixStackView)
     
     // Add UI elements to the headerContentStackView
+    startDateButton.tag = 1
+    endDateButton.tag = 2
     periodStackView.addArrangedSubview(periodLabel)
     periodStackView.addArrangedSubview(grayDividerLine3)
     periodStackView.addArrangedSubview(startLabel)
@@ -570,38 +596,45 @@ class CreateStudyViewController: UIViewController {
     }
   }
   
-  // 선택한 학과에 대한 버튼을 생성하고 departmentButtonStackView에 추가하는 함수
+  // MARK: -  선택한 학과에 대한 버튼을 생성
   func addDepartmentButton(_ department: String) {
-      // Department 버튼과 삭제 버튼을 수평으로 나열하는 스택 뷰 생성
-      lazy var buttonStackView: UIStackView = createStackView(axis: .horizontal, spacing: 0)
-      buttonStackView.distribution = .fill // 뷰들이 스택 뷰의 전체 너비를 채우도록 설정
-      buttonStackView.alignment = .center // 수직 방향 가운데 정렬
+    selectedMajor = department
 
-      departmentButtonStackView.addArrangedSubview(buttonStackView)
+    let labelText = selectedMajor
+    let labelSize = (labelText as? NSString)?.size(withAttributes: [NSAttributedString.Key.font: selectMajorLabel.font!])
 
-      // Department 버튼 생성
-      let departmentButton = UIButton(type: .system)
-      departmentButton.backgroundColor = UIColor(hexCode: "F3F5F6")
-      departmentButton.setTitleColor(UIColor(hexCode: "68737D"), for: .normal)
-      departmentButton.setTitle(department, for: .normal)
-      departmentButton.layer.cornerRadius = 20
-      departmentButton.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-      departmentButton.contentHorizontalAlignment = .center // 텍스트 정렬
+    selectMajorLabel.text = labelText
+    selectMajorLabel.clipsToBounds = true
+    selectMajorLabel.layer.cornerRadius = 15
+    selectMajorLabel.backgroundColor = .bg30
+    selectMajorLabel.textAlignment = .left
+    selectMajorLabel.adjustsFontSizeToFitWidth = true
+
+    selectedMajor = selectMajorLabel.text ?? ""
     
-
-      // 삭제 버튼 생성
-      let deleteButton = UIButton(type: .system)
-      deleteButton.setImage(UIImage(systemName: "xmark.circle.fill"), for: .normal)
-      deleteButton.tintColor = .lightGray
-
-      // 문자열 길이에 따라 버튼 가로 길이 동적 조절
-      let buttonWidth = department.width(withConstrainedHeight: 30, font: departmentButton.titleLabel!.font)
-      departmentButton.widthAnchor.constraint(equalToConstant: buttonWidth + 50).isActive = true
-
-      buttonStackView.addArrangedSubview(departmentButton)
-      buttonStackView.addArrangedSubview(deleteButton)
+    scrollView.addSubview(selectMajorLabel)
+    scrollView.addSubview(cancelButton)
+    
+    selectMajorLabel.snp.makeConstraints { make in
+      make.top.equalTo(associatedepartLabel.snp.bottom).offset(10)
+      make.leading.equalTo(associatedepartLabel)
+      make.width.equalTo((labelSize?.width ?? 30) + 35)
+      make.height.equalTo(30)
+    }
+    
+    cancelButton.snp.makeConstraints { make in
+      make.centerY.equalTo(selectMajorLabel.snp.centerY)
+      make.leading.equalTo(selectMajorLabel.snp.trailing).offset(-35)
+    }
+    view.layoutIfNeeded()
   }
-
+  
+  @objc func cancelButtonTapped(){
+    selectMajorLabel.isHidden = true
+    cancelButton.isHidden = true
+    
+    selectedMajor = nil
+  }
   
   // 키보드 내리기 위한 탭 제스처 핸들러
   @objc func handleTap() {
@@ -622,7 +655,7 @@ class CreateStudyViewController: UIViewController {
       
       // Create a text field for chat link input
       let fineTypesTextField = createTextField(title: "지각비, 결석비 등")
-  
+      
       // Create a text field for "얼마인가요?"
       let fineAmountLabel = createLabel(title: "얼마인가요?",
                                         textColor: UIColor(hexCode: "#49545C"),
@@ -668,22 +701,23 @@ class CreateStudyViewController: UIViewController {
         make.top.equalTo(fineAmountTextField.snp.bottom).offset(10)
       }
       
-    } 
+    }
   }
   
   // MARK: - 완료버튼 누를 때 함수
   @objc func completeButtonTapped() {
-    // 성별, 스터디방식 버튼에 따라서 내용이 안바뀜
+    // 과를 영어로 변경해야함
     let studyData = CreateStudyRequest(
       chatUrl: chatLinkTextField.text ?? "",
       close: false,
       content: studyproduceTextView.text ?? "",
+      // 무관일때 안됨 null이 아닌가
       gender: genderType ?? "null",
-      major: "COMPUTER_SCIENCE_ENGINEERING",
+      major: convertMajor(selectedMajor ?? "", toEnglish: true) ,
       penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
-      studyEndDate: (endDateTextField.text ?? "").dateConvert(),
+      studyEndDate: endDateButton.currentTitle ?? "",
       studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
-      studyStartDate: (startDateTextField.text ?? "").dateConvert(),
+      studyStartDate: startDateButton.currentTitle ?? "",
       studyWay: contactMethod ?? "CONTACT",
       title: studytitleTextField.text ?? "")
     
@@ -695,13 +729,17 @@ class CreateStudyViewController: UIViewController {
       case .success(let userData):
         self.postDataSender?.sendData(data: userData)
         print(userData)
+        
+        let postVC = PostedStudyViewController()
+        self.navigationController?.pushViewController(postVC, animated: true)
+        
       case .failure(let error):
         print("Error: \(error)")
       }
     }
   }
-
-
+  
+  
   // MARK: - 벌금 없을 때 함수
   @objc func noFineButtonTapped(_ sender: UIButton) {
     sender.isSelected = !sender.isSelected
@@ -712,22 +750,23 @@ class CreateStudyViewController: UIViewController {
   }
   
   @objc func departmentArrowButtonTapped() {
-    let departmentselectViewController = DepartmentselectViewController()
-    let navigationController = UINavigationController(rootViewController: departmentselectViewController)
+    let departmentselectVC = DepartmentselectViewController()
+    departmentselectVC.previousVC = self
+    let navigationController = UINavigationController(rootViewController: departmentselectVC)
     navigationController.modalPresentationStyle = .fullScreen
     present(navigationController, animated: true, completion: nil)
   }
-
+  
   // MARK: - 성별 눌렸을 때 함수
   @objc func genderButtonTapped(_ sender: UIButton) {
     // Reset colors of all buttons
-    allGenderButton.backgroundColor = .white
+    allGenderButton.layer.borderColor = UIColor.bg50.cgColor
     allGenderButton.setTitleColor(.gray, for: .normal)
     
-    maleOnlyButton.backgroundColor = .white
+    maleOnlyButton.layer.borderColor = UIColor.bg50.cgColor
     maleOnlyButton.setTitleColor(.gray, for: .normal)
     
-    femaleOnlyButton.backgroundColor = .white
+    femaleOnlyButton.layer.borderColor = UIColor.bg50.cgColor
     femaleOnlyButton.setTitleColor(.gray, for: .normal)
     
     // Set the tapped button to orange background
@@ -751,13 +790,13 @@ class CreateStudyViewController: UIViewController {
   // MARK: - 스터디 방식 눌렸을 때 함수
   @objc func meetButtonTapped(_ sender: UIButton) {
     // Reset colors of all buttons
-    contactButton.backgroundColor = .white
+    contactButton.layer.borderColor = UIColor.bg50.cgColor
     contactButton.setTitleColor(.gray, for: .normal)
     
-    untactButton.backgroundColor = .white
+    untactButton.layer.borderColor = UIColor.bg50.cgColor
     untactButton.setTitleColor(.gray, for: .normal)
     
-    mixmeetButton.backgroundColor = .white
+    mixmeetButton.layer.borderColor = UIColor.bg50.cgColor
     mixmeetButton.setTitleColor(.gray, for: .normal)
     
     // Set the tapped button to orange background
@@ -777,117 +816,81 @@ class CreateStudyViewController: UIViewController {
     }
   }
   
-  // MARK: - date 선택
-  @objc func startDateButtonTapped() {
-    // Create a date picker
-    startDatePicker.datePickerMode = .date
-    startDatePicker.preferredDatePickerStyle = .inline // You can choose the style you prefer
-    startDatePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
-    
-    // Create an input view for the date picker
-    startDateTextField.inputView = startDatePicker
-    
-    let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
-    let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissDatePicker))
-    let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    toolbar.setItems([flexibleSpace, doneButton], animated: false)
-    startDateTextField.inputAccessoryView = toolbar
-    
-    // Add the text field to the view
-    view.addSubview(startDateTextField)
-    
-    // Set up constraints for the text field (adjust as needed)
-    startDateTextField.translatesAutoresizingMaskIntoConstraints = false
-    startDateTextField.topAnchor.constraint(equalTo: startDateButton.bottomAnchor, constant: -35).isActive = true
-    startDateTextField.leadingAnchor.constraint(equalTo: periodStackView.leadingAnchor, constant: 40).isActive = true
-    startDateTextField.trailingAnchor.constraint(equalTo: periodStackView.trailingAnchor, constant: -16).isActive = true
-    
-    // Show the date picker
-    startDateTextField.becomeFirstResponder()
-  }
-  
-  @objc func datePickerValueChanged() {
-    // Update the selectedStartDate when the date picker's value changes
-    selectedStartDate = startDatePicker.date
-    updateStartDateTextField() // Update the text field to display the selected date
-  }
-  
-  @objc func dismissDatePicker() {
-    // Dismiss the date picker when the Done button is tapped
-    startDateTextField.resignFirstResponder()
-  }
-  
-  func updateStartDateTextField() {
-    // Update the text field with the selected date
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy년 MM월 dd일" // You can choose the date format you prefer
-    startDateTextField.textColor = .black
-    startDateTextField.text = dateFormatter.string(from: selectedStartDate ?? Date())
-    
-    // Hide the "선택하기" title of startDateButton
-    startDateButton.setTitle("", for: .normal)
-  }
-  
-  @objc func endDateButtonTapped() {
-    // Create a date picker
-    endDatePicker.datePickerMode = .date
-    endDatePicker.preferredDatePickerStyle = .inline // You can choose the style you prefer
-    endDatePicker.addTarget(self, action: #selector(endDatePickerValueChanged), for: .valueChanged)
-    
-    endDateTextField.textColor = .black
-    endDateTextField.inputView = endDatePicker
-    
-    // Set titleTextField's inputAccessoryView to a toolbar with a done button
-    let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 44))
-    let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissEndDatePicker))
-    let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    toolbar.setItems([flexibleSpace, doneButton], animated: false)
-    endDateTextField.inputAccessoryView = toolbar
-    
-    // Assign the toolbar as the input accessory view for the date picker
-    endDateTextField.inputAccessoryView = toolbar
-    
-    // Add the text field to the view
-    view.addSubview(endDateTextField)
-    
-    // Set up constraints for the text field (adjust as needed)
-    endDateTextField.translatesAutoresizingMaskIntoConstraints = false
-    endDateTextField.topAnchor.constraint(equalTo: endDateButton.bottomAnchor, constant: -35).isActive = true
-    endDateTextField.leadingAnchor.constraint(equalTo: periodStackView.leadingAnchor, constant: 40).isActive = true
-    endDateTextField.trailingAnchor.constraint(equalTo: periodStackView.trailingAnchor, constant: -16).isActive = true
-    
-    // Show the date picker
-    endDateTextField.becomeFirstResponder()
-  }
-  
-  @objc func endDatePickerValueChanged() {
-    // Update the selectedEndDate when the date picker's value changes
-    selectedEndDate = endDatePicker.date
-    updateEndDateTextField() // Update the text field to display the selected date
-  }
-  
-  @objc func dismissEndDatePicker() {
-    // Dismiss the date picker when the Done button is tapped
-    endDateTextField.resignFirstResponder()
-  }
-  
-  func updateEndDateTextField() {
-    // Update the text field with the selected date
-    let dateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "yyyy년 MM월 dd일" // You can choose the date format you prefer
-    endDateTextField.text = dateFormatter.string(from: selectedEndDate ?? Date())
-    // Hide the "선택하기" title of endDateButton
-    endDateButton.setTitle("", for: .normal)
-  }
-  
-  // Function to handle back button tap and navigate back to HomeViewController
+  // MARK: - 뒤로 가는 함수
   @objc func goBack() {
     
     self.dismiss(animated: true, completion: nil)
   }
   
+  // MARK: - calenderTapped함수
+  @objc func calendarButtonTapped(_ sender: Any) {
+    let viewControllerToPresent = CalendarViewController()
+    viewControllerToPresent.delegate = self
+    
+    if (sender as AnyObject).tag == 1 {
+      viewControllerToPresent.buttonSelect = true
+    } else {
+      viewControllerToPresent.buttonSelect = false
+    }
+    if #available(iOS 15.0, *) {
+      if let sheet = viewControllerToPresent.sheetPresentationController {
+        if #available(iOS 16.0, *) {
+          sheet.detents = [.custom(resolver: { context in
+            return 400.0
+          })]
+        } else {
+          // Fallback on earlier versions
+        }
+        sheet.largestUndimmedDetentIdentifier = nil
+        sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        sheet.prefersEdgeAttachedInCompactHeight = true
+        sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        sheet.preferredCornerRadius = 20
+      }
+    } else {
+      // Fallback on earlier versions
+    }
+    self.present(viewControllerToPresent, animated: true, completion: nil)
+  }
+  
+  // 캘린더에서 선택한 날짜로 바꿈
+  func dataSend(data: String, buttonTag: Int) {
+    if buttonTag == 1 {
+      startDateButton.setTitle(data, for: .normal)
+    } else if buttonTag == 2 {
+      endDateButton.setTitle(data, for: .normal)
+    }
+  }
 }
 
+// MARK: - textField 0 입력 시
+extension CreateStudyViewController {
+  override func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField == studymemberTextField, let text = textField.text, text == "0" {
+      countAlert.isHidden = false
+      studymemberTextField.layer.borderColor = UIColor.r50.cgColor
+      
+      scrollView.addSubview(countAlert)
+      
+      countAlert.snp.makeConstraints { make in
+        make.top.equalTo(studymemberTextField.snp.bottom)
+        make.leading.equalTo(studymemberTextField)
+      }
+      studymemberTextField.text = ""
+    }
+    else {
+      studymemberTextField.layer.borderColor = UIColor.bg50.cgColor
+      
+      countAlert.isHidden = true
+    }
+  }
+}
+
+// 다음 페이지로 데이터 전달할 delegate
 protocol SendPostData {
   func sendData(data: CreateStudyRequest)
 }
+
+
+
+

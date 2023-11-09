@@ -82,7 +82,6 @@ final class PostManager {
       }
       
       print("Response Status Code:", httpResponse.statusCode)
-      
       do {
         let responseJSON = try JSONSerialization.jsonObject(with: safeData, options: []) as? [String: Any]
         if let response = responseJSON?["response"] as? String, response == "ACCEPTED" {
@@ -91,7 +90,9 @@ final class PostManager {
           print("Post request failed.")
         }
       } catch {
-        print("JSON Parsing Error:", error)
+        // 반환되는 값을 알아야함
+        
+        print("JSON 파싱 에러: \(error.localizedDescription)")
         completion(.failure(.parseError))
       }
 
