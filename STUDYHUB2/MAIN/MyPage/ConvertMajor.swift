@@ -11,13 +11,16 @@ extension MyPageViewController {
   func convertMajor(major: String) -> String {
     switch major {
     case "INFORMATION_TELECOMMUNICATION_ENGINEERING":
-      return "정보통신공학"
+      return "정보통신공학과"
     default:
-        return "비어있으"
+        return "비어있음"
     }
     
   }
 }
+
+
+
 
 /*
  공연예술과(Performing Arts)

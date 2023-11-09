@@ -260,6 +260,8 @@ final class SignUpViewController: UIViewController {
                 verificationCodeTextField.isHidden = true
                 verificationCodedividerLine.isHidden = true
                 invalidLabel.isHidden = isValidEmail
+                nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+                nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
             }
         }
         if validButton.title(for: .normal) == "재전송" {
@@ -382,6 +384,8 @@ final class SignUpViewController: UIViewController {
                     DispatchQueue.main.async {
                         self?.emailTextFielddividerLine.backgroundColor = .red
                         self?.duplicationLabel.isHidden = false
+                        self?.codesendLabel.isHidden = true
+
                     }
                 }
             }
@@ -411,12 +415,22 @@ final class SignUpViewController: UIViewController {
             // Check if the entered email follows the '@inu.ac.kr' format
             let isValidEmail = email.hasSuffix("@inu.ac.kr")
             
+            if isValidEmail && !(verificationCodeTextField.text?.isEmpty ?? true) {
+                nextButton.backgroundColor = UIColor(hexCode: "#FF5530")
+                nextButton.setTitleColor(.white, for: .normal)
+            } else {
+                nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+                nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
+            }
+            
             if isValidEmail {
                 emailTextFielddividerLine.backgroundColor = .gray
                 validButton.backgroundColor = UIColor(hexCode: "#FF5935")
                 validButton.setTitleColor(isValidEmail ? .white : UIColor(hexCode: "#FFFFFF"), for: .normal)
                 
             }else {
+                nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+                nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
                 validButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
                 validButton.setTitleColor(isValidEmail ? .white : UIColor(hexCode: "#6F6F6F"), for: .normal)
             }

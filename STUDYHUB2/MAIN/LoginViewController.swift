@@ -358,7 +358,7 @@ final class LoginViewController: UIViewController {
   
   // Action for the "회원가입" (Signup) button
   @objc func signUpButtonTapped() {
-    let nicknameViewController = NicknameViewController()
+    let signUpViewController = SignUpViewController()
     
       let backButton = UIBarButtonItem(title: "",
                                        style: .plain,
@@ -366,9 +366,9 @@ final class LoginViewController: UIViewController {
                                        action: #selector(backButtonTapped))
       backButton.image = UIImage(systemName: "chevron.left")
       backButton.tintColor = .white
-      nicknameViewController.navigationItem.leftBarButtonItem = backButton
+      signUpViewController.navigationItem.leftBarButtonItem = backButton
       
-      navigationController?.pushViewController(nicknameViewController, animated: true)
+      navigationController?.pushViewController(signUpViewController, animated: true)
   }
   
   @objc func backButtonTapped() {

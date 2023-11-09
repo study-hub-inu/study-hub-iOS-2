@@ -340,35 +340,42 @@ final class PasswordViewController: UIViewController {
     }
     
     if !validatePassword(password: password) {
-      
+        nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+        nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
       passwordTextFielddividerLine.backgroundColor = .red
       
       return
     }
     
     else {
+    nextButton.backgroundColor = UIColor(hexCode: "#FF5530")
+    nextButton.setTitleColor(UIColor(hexCode: "#FFFFFF"), for: .normal)
       passwordTextFielddividerLine.backgroundColor = .green
       
     }
     
     // Check if passwords match
     if password != confirmPassword {
-      
+
       confirmPasswordTextFielddividerLine.backgroundColor = .red
       return
     }
-    
-    // 다음 뷰 컨트롤러로 이메일과 비밀번호 전달
-    let nicknameVC = NicknameViewController()
-    
-    nicknameVC.email = email
-    nicknameVC.password = password
       
-    let backButton = UIBarButtonItem()
-    backButton.tintColor = .white
-    navigationItem.backBarButtonItem = backButton
-      
-    navigationController?.pushViewController(nicknameVC, animated: true)
+      // Check if passwords match
+      if password == confirmPassword, validatePassword(password: password) {
+          // 다음 뷰 컨트롤러로 이메일과 비밀번호 전달
+          let nicknameVC = NicknameViewController()
+          
+          nicknameVC.email = email
+          nicknameVC.password = password
+            
+          let backButton = UIBarButtonItem()
+          backButton.tintColor = .white
+          navigationItem.backBarButtonItem = backButton
+            
+          navigationController?.pushViewController(nicknameVC, animated: true)
+          
+      }
     
   }
   
@@ -380,16 +387,25 @@ final class PasswordViewController: UIViewController {
       
       // Change the color of the passwordTextFielddividerLine based on the validation result
       passwordTextFielddividerLine.backgroundColor = isValidPassword ? .green : .red
-//        if passwordTextFielddividerLine.backgroundColor == .red{
-//            nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
-//            nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
-//        }
+        
+        let confirmPassword = confirmPasswordTextField.text
+
         if isValidPassword {
             canuseLabel.isHidden = false
             cannotuseLabel.isHidden = true
         }else {
+            nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+            nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
             canuseLabel.isHidden = true
             cannotuseLabel.isHidden = false
+        }
+        
+        if password == confirmPassword, isValidPassword {
+            nextButton.backgroundColor = UIColor(hexCode: "#FF5530")
+            nextButton.setTitleColor(UIColor(hexCode: "#FFFFFF"), for: .normal)
+        } else {
+            nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+            nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
         }
     }
   }

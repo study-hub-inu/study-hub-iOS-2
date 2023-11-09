@@ -3,7 +3,7 @@ import UIKit
 import SnapKit
 
 class MyPageViewController: UIViewController {
-  
+    
   var loginStatus: Bool = false
   var myPageUserData: UserData?
   
@@ -33,7 +33,7 @@ class MyPageViewController: UIViewController {
   }()
   
   private lazy var headerContentStackView = createStackView(axis: .vertical,
-                                                            spacing: 16)
+                                                            spacing: 8)
   
   
   // 로그인 하면 보이는 라벨
@@ -359,14 +359,34 @@ class MyPageViewController: UIViewController {
   
   @objc func chevronButtonTapped() {
     // Create an instance of ViewController (assuming that's the name of your ViewController class)
-    let viewController = LoginViewController()
-    
-    // If you want to present it modally, you can use the following code
-    let navigationController = UINavigationController(rootViewController: viewController)
-    navigationController.modalPresentationStyle = .fullScreen
-    
-    // Present the ViewController modally
-    present(navigationController, animated: true, completion: nil)
-  }
+//    let viewController = LoginViewController()
+//
+//    // If you want to present it modally, you can use the following code
+//    let navigationController = UINavigationController(rootViewController: viewController)
+//    navigationController.modalPresentationStyle = .fullScreen
+//
+//    // Present the ViewController modally
+//    present(navigationController, animated: true, completion: nil)
+//  }
   
+      let myinformViewController = MyinformViewController()
+
+      // Pass major information to MyinformViewController
+      myinformViewController.major = convertMajor(major: myPageUserData?.major! ?? "")
+      myinformViewController.nickname = myPageUserData?.nickname
+      myinformViewController.email = myPageUserData?.email
+      myinformViewController.gender = myPageUserData?.gender
+
+
+    
+      
+      // If you want to present it modally, you can use the following code
+      let navigationController = UINavigationController(rootViewController: myinformViewController)
+      navigationController.modalPresentationStyle = .fullScreen
+      
+      // Present the ViewController modally
+      present(navigationController, animated: true, completion: nil)
+    }
+    
+    
 }

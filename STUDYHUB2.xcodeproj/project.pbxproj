@@ -46,6 +46,8 @@
 		F88AB33B2A951AFF001D619C /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB33A2A951AFF001D619C /* CategoryViewController.swift */; };
 		F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB33E2A95236B001D619C /* CreatestudyViewController.swift */; };
 		F89A01102A8686ED00B4C10D /* OpenNewPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F89A010F2A8686ED00B4C10D /* OpenNewPageViewController.swift */; };
+		F8A2C5B22AFA487500EC742F /* MyinformViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A2C5B12AFA487500EC742F /* MyinformViewController.swift */; };
+		F8A2C5B52AFCC19B00EC742F /* NicknamechngViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8A2C5B42AFCC19B00EC742F /* NicknamechngViewController.swift */; };
 		F8D5BC662AB71DDA00B2B154 /* Singleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8D5BC652AB71DDA00B2B154 /* Singleton.swift */; };
 		F8FD98D22AF7F266000A1302 /* SearchBarHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8FD98D12AF7F266000A1302 /* SearchBarHelper.swift */; };
 /* End PBXBuildFile section */
@@ -116,6 +118,8 @@
 		F88AB33A2A951AFF001D619C /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		F88AB33E2A95236B001D619C /* CreatestudyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatestudyViewController.swift; sourceTree = "<group>"; };
 		F89A010F2A8686ED00B4C10D /* OpenNewPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenNewPageViewController.swift; sourceTree = "<group>"; };
+		F8A2C5B12AFA487500EC742F /* MyinformViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyinformViewController.swift; sourceTree = "<group>"; };
+		F8A2C5B42AFCC19B00EC742F /* NicknamechngViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknamechngViewController.swift; sourceTree = "<group>"; };
 		F8D5BC652AB71DDA00B2B154 /* Singleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Singleton.swift; sourceTree = "<group>"; };
 		F8FD98D12AF7F266000A1302 /* SearchBarHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarHelper.swift; sourceTree = "<group>"; };
 		FBF19D90E98D2A473BB1FACD /* Pods_STUDYHUB2Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_STUDYHUB2Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,8 +302,18 @@
 				EE271F2D2ADA6D3700190E7A /* InfoManager.swift */,
 				EE07ADBC2AEFF7BD0096890F /* ConvertMajor.swift */,
 				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
+				F8A2C5B32AFA704800EC742F /* INFO */,
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		F8A2C5B32AFA704800EC742F /* INFO */ = {
+			isa = PBXGroup;
+			children = (
+				F8A2C5B12AFA487500EC742F /* MyinformViewController.swift */,
+				F8A2C5B42AFCC19B00EC742F /* NicknamechngViewController.swift */,
+			);
+			path = INFO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -564,6 +578,7 @@
 				EE271F262AD77CD100190E7A /* UIViewcontroller+.swift in Sources */,
 				EE271F2C2AD9250F00190E7A /* UIView+.swift in Sources */,
 				F80421CC2A7D9BC3006C6B87 /* NicknameViewController.swift in Sources */,
+				F8A2C5B22AFA487500EC742F /* MyinformViewController.swift in Sources */,
 				EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */,
 				F86E031F2A8BBAE600164976 /* SearchViewController.swift in Sources */,
 				F87377592AA850940055B041 /* DepartmentselectViewController.swift in Sources */,
@@ -575,6 +590,7 @@
 				EE271F202AD0584100190E7A /* UIColor+.swift in Sources */,
 				EE271F282AD7852900190E7A /* TapBar.swift in Sources */,
 				F8085D462A8184800067D4DE /* MyPageViewController.swift in Sources */,
+				F8A2C5B52AFCC19B00EC742F /* NicknamechngViewController.swift in Sources */,
 				F8085D3E2A7E9E270067D4DE /* CompleteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

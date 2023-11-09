@@ -7,6 +7,7 @@ final class DepartmentViewController: UIViewController, UITableViewDelegate, UIS
     var gender: String?
     var nickname: String?
     var major: String?
+    var selectedDepartment: String?
     
     lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -168,9 +169,58 @@ final class DepartmentViewController: UIViewController, UITableViewDelegate, UIS
     
     @objc func nextButtonTapped() {
         let completeViewController = CompleteViewController()
-    }
+        
+        
+        // 회원가입 정보 JSON 형식으로 생성
+        let userData: [String: Any] = [
+            "email": email ?? "",
+            "gender": gender ?? "",
+            "major": major ?? "",
+            "nickname": nickname ?? "",
+            "password": password ?? "",
+        ]
+        
+        print("email: \(email)")
+        print("gender: \(gender)")
+        print("major: \(major)")
+        print("nickname: \(nickname)")
+        print("password: \(password)")
+
+
+        
+        
+        // JSON 데이터를 서버로 전송
+        if let jsonData = try? JSONSerialization.data(withJSONObject: userData),
+           let url = URL(string: "https://study-hub.site:443/api/users/signup") {
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.httpBody = jsonData
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            URLSession.shared.dataTask(with: request) { (data, response, error) in
+                if let data = data {
+                    // 서버 응답 데이터 처리
+                    if let json = try? JSONSerialization.jsonObject(with: data, options: []) {
+                        print("서버 응답: \(json)")
+                    }
+                } else if let error = error {
+                    print("네트워크 오류: \(error.localizedDescription)")
+                }
+            }.resume()
+        }
+        
+          let backButton = UIBarButtonItem()
+        backButton.tintColor = .black
+          navigationItem.backBarButtonItem = backButton
+ 
+        navigationController?.pushViewController(completeViewController, animated: true)
+      }
+    
+    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        searchIconButton.isHidden = true
         matchingDepartments = availableDepartments.filter { $0.contains(searchText) }
         tableView.reloadData()
     }
@@ -192,7 +242,15 @@ final class DepartmentViewController: UIViewController, UITableViewDelegate, UIS
         searchBar.text = selectedDepartment
         matchingDepartments.removeAll()
         tableView.reloadData()
+//        print("selectedDepartment: \(selectedDepartment)")
+        
+        if selectedDepartment == "컴퓨터공학부" {
+            major = "COMPUTER_SCIENCE_ENGINEERING"
+        } else if selectedDepartment == "정보통신공학과" {
+            major = "INFORMATION_TELECOMMUNICATION_ENGINEERING"
+        }
     }
+    
     
 
 }
