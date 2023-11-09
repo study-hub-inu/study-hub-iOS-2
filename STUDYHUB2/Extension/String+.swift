@@ -2,7 +2,8 @@
 //  String+.swift
 //  STUDYHUB2
 //
-
+//  Created by 최용헌 on 2023/10/13.
+//
 
 import UIKit
 
@@ -32,4 +33,14 @@ extension String {
     }
   }
   
+  func convertMajor(_ major: String, toEnglish: Bool) -> String {
+    switch (major, toEnglish) {
+    case ("정보통신공학과", true):
+      return "INFORMATION_TELECOMMUNICATION_ENGINEERING"
+    case ("INFORMATION_TELECOMMUNICATION_ENGINEERING", false):
+      return "정보통신공학"
+    default:
+      return "Unknown"
+    }
+  }
 }
