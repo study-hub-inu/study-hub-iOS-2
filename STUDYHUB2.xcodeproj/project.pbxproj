@@ -294,7 +294,6 @@
 				EE07ADC92AF25F1E0096890F /* Helper */,
 				EE271F212AD0584900190E7A /* Extension */,
 				F8085D3F2A815DB00067D4DE /* MAIN */,
-				EE0A8B612AFCB4DC001C3F41 /* BookMark */,
 				F8D5BC652AB71DDA00B2B154 /* Singleton.swift */,
 				F80421972A7D6816006C6B87 /* Main.storyboard */,
 				F804219A2A7D6818006C6B87 /* Assets.xcassets */,
@@ -357,6 +356,7 @@
 				F8085D432A81846C0067D4DE /* StudyViewController.swift */,
 				F88AB3472A9E71A4001D619C /* CreateStudy */,
 				EE07ADC82AF2570E0096890F /* PostedStudy */,
+				EE0A8B612AFCB4DC001C3F41 /* BookMark */,
 			);
 			path = STUDY;
 			sourceTree = "<group>";

@@ -59,19 +59,28 @@ final class StudyViewController: NaviHelper {
     navigationItemSetting()
     redesignNavigationbar()
     
+    setupLayout()
     makeUI()
   }
   
+  // MARK: - setupLayout
+  func setupLayout(){
+    [
+      recentButton,
+      separateLine,
+      popularButton,
+      countLabel,
+      divideLine,
+      emptyImageView,
+      describeLabel,
+      addButton
+    ].forEach {
+      view.addSubview($0)
+    }
+  }
+  
+  // MARK: - makeUI
   func makeUI(){
-    view.addSubview(recentButton)
-    view.addSubview(separateLine)
-    view.addSubview(popularButton)
-    view.addSubview(countLabel)
-    view.addSubview(divideLine)
-    view.addSubview(emptyImageView)
-    view.addSubview(describeLabel)
-    view.addSubview(addButton)
-
     recentButton.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide).offset(10)
       make.leading.equalToSuperview().offset(10)

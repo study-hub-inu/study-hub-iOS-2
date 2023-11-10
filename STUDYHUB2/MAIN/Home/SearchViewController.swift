@@ -179,7 +179,7 @@ extension SearchViewController: UISearchBarDelegate {
   }
 }
 
-// MARK: - cell 함수
+// MARK: - tableView cell 함수
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
   // UITableViewDataSource 함수
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
