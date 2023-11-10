@@ -28,6 +28,7 @@
 		EE0A8B5E2AF9B01C001C3F41 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B5D2AF9B01C001C3F41 /* UILabel+.swift */; };
 		EE0A8B602AFA7FD2001C3F41 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B5F2AFA7FD2001C3F41 /* SearchResultCell.swift */; };
 		EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B622AFCB572001C3F41 /* BookMarkCell.swift */; };
+		EE0A8B652AFDDA6E001C3F41 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -103,6 +104,7 @@
 		EE0A8B5D2AF9B01C001C3F41 /* UILabel+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+.swift"; sourceTree = "<group>"; };
 		EE0A8B5F2AFA7FD2001C3F41 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		EE0A8B622AFCB572001C3F41 /* BookMarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkCell.swift; sourceTree = "<group>"; };
+		EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -364,6 +366,7 @@
 			children = (
 				EE271F2D2ADA6D3700190E7A /* InfoManager.swift */,
 				EE07ADBC2AEFF7BD0096890F /* ConvertMajor.swift */,
+				EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */,
 				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
 			);
 			path = MyPage;
@@ -628,6 +631,7 @@
 				EE271F2A2AD8B9FA00190E7A /* String+.swift in Sources */,
 				F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */,
 				EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */,
+				EE0A8B652AFDDA6E001C3F41 /* MyInformationViewController.swift in Sources */,
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,
 				EE07ADCD2AF26D360096890F /* DepartMentCell.swift in Sources */,

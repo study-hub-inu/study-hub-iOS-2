@@ -360,13 +360,15 @@ final class LoginViewController: UIViewController {
   @objc func signUpButtonTapped() {
     let signUpViewController = SignUpViewController()
     
-    let backButton = UIBarButtonItem(title: "back",
-                                     style: .plain,
-                                     target: self,
-                                     action: #selector(backButtonTapped))
-    signUpViewController.navigationItem.leftBarButtonItem = backButton
-    
-    navigationController?.pushViewController(signUpViewController, animated: true)
+      let backButton = UIBarButtonItem(title: "",
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(backButtonTapped))
+      backButton.image = UIImage(systemName: "chevron.left")
+      backButton.tintColor = .white
+      signUpViewController.navigationItem.leftBarButtonItem = backButton
+      
+      navigationController?.pushViewController(signUpViewController, animated: true)
   }
   
   @objc func backButtonTapped() {
