@@ -23,12 +23,35 @@ final class PasswordViewController: UIViewController {
     passwordTF.becomeFirstResponder()
     return passwordTF
   }()
+    
+  var eyeButton = UIButton(type: .custom)
   
   private let passwordTextFielddividerLine: UIView = {
     let passwordLine = UIView()
     passwordLine.backgroundColor = .gray
+    passwordLine.heightAnchor.constraint(equalToConstant: 1).isActive = true
     return passwordLine
   }()
+    
+    private lazy var cannotuseLabel: UILabel = {
+        let cannotuseLabel = UILabel()
+        cannotuseLabel.text = "사용할 수 없는 비밀번호예요(10자리 이상, 특수문자 포함 필수)"
+        cannotuseLabel.font = UIFont.systemFont(ofSize: 12)
+        cannotuseLabel.textColor = .red
+        cannotuseLabel.isHidden = true
+        
+        return cannotuseLabel
+    }()
+    
+    private lazy var canuseLabel: UILabel = {
+        let canuseLabel = UILabel()
+        canuseLabel.text = "사용가능한 비밀번호예요"
+        canuseLabel.font = UIFont.systemFont(ofSize: 12)
+        canuseLabel.textColor = .green
+        canuseLabel.isHidden = true
+        
+        return canuseLabel
+    }()
   
   lazy var confirmPasswordTextField: UITextField = {
     let confirmTF = UITextField()
@@ -45,6 +68,26 @@ final class PasswordViewController: UIViewController {
     confirmTF.isSecureTextEntry = true
     return confirmTF
   }()
+    
+    private lazy var pswdnotmatchLabel: UILabel = {
+        let pswdnotmatchLabel = UILabel()
+        pswdnotmatchLabel.text = "비밀번호가 일치하지 않아요"
+        pswdnotmatchLabel.font = UIFont.systemFont(ofSize: 12)
+        pswdnotmatchLabel.textColor = .red
+        pswdnotmatchLabel.isHidden = true
+        
+        return pswdnotmatchLabel
+    }()
+    
+    private lazy var pswdmatchLabel: UILabel = {
+        let pswdmatchLabel = UILabel()
+        pswdmatchLabel.text = "비밀번호가 확인되었어요"
+        pswdmatchLabel.font = UIFont.systemFont(ofSize: 12)
+        pswdmatchLabel.textColor = .green
+        pswdmatchLabel.isHidden = true
+        
+        return pswdmatchLabel
+    }()
   
   private let confirmPasswordTextFielddividerLine: UIView = {
     let line = UIView()
@@ -91,27 +134,12 @@ final class PasswordViewController: UIViewController {
     return passwordLabel
   }()
   
-  lazy var confirmButton: UIButton = {
-    let confirmButton = UIButton(type: .system)
-    confirmButton.setTitle("확인", for: .normal)
-    confirmButton.setTitleColor(UIColor(hexCode: "FF5935"),
-                                for: .normal)
-    confirmButton.backgroundColor = .black
-    confirmButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-    confirmButton.layer.cornerRadius = 10
-    confirmButton.layer.borderColor = UIColor(hexCode: "FF5935").cgColor
-    confirmButton.layer.borderWidth = 1.0 // Set the border width
-    confirmButton.addTarget(self,
-                            action: #selector(confirmButtonTapped),
-                            for: .touchUpInside)
-    return confirmButton
-  }()
   
   lazy var nextButton: UIButton = {
     let nextButton = UIButton(type: .system)
     nextButton.setTitle("다음", for: .normal)
-    nextButton.setTitleColor(.white, for: .normal)
-    nextButton.backgroundColor = UIColor(hexCode: "FF5935")
+    nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
+    nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
     nextButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
     nextButton.layer.cornerRadius = 10
     nextButton.addTarget(self,
@@ -128,8 +156,51 @@ final class PasswordViewController: UIViewController {
     
     setUpLayout()
     makeUI()
+      
+    if #available(iOS 15.0, *) {
+      setPasswordShowButtonImage()
+      setConfirmPasswordShowButtonImage()
+    }
   }
   
+    @available(iOS 15.0, *)
+    func setPasswordShowButtonImage(){
+      eyeButton = UIButton.init(primaryAction: UIAction(handler: { [self] _ in
+        passwordTextField.isSecureTextEntry.toggle()
+        self.eyeButton.isSelected.toggle()
+      }))
+      
+      var buttonConfiguration = UIButton.Configuration.plain()
+      buttonConfiguration.imagePadding = 10
+      buttonConfiguration.baseBackgroundColor = .clear
+
+      eyeButton.setImage(UIImage(named: "icon_eye_close_g80"), for: .normal)
+      self.eyeButton.configuration = buttonConfiguration
+
+      self.passwordTextField.rightView = eyeButton
+      self.passwordTextField.rightViewMode = .always
+    
+    }
+    
+    @available(iOS 15.0, *)
+    func setConfirmPasswordShowButtonImage(){
+      eyeButton = UIButton.init(primaryAction: UIAction(handler: { [self] _ in
+        confirmPasswordTextField.isSecureTextEntry.toggle()
+        self.eyeButton.isSelected.toggle()
+      }))
+      
+      var buttonConfiguration = UIButton.Configuration.plain()
+      buttonConfiguration.imagePadding = 10
+      buttonConfiguration.baseBackgroundColor = .clear
+
+      eyeButton.setImage(UIImage(named: "icon_eye_close_g80"), for: .normal)
+      self.eyeButton.configuration = buttonConfiguration
+
+      self.confirmPasswordTextField.rightView = eyeButton
+      self.confirmPasswordTextField.rightViewMode = .always
+    
+    }
+    
   // MARK: - setUpLayout
   func setUpLayout(){
     [
@@ -140,9 +211,13 @@ final class PasswordViewController: UIViewController {
       passwordLabel,
       passwordTextFielddividerLine,
       passwordTextField,
+      eyeButton,
+      cannotuseLabel,
+      canuseLabel,
       confirmPasswordTextField,
       confirmPasswordTextFielddividerLine,
-      confirmButton,
+      pswdnotmatchLabel,
+      pswdmatchLabel,
       nextButton
     ].forEach {
       view.addSubview($0)
@@ -152,7 +227,7 @@ final class PasswordViewController: UIViewController {
   // MARK: - makeUI
   func makeUI(){
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-40)
+      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(-35)
       make.centerX.equalToSuperview()
     }
     
@@ -179,23 +254,42 @@ final class PasswordViewController: UIViewController {
     passwordTextField.snp.makeConstraints { make in
       make.top.equalTo(passwordLabel.snp.bottom).offset(20)
       make.leading.equalTo(passwordLabel.snp.leading)
-      make.trailing.equalTo(view.snp.trailing).offset(-70)
+      make.trailing.equalTo(view.snp.trailing).offset(-20)
       make.height.equalTo(30)
     }
     
+    eyeButton.snp.makeConstraints { make in
+      make.trailing.equalTo(passwordTextFielddividerLine.snp.trailing)
+    }
+      
     // Divider line constraints
     passwordTextFielddividerLine.snp.makeConstraints { make in
       make.leading.trailing.equalTo(view)
       make.top.equalTo(passwordTextField.snp.bottom).offset(5)
       make.height.equalTo(1)
     }
+      
+      cannotuseLabel.snp.makeConstraints { make in
+          make.top.equalTo(passwordTextFielddividerLine.snp.bottom).offset(5)
+          make.leading.equalTo(view).offset(15)
+      }
+      
+      canuseLabel.snp.makeConstraints { make in
+          make.top.equalTo(passwordTextFielddividerLine.snp.bottom).offset(5)
+          make.leading.equalTo(view).offset(15)
+      }
     
     confirmPasswordTextField.snp.makeConstraints { make in
       make.top.equalTo(passwordTextFielddividerLine.snp.bottom).offset(50)
       make.leading.equalTo(view.snp.leading).offset(15)
-      make.trailing.equalTo(view.snp.trailing).offset(-70)
+      make.trailing.equalTo(view.snp.trailing).offset(-20)
       make.height.equalTo(30)
     }
+      
+      eyeButton.snp.makeConstraints { make in
+        make.trailing.equalTo(confirmPasswordTextFielddividerLine.snp.trailing)
+      }
+    
     
     // Divider line constraints for confirmation password
     confirmPasswordTextFielddividerLine.snp.makeConstraints { make in
@@ -203,13 +297,17 @@ final class PasswordViewController: UIViewController {
       make.top.equalTo(confirmPasswordTextField.snp.bottom).offset(5)
       make.height.equalTo(1)
     }
+      
+      pswdnotmatchLabel.snp.makeConstraints { make in
+          make.top.equalTo(confirmPasswordTextFielddividerLine.snp.bottom).offset(5)
+          make.leading.equalTo(view).offset(15)
+      }
+      
+      pswdmatchLabel.snp.makeConstraints { make in
+          make.top.equalTo(confirmPasswordTextFielddividerLine.snp.bottom).offset(5)
+          make.leading.equalTo(view).offset(15)
+      }
     
-    confirmButton.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(confirmPasswordTextFielddividerLine.snp.bottom).offset(50)
-      make.height.equalTo(55)
-      make.width.equalTo(380)
-    }
     
     nextButton.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
@@ -230,124 +328,55 @@ final class PasswordViewController: UIViewController {
   
   @objc func nextButtonTapped() {
     guard let password = passwordTextField.text, !password.isEmpty else {
-      // Change the color of passwordTextFielddividerLine to red
+        
       passwordTextFielddividerLine.backgroundColor = .red
-      
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호를 입력해주세요.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      
-      
       return
     }
     
     guard let confirmPassword = confirmPasswordTextField.text, !confirmPassword.isEmpty else {
-      // Change the color of confirmPasswordTextFielddividerLine to red
+        
       confirmPasswordTextFielddividerLine.backgroundColor = .red
-      
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호를 한번 더 입력해주세요.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      return
+        return
     }
     
     if !validatePassword(password: password) {
-      
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호는 10자리 이상이거나 특수문자를 포함해야 합니다.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      
-      // Change the color of passwordTextFielddividerLine to red
+        nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+        nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
       passwordTextFielddividerLine.backgroundColor = .red
       
       return
     }
     
     else {
+    nextButton.backgroundColor = UIColor(hexCode: "#FF5530")
+    nextButton.setTitleColor(UIColor(hexCode: "#FFFFFF"), for: .normal)
       passwordTextFielddividerLine.backgroundColor = .green
       
     }
     
     // Check if passwords match
     if password != confirmPassword {
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호가 일치하지 않습니다.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      
+
       confirmPasswordTextFielddividerLine.backgroundColor = .red
       return
     }
-    
-    // 다음 뷰 컨트롤러로 이메일과 비밀번호 전달
-    let nicknameVC = NicknameViewController()
-    
-    nicknameVC.email = email
-    nicknameVC.password = password
-    navigationController?.pushViewController(nicknameVC, animated: true)
-    
-  }
-  @objc func confirmButtonTapped() {
-    guard let password = passwordTextField.text, !password.isEmpty else {
-      // Change the color of passwordTextFielddividerLine to red
-      passwordTextFielddividerLine.backgroundColor = .red
       
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호를 입력해주세요.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      return
-    }
+      // Check if passwords match
+      if password == confirmPassword, validatePassword(password: password) {
+          // 다음 뷰 컨트롤러로 이메일과 비밀번호 전달
+          let nicknameVC = NicknameViewController()
+          
+          nicknameVC.email = email
+          nicknameVC.password = password
+            
+          let backButton = UIBarButtonItem()
+          backButton.tintColor = .white
+          navigationItem.backBarButtonItem = backButton
+            
+          navigationController?.pushViewController(nicknameVC, animated: true)
+          
+      }
     
-    if !validatePassword(password: password) {
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호는 10자리 이상이거나 특수문자를 포함해야 합니다.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      
-      // Change the color of passwordTextFielddividerLine to red
-      passwordTextFielddividerLine.backgroundColor = .red
-      return
-    }
-    
-    passwordTextFielddividerLine.backgroundColor = .green
-    
-    guard let confirmPassword = confirmPasswordTextField.text, !confirmPassword.isEmpty else {
-      // Change the color of confirmPasswordTextFielddividerLine to red
-      confirmPasswordTextFielddividerLine.backgroundColor = .red
-      
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호를 한번 더 입력해주세요.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      return
-    }
-    
-    
-    confirmPasswordTextFielddividerLine.backgroundColor = .green
-    
-    // Check if passwords match
-    if password != confirmPassword {
-      let alert = UIAlertController(title: "경고",
-                                    message: "비밀번호가 일치하지 않습니다.",
-                                    preferredStyle: .alert)
-      alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
-      present(alert, animated: true, completion: nil)
-      
-      // Change the color of confirmPasswordTextFielddividerLine to red
-      confirmPasswordTextFielddividerLine.backgroundColor = .red
-      return
-    }
   }
   
   // Action for passwordTextField editingChanged event
@@ -358,15 +387,56 @@ final class PasswordViewController: UIViewController {
       
       // Change the color of the passwordTextFielddividerLine based on the validation result
       passwordTextFielddividerLine.backgroundColor = isValidPassword ? .green : .red
+        
+        let confirmPassword = confirmPasswordTextField.text
+
+        if isValidPassword {
+            canuseLabel.isHidden = false
+            cannotuseLabel.isHidden = true
+        }else {
+            nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+            nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
+            canuseLabel.isHidden = true
+            cannotuseLabel.isHidden = false
+        }
+        
+        if password == confirmPassword, isValidPassword {
+            nextButton.backgroundColor = UIColor(hexCode: "#FF5530")
+            nextButton.setTitleColor(UIColor(hexCode: "#FFFFFF"), for: .normal)
+        } else {
+            nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+            nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
+        }
     }
   }
   @objc func confirmPasswordTextFieldDidChange() {
-    if let password = confirmPasswordTextField.text {
-      // Check if the entered password meets the required criteria
-      let isValidPassword = validatePassword(password: password)
-      
-      // Change the color of the passwordTextFielddividerLine based on the validation result
-      confirmPasswordTextFielddividerLine.backgroundColor = isValidPassword ? .green : .red
+      canuseLabel.isHidden = true
+      passwordTextFielddividerLine.backgroundColor = .gray
+    if let password = passwordTextField.text {
+            guard let confirmPassword = confirmPasswordTextField.text, !confirmPassword.isEmpty else {
+              // Change the color of confirmPasswordTextFielddividerLine to red
+              confirmPasswordTextFielddividerLine.backgroundColor = .red
+                pswdnotmatchLabel.isHidden = false
+                pswdmatchLabel.isHidden = true
+              return
+            }
+            // Check if passwords match
+            if password != confirmPassword {
+                pswdnotmatchLabel.isHidden = false
+                pswdmatchLabel.isHidden = true
+              // Change the color of confirmPasswordTextFielddividerLine to red
+              confirmPasswordTextFielddividerLine.backgroundColor = .red
+                nextButton.backgroundColor = UIColor(hexCode: "#6F2B1C")
+                nextButton.setTitleColor(UIColor(hexCode: "#6F6F6F"), for: .normal)
+              return
+            }else{
+                pswdnotmatchLabel.isHidden = true
+                pswdmatchLabel.isHidden = false
+                confirmPasswordTextFielddividerLine.backgroundColor = .green
+                nextButton.backgroundColor = UIColor(hexCode: "#FF5530")
+                nextButton.setTitleColor(UIColor(hexCode: "#FFFFFF"), for: .normal)
+            }
+
     }
   }
   

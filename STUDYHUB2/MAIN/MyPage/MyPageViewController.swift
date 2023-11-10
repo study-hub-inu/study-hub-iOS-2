@@ -33,7 +33,7 @@ class MyPageViewController: UIViewController {
   }()
   
   private lazy var headerContentStackView = createStackView(axis: .vertical,
-                                                            spacing: 16)
+                                                            spacing: 8)
   
   
   // 로그인 하면 보이는 라벨
@@ -49,7 +49,7 @@ class MyPageViewController: UIViewController {
   }()
   
   private lazy var majorLabel = createLabel(title: convertMajor(myPageUserData?.major! ?? "",
-                                                                toEnglish: false) ,
+                                                                toEnglish: false),
                                             textColor: .gray,
                                             fontSize: 18)
   private lazy var nickNameLabel = createLabel(title: myPageUserData?.nickname ?? "비어있음",
@@ -107,7 +107,7 @@ class MyPageViewController: UIViewController {
                             action: #selector(chevronButtonTapped),
                             for: .touchUpInside)
     chevronButton.contentHorizontalAlignment = .trailing
-
+    
     return chevronButton
   }()
   
@@ -185,7 +185,7 @@ class MyPageViewController: UIViewController {
       print(loginStatus)
       loginOrStackView.addArrangedSubview(grayTextLabel)
       loginOrStackView.addArrangedSubview(blackTextLabel)
-
+      
       gotologinStackView.addArrangedSubview(loginOrStackView)
     } else {
       //로그인 관련
@@ -261,7 +261,7 @@ class MyPageViewController: UIViewController {
       print(loginStatus)
       print("로그인성공")
     }
-  
+    
     chevronButton.snp.makeConstraints { make in
       make.top.equalTo(gotologinStackView.snp.top)
       make.trailing.equalTo(gotologinStackView.snp.trailing)
@@ -329,7 +329,7 @@ class MyPageViewController: UIViewController {
         // 사용자 정보를 사용하여 원하는 작업을 수행합니다.
         print("Email: \(userData.email)")
         print("Gender: \(userData.gender)")
-   
+        
         if userData.email != nil {
           self.myPageUserData = userData
           self.loginStatus = true
@@ -360,14 +360,34 @@ class MyPageViewController: UIViewController {
   
   @objc func chevronButtonTapped() {
     // Create an instance of ViewController (assuming that's the name of your ViewController class)
-    let viewController = LoginViewController()
+    //    let viewController = LoginViewController()
+    //
+    //    // If you want to present it modally, you can use the following code
+    //    let navigationController = UINavigationController(rootViewController: viewController)
+    //    navigationController.modalPresentationStyle = .fullScreen
+    //
+    //    // Present the ViewController modally
+    //    present(navigationController, animated: true, completion: nil)
+    //  }
+    
+    let myinformViewController = MyInformViewController()
+    
+    // Pass major information to MyinformViewController
+    myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", toEnglish: false)
+    myinformViewController.nickname = myPageUserData?.nickname
+    myinformViewController.email = myPageUserData?.email
+    myinformViewController.gender = myPageUserData?.gender
+    
+    
+    
     
     // If you want to present it modally, you can use the following code
-    let navigationController = UINavigationController(rootViewController: viewController)
+    let navigationController = UINavigationController(rootViewController: myinformViewController)
     navigationController.modalPresentationStyle = .fullScreen
     
     // Present the ViewController modally
     present(navigationController, animated: true, completion: nil)
   }
+  
   
 }
