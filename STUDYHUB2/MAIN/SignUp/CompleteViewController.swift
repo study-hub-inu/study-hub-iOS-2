@@ -5,13 +5,7 @@ import SnapKit
 final class CompleteViewController: UIViewController {
   
   // MARK: - 화면구성
-  private let titleLabel: UILabel = {
-    let titleLabel = UILabel()
-    titleLabel.text = "회원가입"
-    titleLabel.textColor = .white
-    titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
-    return titleLabel
-  }()
+
   
   private let imageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(named: "Image 1"))
@@ -23,7 +17,7 @@ final class CompleteViewController: UIViewController {
     let congratsLabel = UILabel()
     congratsLabel.text = "가입을 축하드립니다!"
     congratsLabel.textColor = .white
-    congratsLabel.font = UIFont.boldSystemFont(ofSize: 25)
+    congratsLabel.font = UIFont.boldSystemFont(ofSize: 20)
     
     let attributedText = NSMutableAttributedString(string: "가입을 축하드립니다!")
     attributedText.addAttribute(.foregroundColor, value: UIColor(hexCode: "FF5935"), range: NSRange(location: 4, length: 2))
@@ -34,9 +28,10 @@ final class CompleteViewController: UIViewController {
   private let recruitLabel: UILabel = {
     // '지금 바로 스터디 팀원을 모집하여' Label
     let recruitLabel = UILabel()
-    recruitLabel.text = "지금 바로 스터디 팀원을 모집하여 \n 함께 목표를 달성해 보세요!"
+    recruitLabel.text = "지금 바로 스터디 팀원을 모집하여 \n      함께 목표를 달성해 보세요!"
     recruitLabel.textColor = .gray
-    recruitLabel.font = UIFont.systemFont(ofSize: 18)
+    recruitLabel.font = UIFont.boldSystemFont(ofSize: 14)
+    recruitLabel.numberOfLines = 0
     return recruitLabel
   }()
   
@@ -66,9 +61,10 @@ final class CompleteViewController: UIViewController {
   // MARK: - setUpLayout
   func setUpLayout(){
     [
-      titleLabel,
+
       imageView,
       congratsLabel,
+      recruitLabel,
       startButton
     ].forEach {
       view.addSubview($0)
@@ -77,15 +73,12 @@ final class CompleteViewController: UIViewController {
   
   // MARK: - makeUI
   func makeUI(){
-    titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).offset(-40)
-      make.centerX.equalToSuperview()
-    }
     
     imageView.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide).offset(80)
       make.centerX.equalToSuperview()
-      make.width.equalTo(300)
-      make.height.equalTo(300)
+      make.width.equalTo(280)
+      make.height.equalTo(280)
     }
     
     congratsLabel.snp.makeConstraints { make in
@@ -93,10 +86,10 @@ final class CompleteViewController: UIViewController {
       make.centerX.equalToSuperview()
     }
     
-    recruitLabel.snp.makeConstraints { make in
-      make.top.equalTo(congratsLabel.snp.bottom).offset(20)
-      make.centerX.equalToSuperview()
-    }
+      recruitLabel.snp.makeConstraints { make in
+          make.top.equalTo(congratsLabel.snp.bottom).offset(20)
+          make.centerX.equalToSuperview()
+      }
     
     startButton.snp.makeConstraints { make in
       make.centerX.equalToSuperview()
