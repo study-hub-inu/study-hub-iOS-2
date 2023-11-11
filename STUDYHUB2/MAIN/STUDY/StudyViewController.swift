@@ -2,7 +2,7 @@ import UIKit
 
 import SnapKit
 
-// searchResultCell이랑 같은 형식
+// searchResultCell이랑 같은 형식 , collectionview랑 추가버튼 같이 뜨게 수정해야함
 final class StudyViewController: NaviHelper {
   private lazy var recentButton: UIButton = {
     let button = UIButton()
@@ -28,7 +28,7 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  var studyCount = 4
+  var studyCount = 0
   private lazy var countLabel = createLabel(title: "\(studyCount)개",
                                             textColor: .bg80,
                                             fontSize: 14)
@@ -95,12 +95,12 @@ final class StudyViewController: NaviHelper {
         popularButton,
         countLabel,
         divideLine,
+        addButton,
         scrollView
       ].forEach {
         view.addSubview($0)
       }
       
-      scrollView.addSubview(addButton)
       scrollView.addSubview(resultCollectionView)
     }else {
       [
@@ -163,10 +163,11 @@ final class StudyViewController: NaviHelper {
       }
       
       addButton.snp.makeConstraints { make in
-        make.width.height.equalTo(60)
-        make.bottom.equalTo(scrollView.snp.bottom).offset(-30)
-        make.trailing.equalTo(scrollView.snp.trailing).offset(-16)
+        make.width.height.equalTo(60) // Increase width and height as needed
+        make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
+        make.trailing.equalTo(view).offset(-16)
       }
+      
       scrollView.snp.makeConstraints { make in
         make.top.equalTo(divideLine.snp.bottom).offset(10)
         make.leading.trailing.bottom.equalTo(view)

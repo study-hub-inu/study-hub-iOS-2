@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       let tabBarController = TabBarController()
       window?.rootViewController = tabBarController
     } else {
-  
       // 로그인하지 않은 경우 LoginViewController 표시
       if #available(iOS 16.0, *) {
         let loginViewController = LoginViewController()
@@ -38,8 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
       }
    
     }
-    
     window?.makeKeyAndVisible()
+
   }
   
   
