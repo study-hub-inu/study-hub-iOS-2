@@ -67,9 +67,6 @@ final class BookmarkViewController: NaviHelper {
   // MARK: - 네비게이션 바 재설정
   func redesignNavigationbar(){
     navigationItem.rightBarButtonItems = .none
-    
-    navigationController?.navigationBar.topItem?.title = "북마크"
-    navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
   }
   
   // MARK: - setupLayout
@@ -144,9 +141,11 @@ final class BookmarkViewController: NaviHelper {
                                     forCellWithReuseIdentifier: BookMarkCell.id)
   }
   @objc func deleteAllButtonTapped(){
-    print("alldelete")
+    let popupVC = PopupViewController(title: "",
+                                      desc: "북마크를 모두 삭제할까요?")
+    popupVC.modalPresentationStyle = .overFullScreen
+    self.present(popupVC, animated: false)
   }
-  
 }
 
 // MARK: - collectionView

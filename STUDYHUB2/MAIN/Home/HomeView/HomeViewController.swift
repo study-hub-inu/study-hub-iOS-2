@@ -270,10 +270,10 @@ final class HomeViewController: NaviHelper {
   // 북마크 페이지로 이동
   @objc func bookmarkpageButtonTapped() {
     let bookmarkViewController = BookmarkViewController()
-    let navigationController = UINavigationController(rootViewController: bookmarkViewController)
-    
-    navigationController.modalPresentationStyle = .fullScreen
-    present(navigationController, animated: true, completion: nil)
+    bookmarkViewController.navigationItem.title = "북마크"
+    self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+
+    self.navigationController?.pushViewController(bookmarkViewController, animated: true)
   }
   
   // 서치바 재설정
@@ -326,11 +326,8 @@ extension HomeViewController: UISearchBarDelegate {
       // 검색 결과가 없을 때의 처리를 할 수 있습니다.
     } else {
       let searchViewController = SearchViewController()
-      let navigationController = UINavigationController(rootViewController: searchViewController)
-      navigationController.modalPresentationStyle = .fullScreen
-      present(navigationController, animated: true, completion: nil)
+      self.navigationController?.pushViewController(searchViewController, animated: true)
     }
-    
   }
 }
 
@@ -351,8 +348,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
     let postedVC = PostedStudyViewController()
-    let postedVCwithNavi = UINavigationController(rootViewController: postedVC)
-    present(postedVCwithNavi, animated: true, completion: nil)
+    self.navigationController?.pushViewController(postedVC, animated: true)
+
   }
   
   func collectionView(_ collectionView: UICollectionView,

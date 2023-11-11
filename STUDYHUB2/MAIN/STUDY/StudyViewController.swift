@@ -2,6 +2,7 @@ import UIKit
 
 import SnapKit
 
+// searchResultCell이랑 같은 형식
 final class StudyViewController: NaviHelper {
   private lazy var recentButton: UIButton = {
     let button = UIButton()
@@ -27,7 +28,8 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  private lazy var countLabel = createLabel(title: "4개",
+  var studyCount = 4
+  private lazy var countLabel = createLabel(title: "\(studyCount)개",
                                             textColor: .bg80,
                                             fontSize: 14)
   
@@ -40,6 +42,25 @@ final class StudyViewController: NaviHelper {
     title: "관련 스터디가 없어요\n지금 스터디를 만들어\n  팀원을 구해보세요!",
     textColor: .bg80,
     fontSize: 12)
+  
+  // 스터디가 있는 경우
+  private lazy var resultCollectionView: UICollectionView = {
+    let flowLayout = UICollectionViewFlowLayout()
+    flowLayout.scrollDirection = .vertical
+    flowLayout.minimumLineSpacing = 10
+    
+    let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
+    view.backgroundColor = .white
+    view.clipsToBounds = false
+
+    return view
+  }()
+  
+  private let scrollView: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.backgroundColor = .white
+    return scrollView
+  }()
   
   private lazy var addButton: UIButton = {
     let addButton = UIButton(type: .system)
@@ -59,26 +80,51 @@ final class StudyViewController: NaviHelper {
     navigationItemSetting()
     redesignNavigationbar()
     
+    setupCollectionView()
+    
     setupLayout()
     makeUI()
   }
   
   // MARK: - setupLayout
   func setupLayout(){
-    [
-      recentButton,
-      separateLine,
-      popularButton,
-      countLabel,
-      divideLine,
-      emptyImageView,
-      describeLabel,
-      addButton
-    ].forEach {
-      view.addSubview($0)
+    if studyCount > 0 {
+      [
+        recentButton,
+        separateLine,
+        popularButton,
+        countLabel,
+        divideLine,
+        scrollView
+      ].forEach {
+        view.addSubview($0)
+      }
+      
+      scrollView.addSubview(addButton)
+      scrollView.addSubview(resultCollectionView)
+    }else {
+      [
+        recentButton,
+        separateLine,
+        popularButton,
+        countLabel,
+        divideLine,
+        emptyImageView,
+        describeLabel,
+        addButton
+      ].forEach {
+        view.addSubview($0)
+      }
     }
   }
   
+  func setupCollectionView(){
+    resultCollectionView.delegate = self
+    resultCollectionView.dataSource = self
+    
+    resultCollectionView.register(SearchResultCell.self,
+                                  forCellWithReuseIdentifier: SearchResultCell.id)
+  }
   // MARK: - makeUI
   func makeUI(){
     recentButton.snp.makeConstraints { make in
@@ -110,22 +156,38 @@ final class StudyViewController: NaviHelper {
       make.leading.trailing.equalToSuperview()
     }
     
-    emptyImageView.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.centerY.equalToSuperview().offset(-50)
-    }
-    
-    describeLabel.numberOfLines = 3
-    describeLabel.changeColor(label: describeLabel, wantToChange: "지금 스터디를 만들어\n  팀원을 구해보세요!", color: .changeInfo)
-    describeLabel.snp.makeConstraints { make in
-      make.top.equalTo(emptyImageView.snp.bottom).offset(10)
-      make.centerX.equalTo(emptyImageView)
-    }
-    
-    addButton.snp.makeConstraints { make in
-      make.width.height.equalTo(60) // Increase width and height as needed
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-      make.trailing.equalTo(view).offset(-16)
+    if studyCount > 0 {
+      resultCollectionView.snp.makeConstraints { make in
+        make.width.equalToSuperview()
+        make.height.equalTo(scrollView.snp.height)
+      }
+      
+      addButton.snp.makeConstraints { make in
+        make.width.height.equalTo(60)
+        make.bottom.equalTo(scrollView.snp.bottom).offset(-30)
+        make.trailing.equalTo(scrollView.snp.trailing).offset(-16)
+      }
+      scrollView.snp.makeConstraints { make in
+        make.top.equalTo(divideLine.snp.bottom).offset(10)
+        make.leading.trailing.bottom.equalTo(view)
+      }
+    }else {
+      emptyImageView.snp.makeConstraints { make in
+        make.centerX.equalToSuperview()
+        make.centerY.equalToSuperview().offset(-50)
+      }
+      
+      describeLabel.numberOfLines = 3
+      describeLabel.changeColor(label: describeLabel, wantToChange: "지금 스터디를 만들어\n  팀원을 구해보세요!", color: .changeInfo)
+      describeLabel.snp.makeConstraints { make in
+        make.top.equalTo(emptyImageView.snp.bottom).offset(10)
+        make.centerX.equalTo(emptyImageView)
+      }
+      addButton.snp.makeConstraints { make in
+        make.width.height.equalTo(60) // Increase width and height as needed
+        make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
+        make.trailing.equalTo(view).offset(-16)
+      }
     }
   }
   
@@ -182,3 +244,40 @@ final class StudyViewController: NaviHelper {
     popularButton.setTitleColor(.black, for: .normal)
   }
 }
+
+// MARK: - collectionView
+extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      numberOfItemsInSection section: Int) -> Int {
+    return 4
+  }
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      didSelectItemAt indexPath: IndexPath) {
+    
+    let postedVC = PostedStudyViewController()
+  
+    self.navigationController?.pushViewController(postedVC, animated: true)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView,
+                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id,
+                                                  for: indexPath)
+    return cell
+  }
+}
+
+// 셀의 각각의 크기
+extension StudyViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView,
+                      layout collectionViewLayout: UICollectionViewLayout,
+                      sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
+    return CGSize(width: 350, height: 247)
+    
+  }
+}
+
