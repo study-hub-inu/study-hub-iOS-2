@@ -28,13 +28,13 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  var studyCount = 0
+  var studyCount = 2
   private lazy var countLabel = createLabel(title: "\(studyCount)개",
                                             textColor: .bg80,
                                             fontSize: 14)
   
   private lazy var divideLine = createDividerLine(height: 1)
-
+  
   private lazy var emptyImage = UIImage(named: "EmptyStudy")
   private lazy var emptyImageView = UIImageView(image: emptyImage)
   
@@ -44,6 +44,7 @@ final class StudyViewController: NaviHelper {
     fontSize: 12)
   
   // 스터디가 있는 경우
+  private lazy var contentView = UIView()
   private lazy var resultCollectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .vertical
@@ -52,7 +53,7 @@ final class StudyViewController: NaviHelper {
     let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     view.backgroundColor = .white
     view.clipsToBounds = false
-
+    
     return view
   }()
   
@@ -95,13 +96,14 @@ final class StudyViewController: NaviHelper {
         popularButton,
         countLabel,
         divideLine,
-        addButton,
         scrollView
       ].forEach {
         view.addSubview($0)
       }
       
-      scrollView.addSubview(resultCollectionView)
+      scrollView.addSubview(contentView)
+      contentView.addSubview(resultCollectionView)
+      contentView.addSubview(addButton)
     }else {
       [
         recentButton,
@@ -158,19 +160,26 @@ final class StudyViewController: NaviHelper {
     
     if studyCount > 0 {
       resultCollectionView.snp.makeConstraints { make in
+        make.top.leading.trailing.equalTo(contentView)
         make.width.equalToSuperview()
-        make.height.equalTo(scrollView.snp.height)
+        make.height.equalTo(1200)
       }
       
       addButton.snp.makeConstraints { make in
-        make.width.height.equalTo(60) // Increase width and height as needed
-        make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-30)
-        make.trailing.equalTo(view).offset(-16)
+        make.width.height.equalTo(60)
+        make.bottom.equalTo(scrollView.frameLayoutGuide).offset(-30)
+        make.trailing.equalTo(scrollView.frameLayoutGuide).offset(-30)
+      }
+      
+      contentView.snp.makeConstraints { make in
+        make.edges.equalTo(scrollView.contentLayoutGuide)
+        make.width.equalTo(scrollView.frameLayoutGuide)
+        make.height.equalTo(1200)
+
       }
       
       scrollView.snp.makeConstraints { make in
-        make.top.equalTo(divideLine.snp.bottom).offset(10)
-        make.leading.trailing.bottom.equalTo(view)
+        make.edges.equalTo(view.safeAreaLayoutGuide)
       }
     }else {
       emptyImageView.snp.makeConstraints { make in
@@ -258,7 +267,7 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
                       didSelectItemAt indexPath: IndexPath) {
     
     let postedVC = PostedStudyViewController()
-  
+    
     self.navigationController?.pushViewController(postedVC, animated: true)
   }
   
