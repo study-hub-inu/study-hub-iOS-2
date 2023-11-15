@@ -8,144 +8,88 @@
 import UIKit
 
 extension UIViewController {
-  func convertMajor(_ major: String, toEnglish: Bool) -> String {
-    switch (major, toEnglish) {
-    case ("정보통신학과", true):
-      return "INFORMATION_TELECOMMUNICATION_ENGINEERING"
-    case ("INFORMATION_TELECOMMUNICATION_ENGINEERING", false):
-      return "정보통신공학"
-    default:
-      return "Unknown"
-    }
+//  func convertMajor(_ major: String, toEnglish: Bool) -> String {
+//    switch (major, toEnglish) {
+//    case ("정보통신학과", true):
+//      return "INFORMATION_TELECOMMUNICATION_ENGINEERING"
+//    case ("INFORMATION_TELECOMMUNICATION_ENGINEERING", false):
+//      return "정보통신공학"
+//    default:
+//      return "Unknown"
+//    }
+//  }
+  
+  func convertMajor(_ koreanName: String, isEnglish: Bool) -> String {
+    let conversionTable: [String: String] = [
+      "공연예술과": "PERFORMING_ARTS",
+      "IBE전공": "IBE",
+      "건설환경공학": "CIVIL_AND_ENVIRONMENTAL_ENGINEERING",
+      "건축공학": "ARCHITECTURAL_ENGINEERING",
+      "경영학부": "BUSINESS_ADMINISTRATION",
+      "경제학과": "ECONOMICS",
+      "국어교육과": "KOREAN_LANGUAGE_EDUCATION",
+      "국어국문학과": "KOREAN_LANGUAGE_AND_LITERATURE",
+      "기계공학과": "MECHANICAL_ENGINEERING",
+      "데이터과학과": "BUSINESS_WITH_DATA_SCIENCE",
+      "도시건축학": "ARCHITECTURE_AND_URBAN_DESIGN",
+      "도시공학과": "URBAN_ENGINEERING",
+      "도시행정학과": "URBAN_POLICY_AND_ADMINISTRATION",
+      "독어독문학과": "GERMAN_LANGUAGE_AND_LITERATURE",
+      "동북아통상전공": "SCHOOL_OF_NORTHEAST_ASIAN_STUDIES",
+      "디자인학부": "DIVISION_OF_DESIGN",
+      "무역학부": "INTERNATIONAL_TRADE",
+      "문헌정보학과": "LIBRARY_AND_INFORMATION_SCIENCE",
+      "물리학과": "PHYSICS",
+      "미디어커뮤니케이션학과": "MASS_COMMUNICATION",
+      "바이오-로봇 시스템 공학과": "MECHANICAL_ENGINEERING_AND_ROBOTICS",
+      "법학부": "LAW",
+      "불어불문학과": "FRENCH_LANGUAGE_AND_LITERATURE",
+      "사회복지학과": "SOCIAL_WELFARE",
+      "산업경영공학과": "INDUSTRIAL_AND_MANAGEMENT_ENGINEERING",
+      "생명공학부(나노바이오공학전공)": "NANO_BIOENGINEERING",
+      "생명공학부(생명공학전공)": "BIOENGINEERING",
+      "생명과학부(분자의생명전공)": "MOLECULAR_AND_MEDICAL_SCIENCE",
+      "생명과학부(생명과학전공)": "BIOLOGICAL_SCIENCES",
+      "서양화전공(조형예술학부)": "WESTERN_PAINTING_MAJOR",
+      "세무회계학과": "TAX_AND_ACCOUNTING",
+      "소비자학과": "CONSUMER_SCIENCE",
+      "수학과": "MATHEMATICS",
+      "수학교육과": "MATHEMATICS_EDUCATION",
+      "스마트물류공학전공": "SMART_LOGISTICS_ENGINEERING",
+      "스포츠과학부": "SPORT_SCIENCE",
+      "신소재공학과": "MATERIALS_SCIENCE_AND_ENGINEERING",
+      "안전공학과": "SAFETY_ENGINEERING",
+      "에너지화학공학": "ENERGY_AND_CHEMICAL_ENGINEERING",
+      "역사교육과": "HISTORY_EDUCATION",
+      "영어교육과": "ENGLISH_LANGUAGE_EDUCATION",
+      "영어영문학과": "ENGLISH_LANGUAGE_AND_LITERATURE",
+      "운동건강학부": "HEALTH_AND_KINESIOLOGY",
+      "유아교육과": "EARLY_CHILDHOOD_EDUCATION",
+      "윤리교육과": "ETHICS_EDUCATION",
+      "일본지역문화학과": "JAPANESE_LANGUAGE_AND_LITERATURE",
+      "일일어교육과": "JAPANESE_LANGUAGE_EDUCATION",
+      "임베디드시스템공과": "EMBEDDED_SYSTEMS_ENGINEERING",
+      "전기공학과": "ELECTRICAL_ENGINEERING",
+      "전자공학과": "ELECTRONICS_ENGINEERING",
+      "정보통신학과": "INFORMATION_TELECOMMUNICATION_ENGINEERING",
+      "정치외교학과": "POLITICAL_SCIENCE_AND_INTERNATIONAL_STUDIES",
+      "중어중국학과": "CHINESE_LANGUAGE_AND_CULTURAL_STUDIES",
+      "창의인개발학과": "CREATIVE_HUMAN_RESOURCE_DEVELOPMENT",
+      "체육교육과": "PHYSICAL_EDUCATION",
+      "컴퓨터공학부": "COMPUTER_SCIENCE_AND_ENGINEERING",
+      "테크노경영학과": "TECHNOLOGY_MANAGEMENT",
+      "패션산업학과": "FASHION_AND_INDUSTRY",
+      "한국화전공(조형예술학부)": "KOREAN_PAINTING",
+      "해양학과": "MARINE_SCIENCE",
+      "행정학과": "PUBLIC_ADMINISTRATION",
+      "화학과": "CHEMISTRY",
+      "환경공학": "ENVIRONMENTAL_ENGINEERING"
+    ]
+    
+    let convertedName = isEnglish ? conversionTable[koreanName] ?? "" :
+    Array(conversionTable.keys).first(where: { conversionTable[$0] == koreanName }) ?? ""
+    
+    return convertedName.uppercased().replacingOccurrences(of: " ", with: "_")
   }
+  
 }
-
-
-/*
- 공연예술과(Performing Arts)
-
- IBE전공(IBE)
-
- 건설환경공학(Civil and Environmental Engineering)
-
- 건축공학(Architectural Engineering)
-
- 경영학부(Business Administration)
-
- 경제학과(Economics)
-
- 국어교육과(Korean Language Education)
-
- 국어국문학과(Korean Language & Literature)
-
- 기계공학과(Mechanical Engineering)
-
- 데이터과학과(business with data science)
-
- 도시건축학(Architecture and Urban Design)
-
- 도시공학과(Urban Engineering)
-
- 도시행정학과(Urban Policy and Administration)
-
- 독어독문학과(German Language & Literature)
-
- 동북아통상전공(School of Northeast Asian Studies)
-
- 디자인학부(Division of Design)
-
- 무역학부(International Trade)
-
- 문헌정보학과(Library and Information Science)
-
- 물리학과(Physics)
-
- 미디어커뮤니케이션학과(Mass Communication)
-
- 바이오-로봇 시스템 공학과(Mechanical Engineering and Robotics)
-
- 법학부(Law)
-
- 불어불문학과(French Language & Literature)
-
- 사회복지학과(Social Welfare)
-
- 산업경영공학과(Industrial and Management Engineering)
-
- 생명공학부(나노바이오공학전공)(Nano-Bioengineering)
-
- 생명공학부(생명공학전공)(Bio engineering)
-
- 생명과학부(분자의생명전공)(Molecular & Medical Science)
-
- 생명과학부(생명과학전공)(Biological Sciences)
-
- 서양화전공(조형예술학부)(Western Painting Major)
-
- 세무회계학과(Tax & Accounting)
-
- 소비자학과(Consumer Science)
-
- 수학과(Mathematics)
-
- 수학교육과(Mathematics Education)
-
- 스마트물류공학전공(smart Logistics Engineering)
-
- 스포츠과학부(Sport Science)
-
- 신소재공학과(Materials Science and Engineering)
-
- 안전공학과(Safety Engineering)
-
- 에너지화학공학(Energy and Chemical Engineering)
-
- 역사교육과(History Education)
-
- 영어교육과(English Language Education)
-
- 영어영문학과(English Language & Literature)
-
- 운동건강학부(Health & Kinesiology)
-
- 유아교육과(Early Childhood Education)
-
- 윤리교육과(Ethics Education)
-
- 일본지역문화학과(Japanese Language & Literature)
-
- 일일어교육과(Japenese Language Education)
-
- 임베디드시스템공과(Embedded-Systems Engineering)
-
- 전기공학과(Electrical Engineering)
-
- 전자공학과(Electronics Engineering)
-
- 정보통신학과(Information Telecommunication Engineering)
-
- 정치외교학과(Political Science & International Studies)
-
- 중어중국학과(Chinese Language & Cultural Studies)
-
- 창의인개발학과(Creative Human Resource Development)
-
- 체육교육과(Physical Education)
-
- 컴퓨터공학부(Computer Science & Engineering)
-
- 테크노경영학과(Technology Management)
-
- 패션산업학과(Fashion & Industry)
-
- 한국화전공(조형예술학부)(Korean Painting)
-
- 해양학과(Marine Science)
-
- 행정학과(Public Administration)
-
- 화학과(Chemistry)
-
- 환경공학(Environmental Engineering)
- 
- */

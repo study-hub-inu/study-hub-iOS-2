@@ -2,9 +2,10 @@
 import UIKit
 
 import SnapKit
-final class HomeViewController: NaviHelper {
 
-  
+final class HomeViewController: NaviHelper {
+  var newPostData: [Content] = []
+
   // MARK: - 화면구성
   private lazy var mainStackView = createStackView(axis: .vertical,
                                                    spacing: 10)
@@ -72,13 +73,11 @@ final class HomeViewController: NaviHelper {
   
   
   // MARK: - collectionview
-  var dataSource: [String] = []
-  
   private lazy var recrutingCollectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .horizontal
     flowLayout.minimumLineSpacing = 50 // cell사이의 간격 설정
-//    flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+    //    flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     view.backgroundColor = .white
     view.clipsToBounds = false
@@ -117,7 +116,7 @@ final class HomeViewController: NaviHelper {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .vertical
     flowLayout.minimumLineSpacing = 10// cell사이의 간격 설정
-//    flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
+    //    flowLayout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
     let view = UICollectionView(frame: .zero, collectionViewLayout: flowLayout)
     view.backgroundColor = .white
     view.clipsToBounds = false
@@ -144,10 +143,11 @@ final class HomeViewController: NaviHelper {
     
     setupDelegate()
     registerCell()
-    setupDataSource()
     
     setUpLayout()
     makeUI()
+    
+    getNewPostData()
   }
   
   // MARK: - setuplayout
@@ -272,7 +272,7 @@ final class HomeViewController: NaviHelper {
     let bookmarkViewController = BookmarkViewController()
     bookmarkViewController.navigationItem.title = "북마크"
     self.navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-
+    
     self.navigationController?.pushViewController(bookmarkViewController, animated: true)
   }
   
@@ -286,11 +286,7 @@ final class HomeViewController: NaviHelper {
     }
   }
   
-  private func setupDataSource() {
-    for i in 0...10 {
-      dataSource += ["\(i)"]
-    }
-  }
+
   private func setupDelegate() {
     recrutingCollectionView.tag = 1
     deadLineCollectionView.tag = 2
@@ -306,12 +302,45 @@ final class HomeViewController: NaviHelper {
   
   private func registerCell() {
     recrutingCollectionView.register(RecruitPostCell.self,
-                            forCellWithReuseIdentifier: RecruitPostCell.id)
+                                     forCellWithReuseIdentifier: RecruitPostCell.id)
     
     deadLineCollectionView.register(DeadLineCell.self,
                                     forCellWithReuseIdentifier: DeadLineCell.id)
   }
   
+  // MARK: - newPostData 가져오기
+  func getNewPostData(){
+    let postDataManager = PostDataManager.shared
+    
+    postDataManager.fetchUser { result in
+      switch result {
+      case .success(let posData):
+        let extractedData = posData.content.map { content in
+          return Content(
+            postID: content.postID,
+            major: content.major,
+            title: content.title,
+            content: content.content,
+            leftover: content.leftover,
+            studyPerson: content.studyPerson,
+            close: content.close
+          )
+        }
+        self.newPostData = extractedData
+   
+      case .failure(let error):
+        switch error {
+        case .networkingError:
+          print("네트워크 에러")
+        case .dataError:
+          print("데이터 에러")
+        case .parseError:
+          print("파싱 에러")
+        }
+      }
+    }
+    
+  }
 }
 
 // MARK: - 서치바 관련
@@ -323,7 +352,6 @@ extension HomeViewController: UISearchBarDelegate {
     
     if keyword.isEmpty {
       print("검색 결과가 없음")
-      // 검색 결과가 없을 때의 처리를 할 수 있습니다.
     } else {
       let searchViewController = SearchViewController()
       self.navigationController?.pushViewController(searchViewController, animated: true)
@@ -337,7 +365,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
     if collectionView.tag == 1 {
-      return dataSource.count
+      return 5
     } else if collectionView.tag == 2 {
       return 4
     }
@@ -349,7 +377,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                       didSelectItemAt indexPath: IndexPath) {
     let postedVC = PostedStudyViewController()
     self.navigationController?.pushViewController(postedVC, animated: true)
-
+    
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -358,7 +386,8 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecruitPostCell.id,
                                                     for: indexPath)
       if let cell = cell as? RecruitPostCell {
-        cell.model = dataSource[indexPath.item]
+        cell.model = newPostData
+      
       }
       return cell
       

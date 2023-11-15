@@ -713,7 +713,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       content: studyproduceTextView.text ?? "",
       // 무관일때 안됨 null이 아닌가
       gender: genderType ?? "null",
-      major: convertMajor(selectedMajor ?? "", toEnglish: true) ,
+      major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
       penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
       studyEndDate: endDateButton.currentTitle ?? "",
       studyPerson: Int(studymemberTextField.text ?? "") ?? 0,

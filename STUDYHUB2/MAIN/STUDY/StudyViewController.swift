@@ -188,7 +188,8 @@ final class StudyViewController: NaviHelper {
       }
       
       describeLabel.numberOfLines = 3
-      describeLabel.changeColor(label: describeLabel, wantToChange: "지금 스터디를 만들어\n  팀원을 구해보세요!", color: .changeInfo)
+      describeLabel.changeColor(label: describeLabel, wantToChange: "지금 스터디를 만들어\n  팀원을 구해보세요!",
+                                color: .changeInfo)
       describeLabel.snp.makeConstraints { make in
         make.top.equalTo(emptyImageView.snp.bottom).offset(10)
         make.centerX.equalTo(emptyImageView)

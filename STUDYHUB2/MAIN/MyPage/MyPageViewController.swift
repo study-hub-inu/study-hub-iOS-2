@@ -49,7 +49,7 @@ class MyPageViewController: UIViewController {
   }()
   
   private lazy var majorLabel = createLabel(title: convertMajor(myPageUserData?.major! ?? "",
-                                                                toEnglish: false),
+                                                                isEnglish: false),
                                             textColor: .gray,
                                             fontSize: 18)
   private lazy var nickNameLabel = createLabel(title: myPageUserData?.nickname ?? "비어있음",
@@ -373,7 +373,7 @@ class MyPageViewController: UIViewController {
     let myinformViewController = MyInformViewController()
     
     // Pass major information to MyinformViewController
-    myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", toEnglish: false)
+    myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", isEnglish: false)
     myinformViewController.nickname = myPageUserData?.nickname
     myinformViewController.email = myPageUserData?.email
     myinformViewController.gender = myPageUserData?.gender
