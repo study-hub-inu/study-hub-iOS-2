@@ -92,6 +92,14 @@ class EditnicknameViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .black
+      
+      // Load access token
+      if let accessToken = TokenManager.shared.loadAccessToken() {
+          print("Access Token: \(accessToken)")
+          // Now you can use the accessToken as needed in this view controller
+      } else {
+          print("Access Token not found.")
+      }
     
     setUpLayout()
     makeUI()
@@ -173,11 +181,12 @@ class EditnicknameViewController: UIViewController {
       
       characterCountLabel.snp.makeConstraints { make in
           make.top.equalTo(newnicknameTextField.snp.bottom).offset(10)
+          make.leading.equalTo(view).offset(350)
       }
       
       nicknamenotuseLabel.snp.makeConstraints { make in
           make.top.equalTo(newnicknameTextField.snp.bottom).offset(5)
-          make.leading.equalTo(view).offset(10)
+          make.leading.equalTo(view).offset(20)
       }
       
     
@@ -217,15 +226,13 @@ class EditnicknameViewController: UIViewController {
     }
     
     
-    // MARK: - 닉네임 중복 확인
     @objc func completeButtonTapped() {
         let nickname = newnicknameTextField.text
         
-        // 서버에 POST 요청을 보냅니다.
+        //닉네임 중복확인
         sendNicknameToServer(nickname: nickname)
     }
     
- 
     
   
   // 키보드 내리기 위한 탭 제스처 핸들러
@@ -239,6 +246,7 @@ class EditnicknameViewController: UIViewController {
     
     self.dismiss(animated: true, completion: nil)
   }
+    
     
     // MARK: - 닉네임 중복확인
     func sendNicknameToServer(nickname: String?) {
@@ -272,7 +280,8 @@ class EditnicknameViewController: UIViewController {
                     // "사용 가능한 닉네임입니다"
                     self?.nicknamenotuseLabel.isHidden = true
                     self?.newnicknameTextField.layer.borderColor = UIColor.black.cgColor
-                    
+                    self?.updateNicknameWithServer(nickname: nickname)
+
                 }
             } else {
                 // 기타 오류 응답일 때의 처리
@@ -289,4 +298,82 @@ class EditnicknameViewController: UIViewController {
         }
         task.resume()
     }
+
+
+    // MARK: - 닉네임 변경
+    func updateNicknameWithServer(nickname: String) {
+        // API 엔드포인트 URL 설정
+        let urlString = "https://study-hub.site:443/api/users/nickname"
+        guard let url = URL(string: urlString) else {
+            // 잘못된 URL 처리
+            return
+        }
+
+        // URLRequest 생성 (PUT 요청)
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+
+        // 헤더에 Access Token 추가
+        if let accessToken = TokenManager.shared.loadAccessToken() {
+            request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        } else {
+            // Access Token이 없을 경우에 대한 처리
+            return
+        }
+
+        // HTTP Body 설정
+        let body: [String: Any] = [
+            "nickname": nickname
+        ]
+
+        do {
+            request.httpBody = try JSONSerialization.data(withJSONObject: body)
+        } catch {
+            // JSON Serialization 에러 처리
+            return
+        }
+
+        // URLSession을 사용하여 서버 요청을 보냅니다.
+        let task = URLSession.shared.dataTask(with: request) { [weak self] (data, response, error) in
+            // 서버 응답 처리
+            if let data = data,
+               let response = response as? HTTPURLResponse,
+               response.statusCode == 200 {
+                // 서버로부터 OK 응답을 받았을 때의 처리
+                if let responseString = String(data: data, encoding: .utf8) {
+                    print("닉네임 변경 성공 - 서버 응답: \(responseString)")
+
+                    DispatchQueue.main.async { [weak self] in
+                        // 닉네임 변경 완료 후 MyInformViewController로 이동
+                        self?.navigateToMyInformViewController(with: nickname)
+                    }
+                }
+            } else {
+                // 기타 오류 응답일 때의 처리
+                if let responseString = String(data: data ?? Data(), encoding: .utf8) {
+                    if let accessToken = TokenManager.shared.loadAccessToken() {
+                        print("액세스토큰: \(accessToken)")
+
+                    } else {
+                        // Handle the case where the access token is not available
+                        print("Access Token not available.")
+                        return
+                    }
+                    print("닉네임: \(nickname)")
+                    print("닉네임 변경 실패 - 서버 응답: \(responseString)")
+                }
+                DispatchQueue.main.async {
+                    print("닉네임 변경 실패")
+                }
+            }
+        }
+        task.resume()
+    }
+
+    // Helper function to navigate to MyInformViewController
+    private func navigateToMyInformViewController(with nickname: String) {
+
+    }
+
 }
