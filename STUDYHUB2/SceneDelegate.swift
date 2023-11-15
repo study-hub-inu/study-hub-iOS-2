@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window = UIWindow(windowScene: windowScene)
     
     let accessToken = TokenManager.shared.loadAccessToken()
+    loginManager.autoLogin()
     // api연결해서 refresh 토근 던져주고 acess와 같으면 로그인
     if accessToken == "a" {
       // 로그인 성공한 경우 HomeViewController 표시
