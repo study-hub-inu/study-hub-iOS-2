@@ -32,7 +32,7 @@ class NaviHelper: UIViewController {
   }
   
   @objc func leftButtonTapped(_ sender: UIBarButtonItem) {
-    dismiss(animated: true, completion: nil)
+    self.navigationController?.popViewController(animated: true)
   }
   
   @objc func rightButtonTapped() {

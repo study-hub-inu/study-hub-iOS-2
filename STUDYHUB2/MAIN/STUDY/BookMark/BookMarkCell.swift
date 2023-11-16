@@ -18,7 +18,6 @@ final class BookMarkCell: UICollectionViewCell {
     let label = UILabel()
     label.text = " 세무회계학과 "
     label.textColor = .o50
-    label.backgroundColor = .o10
     label.layer.cornerRadius = 5
     return label
   }()
@@ -45,7 +44,7 @@ final class BookMarkCell: UICollectionViewCell {
     return label
   }()
   
-  var remainCount: Int = 0
+  var remainCount: Int = 4
   private lazy var remainLabel: UILabel = {
     let label = UILabel()
     label.text = "잔여 \(remainCount)자리"
@@ -95,7 +94,7 @@ final class BookMarkCell: UICollectionViewCell {
   
   private func configure() {
     majorLabel.snp.makeConstraints { make in
-      make.top.equalToSuperview().offset(10)
+      make.top.equalToSuperview().offset(20)
       make.leading.equalToSuperview().offset(10)
     }
     
@@ -105,23 +104,25 @@ final class BookMarkCell: UICollectionViewCell {
     }
     
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(majorLabel.snp.bottom).offset(20)
-      make.leading.equalTo(majorLabel)
+      make.top.equalTo(majorLabel.snp.bottom).offset(10)
+      make.leading.equalTo(majorLabel.snp.leading).offset(5)
     }
     
     infoLabel.snp.makeConstraints { make in
       make.top.equalTo(titleLabel.snp.bottom).offset(10)
-      make.leading.equalTo(majorLabel)
+      make.leading.equalTo(majorLabel.snp.leading).offset(5)
     }
     
     remainLabel.snp.makeConstraints { make in
       make.top.equalTo(infoLabel.snp.bottom).offset(10)
-      make.leading.equalTo(majorLabel)
+      make.leading.equalTo(majorLabel.snp.leading).offset(5)
     }
     
     enterButton.snp.makeConstraints { make in
       make.top.equalTo(remainLabel.snp.bottom).offset(20)
-      make.leading.equalTo(majorLabel)
+      make.leading.equalTo(majorLabel.snp.leading)
+      make.trailing.equalTo(bookMarkButton.snp.trailing)
+      make.height.equalTo(47)
     }
     
     backgroundColor = .white

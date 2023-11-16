@@ -29,6 +29,7 @@
 		EE0A8B602AFA7FD2001C3F41 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B5F2AFA7FD2001C3F41 /* SearchResultCell.swift */; };
 		EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B622AFCB572001C3F41 /* BookMarkCell.swift */; };
 		EE0A8B652AFDDA6E001C3F41 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */; };
+		EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B682B04FED3001C3F41 /* PostDataManager.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -105,6 +106,7 @@
 		EE0A8B5F2AFA7FD2001C3F41 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		EE0A8B622AFCB572001C3F41 /* BookMarkCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookMarkCell.swift; sourceTree = "<group>"; };
 		EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
+		EE0A8B682B04FED3001C3F41 /* PostDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataManager.swift; sourceTree = "<group>"; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -294,7 +296,6 @@
 				EE07ADC92AF25F1E0096890F /* Helper */,
 				EE271F212AD0584900190E7A /* Extension */,
 				F8085D3F2A815DB00067D4DE /* MAIN */,
-				EE0A8B612AFCB4DC001C3F41 /* BookMark */,
 				F8D5BC652AB71DDA00B2B154 /* Singleton.swift */,
 				F80421972A7D6816006C6B87 /* Main.storyboard */,
 				F804219A2A7D6818006C6B87 /* Assets.xcassets */,
@@ -344,6 +345,7 @@
 		F89A010E2A8686B500B4C10D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				EE0A8B682B04FED3001C3F41 /* PostDataManager.swift */,
 				EE0A8B582AF93255001C3F41 /* HomeView */,
 				F86E031E2A8BBAE600164976 /* SearchViewController.swift */,
 				EE0A8B5F2AFA7FD2001C3F41 /* SearchResultCell.swift */,
@@ -357,6 +359,7 @@
 				F8085D432A81846C0067D4DE /* StudyViewController.swift */,
 				F88AB3472A9E71A4001D619C /* CreateStudy */,
 				EE07ADC82AF2570E0096890F /* PostedStudy */,
+				EE0A8B612AFCB4DC001C3F41 /* BookMark */,
 			);
 			path = STUDY;
 			sourceTree = "<group>";
@@ -614,6 +617,7 @@
 				EE07ADD12AF632B80096890F /* Calendar.swift in Sources */,
 				F8085D442A81846C0067D4DE /* StudyViewController.swift in Sources */,
 				F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */,
+				EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */,
 				F8D5BC662AB71DDA00B2B154 /* Singleton.swift in Sources */,
 				EE271F2E2ADA6D3700190E7A /* InfoManager.swift in Sources */,
 				F873775B2AACD41D0055B041 /* BookmarkViewController.swift in Sources */,
