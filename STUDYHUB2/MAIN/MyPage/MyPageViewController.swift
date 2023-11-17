@@ -117,6 +117,7 @@ class MyPageViewController: UIViewController {
     writtenButton.layer.cornerRadius = 5
     writtenButton.widthAnchor.constraint(equalToConstant: 115).isActive = true
     writtenButton.heightAnchor.constraint(equalToConstant: 87).isActive = true
+    writtenButton.addTarget(self, action: #selector(writtenButtonTapped), for: .touchUpInside)
     return writtenButton
   }()
   
@@ -347,29 +348,19 @@ class MyPageViewController: UIViewController {
     }
   }
   
+  @objc func writtenButtonTapped(){
+    let myPostVC = MyPostViewController()
+  
+    self.navigationController?.pushViewController(myPostVC, animated: true)  }
   
   @objc func bookmarkpageButtonTapped() {
-    let bookmarkViewController = BookmarkViewController()
-    // Create a UINavigationController with HomeViewController as the root view controller
-    let navigationController = UINavigationController(rootViewController: bookmarkViewController)
-    navigationController.modalPresentationStyle = .fullScreen
-    
-    // Present the UINavigationController modally
-    present(navigationController, animated: true, completion: nil)
+    let bookmarkVC = BookmarkViewController()
+  
+    self.navigationController?.pushViewController(bookmarkVC, animated: true)
   }
   
   @objc func chevronButtonTapped() {
-    // Create an instance of ViewController (assuming that's the name of your ViewController class)
-    //    let viewController = LoginViewController()
-    //
-    //    // If you want to present it modally, you can use the following code
-    //    let navigationController = UINavigationController(rootViewController: viewController)
-    //    navigationController.modalPresentationStyle = .fullScreen
-    //
-    //    // Present the ViewController modally
-    //    present(navigationController, animated: true, completion: nil)
-    //  }
-    
+
     let myinformViewController = MyInformViewController()
     
     // Pass major information to MyinformViewController

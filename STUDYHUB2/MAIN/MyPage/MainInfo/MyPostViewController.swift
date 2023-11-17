@@ -176,6 +176,7 @@ final class MyPostViewController: NaviHelper {
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
   }
   
+  // 데이터를 받아서 셀로 뿌려줘야함
   func getMyPostData() {
     let data = MyPostInfoManager.shared
     data.fetchUser { result in
@@ -191,6 +192,7 @@ final class MyPostViewController: NaviHelper {
             title: content.title
           )
         }
+        
         print(extractedData)
         
       case .failure(let error):
