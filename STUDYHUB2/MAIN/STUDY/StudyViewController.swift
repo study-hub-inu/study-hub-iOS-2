@@ -160,7 +160,8 @@ final class StudyViewController: NaviHelper {
     
     if studyCount > 0 {
       resultCollectionView.snp.makeConstraints { make in
-        make.top.leading.trailing.equalTo(contentView)
+        make.top.equalTo(contentView).offset(20)
+        make.leading.trailing.equalTo(contentView)
         make.width.equalToSuperview()
         make.height.equalTo(1200)
       }
@@ -179,7 +180,8 @@ final class StudyViewController: NaviHelper {
       }
       
       scrollView.snp.makeConstraints { make in
-        make.edges.equalTo(view.safeAreaLayoutGuide)
+        make.top.equalTo(divideLine.snp.bottom).offset(10)
+        make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
       }
     }else {
       emptyImageView.snp.makeConstraints { make in

@@ -20,5 +20,17 @@ extension UILabel {
     //최종적으로 내 label에 text가 아닌, attributedText를 적용
     label.attributedText = attributedStr
   }
+  
+  func setLineSpacing(spacing: CGFloat) {
+      guard let text = text else { return }
+
+      let attributeString = NSMutableAttributedString(string: text)
+      let style = NSMutableParagraphStyle()
+      style.lineSpacing = spacing
+      attributeString.addAttribute(.paragraphStyle,
+                                   value: style,
+                                   range: NSRange(location: 0, length: attributeString.length))
+      attributedText = attributeString
+  }
 }
 
