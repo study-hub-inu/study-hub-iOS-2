@@ -32,6 +32,7 @@
 		EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B682B04FED3001C3F41 /* PostDataManager.swift */; };
 		EE0A8B6B2B07614C001C3F41 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B6A2B07614C001C3F41 /* MyPostViewController.swift */; };
 		EE0A8B6E2B076B3F001C3F41 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B6D2B076B3F001C3F41 /* MyPostCell.swift */; };
+		EE0A8B702B0790D2001C3F41 /* MyPostInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B6F2B0790D2001C3F41 /* MyPostInfoManager.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -110,6 +111,7 @@
 		EE0A8B682B04FED3001C3F41 /* PostDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDataManager.swift; sourceTree = "<group>"; };
 		EE0A8B6A2B07614C001C3F41 /* MyPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
 		EE0A8B6D2B076B3F001C3F41 /* MyPostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostCell.swift; sourceTree = "<group>"; };
+		EE0A8B6F2B0790D2001C3F41 /* MyPostInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPostInfoManager.swift; sourceTree = "<group>"; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 		EE0A8B6C2B076B1E001C3F41 /* MainInfo */ = {
 			isa = PBXGroup;
 			children = (
+				EE0A8B6F2B0790D2001C3F41 /* MyPostInfoManager.swift */,
 				EE0A8B6A2B07614C001C3F41 /* MyPostViewController.swift */,
 				EE0A8B6D2B076B3F001C3F41 /* MyPostCell.swift */,
 			);
@@ -646,6 +649,7 @@
 				F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */,
 				EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */,
 				EE0A8B6B2B07614C001C3F41 /* MyPostViewController.swift in Sources */,
+				EE0A8B702B0790D2001C3F41 /* MyPostInfoManager.swift in Sources */,
 				EE0A8B652AFDDA6E001C3F41 /* MyInformationViewController.swift in Sources */,
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,

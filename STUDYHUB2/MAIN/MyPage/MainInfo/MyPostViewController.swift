@@ -82,6 +82,8 @@ final class MyPostViewController: NaviHelper {
 
     setupLayout()
     makeUI()
+    
+    getMyPostData()
   }
   
   // MARK: - setupLayout
@@ -173,6 +175,36 @@ final class MyPostViewController: NaviHelper {
     self.navigationItem.title = "작성한 글"
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
   }
+  
+  func getMyPostData() {
+    let data = MyPostInfoManager.shared
+    data.fetchUser { result in
+      switch result {
+      case .success(let myPostData):
+        let extractedData = myPostData.getMyPostData.content.map { content in
+          return MyPostInfo(
+            close: content.close,
+            content: content.content,
+            major: content.major,
+            postId: content.postId,
+            remainingSeat: content.remainingSeat,
+            title: content.title
+          )
+        }
+        print(extractedData)
+        
+      case .failure(let error):
+        switch error {
+        case .networkingError:
+          print("네트워크 에러")
+        case .dataError:
+          print("데이터 에러")
+        case .parseError:
+          print("파싱 에러")
+        }
+      }
+    }
+  }
 }
 
 // MARK: - collectionView
@@ -192,7 +224,8 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
   func collectionView(_ collectionView: UICollectionView,
                       cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPostCell.id,
-                                                  for: indexPath)
+                                                  for: indexPath) as! MyPostCell
+    cell.delegate = self
     
     return cell
   }
@@ -203,7 +236,39 @@ extension MyPostViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView,
                       layout collectionViewLayout: UICollectionViewLayout,
                       sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: 350, height: 210)
+    return CGSize(width: 350, height: 181)
   }
 }
 
+// MARK: - MyPostcell 함수
+extension MyPostViewController: MyPostCellDelegate{
+  func menuButtonTapped(in cell: MyPostCell) {
+      let viewControllerToPresent = BottomSheet()
+      if #available(iOS 15.0, *) {
+        if let sheet = viewControllerToPresent.sheetPresentationController {
+          if #available(iOS 16.0, *) {
+            sheet.detents = [.custom(resolver: { context in
+              return 228.0
+            })]
+          } else {
+            // Fallback on earlier versions
+          }
+          sheet.largestUndimmedDetentIdentifier = nil
+          sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+          sheet.prefersEdgeAttachedInCompactHeight = true
+          sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+          sheet.preferredCornerRadius = 20
+        }
+      } else {
+        // Fallback on earlier versions
+      }
+      present(viewControllerToPresent, animated: true, completion: nil)
+  }
+  
+  func closeButtonTapped(in cell: MyPostCell){
+    let popupVC = PopupViewController(title: "이 글의 모집을 마감할까요?",
+                                      desc: "마감하면 다시 모집할 수 없어요")
+    popupVC.modalPresentationStyle = .overFullScreen
+    self.present(popupVC, animated: false)
+  }
+}

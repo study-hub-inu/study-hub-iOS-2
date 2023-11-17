@@ -85,6 +85,7 @@ final class StudyViewController: NaviHelper {
     
     setupLayout()
     makeUI()
+    
   }
   
   // MARK: - setupLayout

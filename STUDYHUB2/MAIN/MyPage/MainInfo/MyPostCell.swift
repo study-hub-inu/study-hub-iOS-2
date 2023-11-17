@@ -3,10 +3,24 @@ import UIKit
 
 import SnapKit
 
+protocol MyPostCellDelegate: AnyObject {
+  func menuButtonTapped(in cell: MyPostCell)
+  func closeButtonTapped(in cell: MyPostCell)
+}
+
+
 final class MyPostCell: UICollectionViewCell {
+  weak var delegate: MyPostCellDelegate?
+  
+  @objc func menuButtonTapped(){
+    delegate?.menuButtonTapped(in: self)
+  }
+  
+  @objc func closeButtonTapped(){
+    delegate?.closeButtonTapped(in: self)
+  }
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
-  
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -19,6 +33,7 @@ final class MyPostCell: UICollectionViewCell {
   private lazy var menuButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "ThreeDotImage"), for: .normal)
+    button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
     return button
   }()
   
@@ -61,6 +76,7 @@ final class MyPostCell: UICollectionViewCell {
     button.setTitle("마감", for: .normal)
     button.setTitleColor(UIColor.o50, for: .normal)
     button.titleLabel?.textAlignment = .center
+    button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
     return button
   }()
   
@@ -120,7 +136,7 @@ final class MyPostCell: UICollectionViewCell {
     }
     
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(majorLabel.snp.bottom).offset(10)
+      make.top.equalTo(majorLabel.snp.bottom).offset(20)
       make.leading.equalTo(majorLabel.snp.leading).offset(5)
     }
     
@@ -136,7 +152,7 @@ final class MyPostCell: UICollectionViewCell {
     
     seperateLine.backgroundColor = .bg30
     seperateLine.snp.makeConstraints { make in
-      make.top.equalTo(remainLabel.snp.bottom).offset(30)
+      make.top.equalTo(remainLabel.snp.bottom).offset(10)
       make.leading.trailing.equalToSuperview()
       make.height.equalTo(1)
     }
@@ -144,14 +160,14 @@ final class MyPostCell: UICollectionViewCell {
     
     seperateLineinStackView.backgroundColor = .bg30
     seperateLineinStackView.snp.makeConstraints { make in
-      make.height.equalTo(30)
+      make.height.equalTo(20)
       make.width.equalTo(1)
     }
     
     buttonStackView.alignment = .center
     buttonStackView.distribution = .equalCentering
     buttonStackView.snp.makeConstraints { make in
-      make.top.equalTo(seperateLine.snp.bottom).offset(20)
+      make.top.equalTo(seperateLine.snp.bottom)
       make.leading.equalTo(remainLabel.snp.trailing)
       make.trailing.equalTo(menuButton.snp.leading).offset(-30)
     }
