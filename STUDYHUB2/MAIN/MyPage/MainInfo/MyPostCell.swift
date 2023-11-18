@@ -8,6 +8,10 @@ protocol MyPostCellDelegate: AnyObject {
   func closeButtonTapped(in cell: MyPostCell)
 }
 
+struct CellData {
+  var major, title, info: String
+  var remainNum: Int
+}
 
 final class MyPostCell: UICollectionViewCell {
   weak var delegate: MyPostCellDelegate?
@@ -22,7 +26,7 @@ final class MyPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  private lazy var majorLabel: UILabel = {
+  lazy var majorLabel: UILabel = {
     let label = UILabel()
     label.text = " 세무회계학과 "
     label.textColor = .o50
@@ -37,7 +41,7 @@ final class MyPostCell: UICollectionViewCell {
     return button
   }()
   
-  private lazy var titleLabel: UILabel = {
+  lazy var titleLabel: UILabel = {
     let label = UILabel()
     label.text = "단기 스터디원 구해요!"
     label.textColor = .black
@@ -45,7 +49,7 @@ final class MyPostCell: UICollectionViewCell {
     return label
   }()
   
-  private lazy var infoLabel: UILabel = {
+  lazy var infoLabel: UILabel = {
     let label = UILabel()
     label.text = "내용내용내용"
     label.textColor = .bg80

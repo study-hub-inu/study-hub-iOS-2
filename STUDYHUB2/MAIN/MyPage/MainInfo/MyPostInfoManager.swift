@@ -28,7 +28,7 @@ final class MyPostInfoManager {
   typealias NetworkCompletion = (Result<MyPostData, NetworkError>) -> Void
   
   // 네트워킹 요청하는 함수
-  func fetchUser(completion: @escaping NetworkCompletion) {
+  private func fetchUser(completion: @escaping NetworkCompletion) {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
@@ -92,6 +92,44 @@ final class MyPostInfoManager {
         completion(.failure(.parseError))
       }
     }.resume()
+  }
+  
+  
+  // 내가 쓴 게시글 정보
+  private var myPostDatas: [MyPostInfo] = []
+  
+  func getMyPostData() -> [MyPostInfo] {
+    return myPostDatas
+  }
+  
+  func getMyPostDataFromApi() {
+    let data = MyPostInfoManager.shared
+    data.fetchUser { result in
+      switch result {
+      case .success(let myPostData):
+        let extractedData: [MyPostInfo] = myPostData.getMyPostData.content.map { content in
+          var myPostData = MyPostInfo(
+            close: content.close,
+            content: content.content,
+            major: content.major,
+            postId: content.postId,
+            remainingSeat: content.remainingSeat,
+            title: content.title
+          )
+          return myPostData
+        }
+        self.myPostDatas = extractedData
+      case .failure(let error):
+        switch error {
+        case .networkingError:
+          print("네트워크 에러")
+        case .dataError:
+          print("데이터 에러")
+        case .parseError:
+          print("파싱 에러")
+        }
+      }
+    }
   }
 }
 

@@ -10,11 +10,14 @@ import UIKit
 import SnapKit
 
 final class MyPostViewController: NaviHelper {
-  
+  let myPostDataManager = MyPostInfoManager.shared
+  var myPostDatas: [MyPostInfo] = []
+
   var countPostNumber = 4
   private lazy var totalPostCountLabel: UILabel = {
     let label = UILabel()
     label.text = "전체 \(countPostNumber)"
+    label.font = UIFont(name: "Pretendard", size: 14)
     return label
   }()
   
@@ -22,6 +25,7 @@ final class MyPostViewController: NaviHelper {
     let button = UIButton()
     button.setTitle("전체삭제", for: .normal)
     button.setTitleColor(UIColor.bg70, for: .normal)
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
     return button
   }()
   
@@ -68,23 +72,27 @@ final class MyPostViewController: NaviHelper {
     return scrollView
   }()
   
-  
   // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
     
     view.backgroundColor = .bg30
+  
     
     navigationItemSetting()
     redesignNavigationbar()
 
     registerCell()
 
+    getMyPostData {
+      self.myPostCollectionView.reloadData() // 데이터를 가져온 후에 UI 업데이트
+    }
     setupLayout()
     makeUI()
+
     
-    getMyPostData()
   }
+  
   
   // MARK: - setupLayout
   func setupLayout(){
@@ -107,7 +115,6 @@ final class MyPostViewController: NaviHelper {
         view.addSubview($0)
       }
     }
- 
   }
   
   // MARK: - makeUI
@@ -175,35 +182,14 @@ final class MyPostViewController: NaviHelper {
     self.navigationItem.title = "작성한 글"
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
   }
-  
-  // 데이터를 받아서 셀로 뿌려줘야함
-  func getMyPostData() {
-    let data = MyPostInfoManager.shared
-    data.fetchUser { result in
-      switch result {
-      case .success(let myPostData):
-        let extractedData = myPostData.getMyPostData.content.map { content in
-          return MyPostInfo(
-            close: content.close,
-            content: content.content,
-            major: content.major,
-            postId: content.postId,
-            remainingSeat: content.remainingSeat,
-            title: content.title
-          )
-        }
-        
-        print(extractedData)
-        
-      case .failure(let error):
-        switch error {
-        case .networkingError:
-          print("네트워크 에러")
-        case .dataError:
-          print("데이터 에러")
-        case .parseError:
-          print("파싱 에러")
-        }
+
+  func getMyPostData(completion: @escaping () -> Void) {
+    DispatchQueue.global().async {
+      self.myPostDataManager.getMyPostDataFromApi()
+      self.myPostDatas = self.myPostDataManager.getMyPostData()
+      DispatchQueue.main.async {
+        self.myPostCollectionView.reloadData()
+        completion()
       }
     }
   }
@@ -211,10 +197,9 @@ final class MyPostViewController: NaviHelper {
 
 // MARK: - collectionView
 extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-  
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 4
+    return myPostDatas.count
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -224,10 +209,16 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
   }
   
   func collectionView(_ collectionView: UICollectionView,
-                      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                      cellForItemAt indexPath: IndexPath)  -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPostCell.id,
                                                   for: indexPath) as! MyPostCell
     cell.delegate = self
+ 
+    cell.majorLabel.text = convertMajor(myPostDatas[indexPath.row].major,
+                                        isEnglish: false)
+    cell.titleLabel.text = myPostDatas[indexPath.row].title
+    cell.infoLabel.text = myPostDatas[indexPath.row].content
+    cell.remainCount = myPostDatas[indexPath.row].remainingSeat
     
     return cell
   }
