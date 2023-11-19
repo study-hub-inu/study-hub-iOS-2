@@ -57,7 +57,7 @@ final class MyPostCell: UICollectionViewCell {
     return label
   }()
   
-  var remainCount: Int = 4
+  var remainCount: Int = 1
   private lazy var remainLabel: UILabel = {
     let label = UILabel()
     label.text = "잔여 \(remainCount)자리"

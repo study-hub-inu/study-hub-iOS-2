@@ -102,9 +102,8 @@ final class MyPostInfoManager {
     return myPostDatas
   }
   
-  func getMyPostDataFromApi() {
-    let data = MyPostInfoManager.shared
-    data.fetchUser { result in
+  func getMyPostDataFromApi(completion: @escaping () -> Void) {
+    fetchUser { result in
       switch result {
       case .success(let myPostData):
         let extractedData: [MyPostInfo] = myPostData.getMyPostData.content.map { content in
@@ -119,6 +118,7 @@ final class MyPostInfoManager {
           return myPostData
         }
         self.myPostDatas = extractedData
+        completion()
       case .failure(let error):
         switch error {
         case .networkingError:

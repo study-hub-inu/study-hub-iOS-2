@@ -85,7 +85,9 @@ final class MyPostViewController: NaviHelper {
     registerCell()
 
     getMyPostData {
-      self.myPostCollectionView.reloadData() // 데이터를 가져온 후에 UI 업데이트
+      DispatchQueue.main.async {
+        self.myPostCollectionView.reloadData()
+      }
     }
     setupLayout()
     makeUI()
@@ -185,11 +187,12 @@ final class MyPostViewController: NaviHelper {
 
   func getMyPostData(completion: @escaping () -> Void) {
     DispatchQueue.global().async {
-      self.myPostDataManager.getMyPostDataFromApi()
-      self.myPostDatas = self.myPostDataManager.getMyPostData()
-      DispatchQueue.main.async {
-        self.myPostCollectionView.reloadData()
-        completion()
+      self.myPostDataManager.getMyPostDataFromApi {
+        DispatchQueue.main.async {
+          self.myPostDatas = self.myPostDataManager.getMyPostData()
+          self.myPostCollectionView.reloadData()
+          completion()
+        }
       }
     }
   }
@@ -213,13 +216,17 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPostCell.id,
                                                   for: indexPath) as! MyPostCell
     cell.delegate = self
- 
+    
     cell.majorLabel.text = convertMajor(myPostDatas[indexPath.row].major,
                                         isEnglish: false)
     cell.titleLabel.text = myPostDatas[indexPath.row].title
     cell.infoLabel.text = myPostDatas[indexPath.row].content
     cell.remainCount = myPostDatas[indexPath.row].remainingSeat
+ 
+    countPostNumber = myPostDatas.count
     
+    print(myPostDatas.count)
+    print(myPostDatas[indexPath.row].remainingSeat)
     return cell
   }
 }
