@@ -13,10 +13,14 @@ final class MyPostViewController: NaviHelper {
   let myPostDataManager = MyPostInfoManager.shared
   var myPostDatas: [MyPostInfo] = []
 
-  var countPostNumber = 4
+  var countPostNumber = 1 {
+    didSet {
+      totalPostCountLabel.text = "전체 \(countPostNumber)"
+    }
+  }
+  
   private lazy var totalPostCountLabel: UILabel = {
     let label = UILabel()
-    label.text = "전체 \(countPostNumber)"
     label.font = UIFont(name: "Pretendard", size: 14)
     return label
   }()
@@ -85,16 +89,10 @@ final class MyPostViewController: NaviHelper {
     registerCell()
 
     getMyPostData {
-      DispatchQueue.main.async {
-        self.myPostCollectionView.reloadData()
-      }
+      self.setupLayout()
+      self.makeUI()
     }
-    setupLayout()
-    makeUI()
-
-    
   }
-  
   
   // MARK: - setupLayout
   func setupLayout(){
@@ -190,6 +188,7 @@ final class MyPostViewController: NaviHelper {
       self.myPostDataManager.getMyPostDataFromApi {
         DispatchQueue.main.async {
           self.myPostDatas = self.myPostDataManager.getMyPostData()
+          self.countPostNumber = self.myPostDatas.count
           self.myPostCollectionView.reloadData()
           completion()
         }
@@ -215,18 +214,15 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
                       cellForItemAt indexPath: IndexPath)  -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyPostCell.id,
                                                   for: indexPath) as! MyPostCell
-    cell.delegate = self
     
+    cell.delegate = self
     cell.majorLabel.text = convertMajor(myPostDatas[indexPath.row].major,
                                         isEnglish: false)
     cell.titleLabel.text = myPostDatas[indexPath.row].title
     cell.infoLabel.text = myPostDatas[indexPath.row].content
     cell.remainCount = myPostDatas[indexPath.row].remainingSeat
- 
-    countPostNumber = myPostDatas.count
-    
-    print(myPostDatas.count)
-    print(myPostDatas[indexPath.row].remainingSeat)
+     
+
     return cell
   }
 }

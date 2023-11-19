@@ -57,10 +57,14 @@ final class MyPostCell: UICollectionViewCell {
     return label
   }()
   
-  var remainCount: Int = 1
+  var remainCount: Int = 0 {
+    didSet {
+      remainLabel.text = "잔여 \(remainCount)자리"
+    }
+  }
+  
   private lazy var remainLabel: UILabel = {
     let label = UILabel()
-    label.text = "잔여 \(remainCount)자리"
     label.textColor = .bg70
     label.font = UIFont.boldSystemFont(ofSize: 12)
     return label
