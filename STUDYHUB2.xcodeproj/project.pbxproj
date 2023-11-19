@@ -42,6 +42,7 @@
 		EE0A8B812B089729001C3F41 /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B782B089729001C3F41 /* Pretendard-Medium.otf */; };
 		EE0A8B822B089729001C3F41 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B792B089729001C3F41 /* Pretendard-ExtraBold.otf */; };
 		EE0A8B832B089729001C3F41 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */; };
+		EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -130,6 +131,7 @@
 		EE0A8B782B089729001C3F41 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		EE0A8B792B089729001C3F41 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailManager.swift; sourceTree = "<group>"; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -406,6 +408,7 @@
 			isa = PBXGroup;
 			children = (
 				F8085D432A81846C0067D4DE /* StudyViewController.swift */,
+				EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */,
 				F88AB3472A9E71A4001D619C /* CreateStudy */,
 				EE07ADC82AF2570E0096890F /* PostedStudy */,
 				EE0A8B612AFCB4DC001C3F41 /* BookMark */,
@@ -677,6 +680,7 @@
 				F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */,
 				EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */,
 				EE271F2E2ADA6D3700190E7A /* InfoManager.swift in Sources */,
+				EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */,
 				F873775B2AACD41D0055B041 /* BookmarkViewController.swift in Sources */,
 				EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */,
 				F80421CA2A7D9534006C6B87 /* PasswordViewController.swift in Sources */,

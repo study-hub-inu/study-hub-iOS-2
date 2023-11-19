@@ -10,8 +10,19 @@ import UIKit
 import SnapKit
 
 final class PostedStudyViewController: NaviHelper, SendPostData {
-  var postedDate: CreateStudyRequest?
+  // 여기에 데이터가 들어오면 관련 UI에 데이터 넣어줌
+  var postedDate: PostDetailData? {
+    didSet {
+      DispatchQueue.main.async {
+        self.postedMajorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
+                                                  isEnglish: false)
+        self.postedTitleLabel.text = self.postedDate?.title
+      }
+    }
+  }
+  
   func sendData(data: CreateStudyRequest) {
+    
   }
   
   // 작성일, 관련학과, 제목

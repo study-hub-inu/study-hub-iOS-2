@@ -11,6 +11,7 @@ import SnapKit
 
 final class MyPostViewController: NaviHelper {
   let myPostDataManager = MyPostInfoManager.shared
+  let detailPostDataManager = PostDetailInfoManager.shared
   var myPostDatas: [MyPostInfo] = []
 
   var countPostNumber = 1 {
@@ -206,8 +207,16 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
   
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
+
     let postedVC = PostedStudyViewController()
+
+    // 단건조회 시 연관된 포스트도 같이 나옴
+    detailPostDataManager.getPostDetailData(postID: myPostDatas[indexPath.row].postId) {
+      let test = self.detailPostDataManager.getPostDetailData()
+      postedVC.postedDate = test
+    }
     self.navigationController?.pushViewController(postedVC, animated: true)
+
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -222,7 +231,6 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
     cell.infoLabel.text = myPostDatas[indexPath.row].content
     cell.remainCount = myPostDatas[indexPath.row].remainingSeat
      
-
     return cell
   }
 }
