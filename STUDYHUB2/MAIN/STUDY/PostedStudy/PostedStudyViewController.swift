@@ -10,19 +10,66 @@ import UIKit
 import SnapKit
 
 final class PostedStudyViewController: NaviHelper, SendPostData {
+  func sendData(data: CreateStudyRequest) {
+    print("11")
+  }
+  
   // 여기에 데이터가 들어오면 관련 UI에 데이터 넣어줌
   var postedDate: PostDetailData? {
     didSet {
       DispatchQueue.main.async {
+        print(self.postedDate?.createdDate)
         self.postedMajorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
                                                   isEnglish: false)
         self.postedTitleLabel.text = self.postedDate?.title
+        self.memberNumberCount = self.postedDate?.remainingSeat ?? 0
+        self.fineCount = self.postedDate?.penalty ?? 0
+        
+        if self.postedDate?.filteredGender == "FEMALE" {
+          self.gender = "여자"
+        } else if self.postedDate?.filteredGender == "MALE" {
+          self.gender = "남자"
+        }
+        
+        self.aboutStudyDeatilLabel.text = self.postedDate?.content
+        
+        guard let startDate = self.postedDate?.studyStartDate,
+              let endDate = self.postedDate?.studyEndDate else { return }
+        
+        self.periodLabel.text = "\(startDate) ~ \(endDate)"
+        self.meetLabel.text = self.postedDate?.studyWay
+        self.majorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
+                                                 isEnglish: false)
+        self.writerMajorLabel.text = self.convertMajor(self.postedDate?.postedUser.major ?? "",
+                                                       isEnglish: false)
+        self.nickNameLabel.text = self.postedDate?.postedUser.nickname
       }
     }
   }
   
-  func sendData(data: CreateStudyRequest) {
-    
+  var memberNumberCount: Int = 0 {
+    didSet {
+      memeberNumberCountLabel.text = "\(memberNumberCount)/30명"
+      memeberNumberCountLabel.changeColor(label: memeberNumberCountLabel,
+                                          wantToChange: memberNumberCount,
+                                          color: .changeInfo)
+    }
+  }
+  
+  var fineCount: Int = 0 {
+    didSet{
+      fineCountLabel.text = "\(fineCount)원"
+      fineCountLabel.changeColor(label: fineCountLabel,
+                                 wantToChange: fineCount,
+                                 color: .changeInfo)
+
+      fineAmountLabel.text = "결석비 \(fineCount)원"
+    }
+  }
+  var gender: String = "무관" {
+    didSet {
+      fixedGenderLabel.text = "\(gender)"
+    }
   }
   
   // 작성일, 관련학과, 제목
@@ -343,6 +390,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     for view in majorData {
       majorStackView.addArrangedSubview(view)
     }
+    
     let detailInfo = [periodTitleLabel, periodStackView,
                       fineTitleLabel, fineInfoStackView,
                       meetTitleLabel, meetStackView,
@@ -373,8 +421,9 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     }
     
     // 유사 스터디 추천
-    let similarPostData = [similarPostLabel,collectionView]
-    for view in similarPostData {
+    let spaceView11 = UIView()
+    let collectionView = [similarPostLabel,collectionView, spaceView11]
+    for view in collectionView {
       similarPostStackView.addArrangedSubview(view)
     }
     
@@ -404,9 +453,19 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     postedInfoStackView.isLayoutMarginsRelativeArrangement = true
     
     // 인원수 벌금 성별여부
+    [
+      periodStackView,
+      fineInfoStackView,
+      meetStackView,
+      majorStackView
+    ].forEach {
+      $0.layoutMargins = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
+      $0.isLayoutMarginsRelativeArrangement = true
+    }
+ 
     coreInfoStackView.spacing = 10  // 수평 여백 설정
     coreInfoStackView.layer.cornerRadius = 10
-    coreInfoStackView.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    coreInfoStackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
     coreInfoStackView.isLayoutMarginsRelativeArrangement = true
     
     redesignCoreInfoStackView.distribution = .fillProportionally
@@ -418,19 +477,19 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     // 스터디 소개
     aboutStudyStackView.backgroundColor = .white
     aboutStudyDeatilLabel.numberOfLines = 0
-    aboutStudyStackView.layoutMargins = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
+    aboutStudyStackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 10)
     aboutStudyStackView.isLayoutMarginsRelativeArrangement = true
     
     // 기간 벌금 대면여부 관련학과
     detailInfoStackView.backgroundColor = .white
-    detailInfoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 20, right: 10)
+    detailInfoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 10)
     detailInfoStackView.isLayoutMarginsRelativeArrangement = true
     
     // 작성자 정보
     writerInfoWithImageStackView.distribution = .fillProportionally
     
     totalWriterInfoStackView.backgroundColor = .white
-    totalWriterInfoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 20, right: 10)
+    totalWriterInfoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 10)
     totalWriterInfoStackView.isLayoutMarginsRelativeArrangement = true
     
     spaceView1.snp.makeConstraints { make in
@@ -439,7 +498,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     
     // 비슷한 게시글
     similarPostStackView.backgroundColor = .white
-    similarPostStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+    similarPostStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
     similarPostStackView.isLayoutMarginsRelativeArrangement = true
     
     collectionView.snp.makeConstraints { make in
@@ -458,8 +517,6 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
       make.edges.equalTo(view)
     }
     
-    memeberNumberCountLabel.changeColor(label: memeberNumberCountLabel, wantToChange: "1", color: .changeInfo)
-    fineCountLabel.changeColor(label: fineCountLabel, wantToChange: "1000", color: .changeInfo)
   }
   
   private func setupDataSource() {
