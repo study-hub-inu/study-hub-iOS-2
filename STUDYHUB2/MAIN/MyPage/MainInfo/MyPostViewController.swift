@@ -232,6 +232,7 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
     cell.titleLabel.text = myPostDatas[indexPath.row].title
     cell.infoLabel.text = myPostDatas[indexPath.row].content
     cell.remainCount = myPostDatas[indexPath.row].remainingSeat
+    cell.postID = myPostDatas[indexPath.row].postId
      
     return cell
   }
@@ -248,8 +249,9 @@ extension MyPostViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - MyPostcell 함수
 extension MyPostViewController: MyPostCellDelegate{
-  func menuButtonTapped(in cell: MyPostCell) {
-      let viewControllerToPresent = BottomSheet()
+  func menuButtonTapped(in cell: MyPostCell, postID: Int) {
+    print(postID)
+    let viewControllerToPresent = BottomSheet(postID: postID)
       if #available(iOS 15.0, *) {
         if let sheet = viewControllerToPresent.sheetPresentationController {
           if #available(iOS 16.0, *) {
@@ -272,8 +274,10 @@ extension MyPostViewController: MyPostCellDelegate{
   }
   
   func closeButtonTapped(in cell: MyPostCell){
+    // Postid수정필요
     let popupVC = PopupViewController(title: "이 글의 모집을 마감할까요?",
-                                      desc: "마감하면 다시 모집할 수 없어요")
+                                      desc: "마감하면 다시 모집할 수 없어요",
+                                      postID: 1)
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }

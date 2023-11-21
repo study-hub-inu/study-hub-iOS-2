@@ -26,8 +26,8 @@ final class MyPostInfoManager {
   
   typealias NetworkCompletion = (Result<MyPostData, NetworkError>) -> Void
   
-  // 네트워킹 요청하는 함수
-  private func fetchUser(completion: @escaping NetworkCompletion) {
+  // MARK: - 내가 쓴 게시글 정보 가져오기
+  private func fetchMyPostInfo(completion: @escaping NetworkCompletion) {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
@@ -46,10 +46,10 @@ final class MyPostInfoManager {
       completion(.failure(.networkingError))
       return
     }
-    getMethod(with: urlString, token: token, completion: completion)
+    getMyPostInfo(with: urlString, token: token, completion: completion)
   }
   
-  private func getMethod(with urlString: String, token: String, completion: @escaping NetworkCompletion) {
+  private func getMyPostInfo(with urlString: String, token: String, completion: @escaping NetworkCompletion) {
     guard let url = URL(string: urlString) else {
       print("Invalid URL")
       completion(.failure(.networkingError))
@@ -102,7 +102,7 @@ final class MyPostInfoManager {
   }
   
   func getMyPostDataFromApi(completion: @escaping () -> Void) {
-    fetchUser { result in
+    fetchMyPostInfo { result in
       switch result {
       case .success(let myPostData):
         let extractedData: [MyPostInfo] = myPostData.getMyPostData.content.map { content in
@@ -130,5 +130,72 @@ final class MyPostInfoManager {
       }
     }
   }
+  
+  // MARK: - 내가 쓴 게시글 삭제
+  typealias DeleteNetworkCompletion = (Result<Void, NetworkError>) -> Void
+
+  func fetchDeletePostInfo(postID: Int, completion: @escaping DeleteNetworkCompletion) {
+    var urlComponents = URLComponents()
+    urlComponents.scheme = "https"
+    urlComponents.host = "study-hub.site"
+    urlComponents.port = 443
+    urlComponents.path = "/api/study-posts/\(postID)"
+
+    guard var token = tokenManager.loadAccessToken() else { return }
+    
+    guard let urlString = urlComponents.url?.absoluteString else {
+      print("Invalid URL")
+      completion(.failure(.networkingError))
+      return
+    }
+    deleteMyPost(with: urlString, token: token, completion: completion)
+  }
+  
+  private func deleteMyPost(with urlString: String,
+                            token: String,
+                            completion: @escaping DeleteNetworkCompletion) {
+    guard let url = URL(string: urlString) else {
+      print("Invalid URL")
+      completion(.failure(.networkingError))
+      return
+    }
+    var request = URLRequest(url: url)
+    request.httpMethod = "DELETE"
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    request.setValue("\(token)", forHTTPHeaderField: "Authorization")
+
+    URLSession.shared.dataTask(with: request) { data, response, error in
+      if let error = error {
+        print("Networking Error:", error)
+        completion(.failure(.networkingError))
+        return
+      }
+      
+      guard let safeData = data else {
+        print("No Data")
+        completion(.failure(.dataError))
+        return
+      }
+      
+      guard let httpResponse = response as? HTTPURLResponse else {
+        print("Invalid Response")
+        completion(.failure(.networkingError))
+        return
+      }
+      
+      print("Response Status Code:", httpResponse.statusCode)
+      
+      do {
+        let deleteAccepted = String(data: safeData, encoding: .utf8)
+        completion(.success(()))
+      } catch {
+        print("JSON Parsing Error:", error)
+        completion(.failure(.parseError))
+      }
+    }.resume()
+  }
 }
+
+
 

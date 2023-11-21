@@ -4,7 +4,7 @@ import UIKit
 import SnapKit
 
 protocol MyPostCellDelegate: AnyObject {
-  func menuButtonTapped(in cell: MyPostCell)
+  func menuButtonTapped(in cell: MyPostCell, postID: Int)
   func closeButtonTapped(in cell: MyPostCell)
 }
 
@@ -17,13 +17,14 @@ final class MyPostCell: UICollectionViewCell {
   weak var delegate: MyPostCellDelegate?
   
   @objc func menuButtonTapped(){
-    delegate?.menuButtonTapped(in: self)
+    delegate?.menuButtonTapped(in: self, postID: postID ?? 0)
   }
   
   @objc func closeButtonTapped(){
     delegate?.closeButtonTapped(in: self)
   }
   
+  var postID: Int?
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
   lazy var majorLabel: UILabel = {

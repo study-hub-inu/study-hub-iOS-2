@@ -10,6 +10,17 @@ import UIKit
 import SnapKit
 
 final class BottomSheet: UIViewController {
+  private let postID: Int
+  
+  init(postID: Int) {
+      self.postID = postID
+      super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   private lazy var deleteButton: UIButton = {
     let button = UIButton()
     button.setTitle("삭제하기", for: .normal)
@@ -79,7 +90,8 @@ final class BottomSheet: UIViewController {
   
   @objc func deleteButtonTapped(){
     let popupVC = PopupViewController(title: "이 글을 삭제할까요?",
-                                      desc: "삭제한 글과 참여자는 다시 볼 수 없어요")
+                                      desc: "삭제한 글과 참여자는 다시 볼 수 없어요",
+                                      postID: postID)
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }
