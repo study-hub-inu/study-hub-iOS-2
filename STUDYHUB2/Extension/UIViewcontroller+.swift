@@ -42,30 +42,30 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
   
   // 날짜 선택하는 버튼
   func createDateButton(selector: Selector) -> UIButton {
-      // 버튼 초기화
-      let button = UIButton()
-      
-      // 버튼에 이미지 설정
-      let image = UIImage(named: "RightArrow")
-      button.setImage(image, for: .normal)
-      
-      // 버튼의 이미지 위치 조절
-      button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 320, bottom: 0, right: 10)
-      
-      // 버튼의 나머지 속성 설정
-      button.setTitle("선택하기", for: .normal)
-      button.contentHorizontalAlignment = .left
-      button.setTitleColor(UIColor(hexCode: "#A1AAB0"), for: .normal)
-      button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-      button.backgroundColor = .white
-      button.layer.borderWidth = 1
-      button.layer.borderColor = UIColor(hexCode: "#D8DCDE").cgColor
-      button.layer.cornerRadius = 5
-      button.addTarget(self, action: selector, for: .touchUpInside)
-      
-      return button
+    // 버튼 초기화
+    let button = UIButton()
+    
+    // 버튼에 이미지 설정
+    let image = UIImage(named: "RightArrow")
+    button.setImage(image, for: .normal)
+    
+    // 버튼의 이미지 위치 조절
+    button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 320, bottom: 0, right: 10)
+    
+    // 버튼의 나머지 속성 설정
+    button.setTitle("선택하기", for: .normal)
+    button.contentHorizontalAlignment = .left
+    button.setTitleColor(UIColor(hexCode: "#A1AAB0"), for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+    button.backgroundColor = .white
+    button.layer.borderWidth = 1
+    button.layer.borderColor = UIColor(hexCode: "#D8DCDE").cgColor
+    button.layer.cornerRadius = 5
+    button.addTarget(self, action: selector, for: .touchUpInside)
+    
+    return button
   }
-
+  
   // info
   func createTextField(title: String) -> UITextField {
     let textField = UITextField()
@@ -179,10 +179,10 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
       
       let imageAttachment = NSTextAttachment()
       imageAttachment.image = UIImage(named: "WarningImg")
-
+      
       let attributedString = NSMutableAttributedString(string: text)
       attributedString.append(NSAttributedString(attachment: imageAttachment))
-
+      
       toastLabel.attributedText = attributedString
     }
     
@@ -193,6 +193,28 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     }, completion: {(isCompleted) in
       toastLabel.removeFromSuperview()
     })
+  }
+  
+  // MARK: - 성별 to 한글
+  func convertGender(gender: String) -> String {
+    if gender == "FEMALE" {
+      return "여자"
+    } else if gender == "MALE" {
+      return "남자"
+    } else {
+      return "무관"
+    }
+  }
+  
+  // MARK: - 대면여부 to 한글
+  func convertStudyWay(wayToStudy: String) -> String {
+    if wayToStudy == "CONTACT" {
+      return "대면"
+    } else if wayToStudy == "MIX" {
+      return "혼합"
+    } else {
+      return "비대면"
+    }
   }
 }
 

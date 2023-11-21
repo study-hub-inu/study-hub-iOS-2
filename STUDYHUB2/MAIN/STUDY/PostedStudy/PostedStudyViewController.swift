@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 final class PostedStudyViewController: NaviHelper, SendPostData {
+ 
+  let dateFormatter = DateFormatter()
   func sendData(data: CreateStudyRequest) {
     print("11")
   }
@@ -18,31 +20,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   var postedDate: PostDetailData? {
     didSet {
       DispatchQueue.main.async {
-        print(self.postedDate?.createdDate)
-        self.postedMajorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
-                                                  isEnglish: false)
-        self.postedTitleLabel.text = self.postedDate?.title
-        self.memberNumberCount = self.postedDate?.remainingSeat ?? 0
-        self.fineCount = self.postedDate?.penalty ?? 0
-        
-        if self.postedDate?.filteredGender == "FEMALE" {
-          self.gender = "여자"
-        } else if self.postedDate?.filteredGender == "MALE" {
-          self.gender = "남자"
-        }
-        
-        self.aboutStudyDeatilLabel.text = self.postedDate?.content
-        
-        guard let startDate = self.postedDate?.studyStartDate,
-              let endDate = self.postedDate?.studyEndDate else { return }
-        
-        self.periodLabel.text = "\(startDate) ~ \(endDate)"
-        self.meetLabel.text = self.postedDate?.studyWay
-        self.majorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
-                                                 isEnglish: false)
-        self.writerMajorLabel.text = self.convertMajor(self.postedDate?.postedUser.major ?? "",
-                                                       isEnglish: false)
-        self.nickNameLabel.text = self.postedDate?.postedUser.nickname
+        self.redrawUI()
       }
     }
   }
@@ -66,6 +44,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
       fineAmountLabel.text = "결석비 \(fineCount)원"
     }
   }
+  
   var gender: String = "무관" {
     didSet {
       fixedGenderLabel.text = "\(gender)"
@@ -534,6 +513,33 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
                             forCellWithReuseIdentifier: SimilarPostCell.id)
   }
   
+  func redrawUI(){
+    if let postDate = self.postedDate?.createdDate {
+      self.postedDateLabel.text = "\(postDate[0]). \(postDate[1]). \(postDate[2])"
+    }
+    
+    self.postedMajorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
+                                              isEnglish: false)
+    self.postedTitleLabel.text = self.postedDate?.title
+    self.memberNumberCount = self.postedDate?.remainingSeat ?? 0
+    self.fineCount = self.postedDate?.penalty ?? 0
+    
+   
+    self.gender = self.convertGender(gender: self.postedDate?.filteredGender ?? "무관")
+    
+    self.aboutStudyDeatilLabel.text = self.postedDate?.content
+    
+    guard let startDate = self.postedDate?.studyStartDate,
+          let endDate = self.postedDate?.studyEndDate else { return }
+    
+    self.periodLabel.text = "\(startDate[0]). \(startDate[1]). \(startDate[2]) ~ \(endDate[0]). \(endDate[1]). \(endDate[2])"
+    self.meetLabel.text = self.convertStudyWay(wayToStudy: self.postedDate?.studyWay ?? "혼합")
+    self.majorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
+                                             isEnglish: false)
+    self.writerMajorLabel.text = self.convertMajor(self.postedDate?.postedUser.major ?? "",
+                                                   isEnglish: false)
+    self.nickNameLabel.text = self.postedDate?.postedUser.nickname
+  }
   
 }
 // MARK: - collectionView
