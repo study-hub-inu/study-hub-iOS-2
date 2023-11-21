@@ -10,8 +10,7 @@ import UIKit
 import SnapKit
 
 final class PostedStudyViewController: NaviHelper, SendPostData {
- 
-  let dateFormatter = DateFormatter()
+  let detailPostDataManager = PostDetailInfoManager.shared
   func sendData(data: CreateStudyRequest) {
     print("11")
   }
@@ -282,7 +281,6 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     view.backgroundColor = .white
     
     setupDelegate()
-    setupDataSource()
     registerCell()
     
     navigationItemSetting()
@@ -497,12 +495,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     }
     
   }
-  
-  private func setupDataSource() {
-    for i in 0...10 {
-      dataSource += ["\(i)"]
-    }
-  }
+
   private func setupDelegate() {
     collectionView.delegate = self
     collectionView.dataSource = self
@@ -540,14 +533,13 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
                                                    isEnglish: false)
     self.nickNameLabel.text = self.postedDate?.postedUser.nickname
   }
-  
 }
 // MARK: - collectionView
 extension PostedStudyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return dataSource.count
+    return postedDate?.relatedPost.count ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -555,11 +547,27 @@ extension PostedStudyViewController: UICollectionViewDelegate, UICollectionViewD
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SimilarPostCell.id,
                                                   for: indexPath)
     if let cell = cell as? SimilarPostCell {
-      cell.model = dataSource[indexPath.item]
+      if indexPath.item < postedDate?.relatedPost.count ?? 0 {
+        let data = postedDate?.relatedPost[indexPath.item]
+        cell.model = data
+      }
     }
     
     return cell
   }
+
+  func collectionView(_ collectionView: UICollectionView,
+                      didSelectItemAt indexPath: IndexPath) {
+    if let cell = collectionView.cellForItem(at: indexPath) as? SimilarPostCell {
+      let postedVC = PostedStudyViewController()
+      detailPostDataManager.getPostDetailData(postID: cell.postID ?? 0) {
+        let cellData = self.detailPostDataManager.getPostDetailData()
+        postedVC.postedDate = cellData
+      }
+      self.navigationController?.pushViewController(postedVC, animated: true)
+    }
+  }
+  
 }
 
 extension PostedStudyViewController: UICollectionViewDelegateFlowLayout {

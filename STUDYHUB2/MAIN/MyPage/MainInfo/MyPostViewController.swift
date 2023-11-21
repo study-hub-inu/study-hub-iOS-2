@@ -14,7 +14,7 @@ final class MyPostViewController: NaviHelper {
   let detailPostDataManager = PostDetailInfoManager.shared
   var myPostDatas: [MyPostInfo] = []
 
-  var countPostNumber = 1 {
+  var countPostNumber = 0 {
     didSet {
       totalPostCountLabel.text = "전체 \(countPostNumber)"
     }
@@ -93,6 +93,8 @@ final class MyPostViewController: NaviHelper {
       self.setupLayout()
       self.makeUI()
     }
+    setupLayout()
+    makeUI()
   }
   
   // MARK: - setupLayout
@@ -212,8 +214,8 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
     // 단건조회 시 연관된 포스트도 같이 나옴
     detailPostDataManager.getPostDetailData(postID: myPostDatas[indexPath.row].postId) {
-      let test = self.detailPostDataManager.getPostDetailData()
-      postedVC.postedDate = test
+      let cellData = self.detailPostDataManager.getPostDetailData()
+      postedVC.postedDate = cellData
     }
     self.navigationController?.pushViewController(postedVC, animated: true)
 

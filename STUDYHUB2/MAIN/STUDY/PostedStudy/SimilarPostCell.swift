@@ -12,7 +12,8 @@ final class SimilarPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: String? { didSet { bind() } }
+  var model: RelatedPost? { didSet { bind() } }
+  var postID: Int?
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -29,10 +30,14 @@ final class SimilarPostCell: UICollectionViewCell {
     return label
   }()
   
+  var remainMemberNum: Int = 0 {
+    didSet {
+      remainMemeber.text = "\(remainMemberNum)자리 남았어요"
+    }
+  }
   private lazy var remainMemeber: UILabel = {
     let label = UILabel()
     label.textColor = .lightGray
-    label.text = "4자리 남았어요"
     label.font = UIFont(name: "Pretendard", size: 14)
     return label
   }()
@@ -131,7 +136,14 @@ final class SimilarPostCell: UICollectionViewCell {
   }
   
   private func bind() {
-    titleLabel.text = model
+    majorLabel.text = model?.major.convertMajor(model?.major ?? "공통",
+                                                toEnglish: false)
+    titleLabel.text = model?.title
+    remainMemberNum = model?.remainingSeat ?? 0
+    writerMajorLabel.text = model?.postedUser.major.convertMajor(model?.postedUser.major ?? "공통",
+                                                                 toEnglish: false)
+    nickNameLabel.text = model?.postedUser.nickname
+    postID = model?.postID
   }
   
 }
