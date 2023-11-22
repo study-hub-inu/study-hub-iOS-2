@@ -3,7 +3,7 @@ import UIKit
 import SnapKit
 
 final class PopupViewController: UIViewController {
-  private let popupView: PopupView
+  let popupView: PopupView
   var check: Bool?
   let myPostInfoManager = MyPostInfoManager.shared
   

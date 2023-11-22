@@ -33,7 +33,7 @@ final class MyPostViewController: NaviHelper {
     button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
     button.addAction(UIAction { _ in
       print("tap button")
-      self.deleteAllPost()
+      self.confirmDeleteAll()
       },
       for: .touchUpInside
     )
@@ -206,24 +206,50 @@ final class MyPostViewController: NaviHelper {
   }
   
   // MARK: - 전체삭제
-  func deleteAllPost(){
-    myPostDatas.map({ e in
-      print(e.postId)
-    })
-    //    self?.myPostInfoManager.fetchDeletePostInfo(postID: postID) { result in
-//      guard let self = self else { return }
-//      switch result {
-//      case .success:
-//        DispatchQueue.main.async {
-//          self.showToast(message: "글이 삭제되었어요", alertCheck: true)
-//        }
-//
-//      case .failure(let error):
-//        // 삭제 실패 시의 처리
-//        print("게시글 삭제 실패: \(error)")
-//      }
-//    }
+  // 전체삭제 알람표시
+  func confirmDeleteAll() {
+    let popupVC = PopupViewController(title: "글을 모두 삭제할까요?",
+                                      desc: "삭제한 글과 참여자는 다시 볼 수 없어요")
+    
+    popupVC.popupView.rightButtonAction = { [weak self] in
+      guard let self = self else { return }
+      popupVC.dismiss(animated: true)
+      self.deleteAllPost()
+    }
+    
+    popupVC.modalPresentationStyle = .overFullScreen
+    self.present(popupVC, animated: false)
   }
+  
+  // 전체 삭제를 수행하는 메서드
+  func deleteAllPost() {
+    let dispatchGroup = DispatchGroup()
+    
+    myPostDatas.forEach { post in
+      dispatchGroup.enter() // 진입
+      
+      myPostDataManager.fetchDeletePostInfo(postID: post.postId) { [weak self] result in
+        guard let self = self else { return }
+        defer {
+          dispatchGroup.leave() // 완료되면 나가기
+        }
+        
+        switch result {
+        case .success:
+          print("모든 게시글 삭제")
+        case .failure(let error):
+          // 삭제 실패 시의 처리
+          print("게시글 삭제 실패: \(error)")
+        }
+      }
+    }
+    
+    dispatchGroup.notify(queue: .main) {
+      // 모든 비동기 작업이 완료된 후 실행될 코드
+      self.showToast(message: "모든 글이 삭제되었어요", alertCheck: true)
+    }
+  }
+
 }
 
 // MARK: - collectionView
