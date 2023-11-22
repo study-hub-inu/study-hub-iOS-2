@@ -137,11 +137,11 @@ final class SimilarPostCell: UICollectionViewCell {
   
   private func bind() {
     majorLabel.text = model?.major.convertMajor(model?.major ?? "공통",
-                                                toEnglish: false)
+                                                isEnglish: false)
     titleLabel.text = model?.title
     remainMemberNum = model?.remainingSeat ?? 0
     writerMajorLabel.text = model?.postedUser.major.convertMajor(model?.postedUser.major ?? "공통",
-                                                                 toEnglish: false)
+                                                                 isEnglish: false)
     nickNameLabel.text = model?.postedUser.nickname
     postID = model?.postID
   }

@@ -320,7 +320,8 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
       genderStackView.addArrangedSubview(view)
     }
     
-    let coreInfoData = [memberNumberStackView, fineStackView, genderStackView]
+    let spaceView12 = UIView()
+    let coreInfoData = [memberNumberStackView, fineStackView, genderStackView, spaceView12]
     for view in coreInfoData {
       coreInfoStackView.addArrangedSubview(view)
     }

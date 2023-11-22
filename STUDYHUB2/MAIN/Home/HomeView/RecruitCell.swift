@@ -150,7 +150,7 @@ final class RecruitPostCell: UICollectionViewCell {
   
   private func bind() {
     for data in model {
-      majorLabel.text = data.title.convertMajor(data.title, toEnglish: false)
+      majorLabel.text = data.title.convertMajor(data.title, isEnglish: false)
       titleLabel.text = data.title
 //      countMemeberLabel
     }

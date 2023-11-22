@@ -31,6 +31,12 @@ final class MyPostViewController: NaviHelper {
     button.setTitle("전체삭제", for: .normal)
     button.setTitleColor(UIColor.bg70, for: .normal)
     button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
+    button.addAction(UIAction { _ in
+      print("tap button")
+      self.deleteAllPost()
+      },
+      for: .touchUpInside
+    )
     return button
   }()
   
@@ -198,6 +204,26 @@ final class MyPostViewController: NaviHelper {
       }
     }
   }
+  
+  // MARK: - 전체삭제
+  func deleteAllPost(){
+    myPostDatas.map({ e in
+      print(e.postId)
+    })
+    //    self?.myPostInfoManager.fetchDeletePostInfo(postID: postID) { result in
+//      guard let self = self else { return }
+//      switch result {
+//      case .success:
+//        DispatchQueue.main.async {
+//          self.showToast(message: "글이 삭제되었어요", alertCheck: true)
+//        }
+//
+//      case .failure(let error):
+//        // 삭제 실패 시의 처리
+//        print("게시글 삭제 실패: \(error)")
+//      }
+//    }
+  }
 }
 
 // MARK: - collectionView
@@ -277,8 +303,7 @@ extension MyPostViewController: MyPostCellDelegate{
     // Postid수정필요
     let popupVC = PopupViewController(title: "이 글의 모집을 마감할까요?",
                                       desc: "마감하면 다시 모집할 수 없어요",
-                                      postID: 1,
-                                      bottomeSheet: nil)
+                                      rightButtonTilte: "마감")
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }
