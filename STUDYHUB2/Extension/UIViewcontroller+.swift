@@ -7,6 +7,8 @@
 
 import UIKit
 
+import SnapKit
+
 extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
   func alertShow(title: String, message: String) {
     let alert = UIAlertController(title: title,
@@ -129,6 +131,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     return dateFormatter.string(from: date)
   }
   
+  
   // MARK: -  UITextField가 선택될 때 호출되는 메서드
   public func textFieldDidBeginEditing(_ textField: UITextField) {
     textField.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 검은색으로 변경
@@ -160,40 +163,51 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
   }
   
   // MARK: - toast message, 이미지가 뒤에 나오고 있음 앞으로 빼기
-  func showToast(message : String, font: UIFont = UIFont.systemFont(ofSize: 14.0)) {
-    let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75,
-                                           y: self.view.frame.size.height-100,
-                                           width: 300,
-                                           height: 35))
+  func showToast(message: String, alertCheck: Bool) {
+    let toastContainer = UIView()
+    toastContainer.backgroundColor = .g100
+    toastContainer.layer.cornerRadius = 10
     
-    toastLabel.backgroundColor = UIColor.g100
-    toastLabel.textColor = UIColor.g10
-    toastLabel.font = font
-    toastLabel.textAlignment = .center;
+    let toastLabel = UILabel()
+    toastLabel.textColor = .g10
+    toastLabel.font = UIFont(name: "Pretendard", size: 14)
     toastLabel.text = message
-    toastLabel.alpha = 1.0
-    toastLabel.layer.cornerRadius = 10;
-    toastLabel.clipsToBounds  =  true
     
-    if let text = toastLabel.text {
-      
-      let imageAttachment = NSTextAttachment()
-      imageAttachment.image = UIImage(named: "WarningImg")
-      
-      let attributedString = NSMutableAttributedString(string: text)
-      attributedString.append(NSAttributedString(attachment: imageAttachment))
-      
-      toastLabel.attributedText = attributedString
+    let alertImage = alertCheck ? "SuccessImage" : "WarningImg"
+    let imageView = UIImageView(image: UIImage(named: alertImage))
+    
+    toastContainer.addSubview(imageView)
+    toastContainer.addSubview(toastLabel)
+  
+    guard let keyWindow = UIApplication.shared.keyWindow else { return }
+    
+    keyWindow.addSubview(toastContainer)
+    
+    toastContainer.snp.makeConstraints { make in
+      make.centerX.equalToSuperview()
+      make.bottom.equalTo(keyWindow.safeAreaLayoutGuide.snp.bottom).offset(-50)
+      make.width.equalTo(335)
+      make.height.equalTo(56)
     }
     
-    self.view.addSubview(toastLabel)
-    UIView.animate(withDuration: 10.0, delay: 0.1,
-                   options: .curveEaseOut, animations: {
-      toastLabel.alpha = 0.0
-    }, completion: {(isCompleted) in
-      toastLabel.removeFromSuperview()
+    imageView.snp.makeConstraints { make in
+      make.centerY.equalTo(toastContainer)
+      make.leading.equalTo(toastContainer).offset(30)
+    }
+    
+    toastLabel.snp.makeConstraints { make in
+      make.centerY.equalTo(toastContainer)
+      make.leading.equalTo(imageView.snp.trailing).offset(8)
+    }
+    
+    UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
+      toastContainer.alpha = 0.0
+    }, completion: { _ in
+      toastContainer.removeFromSuperview()
     })
   }
+
+
   
   // MARK: - 성별 to 한글
   func convertGender(gender: String) -> String {

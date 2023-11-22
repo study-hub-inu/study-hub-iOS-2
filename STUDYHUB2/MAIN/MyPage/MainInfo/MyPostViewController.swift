@@ -277,7 +277,8 @@ extension MyPostViewController: MyPostCellDelegate{
     // Postid수정필요
     let popupVC = PopupViewController(title: "이 글의 모집을 마감할까요?",
                                       desc: "마감하면 다시 모집할 수 없어요",
-                                      postID: 1)
+                                      postID: 1,
+                                      bottomeSheet: nil)
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }

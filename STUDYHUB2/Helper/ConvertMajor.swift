@@ -66,7 +66,7 @@ extension UIViewController {
       "중어중국학과": "CHINESE_LANGUAGE_AND_CULTURAL_STUDIES",
       "창의인개발학과": "CREATIVE_HUMAN_RESOURCE_DEVELOPMENT",
       "체육교육과": "PHYSICAL_EDUCATION",
-      "컴퓨터공학부": "COMPUTER_SCIENCE_AND_ENGINEERING",
+      "컴퓨터공학부": "COMPUTER_SCIENCE_ENGINEERING",
       "테크노경영학과": "TECHNOLOGY_MANAGEMENT",
       "패션산업학과": "FASHION_AND_INDUSTRY",
       "한국화전공(조형예술학부)": "KOREAN_PAINTING",

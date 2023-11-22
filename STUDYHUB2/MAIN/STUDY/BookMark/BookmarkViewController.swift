@@ -144,7 +144,7 @@ final class BookmarkViewController: NaviHelper {
     // postID 수정 필요
     let popupVC = PopupViewController(title: "",
                                       desc: "북마크를 모두 삭제할까요?",
-                                      postID: 1)
+                                      postID: 1, bottomeSheet: nil)
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }
