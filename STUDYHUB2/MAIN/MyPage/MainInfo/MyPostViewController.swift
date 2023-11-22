@@ -61,6 +61,11 @@ final class MyPostViewController: NaviHelper {
     button.setTitleColor(UIColor.white, for: .normal)
     button.backgroundColor = .o50
     button.layer.cornerRadius = 5
+    button.addAction(UIAction{ _ in
+      let createPostVC = CreateStudyViewController()
+      createPostVC.modalPresentationStyle = .overFullScreen
+      self.present(createPostVC, animated: true)
+    }, for: .touchUpInside)
     return button
   }()
   
@@ -247,6 +252,7 @@ final class MyPostViewController: NaviHelper {
     dispatchGroup.notify(queue: .main) {
       // 모든 비동기 작업이 완료된 후 실행될 코드
       self.showToast(message: "모든 글이 삭제되었어요", alertCheck: true)
+      self.myPostCollectionView.reloadData()
     }
   }
 
