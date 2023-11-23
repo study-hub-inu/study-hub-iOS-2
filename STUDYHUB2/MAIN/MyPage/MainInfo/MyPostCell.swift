@@ -152,6 +152,7 @@ final class MyPostCell: UICollectionViewCell {
     infoLabel.snp.makeConstraints { make in
       make.top.equalTo(titleLabel.snp.bottom).offset(10)
       make.leading.equalTo(majorLabel.snp.leading).offset(5)
+      make.trailing.equalToSuperview().offset(-10)
     }
     
     remainLabel.snp.makeConstraints { make in
