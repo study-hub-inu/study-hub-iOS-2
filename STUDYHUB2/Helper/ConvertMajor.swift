@@ -7,18 +7,8 @@
 
 import UIKit
 
+// 클래스로 바꾸기
 extension UIViewController {
-//  func convertMajor(_ major: String, toEnglish: Bool) -> String {
-//    switch (major, toEnglish) {
-//    case ("정보통신학과", true):
-//      return "INFORMATION_TELECOMMUNICATION_ENGINEERING"
-//    case ("INFORMATION_TELECOMMUNICATION_ENGINEERING", false):
-//      return "정보통신공학"
-//    default:
-//      return "Unknown"
-//    }
-//  }
-  
   func convertMajor(_ koreanName: String, isEnglish: Bool) -> String {
     let conversionTable: [String: String] = [
       "공연예술과": "PERFORMING_ARTS",
@@ -76,7 +66,7 @@ extension UIViewController {
       "중어중국학과": "CHINESE_LANGUAGE_AND_CULTURAL_STUDIES",
       "창의인개발학과": "CREATIVE_HUMAN_RESOURCE_DEVELOPMENT",
       "체육교육과": "PHYSICAL_EDUCATION",
-      "컴퓨터공학부": "COMPUTER_SCIENCE_AND_ENGINEERING",
+      "컴퓨터공학부": "COMPUTER_SCIENCE_ENGINEERING",
       "테크노경영학과": "TECHNOLOGY_MANAGEMENT",
       "패션산업학과": "FASHION_AND_INDUSTRY",
       "한국화전공(조형예술학부)": "KOREAN_PAINTING",

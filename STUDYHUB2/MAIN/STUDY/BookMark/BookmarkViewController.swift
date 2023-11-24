@@ -141,8 +141,10 @@ final class BookmarkViewController: NaviHelper {
                                     forCellWithReuseIdentifier: BookMarkCell.id)
   }
   @objc func deleteAllButtonTapped(){
+    // postID 수정 필요
     let popupVC = PopupViewController(title: "",
-                                      desc: "북마크를 모두 삭제할까요?")
+                                      desc: "북마크를 모두 삭제할까요?",
+                                      postID: 1, bottomeSheet: nil)
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }

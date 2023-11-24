@@ -36,7 +36,8 @@ class NaviHelper: UIViewController {
   }
   
   @objc func rightButtonTapped() {
-    let viewControllerToPresent = BottomSheet()
+    // postid관련 수정필요
+    let viewControllerToPresent = BottomSheet(postID: 1)
     if #available(iOS 15.0, *) {
       if let sheet = viewControllerToPresent.sheetPresentationController {
         if #available(iOS 16.0, *) {

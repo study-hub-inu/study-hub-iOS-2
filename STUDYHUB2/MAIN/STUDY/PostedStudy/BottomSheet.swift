@@ -10,6 +10,18 @@ import UIKit
 import SnapKit
 
 final class BottomSheet: UIViewController {
+  private let postID: Int
+  
+  let detailPostDataManager = PostDetailInfoManager.shared
+  init(postID: Int) {
+    self.postID = postID
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   private lazy var deleteButton: UIButton = {
     let button = UIButton()
     button.setTitle("삭제하기", for: .normal)
@@ -22,6 +34,9 @@ final class BottomSheet: UIViewController {
     let button = UIButton()
     button.setTitle("수정하기", for: .normal)
     button.setTitleColor(.black, for: .normal)
+    button.addAction(UIAction { _ in
+      self.modifyButtonTapped()
+    }, for: .touchUpInside)
     return button
   }()
   
@@ -66,7 +81,7 @@ final class BottomSheet: UIViewController {
       make.top.equalTo(deleteButton.snp.bottom).offset(10)
       make.centerX.equalToSuperview()
       make.height.equalTo(50)
-
+      
     }
     
     dismissButton.snp.makeConstraints { make in
@@ -79,12 +94,21 @@ final class BottomSheet: UIViewController {
   
   @objc func deleteButtonTapped(){
     let popupVC = PopupViewController(title: "이 글을 삭제할까요?",
-                                      desc: "삭제한 글과 참여자는 다시 볼 수 없어요")
+                                      desc: "삭제한 글과 참여자는 다시 볼 수 없어요",
+                                      postID: postID,
+                                      bottomeSheet: self)
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
   }
   
   @objc func dissMissButtonTapped(){
     dismiss(animated: true, completion: nil)
+  }
+  
+  func modifyButtonTapped(){
+    detailPostDataManager.getPostDetailData(postID: postID ) {
+      let cellData = self.detailPostDataManager.getPostDetailData()
+      print(cellData)
+    }
   }
 }

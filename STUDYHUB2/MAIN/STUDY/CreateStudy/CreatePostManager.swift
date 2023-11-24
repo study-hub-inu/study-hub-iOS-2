@@ -83,17 +83,19 @@ final class PostManager {
       
       print("Response Status Code:", httpResponse.statusCode)
       do {
-        let responseJSON = try JSONSerialization.jsonObject(with: safeData, options: []) as? [String: Any]
-        if let response = responseJSON?["response"] as? String, response == "ACCEPTED" {
-          print("Post completed successfully.")
-        } else {
-          print("Post request failed.")
-        }
+          let responseString = String(data: safeData, encoding: .utf8)
+          print("Response String:", responseString ?? "Invalid String")
+
+          if let responseData = Int(responseString ?? "") {
+              print("Post request succeeded. Response:", responseData)
+          } else {
+              print("Post request failed. Unable to extract 'response' as Int from JSON string.")
+              completion(.failure(.parseError))
+          }
       } catch {
-        // 반환되는 값을 알아야함
-        
-        print("JSON 파싱 에러: \(error.localizedDescription)")
-        completion(.failure(.parseError))
+          print("JSON 파싱 에러: \(error.localizedDescription)")
+          print("Error:", error)
+          completion(.failure(.parseError))
       }
 
     }.resume()
