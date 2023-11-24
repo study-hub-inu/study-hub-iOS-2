@@ -32,6 +32,7 @@ extension UIColor {
   static let changeInfo = UIColor(red: 1.00, green: 0.33, blue: 0.19, alpha: 1.00)
 
   static let o10 = UIColor(red: 1.00, green: 0.95, blue: 0.93, alpha: 1.00)
+  static let o20 = UIColor(red: 1.00, green: 0.84, blue: 0.80, alpha: 1.00)
   static let o40 = UIColor(red: 1.00, green: 0.52, blue: 0.40, alpha: 1.00)
   static let o50 = UIColor(red: 1.00, green: 0.33, blue: 0.19, alpha: 1.00)
 

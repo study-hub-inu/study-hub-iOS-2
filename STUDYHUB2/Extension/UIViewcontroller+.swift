@@ -94,7 +94,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     let label = UILabel()
     label.text = title
     label.textColor = textColor
-    label.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
+    label.font = UIFont(name: "Pretendard", size: fontSize)
     return label
   }
   
