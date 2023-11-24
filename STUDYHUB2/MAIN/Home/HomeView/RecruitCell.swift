@@ -7,7 +7,7 @@ final class RecruitPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: String? { didSet { bind() } }
+  var model: [Content] = [] { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -39,10 +39,11 @@ final class RecruitPostCell: UICollectionViewCell {
     return imageView
   }()
   
+  var countMember = 0
   private lazy var countMemeberLabel: UILabel = {
     let label = UILabel()
     label.textColor = .bg90
-    label.text = "0/14"
+    label.text = "/14"
     return label
   }()
 
@@ -148,7 +149,12 @@ final class RecruitPostCell: UICollectionViewCell {
   }
   
   private func bind() {
-    titleLabel.text = model
+    for data in model {
+      majorLabel.text = data.title.convertMajor(data.title, toEnglish: false)
+      titleLabel.text = data.title
+//      countMemeberLabel
+    }
+    
   }
   
 }

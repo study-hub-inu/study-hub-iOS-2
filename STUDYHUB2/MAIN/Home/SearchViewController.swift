@@ -179,7 +179,7 @@ extension SearchViewController: UISearchBarDelegate {
   }
 }
 
-// MARK: - cell 함수
+// MARK: - tableView cell 함수
 extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
   // UITableViewDataSource 함수
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -280,12 +280,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
                       numberOfItemsInSection section: Int) -> Int {
     return 4
   }
+  
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
     
     let postedVC = PostedStudyViewController()
-    let postedVCwithNavi = UINavigationController(rootViewController: postedVC)
-    present(postedVCwithNavi, animated: true, completion: nil)
+  
+    self.navigationController?.pushViewController(postedVC, animated: true)
   }
   
   func collectionView(_ collectionView: UICollectionView,
