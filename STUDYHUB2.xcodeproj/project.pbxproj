@@ -420,11 +420,25 @@
 			isa = PBXGroup;
 			children = (
 				EE271F2D2ADA6D3700190E7A /* InfoManager.swift */,
+<<<<<<< HEAD
 				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
 				EE0A8B6C2B076B1E001C3F41 /* MainInfo */,
 				EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */,
+=======
+				EE07ADBC2AEFF7BD0096890F /* ConvertMajor.swift */,
+				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
+				F8A6E92F2B02A79E0083CF46 /* INFO */,
+>>>>>>> f1ac8e610ca2cc143be0bd4221815762b77daa1a
 			);
 			path = MyPage;
+			sourceTree = "<group>";
+		};
+		F8A6E92F2B02A79E0083CF46 /* INFO */ = {
+			isa = PBXGroup;
+			children = (
+				EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */,
+			);
+			path = INFO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -906,7 +920,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -939,7 +953,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
