@@ -57,6 +57,7 @@
 		EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E992B10931500C23AB4 /* UIButton+.swift */; };
 		EEB51E9C2B10966100C23AB4 /* RefuseBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */; };
 		EEB51E9E2B1099CB00C23AB4 /* RefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9D2B1099CB00C23AB4 /* RefuseCell.swift */; };
+		EEB51EA02B10EF4200C23AB4 /* WriteRefuseReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */; };
 		F80421922A7D6816006C6B87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421912A7D6816006C6B87 /* AppDelegate.swift */; };
 		F80421942A7D6816006C6B87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421932A7D6816006C6B87 /* SceneDelegate.swift */; };
 		F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421952A7D6816006C6B87 /* LoginViewController.swift */; };
@@ -139,6 +140,7 @@
 		EEB51E992B10931500C23AB4 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseBottomSheet.swift; sourceTree = "<group>"; };
 		EEB51E9D2B1099CB00C23AB4 /* RefuseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseCell.swift; sourceTree = "<group>"; };
+		EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRefuseReasonVC.swift; sourceTree = "<group>"; };
 		F804218E2A7D6816006C6B87 /* STUDYHUB2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STUDYHUB2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80421912A7D6816006C6B87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F80421932A7D6816006C6B87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */,
 				EEB51E972B107B7100C23AB4 /* ParticipantsCell.swift */,
 				EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */,
+				EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */,
 				EEB51E9D2B1099CB00C23AB4 /* RefuseCell.swift */,
 			);
 			path = Participants;
@@ -592,6 +595,7 @@
 				EE07ADC12AF0D5A40096890F /* SimilarPostCell.swift in Sources */,
 				EE271F2A2AD8B9FA00190E7A /* String+.swift in Sources */,
 				F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */,
+				EEB51EA02B10EF4200C23AB4 /* WriteRefuseReasonVC.swift in Sources */,
 				EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */,
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,
