@@ -147,7 +147,7 @@ final class HomeViewController: NaviHelper {
     setUpLayout()
     makeUI()
     
-    getNewPostData()
+//    getNewPostData()
   }
   
   // MARK: - setuplayout

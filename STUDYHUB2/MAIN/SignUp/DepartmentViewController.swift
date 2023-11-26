@@ -191,7 +191,7 @@ final class DepartmentViewController: UIViewController, UITableViewDelegate, UIS
         
         // JSON 데이터를 서버로 전송
         if let jsonData = try? JSONSerialization.data(withJSONObject: userData),
-           let url = URL(string: "https://study-hub.site:443/api/users/signup") {
+           let url = URL(string: "https://study-hub.site:443/api/v1/users/signup") {
 
             var request = URLRequest(url: url)
             request.httpMethod = "POST"

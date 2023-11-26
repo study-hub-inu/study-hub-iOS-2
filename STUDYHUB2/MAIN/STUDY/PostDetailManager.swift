@@ -72,7 +72,7 @@ final class PostDetailInfoManager {
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/study-posts/find/\(postID)"
+    urlComponents.path = "/api/v1/study-posts/\(postID)"
     
     guard let urlString = urlComponents.url?.absoluteString else {
       print("Invalid URL")

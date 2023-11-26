@@ -34,7 +34,7 @@ final class PostManager {
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/study-posts"
+    urlComponents.path = "/api/v1/study-posts"
 
     guard var token = tokenManager.loadAccessToken() else { return }
     

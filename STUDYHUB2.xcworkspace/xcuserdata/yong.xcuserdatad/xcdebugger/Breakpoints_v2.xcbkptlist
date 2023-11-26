@@ -3,4 +3,438 @@
    uuid = "972C4CA7-5CB6-41EF-8E3B-B4239F9A887B"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "444"
+            endingLineNumber = "444"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D - 121d19c620f76b8a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "444"
+                  endingLineNumber = "444"
+                  offsetFromSymbolStart = "356">
+               </Location>
+               <Location
+                  uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D - 121d19c620f76b8a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "444"
+                  endingLineNumber = "444"
+                  offsetFromSymbolStart = "428">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4ECABD17-D359-4248-B8D0-7880F6393594"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4ECABD17-D359-4248-B8D0-7880F6393594 - 121d19c620f76482"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "452"
+                  endingLineNumber = "452"
+                  offsetFromSymbolStart = "700">
+               </Location>
+               <Location
+                  uuid = "4ECABD17-D359-4248-B8D0-7880F6393594 - 121d19c620f76482"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "452"
+                  endingLineNumber = "452"
+                  offsetFromSymbolStart = "784">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "461"
+            endingLineNumber = "461"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF - 121d19c620f765b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "461"
+                  endingLineNumber = "461"
+                  offsetFromSymbolStart = "1076">
+               </Location>
+               <Location
+                  uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF - 121d19c620f765b9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "461"
+                  endingLineNumber = "461"
+                  offsetFromSymbolStart = "1164">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0587A764-4C4E-447D-A694-9E610171B641"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "466"
+            endingLineNumber = "466"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D30F444D-1C35-43A0-A091-A48161263D36"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "472"
+            endingLineNumber = "472"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E - d6b9ae58f46e4d7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "485"
+                  endingLineNumber = "485"
+                  offsetFromSymbolStart = "332">
+               </Location>
+               <Location
+                  uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E - d6b9ae58f46e4d7a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "485"
+                  endingLineNumber = "485"
+                  offsetFromSymbolStart = "764">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "486"
+            endingLineNumber = "486"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81 - d6b9ae58f46e4d5b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "486"
+                  endingLineNumber = "486"
+                  offsetFromSymbolStart = "800">
+               </Location>
+               <Location
+                  uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81 - d6b9ae58f46e4d5b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "486"
+                  endingLineNumber = "486"
+                  offsetFromSymbolStart = "1176">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB - d6b9ae58f46e4d9d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "488"
+                  endingLineNumber = "488"
+                  offsetFromSymbolStart = "1480">
+               </Location>
+               <Location
+                  uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB - ea314cadae8a7a73"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Swift.MainActor () -&gt; () in closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "489"
+                  endingLineNumber = "489"
+                  offsetFromSymbolStart = "392">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "487"
+            endingLineNumber = "487"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22 - d6b9ae58f46e4dbc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "487"
+                  endingLineNumber = "487"
+                  offsetFromSymbolStart = "1212">
+               </Location>
+               <Location
+                  uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22 - d6b9ae58f46e4dbc"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in STUDYHUB2.SignUpViewController.nextButtonTapped() -&gt; ()"
+                  moduleName = "STUDYHUB2"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "487"
+                  endingLineNumber = "487"
+                  offsetFromSymbolStart = "1436">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EACDDE20-E13E-43FC-AD11-6B458DD3438F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0E8A61C4-BF6D-45D7-A5BE-3F15A25B888C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "492"
+            endingLineNumber = "492"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "18C637F8-1EE6-457D-942E-371E1E33AE87"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3783B72-A787-44FB-BF8E-DAE6D75C897E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
+            landmarkName = "nextButtonTapped()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

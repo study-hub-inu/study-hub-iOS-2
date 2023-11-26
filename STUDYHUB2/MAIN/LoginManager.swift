@@ -11,9 +11,13 @@ class LoginManager: UIViewController {
   
   let tokenManager = TokenManager.shared
   static let shared = LoginManager()
+  struct AccessTokenResponse: Codable {
+    let accessToken: String
+    let refreshToken: String
+  }
   
   func autoLogin() {
-    guard let autoLoginURL = URL(string: "https://study-hub.site:443/api/jwt/accessToken") else {
+    guard let autoLoginURL = URL(string: "https://study-hub.site:443/api/v1/jwt/accessToken") else {
       return
     }
     
@@ -77,10 +81,10 @@ class LoginManager: UIViewController {
       print("JSON Serialization Error: \(error)")
     }
   }
-
   
-  func login(email: String, password: String ){
-    guard let loginURL = URL(string: "https://study-hub.site:443/api/users/login") else {
+  
+  func login(email: String, password: String){
+    guard let loginURL = URL(string: "https://study-hub.site:443/api/v1/users/login") else {
       return
     }
     
@@ -106,25 +110,19 @@ class LoginManager: UIViewController {
         if let data = data,
            let response = response as? HTTPURLResponse,
            response.statusCode == 200 {
-          // Login successful
+          
           do {
-            if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-              if let data = json["data"] as? [String: Any],
-                 let accessToken = data["accessToken"] as? String,
-                 let refreshToken = data["refreshToken"] as? String{
-                // Store the access token in Keychain
-                print("refresh:" + refreshToken)
-                print("access:" + accessToken)
-                
-                self?.tokenManager.deleteTokens()
-                self?.tokenManager.saveTokens(accessToken: accessToken,
-                                              refreshToken: refreshToken)
-              }
-            }
+            let decoder = JSONDecoder()
+            let accessTokenResponse = try decoder.decode(AccessTokenResponse.self, from: data)
             
+            self?.tokenManager.deleteTokens()
+            self?.tokenManager.saveTokens(accessToken: accessTokenResponse.accessToken,
+                                         refreshToken: accessTokenResponse.refreshToken)
+            
+            print("Access Token: \(accessTokenResponse.accessToken)")
+            print("Refresh Token: \(accessTokenResponse.refreshToken)")
           } catch {
-            // Handle JSON parsing error
-            print("JSON Parsing Error: \(error)")
+            print("JSON Decoding Error: \(error)")
           }
         } else {
           // Login failed, show an alert
