@@ -320,12 +320,20 @@
 			isa = PBXGroup;
 			children = (
 				EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */,
+				EEB51EA22B145B8000C23AB4 /* Wait */,
+			);
+			path = Participants;
+			sourceTree = "<group>";
+		};
+		EEB51EA22B145B8000C23AB4 /* Wait */ = {
+			isa = PBXGroup;
+			children = (
 				EEB51E972B107B7100C23AB4 /* ParticipantsCell.swift */,
 				EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */,
 				EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */,
 				EEB51E9D2B1099CB00C23AB4 /* RefuseCell.swift */,
 			);
-			path = Participants;
+			path = Wait;
 			sourceTree = "<group>";
 		};
 		F4E2C96E19FEA11B39F5379C /* Frameworks */ = {
