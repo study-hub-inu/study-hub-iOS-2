@@ -9,7 +9,8 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   var contactMethod: String?
   var selectedMajor: String?
   var postDataSender: SendPostData?
-
+  var modifyPostID: Int?
+  
   // 선택한 학과를 저장할 프로퍼티
   var selectedDepartment: String? {
     didSet {
@@ -283,6 +284,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
     
     setUpLayout()
     makeUI()
+    
   }
   
   // MARK: - setUpLayout
@@ -700,7 +702,6 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       maxFineLabel.snp.makeConstraints { make in
         make.top.equalTo(fineAmountTextField.snp.bottom).offset(10)
       }
-      
     }
   }
   

@@ -9,7 +9,13 @@ import UIKit
 
 import SnapKit
 
+protocol BottomSheetDelegate: AnyObject {
+  func modifyButtonTapped(postID: Int)
+}
+
 final class BottomSheet: UIViewController {
+  weak var delegate: BottomSheetDelegate?
+  
   private let postID: Int
   
   let detailPostDataManager = PostDetailInfoManager.shared
@@ -106,9 +112,6 @@ final class BottomSheet: UIViewController {
   }
   
   func modifyButtonTapped(){
-    detailPostDataManager.getPostDetailData(postID: postID ) {
-      let cellData = self.detailPostDataManager.getPostDetailData()
-      print(cellData)
-    }
+    delegate?.modifyButtonTapped(postID: postID)
   }
 }
