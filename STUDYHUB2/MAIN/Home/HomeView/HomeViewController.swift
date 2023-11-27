@@ -339,7 +339,6 @@ final class HomeViewController: NaviHelper {
         }
       }
     }
-    
   }
 }
 
