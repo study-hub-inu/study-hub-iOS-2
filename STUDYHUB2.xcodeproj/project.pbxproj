@@ -198,9 +198,6 @@
 			isa = PBXGroup;
 			children = (
 				EE07ADB82AEFE6730096890F /* PostedStudyViewController.swift */,
-				EE07ADC22AF236260096890F /* BottomSheet.swift */,
-				EE07ADC42AF2414C0096890F /* PopUpViewController.swift */,
-				EE07ADC62AF241A30096890F /* PopUpView.swift */,
 				EE07ADC02AF0D5A40096890F /* SimilarPostCell.swift */,
 			);
 			path = PostedStudy;
@@ -214,6 +211,9 @@
 				EE271F272AD7852900190E7A /* TapBar.swift */,
 				EE07ADCE2AF325F80096890F /* UILabelPadding.swift */,
 				EE07ADBC2AEFF7BD0096890F /* ConvertMajor.swift */,
+				EE07ADC22AF236260096890F /* BottomSheet.swift */,
+				EE07ADC42AF2414C0096890F /* PopUpViewController.swift */,
+				EE07ADC62AF241A30096890F /* PopUpView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
