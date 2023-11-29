@@ -8,6 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		903CF32160A1EDD2ADE8AA03 /* Pods_STUDYHUB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0AEF76B97F2D81A35C2224 /* Pods_STUDYHUB2.framework */; };
+		EE02B10C2B15FEEE0092082F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */; };
+		EE02B10E2B15FEEE0092082F /* MyPostInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */; };
+		EE02B1112B15FEEE0092082F /* CheckParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */; };
+		EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E972B107B7100C23AB4 /* WaitCell.swift */; };
+		EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */; };
+		EE02B1142B15FEEE0092082F /* WriteRefuseReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */; };
+		EE02B1152B15FEEE0092082F /* RefuseReasonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9D2B1099CB00C23AB4 /* RefuseReasonCell.swift */; };
+		EE02B1162B15FEEE0092082F /* ParticipateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */; };
+		EE02B1172B15FEEE0092082F /* RefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */; };
 		EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07AD8F2AE106460096890F /* CreatePostManager.swift */; };
 		EE07ADB52AEFC2B90096890F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07ADB42AEFC2B90096890F /* UITextField+.swift */; };
 		EE07ADB92AEFE6730096890F /* PostedStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07ADB82AEFE6730096890F /* PostedStudyViewController.swift */; };
@@ -37,6 +46,8 @@
 		EE0A8B822B089729001C3F41 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B792B089729001C3F41 /* Pretendard-ExtraBold.otf */; };
 		EE0A8B832B089729001C3F41 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */; };
 		EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */; };
+		EE1E44112B17222200223436 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44102B17222200223436 /* MyPostCell.swift */; };
+		EE1E44142B17228B00223436 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE1E44132B17228B00223436 /* SnapKit */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -45,21 +56,11 @@
 		EE271F282AD7852900190E7A /* TapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F272AD7852900190E7A /* TapBar.swift */; };
 		EE271F2A2AD8B9FA00190E7A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F292AD8B9FA00190E7A /* String+.swift */; };
 		EE271F2C2AD9250F00190E7A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F2B2AD9250F00190E7A /* UIView+.swift */; };
-		EE35ED6C2B14B71A008040E2 /* ParticipateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */; };
-		EE35ED702B14BAA9008040E2 /* RefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */; };
-		EEB51E8D2B103C2300C23AB4 /* InfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E842B103C2300C23AB4 /* InfoManager.swift */; };
-		EEB51E8E2B103C2300C23AB4 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */; };
+		EE35ED7B2B15F829008040E2 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */; };
 		EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */; };
 		EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */; };
-		EEB51E912B103C2300C23AB4 /* MyPostInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */; };
-		EEB51E922B103C2300C23AB4 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E8B2B103C2300C23AB4 /* MyPostViewController.swift */; };
-		EEB51E932B103C2300C23AB4 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E8C2B103C2300C23AB4 /* MyPostCell.swift */; };
-		EEB51E952B1075A500C23AB4 /* CheckParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */; };
-		EEB51E982B107B7100C23AB4 /* WaitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E972B107B7100C23AB4 /* WaitCell.swift */; };
 		EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E992B10931500C23AB4 /* UIButton+.swift */; };
-		EEB51E9C2B10966100C23AB4 /* RefuseBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */; };
-		EEB51E9E2B1099CB00C23AB4 /* RefuseReasonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9D2B1099CB00C23AB4 /* RefuseReasonCell.swift */; };
-		EEB51EA02B10EF4200C23AB4 /* WriteRefuseReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */; };
+		EEC05ED52B15FA0E001602AE /* InfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E842B103C2300C23AB4 /* InfoManager.swift */; };
 		F80421922A7D6816006C6B87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421912A7D6816006C6B87 /* AppDelegate.swift */; };
 		F80421942A7D6816006C6B87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421932A7D6816006C6B87 /* SceneDelegate.swift */; };
 		F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421952A7D6816006C6B87 /* LoginViewController.swift */; };
@@ -122,6 +123,7 @@
 		EE0A8B792B089729001C3F41 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailManager.swift; sourceTree = "<group>"; };
+		EE1E44102B17222200223436 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostCell.swift; path = STUDYHUB2/MAIN/MyPage/MainInfo/MyPostCell.swift; sourceTree = SOURCE_ROOT; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -132,13 +134,12 @@
 		EE271F2B2AD9250F00190E7A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
 		EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipateCell.swift; sourceTree = "<group>"; };
 		EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseCell.swift; sourceTree = "<group>"; };
-		EEB51E842B103C2300C23AB4 /* InfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoManager.swift; path = "../../../../../Documents/study-hub-iOS-2/STUDYHUB2/MAIN/MyPage/InfoManager.swift"; sourceTree = "<group>"; };
-		EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = "../../../../../Documents/study-hub-iOS-2/STUDYHUB2/MAIN/MyPage/MyPageViewController.swift"; sourceTree = "<group>"; };
+		EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		EEB51E842B103C2300C23AB4 /* InfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoManager.swift; path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/InfoManager.swift"; sourceTree = "<group>"; };
+		EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = ../MyPageViewController.swift; sourceTree = "<group>"; };
 		EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
 		EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditnicknameViewController.swift; sourceTree = "<group>"; };
-		EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostInfoManager.swift; sourceTree = "<group>"; };
-		EEB51E8B2B103C2300C23AB4 /* MyPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostViewController.swift; sourceTree = "<group>"; };
-		EEB51E8C2B103C2300C23AB4 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostCell.swift; sourceTree = "<group>"; };
+		EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostInfoManager.swift; path = ../MainInfo/MyPostInfoManager.swift; sourceTree = "<group>"; };
 		EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckParticipantsVC.swift; sourceTree = "<group>"; };
 		EEB51E972B107B7100C23AB4 /* WaitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitCell.swift; sourceTree = "<group>"; };
 		EEB51E992B10931500C23AB4 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				903CF32160A1EDD2ADE8AA03 /* Pods_STUDYHUB2.framework in Frameworks */,
+				EE1E44142B17228B00223436 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,19 +323,19 @@
 				EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */,
 			);
 			name = INFO;
-			path = "../../../../../Documents/study-hub-iOS-2/STUDYHUB2/MAIN/MyPage/INFO";
+			path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/INFO";
 			sourceTree = "<group>";
 		};
 		EEB51E892B103C2300C23AB4 /* MyPost */ = {
 			isa = PBXGroup;
 			children = (
+				EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */,
 				EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */,
-				EEB51E8B2B103C2300C23AB4 /* MyPostViewController.swift */,
-				EEB51E8C2B103C2300C23AB4 /* MyPostCell.swift */,
+				EE1E44102B17222200223436 /* MyPostCell.swift */,
 				EEB51E962B107B5600C23AB4 /* Participants */,
 			);
 			name = MyPost;
-			path = "../../../../../Documents/study-hub-iOS-2/STUDYHUB2/MAIN/MyPage/MyPost";
+			path = MyParticipate;
 			sourceTree = "<group>";
 		};
 		EEB51E962B107B5600C23AB4 /* Participants */ = {
@@ -344,7 +346,8 @@
 				EE35ED6D2B14B7E2008040E2 /* Participate */,
 				EE35ED6E2B14BA95008040E2 /* Refuse */,
 			);
-			path = Participants;
+			name = Participants;
+			path = ../Participants;
 			sourceTree = "<group>";
 		};
 		EEB51EA22B145B8000C23AB4 /* Wait */ = {
@@ -467,10 +470,10 @@
 		F89A01662A87FAF600B4C10D /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
+				EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */,
 				EEB51E842B103C2300C23AB4 /* InfoManager.swift */,
 				EEB51E862B103C2300C23AB4 /* INFO */,
 				EEB51E892B103C2300C23AB4 /* MyPost */,
-				EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -493,6 +496,9 @@
 			dependencies = (
 			);
 			name = STUDYHUB2;
+			packageProductDependencies = (
+				EE1E44132B17228B00223436 /* SnapKit */,
+			);
 			productName = STUDYHUB2;
 			productReference = F804218E2A7D6816006C6B87 /* STUDYHUB2.app */;
 			productType = "com.apple.product-type.application";
@@ -521,6 +527,9 @@
 				Base,
 			);
 			mainGroup = F80421852A7D6816006C6B87;
+			packageReferences = (
+				EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = F804218F2A7D6816006C6B87 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -599,14 +608,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE02B10C2B15FEEE0092082F /* MyPageViewController.swift in Sources */,
+				EE02B10E2B15FEEE0092082F /* MyPostInfoManager.swift in Sources */,
+				EE02B1112B15FEEE0092082F /* CheckParticipantsVC.swift in Sources */,
+				EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */,
+				EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */,
+				EE02B1142B15FEEE0092082F /* WriteRefuseReasonVC.swift in Sources */,
+				EE02B1152B15FEEE0092082F /* RefuseReasonCell.swift in Sources */,
+				EE02B1162B15FEEE0092082F /* ParticipateCell.swift in Sources */,
+				EE02B1172B15FEEE0092082F /* RefuseCell.swift in Sources */,
+				EEC05ED52B15FA0E001602AE /* InfoManager.swift in Sources */,
 				EE07ADD12AF632B80096890F /* Calendar.swift in Sources */,
 				F8085D442A81846C0067D4DE /* StudyViewController.swift in Sources */,
 				F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */,
 				EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */,
-				EEB51E932B103C2300C23AB4 /* MyPostCell.swift in Sources */,
 				EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */,
 				EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */,
 				F873775B2AACD41D0055B041 /* BookmarkViewController.swift in Sources */,
+				EE35ED7B2B15F829008040E2 /* MyPageViewController.swift in Sources */,
 				EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */,
 				F80421CA2A7D9534006C6B87 /* PasswordViewController.swift in Sources */,
 				EE07ADC52AF2414C0096890F /* PopUpViewController.swift in Sources */,
@@ -615,22 +634,16 @@
 				EE07ADBD2AEFF7BD0096890F /* ConvertMajor.swift in Sources */,
 				EE271F242AD77C0E00190E7A /* LoginManager.swift in Sources */,
 				F80421922A7D6816006C6B87 /* AppDelegate.swift in Sources */,
-				EEB51E9C2B10966100C23AB4 /* RefuseBottomSheet.swift in Sources */,
-				EEB51E952B1075A500C23AB4 /* CheckParticipantsVC.swift in Sources */,
 				EE07ADBF2AF0BB360096890F /* NaviHelper.swift in Sources */,
-				EEB51E922B103C2300C23AB4 /* MyPostViewController.swift in Sources */,
 				F86E03212A8BFC8000164976 /* DetailsViewController.swift in Sources */,
 				EE07ADCB2AF25F440096890F /* SearchBarHelper.swift in Sources */,
 				F80421C82A7D800E006C6B87 /* SignUpViewController.swift in Sources */,
-				EE35ED6C2B14B71A008040E2 /* ParticipateCell.swift in Sources */,
 				EE07ADC12AF0D5A40096890F /* SimilarPostCell.swift in Sources */,
 				EE271F2A2AD8B9FA00190E7A /* String+.swift in Sources */,
 				F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */,
-				EEB51EA02B10EF4200C23AB4 /* WriteRefuseReasonVC.swift in Sources */,
 				EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */,
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,
-				EE35ED702B14BAA9008040E2 /* RefuseCell.swift in Sources */,
 				EE07ADCD2AF26D360096890F /* DepartMentCell.swift in Sources */,
 				EE07ADB92AEFE6730096890F /* PostedStudyViewController.swift in Sources */,
 				EE0A8B5A2AF932FE001C3F41 /* RecruitCell.swift in Sources */,
@@ -639,24 +652,20 @@
 				F80421CC2A7D9BC3006C6B87 /* NicknameViewController.swift in Sources */,
 				EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */,
 				F86E031F2A8BBAE600164976 /* SearchViewController.swift in Sources */,
+				EE1E44112B17222200223436 /* MyPostCell.swift in Sources */,
 				EE0A8B5E2AF9B01C001C3F41 /* UILabel+.swift in Sources */,
 				F87377592AA850940055B041 /* DepartmentselectViewController.swift in Sources */,
 				EE07ADB52AEFC2B90096890F /* UITextField+.swift in Sources */,
 				EE0A8B602AFA7FD2001C3F41 /* SearchResultCell.swift in Sources */,
 				EE07ADC72AF241A30096890F /* PopUpView.swift in Sources */,
-				EEB51E9E2B1099CB00C23AB4 /* RefuseReasonCell.swift in Sources */,
 				F8085D412A815DCD0067D4DE /* HomeViewController.swift in Sources */,
 				F80421942A7D6816006C6B87 /* SceneDelegate.swift in Sources */,
-				EEB51E8E2B103C2300C23AB4 /* MyPageViewController.swift in Sources */,
-				EEB51E912B103C2300C23AB4 /* MyPostInfoManager.swift in Sources */,
 				EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */,
 				EE271F202AD0584100190E7A /* UIColor+.swift in Sources */,
-				EEB51E8D2B103C2300C23AB4 /* InfoManager.swift in Sources */,
 				EE07ADCF2AF325F80096890F /* UILabelPadding.swift in Sources */,
 				EE271F282AD7852900190E7A /* TapBar.swift in Sources */,
 				EE0A8B5C2AF9330F001C3F41 /* DeadLineCell.swift in Sources */,
 				F8085D3E2A7E9E270067D4DE /* CompleteViewController.swift in Sources */,
-				EEB51E982B107B7100C23AB4 /* WaitCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -884,6 +893,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE1E44132B17228B00223436 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F80421862A7D6816006C6B87 /* Project object */;
 }
