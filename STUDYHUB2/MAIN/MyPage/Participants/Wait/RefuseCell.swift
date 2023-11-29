@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 final class RefuseCell: UITableViewCell {
+  static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
+
   static let cellId = "CellId"
   
   var buttonAction: (() -> Void) = {}
@@ -32,7 +34,7 @@ final class RefuseCell: UITableViewCell {
     return label
   }()
   
-  private lazy var checkButton: UIButton = {
+   lazy var checkButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(named: "ButtonEmpty"), for: .normal)
     button.addAction(UIAction { _ in
@@ -64,5 +66,6 @@ final class RefuseCell: UITableViewCell {
   
   func setReasonLabel(reason: String){
     reasonLabel.text = reason
+    
   }
 }

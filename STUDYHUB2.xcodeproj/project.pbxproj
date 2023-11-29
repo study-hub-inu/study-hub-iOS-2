@@ -14,7 +14,7 @@
 		EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E972B107B7100C23AB4 /* WaitCell.swift */; };
 		EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */; };
 		EE02B1142B15FEEE0092082F /* WriteRefuseReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */; };
-		EE02B1152B15FEEE0092082F /* RefuseReasonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9D2B1099CB00C23AB4 /* RefuseReasonCell.swift */; };
+		EE02B1152B15FEEE0092082F /* RefusePersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9D2B1099CB00C23AB4 /* RefusePersonCell.swift */; };
 		EE02B1162B15FEEE0092082F /* ParticipateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */; };
 		EE02B1172B15FEEE0092082F /* RefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */; };
 		EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07AD8F2AE106460096890F /* CreatePostManager.swift */; };
@@ -48,6 +48,7 @@
 		EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */; };
 		EE1E44112B17222200223436 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44102B17222200223436 /* MyPostCell.swift */; };
 		EE1E44142B17228B00223436 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE1E44132B17228B00223436 /* SnapKit */; };
+		EE1E44162B172ACB00223436 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44152B172ACB00223436 /* MyPostViewController.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -124,6 +125,7 @@
 		EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailManager.swift; sourceTree = "<group>"; };
 		EE1E44102B17222200223436 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostCell.swift; path = STUDYHUB2/MAIN/MyPage/MainInfo/MyPostCell.swift; sourceTree = SOURCE_ROOT; };
+		EE1E44152B172ACB00223436 /* MyPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostViewController.swift; path = STUDYHUB2/MAIN/MyPage/MyPostViewController.swift; sourceTree = SOURCE_ROOT; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -144,7 +146,7 @@
 		EEB51E972B107B7100C23AB4 /* WaitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitCell.swift; sourceTree = "<group>"; };
 		EEB51E992B10931500C23AB4 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
 		EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseBottomSheet.swift; sourceTree = "<group>"; };
-		EEB51E9D2B1099CB00C23AB4 /* RefuseReasonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseReasonCell.swift; sourceTree = "<group>"; };
+		EEB51E9D2B1099CB00C23AB4 /* RefusePersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefusePersonCell.swift; sourceTree = "<group>"; };
 		EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRefuseReasonVC.swift; sourceTree = "<group>"; };
 		F804218E2A7D6816006C6B87 /* STUDYHUB2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STUDYHUB2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80421912A7D6816006C6B87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -299,7 +301,7 @@
 		EE35ED6E2B14BA95008040E2 /* Refuse */ = {
 			isa = PBXGroup;
 			children = (
-				EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */,
+				EEB51E9D2B1099CB00C23AB4 /* RefusePersonCell.swift */,
 			);
 			path = Refuse;
 			sourceTree = "<group>";
@@ -329,6 +331,7 @@
 		EEB51E892B103C2300C23AB4 /* MyPost */ = {
 			isa = PBXGroup;
 			children = (
+				EE1E44152B172ACB00223436 /* MyPostViewController.swift */,
 				EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */,
 				EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */,
 				EE1E44102B17222200223436 /* MyPostCell.swift */,
@@ -356,7 +359,7 @@
 				EEB51E972B107B7100C23AB4 /* WaitCell.swift */,
 				EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */,
 				EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */,
-				EEB51E9D2B1099CB00C23AB4 /* RefuseReasonCell.swift */,
+				EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */,
 			);
 			path = Wait;
 			sourceTree = "<group>";
@@ -614,7 +617,7 @@
 				EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */,
 				EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */,
 				EE02B1142B15FEEE0092082F /* WriteRefuseReasonVC.swift in Sources */,
-				EE02B1152B15FEEE0092082F /* RefuseReasonCell.swift in Sources */,
+				EE02B1152B15FEEE0092082F /* RefusePersonCell.swift in Sources */,
 				EE02B1162B15FEEE0092082F /* ParticipateCell.swift in Sources */,
 				EE02B1172B15FEEE0092082F /* RefuseCell.swift in Sources */,
 				EEC05ED52B15FA0E001602AE /* InfoManager.swift in Sources */,
@@ -661,6 +664,7 @@
 				F8085D412A815DCD0067D4DE /* HomeViewController.swift in Sources */,
 				F80421942A7D6816006C6B87 /* SceneDelegate.swift in Sources */,
 				EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */,
+				EE1E44162B172ACB00223436 /* MyPostViewController.swift in Sources */,
 				EE271F202AD0584100190E7A /* UIColor+.swift in Sources */,
 				EE07ADCF2AF325F80096890F /* UILabelPadding.swift in Sources */,
 				EE271F282AD7852900190E7A /* TapBar.swift in Sources */,

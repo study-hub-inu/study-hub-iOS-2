@@ -3,7 +3,7 @@ import UIKit
 
 import SnapKit
 
-final class ParticipateCell: UICollectionViewCell {
+final class RefusePersonCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
 
   private lazy var profileImageView: UIImageView = {
@@ -30,10 +30,18 @@ final class ParticipateCell: UICollectionViewCell {
   
   private lazy var dateLabel: UILabel = {
     let label = UILabel()
-    label.text = "2023. 9 . 8 참여 "
+    label.text = "2023. 9 . 8 신청 "
     label.textColor = .bg70
     label.font = UIFont(name: "Pretendard", size: 12)
     return label
+  }()
+  
+  private lazy var refuseReasonTextView: UITextView = {
+    let textView = UITextView()
+    textView.text = "거절 사유\n이 스터디의 목표와 맞지 않아요"
+    textView.textColor = .black
+    textView.font = UIFont(name: "Pretendard", size: 14)
+    return textView
   }()
   
  
@@ -58,7 +66,8 @@ final class ParticipateCell: UICollectionViewCell {
       profileImageView,
       majorLabel,
       nickNameLabel,
-      dateLabel
+      dateLabel,
+      refuseReasonTextView
     ].forEach {
       addSubview($0)
     }
@@ -84,6 +93,11 @@ final class ParticipateCell: UICollectionViewCell {
     dateLabel.snp.makeConstraints {
       $0.top.equalTo(nickNameLabel.snp.bottom)
       $0.leading.equalTo(majorLabel)
+    }
+    
+    refuseReasonTextView.snp.makeConstraints {
+      $0.top.equalTo(profileImageView.snp.bottom).offset(10)
+      $0.leading.equalTo(profileImageView)
     }
   }
 }
