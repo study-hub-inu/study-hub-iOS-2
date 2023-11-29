@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 protocol RefuseBottomSheetDelegate: AnyObject {
-  func didTapRefuseButton(withReason reason: String)
+  func didTapRefuseButton(withReason reason: String, reasonNum: Int)
 }
 
 final class RefuseBottomSheet: UIViewController {
@@ -162,11 +162,8 @@ extension RefuseBottomSheet: UITableViewDelegate, UITableViewDataSource {
   func refuseButtonTapped() {
     self.dismiss(animated: true)
     
-    if selectedButtonTag == 3 {
-      let refuseReason = refuseList[selectedButtonTag]
-      delegate?.didTapRefuseButton(withReason: refuseReason)
-    }
+    let refuseReason = refuseList[selectedButtonTag]
+    delegate?.didTapRefuseButton(withReason: refuseReason, reasonNum: selectedButtonTag)
   }
-  
 }
 

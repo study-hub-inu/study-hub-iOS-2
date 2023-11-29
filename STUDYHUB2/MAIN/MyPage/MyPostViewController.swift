@@ -319,7 +319,6 @@ extension MyPostViewController: MyPostCellDelegate{
 
   
   func menuButtonTapped(in cell: MyPostCell, postID: Int) {
-    print(postID)
     let viewControllerToPresent = BottomSheet(postID: postID)
       if #available(iOS 15.0, *) {
         if let sheet = viewControllerToPresent.sheetPresentationController {
@@ -349,5 +348,11 @@ extension MyPostViewController: MyPostCellDelegate{
                                       rightButtonTilte: "마감")
     popupVC.modalPresentationStyle = .overFullScreen
     self.present(popupVC, animated: false)
+  }
+}
+
+extension MyPostViewController: BottomSheetDelegate {
+  func modifyButtonTapped(postID: Int) {
+    print("\(postID)포아")
   }
 }

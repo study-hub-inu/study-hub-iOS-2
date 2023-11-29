@@ -315,14 +315,18 @@ extension CheckParticipantsVC: ParticipantsCellDelegate {
 
 // MARK: - 거절(기타사유)로 할 경우 화면이동
 extension CheckParticipantsVC: RefuseBottomSheetDelegate {
-  func didTapRefuseButton(withReason reason: String) {
-    let refuseWriteVC = WriteRefuseReasonVC()
-    refuseWriteVC.delegate = self
-    
-    if let navigationController = self.navigationController {
-      navigationController.pushViewController(refuseWriteVC, animated: true)
+  func didTapRefuseButton(withReason reason: String, reasonNum: Int) {
+    if reasonNum == 3 {
+      let refuseWriteVC = WriteRefuseReasonVC()
+      refuseWriteVC.delegate = self
+      
+      if let navigationController = self.navigationController {
+        navigationController.pushViewController(refuseWriteVC, animated: true)
+      } else {
+        self.present(refuseWriteVC, animated: true, completion: nil)
+      }
     } else {
-      self.present(refuseWriteVC, animated: true, completion: nil)
+      showToast(message: "거절이 완료됐어요", alertCheck: true)
     }
   }
 }
