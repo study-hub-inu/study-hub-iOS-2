@@ -169,8 +169,8 @@ final class CheckParticipantsVC: NaviHelper {
     refuseCollectionView.tag = 3
     refuseCollectionView.delegate = self
     refuseCollectionView.dataSource = self
-    refuseCollectionView.register(RefuseCell.self,
-                                  forCellWithReuseIdentifier: RefuseCell.id)
+    refuseCollectionView.register(RefusePersonCell.self,
+                                  forCellWithReuseIdentifier: RefusePersonCell.id)
   }
   
   // MARK: - 네비게이션바 재설정
@@ -235,8 +235,8 @@ extension CheckParticipantsVC: UICollectionViewDelegate, UICollectionViewDataSou
       return cell
 
     } else {
-      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RefuseCell.id,
-                                                    for: indexPath) as! RefuseCell
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RefusePersonCell.id,
+                                                    for: indexPath) as! RefusePersonCell
       return cell
     }
   }

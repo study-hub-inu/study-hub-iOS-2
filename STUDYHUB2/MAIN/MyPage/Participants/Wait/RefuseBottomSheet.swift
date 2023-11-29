@@ -9,7 +9,13 @@ import UIKit
 
 import SnapKit
 
+protocol RefuseBottomSheetDelegate: AnyObject {
+  func didTapRefuseButton(withReason reason: String)
+}
+
 final class RefuseBottomSheet: UIViewController {
+  weak var delegate: RefuseBottomSheetDelegate?
+  
   var refuseList = ["이 스터디의 목표와 맞지 않아요",
                     "팀원 조건과 맞지 않아요 (학과, 성별 등)",
                     "소개글이 짧아서 어떤 분인지 알 수 없어요",
@@ -30,7 +36,7 @@ final class RefuseBottomSheet: UIViewController {
     button.titleLabel?.font = UIFont(name: "Pretendard", size: 16)
     button.setTitleColor(.o20, for: .normal)
     button.addAction(UIAction { _ in
-      self.refuseButtonTapped()
+      self.delegate?.didTapRefuseButton(withReason: self.refuseList[self.selectedButtonTag])
     }, for: .touchUpInside)
     return button
   }()
@@ -95,20 +101,6 @@ final class RefuseBottomSheet: UIViewController {
       $0.bottom.equalToSuperview()
     }
   }
-  
-  func refuseButtonTapped() {
-      self.dismiss(animated: true)
-
-      if selectedButtonTag == 3 {
-          let refuseWriteVC = WriteRefuseReasonVC()
-          
-          if let rootViewController = UIApplication.shared.keyWindow?.rootViewController {
-              rootViewController.present(refuseWriteVC, animated: true, completion: nil)
-          }
-      }
-  }
-
-
 }
 
 // MARK: - tableview

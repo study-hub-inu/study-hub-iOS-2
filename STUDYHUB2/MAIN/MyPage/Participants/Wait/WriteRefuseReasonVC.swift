@@ -9,7 +9,12 @@ import UIKit
 
 import SnapKit
 
+protocol WriteRefuseReasonVCDelegate: AnyObject{
+  func completeButtonTapped(reason: String)
+}
+
 final class WriteRefuseReasonVC: NaviHelper {
+  weak var delegate: WriteRefuseReasonVCDelegate?
   
   private lazy var titlelabel = createLabel(title: "해당 참여자를 거절하게 된 이유를 적어주세요 😢",
                                             textColor: .black,
@@ -28,6 +33,22 @@ final class WriteRefuseReasonVC: NaviHelper {
     label.textColor = .bg70
     label.text = "0/200"
     return label
+  }()
+  
+  private lazy var bottomLabel = createLabel(title: "- 해당 내용은 사용자에게 전송돼요",
+                                             textColor: .bg60,
+                                             fontSize: 12)
+  
+  private lazy var completeButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("완료", for: .normal)
+    button.setTitleColor(UIColor.white, for: .normal)
+    button.backgroundColor = .o30
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 16)
+    button.addAction(UIAction { _ in
+      self.delegate?.completeButtonTapped(reason: self.reasonTextView.text)
+    }, for: .touchUpInside)
+    return button
   }()
 
   // MARK: - viewDidLoad
@@ -51,7 +72,9 @@ final class WriteRefuseReasonVC: NaviHelper {
     [
       titlelabel,
       reasonTextView,
-      countContentLabel
+      countContentLabel,
+      bottomLabel,
+      completeButton
     ].forEach {
       view.addSubview($0)
     }
@@ -72,6 +95,18 @@ final class WriteRefuseReasonVC: NaviHelper {
     countContentLabel.snp.makeConstraints {
       $0.trailing.equalTo(reasonTextView)
       $0.top.equalTo(reasonTextView)
+    }
+    
+    completeButton.snp.makeConstraints {
+      $0.bottom.equalToSuperview().offset(-30)
+      $0.leading.equalToSuperview().offset(10)
+      $0.trailing.equalToSuperview().offset(-10)
+      $0.height.equalTo(55)
+    }
+    
+    bottomLabel.snp.makeConstraints {
+      $0.bottom.equalTo(completeButton.snp.top).offset(10)
+      $0.leading.equalTo(completeButton.snp.leading)
     }
   }
 }

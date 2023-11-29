@@ -3,6 +3,7 @@ import UIKit
 
 import SnapKit
 
+
 final class ParticipateCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
 

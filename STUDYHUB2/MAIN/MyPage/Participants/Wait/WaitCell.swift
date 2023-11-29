@@ -9,9 +9,15 @@ import UIKit
 
 import SnapKit
 
+protocol ParticipantsCellDelegate: AnyObject {
+  func refuseButtonTapped(in cell: WaitCell)
+  func acceptButtonTapped(in cell: WaitCell)
+}
+
 final class WaitCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
-
+  weak var delegate: ParticipantsCellDelegate?
+  
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "ProfileAvatar_change")
@@ -50,8 +56,8 @@ final class WaitCell: UICollectionViewCell {
     return textView
   }()
   
-  private lazy var lineView = UIView()
-  
+  private lazy var seperateLine = UIView()
+
   private lazy var buttonStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
@@ -64,7 +70,7 @@ final class WaitCell: UICollectionViewCell {
     button.setTitle("거절", for: .normal)
     button.setTitleColor(UIColor.bg80, for: .normal)
     button.addAction(UIAction { _ in
-      print("거절")
+      self.delegate?.refuseButtonTapped(in: self)
     }, for: .touchUpInside)
     return button
   }()
@@ -72,20 +78,22 @@ final class WaitCell: UICollectionViewCell {
   private lazy var acceptButton: UIButton = {
     let button = UIButton()
     button.setTitle("수락", for: .normal)
-    button.setTitleColor(UIColor.g10, for: .normal)
+    button.setTitleColor(UIColor.g_10, for: .normal)
     button.addAction(UIAction { _ in
-      print("수락")
+      self.delegate?.acceptButtonTapped(in: self)
     }, for: .touchUpInside)
     return button
   }()
   
-  private lazy var buttonLineView = UIView()
-  
+  private lazy var seperateLineinStackView = UIView()
+
   // MARK: - init
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     setViewShadow(backView: self)
+    
+    self.backgroundColor = .white
     
     setupLayout()
     makeUI()
@@ -100,7 +108,7 @@ final class WaitCell: UICollectionViewCell {
   func setupLayout(){
     [
       refuseButton,
-      buttonLineView,
+      seperateLineinStackView,
       acceptButton
     ].forEach {
       buttonStackView.addArrangedSubview($0)
@@ -112,7 +120,7 @@ final class WaitCell: UICollectionViewCell {
       nickNameLabel,
       dateLabel,
       describeTextView,
-      lineView,
+      seperateLine,
       buttonStackView
     ].forEach {
       addSubview($0)
@@ -122,7 +130,7 @@ final class WaitCell: UICollectionViewCell {
   // MARK: - makeUI
   func makeUI(){
     profileImageView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(10)
+      $0.top.equalToSuperview().offset(20)
       $0.leading.equalToSuperview()
     }
     
@@ -144,21 +152,26 @@ final class WaitCell: UICollectionViewCell {
     describeTextView.snp.makeConstraints {
       $0.top.equalTo(profileImageView.snp.bottom).offset(10)
       $0.leading.equalTo(profileImageView)
+      $0.trailing.equalToSuperview().offset(-10)
     }
     
-    lineView.snp.makeConstraints {
-      $0.top.equalTo(describeTextView.snp.bottom)
+    seperateLine.backgroundColor = .bg30
+    seperateLine.snp.makeConstraints {
+      $0.top.equalTo(describeTextView.snp.bottom).offset(10)
       $0.leading.trailing.equalToSuperview()
+      $0.height.equalTo(1)
     }
     
-    buttonLineView.snp.makeConstraints {
-      $0.height.equalTo(5)
+    seperateLineinStackView.backgroundColor = .bg30
+    seperateLineinStackView.snp.makeConstraints {
+      $0.height.equalTo(20)
       $0.width.equalTo(1)
     }
     
-    buttonStackView.distribution = .fillProportionally
+    buttonStackView.alignment = .center
+    buttonStackView.distribution = .equalCentering
     buttonStackView.snp.makeConstraints {
-      $0.top.equalTo(lineView.snp.bottom)
+      $0.top.equalTo(seperateLine.snp.bottom)
       $0.leading.trailing.equalToSuperview()
       $0.bottom.equalToSuperview()
     }

@@ -307,6 +307,17 @@ extension MyPostViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - MyPostcell 함수
 extension MyPostViewController: MyPostCellDelegate{
+  func acceptButtonTapped(in cell: MyPostCell, postID: Int) {
+    guard let navigationController = self.navigationController else {
+      // navigationController가 정의되지 않은 경우 오류 처리
+      return
+    }
+    
+    let checkParticipateVC = CheckParticipantsVC()
+    navigationController.pushViewController(checkParticipateVC, animated: true)
+  }
+
+  
   func menuButtonTapped(in cell: MyPostCell, postID: Int) {
     print(postID)
     let viewControllerToPresent = BottomSheet(postID: postID)

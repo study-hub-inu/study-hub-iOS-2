@@ -6,6 +6,7 @@ import SnapKit
 protocol MyPostCellDelegate: AnyObject {
   func menuButtonTapped(in cell: MyPostCell, postID: Int)
   func closeButtonTapped(in cell: MyPostCell)
+  func acceptButtonTapped(in cell: MyPostCell, postID: Int)
 }
 
 struct CellData {
@@ -22,6 +23,10 @@ final class MyPostCell: UICollectionViewCell {
   
   @objc func closeButtonTapped(){
     delegate?.closeButtonTapped(in: self)
+  }
+  
+  func acceptButtonTapped(){
+    delegate?.acceptButtonTapped(in: self, postID: postID ?? 0)
   }
   
   var postID: Int?
@@ -96,6 +101,9 @@ final class MyPostCell: UICollectionViewCell {
     button.setTitle("참여자", for: .normal)
     button.setTitleColor(UIColor.bg80, for: .normal)
     button.titleLabel?.textAlignment = .center
+    button.addAction(UIAction { _ in
+      self.acceptButtonTapped()
+    }, for: .touchUpInside)
     return button
   }()
   

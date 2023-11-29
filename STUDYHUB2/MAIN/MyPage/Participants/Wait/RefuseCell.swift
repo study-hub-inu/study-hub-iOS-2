@@ -8,7 +8,7 @@
 import UIKit
 
 import SnapKit
-
+  
 final class RefuseCell: UITableViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
 
