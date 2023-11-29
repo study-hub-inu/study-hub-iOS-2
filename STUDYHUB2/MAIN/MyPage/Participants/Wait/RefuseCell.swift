@@ -38,7 +38,7 @@ final class RefuseCell: UITableViewCell {
     let button = UIButton()
     button.setImage(UIImage(named: "ButtonEmpty"), for: .normal)
     button.addAction(UIAction { _ in
-      print("Hh")
+
     }, for: .touchUpInside)
     return button
   }()

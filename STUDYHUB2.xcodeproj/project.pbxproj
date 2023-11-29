@@ -47,7 +47,6 @@
 		EE0A8B832B089729001C3F41 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */; };
 		EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */; };
 		EE1E44112B17222200223436 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44102B17222200223436 /* MyPostCell.swift */; };
-		EE1E44142B17228B00223436 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = EE1E44132B17228B00223436 /* SnapKit */; };
 		EE1E44162B172ACB00223436 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44152B172ACB00223436 /* MyPostViewController.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
@@ -178,7 +177,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				903CF32160A1EDD2ADE8AA03 /* Pods_STUDYHUB2.framework in Frameworks */,
-				EE1E44142B17228B00223436 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,7 +498,6 @@
 			);
 			name = STUDYHUB2;
 			packageProductDependencies = (
-				EE1E44132B17228B00223436 /* SnapKit */,
 			);
 			productName = STUDYHUB2;
 			productReference = F804218E2A7D6816006C6B87 /* STUDYHUB2.app */;
@@ -908,14 +905,6 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		EE1E44132B17228B00223436 /* SnapKit */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */;
-			productName = SnapKit;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F80421862A7D6816006C6B87 /* Project object */;
 }

@@ -313,6 +313,7 @@ extension CheckParticipantsVC: RefuseBottomSheetDelegate {
       self.present(refuseWriteVC, animated: true, completion: nil)
     }
   }
+  
 }
 
 extension CheckParticipantsVC: WriteRefuseReasonVCDelegate {

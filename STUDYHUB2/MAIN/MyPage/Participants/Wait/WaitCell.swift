@@ -53,6 +53,7 @@ final class WaitCell: UICollectionViewCell {
     textView.textColor = .bg80
     textView.backgroundColor = .bg20
     textView.text = "안녕하세요, 저는 경영학부에 재학 중입니다. 지각이나 잠수 없이 열심히 참여하겠습니다. 잘 부탁드립니다 :)"
+    textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     return textView
   }()
   
@@ -131,12 +132,12 @@ final class WaitCell: UICollectionViewCell {
   func makeUI(){
     profileImageView.snp.makeConstraints {
       $0.top.equalToSuperview().offset(20)
-      $0.leading.equalToSuperview()
+      $0.leading.equalToSuperview().offset(10)
     }
     
     majorLabel.snp.makeConstraints {
       $0.top.equalTo(profileImageView)
-      $0.leading.equalTo(profileImageView.snp.trailing)
+      $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
     }
     
     nickNameLabel.snp.makeConstraints {
@@ -151,7 +152,7 @@ final class WaitCell: UICollectionViewCell {
     
     describeTextView.snp.makeConstraints {
       $0.top.equalTo(profileImageView.snp.bottom).offset(10)
-      $0.leading.equalTo(profileImageView)
+      $0.leading.equalTo(profileImageView.snp.leading)
       $0.trailing.equalToSuperview().offset(-10)
     }
     
@@ -172,9 +173,9 @@ final class WaitCell: UICollectionViewCell {
     buttonStackView.distribution = .equalCentering
     buttonStackView.snp.makeConstraints {
       $0.top.equalTo(seperateLine.snp.bottom)
-      $0.leading.trailing.equalToSuperview()
+      $0.leading.equalTo(profileImageView.snp.trailing)
+      $0.trailing.equalTo(describeTextView.snp.trailing).offset(-50)
       $0.bottom.equalToSuperview()
     }
-  
   }
 }

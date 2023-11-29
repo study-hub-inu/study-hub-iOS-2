@@ -36,7 +36,7 @@ final class RefuseBottomSheet: UIViewController {
     button.titleLabel?.font = UIFont(name: "Pretendard", size: 16)
     button.setTitleColor(.o20, for: .normal)
     button.addAction(UIAction { _ in
-      self.delegate?.didTapRefuseButton(withReason: self.refuseList[self.selectedButtonTag])
+      self.refuseButtonTapped()
     }, for: .touchUpInside)
     return button
   }()
@@ -140,8 +140,14 @@ extension RefuseBottomSheet: UITableViewDelegate, UITableViewDataSource {
     
     selectedButtonTag = tag
     
+    if let selectedCell = reasonTableView.cellForRow(at: IndexPath(row: tag, section: 0)) as? RefuseCell {
+      selectedCell.checkButton.isSelected.toggle()
+      selectedCell.checkButton.setImage(selectedCell.checkButton.isSelected ? UIImage(named: "ButtonChecked") : UIImage(named: "ButtonEmpty"), for: .normal)
+    }
+    
     updateRefuseButtonState()
   }
+
   
   func updateRefuseButtonState() {
     if selectedButtonTag != -1 {
@@ -152,5 +158,15 @@ extension RefuseBottomSheet: UITableViewDelegate, UITableViewDataSource {
       refuseButton.setTitleColor(.o20, for: .normal)
     }
   }
+  
+  func refuseButtonTapped() {
+    self.dismiss(animated: true)
+    
+    if selectedButtonTag == 3 {
+      let refuseReason = refuseList[selectedButtonTag]
+      delegate?.didTapRefuseButton(withReason: refuseReason)
+    }
+  }
+  
 }
 

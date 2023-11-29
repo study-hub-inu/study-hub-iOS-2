@@ -151,8 +151,8 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     }
     textView.layer.borderColor = UIColor.black.cgColor // 테두리 색상을 검은색으로 변경
     textView.layer.borderWidth = 1.0 // 테두리 두께 설정
-    
   }
+  
   public func textViewDidEndEditing(_ textView: UITextView) {
     if textView.text.isEmpty {
       textView.text = "스터디에 대해 알려주세요\n (운영 방법, 대면 여부,벌금,공부 인증 방법 등)"
