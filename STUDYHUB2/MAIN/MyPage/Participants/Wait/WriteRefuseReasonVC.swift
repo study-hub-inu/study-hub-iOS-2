@@ -23,7 +23,7 @@ final class WriteRefuseReasonVC: NaviHelper {
     textView.layer.cornerRadius = 10
     textView.layer.borderWidth = 1
     textView.layer.borderColor = UIColor.bg50.cgColor
-    textView.font = UIFont.systemFont(ofSize: 16)
+    textView.font = UIFont(name: "Pretendard", size: 16)
     textView.delegate = self
     return textView
   }()
@@ -31,17 +31,15 @@ final class WriteRefuseReasonVC: NaviHelper {
   private lazy var countContentLabel: UILabel = {
     let label = UILabel()
     label.textColor = .bg70
+    label.font = UIFont(name: "Pretendard", size: 12)
     label.text = "0/200"
     return label
   }()
   
-  private lazy var bottomLabel: UILabel = {
-    let label = createLabel(title: "- 해당 내용은 사용자에게 전송돼요",
-                            textColor: .bg60,
-                            fontSize: 12)
-    label.textAlignment = .center
-    return label
-  }()
+  private lazy var bottomLabel = createLabel(title: "- 해당 내용은 사용자에게 전송돼요",
+                                             textColor: .bg60,
+                                             fontSize: 12)
+
   
   private lazy var completeButton: UIButton = {
     let button = UIButton()
@@ -50,14 +48,15 @@ final class WriteRefuseReasonVC: NaviHelper {
     button.backgroundColor = .o30
     button.titleLabel?.font = UIFont(name: "Pretendard", size: 16)
     button.addTarget(self, action: #selector(completeButtonTapped), for: .touchUpInside)
-    button.isEnabled = false // 초기에 비활성화 상태로 설정
+    button.isEnabled = false
+    button.layer.cornerRadius = 10
     return button
   }()
   
   // MARK: - Lifecycle Methods
-  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     setupUI()
     
     navigationItemSetting()
@@ -73,40 +72,40 @@ final class WriteRefuseReasonVC: NaviHelper {
       titleLabel,
       reasonTextView,
       countContentLabel,
-      bottomLabel,
-      completeButton
+      completeButton,
+      bottomLabel
     ].forEach {
       view.addSubview($0)
     }
     
     titleLabel.snp.makeConstraints {
       $0.top.equalTo(view.safeAreaLayoutGuide).offset(20)
-      $0.leading.equalToSuperview().offset(10)
+      $0.leading.equalToSuperview().offset(20)
       $0.trailing.equalToSuperview().offset(-10)
     }
     
     reasonTextView.snp.makeConstraints {
-      $0.top.equalTo(titleLabel.snp.bottom).offset(10)
-      $0.leading.equalToSuperview().offset(10)
+      $0.top.equalTo(titleLabel.snp.bottom).offset(20)
+      $0.leading.equalToSuperview().offset(20)
       $0.trailing.equalToSuperview().offset(-10)
       $0.height.equalTo(186)
     }
     
     countContentLabel.snp.makeConstraints {
       $0.trailing.equalTo(reasonTextView)
-      $0.top.equalTo(reasonTextView.snp.bottom)
+      $0.top.equalTo(reasonTextView.snp.bottom).offset(5)
+    }
+    
+    bottomLabel.snp.makeConstraints {
+      $0.bottom.equalTo(completeButton.snp.top).offset(-30)
+      $0.leading.equalTo(completeButton)
     }
     
     completeButton.snp.makeConstraints {
       $0.bottom.equalToSuperview().offset(-30)
-      $0.leading.equalToSuperview().offset(10)
-      $0.trailing.equalToSuperview().offset(-10)
+      $0.leading.equalToSuperview().offset(20)
+      $0.trailing.equalToSuperview().offset(-20)
       $0.height.equalTo(55)
-    }
-    
-    bottomLabel.snp.makeConstraints {
-      $0.bottom.equalTo(completeButton.snp.top).offset(10)
-      $0.leading.trailing.equalTo(completeButton)
     }
   }
   
@@ -123,6 +122,7 @@ final class WriteRefuseReasonVC: NaviHelper {
   }
 }
 
+// MARK: - textview
 extension WriteRefuseReasonVC {
   override func textViewDidBeginEditing(_ textView: UITextView) {
     if textView.textColor == UIColor.bg70 {

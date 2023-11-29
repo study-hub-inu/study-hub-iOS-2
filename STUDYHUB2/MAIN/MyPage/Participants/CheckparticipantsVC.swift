@@ -133,7 +133,7 @@ final class CheckParticipantsVC: NaviHelper {
   }
   
   // MARK: - makeUI
-  func makeUI(){
+  func makeUI() {
     topItemStackView.distribution = .fillEqually
     topItemStackView.snp.makeConstraints {
       $0.top.equalToSuperview().offset(10)
@@ -144,6 +144,18 @@ final class CheckParticipantsVC: NaviHelper {
       $0.top.equalToSuperview().offset(10)
       $0.width.equalToSuperview()
       $0.height.equalTo(scrollView.snp.height)
+    }
+    
+    participateCollectionView.snp.makeConstraints {
+      $0.top.equalTo(waitingCollectionView.snp.top)
+      $0.width.equalTo(waitingCollectionView.snp.width)
+      $0.height.equalTo(waitingCollectionView.snp.height)
+    }
+    
+    refuseCollectionView.snp.makeConstraints {
+      $0.top.equalTo(waitingCollectionView.snp.top)
+      $0.width.equalTo(waitingCollectionView.snp.width)
+      $0.height.equalTo(waitingCollectionView.snp.height)
     }
     
     scrollView.snp.makeConstraints {
@@ -313,7 +325,6 @@ extension CheckParticipantsVC: RefuseBottomSheetDelegate {
       self.present(refuseWriteVC, animated: true, completion: nil)
     }
   }
-  
 }
 
 extension CheckParticipantsVC: WriteRefuseReasonVCDelegate {

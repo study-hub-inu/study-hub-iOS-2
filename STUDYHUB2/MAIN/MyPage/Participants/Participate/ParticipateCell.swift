@@ -3,7 +3,6 @@ import UIKit
 
 import SnapKit
 
-
 final class ParticipateCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
 
@@ -44,6 +43,8 @@ final class ParticipateCell: UICollectionViewCell {
     
     setViewShadow(backView: self)
     
+    self.backgroundColor = .white
+    
     setupLayout()
     makeUI()
   }
@@ -68,13 +69,13 @@ final class ParticipateCell: UICollectionViewCell {
   // MARK: - makeUI
   func makeUI(){
     profileImageView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(10)
-      $0.leading.equalToSuperview()
+      $0.top.equalToSuperview().offset(20)
+      $0.leading.equalToSuperview().offset(10)
     }
     
     majorLabel.snp.makeConstraints {
       $0.top.equalTo(profileImageView)
-      $0.leading.equalTo(profileImageView.snp.trailing)
+      $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
     }
     
     nickNameLabel.snp.makeConstraints {

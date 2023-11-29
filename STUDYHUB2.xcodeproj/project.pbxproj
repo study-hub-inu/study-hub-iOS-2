@@ -140,7 +140,7 @@
 		EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = ../MyPageViewController.swift; sourceTree = "<group>"; };
 		EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
 		EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditnicknameViewController.swift; sourceTree = "<group>"; };
-		EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostInfoManager.swift; path = ../MainInfo/MyPostInfoManager.swift; sourceTree = "<group>"; };
+		EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostInfoManager.swift; sourceTree = "<group>"; };
 		EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckParticipantsVC.swift; sourceTree = "<group>"; };
 		EEB51E972B107B7100C23AB4 /* WaitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitCell.swift; sourceTree = "<group>"; };
 		EEB51E992B10931500C23AB4 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 				EEB51E962B107B5600C23AB4 /* Participants */,
 			);
 			name = MyPost;
-			path = MyParticipate;
+			path = MainInfo;
 			sourceTree = "<group>";
 		};
 		EEB51E962B107B5600C23AB4 /* Participants */ = {

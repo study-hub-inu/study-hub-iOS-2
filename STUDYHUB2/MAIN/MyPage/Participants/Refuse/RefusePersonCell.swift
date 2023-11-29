@@ -5,7 +5,7 @@ import SnapKit
 
 final class RefusePersonCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
-
+  
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "ProfileAvatar_change")
@@ -39,17 +39,21 @@ final class RefusePersonCell: UICollectionViewCell {
   private lazy var refuseReasonTextView: UITextView = {
     let textView = UITextView()
     textView.text = "거절 사유\n이 스터디의 목표와 맞지 않아요"
-    textView.textColor = .black
+    textView.textColor = .bg80
     textView.font = UIFont(name: "Pretendard", size: 14)
+    textView.backgroundColor = .bg20
+    textView.textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     return textView
   }()
   
- 
+  
   // MARK: - init
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     setViewShadow(backView: self)
+    
+    self.backgroundColor = .white
     
     setupLayout()
     makeUI()
@@ -76,13 +80,13 @@ final class RefusePersonCell: UICollectionViewCell {
   // MARK: - makeUI
   func makeUI(){
     profileImageView.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(10)
-      $0.leading.equalToSuperview()
+      $0.top.equalToSuperview().offset(20)
+      $0.leading.equalToSuperview().offset(10)
     }
     
     majorLabel.snp.makeConstraints {
       $0.top.equalTo(profileImageView)
-      $0.leading.equalTo(profileImageView.snp.trailing)
+      $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
     }
     
     nickNameLabel.snp.makeConstraints {
@@ -96,8 +100,10 @@ final class RefusePersonCell: UICollectionViewCell {
     }
     
     refuseReasonTextView.snp.makeConstraints {
-      $0.top.equalTo(profileImageView.snp.bottom).offset(10)
+      $0.top.equalTo(dateLabel.snp.bottom).offset(10)
       $0.leading.equalTo(profileImageView)
+      $0.trailing.equalToSuperview().offset(-10)
+      $0.bottom.equalToSuperview().offset(-10)
     }
   }
 }
