@@ -23,12 +23,13 @@ struct PostDetailData: Codable {
   let postedUser: PostedUser
   let relatedPost: [RelatedPost]
   let usersPost, bookmarked: Bool
-  
+  let chatUrl: String
+
   enum CodingKeys: String, CodingKey {
     case postID = "postId"
     case title, createdDate, content, major, studyPerson, filteredGender,
          studyWay, penalty, penaltyWay, studyStartDate, studyEndDate, remainingSeat,
-         postedUser, relatedPost, usersPost, bookmarked
+         postedUser, relatedPost, usersPost, bookmarked , chatUrl
   }
 }
 
