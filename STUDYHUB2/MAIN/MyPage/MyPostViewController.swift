@@ -13,7 +13,7 @@ final class MyPostViewController: NaviHelper {
   let myPostDataManager = MyPostInfoManager.shared
   let detailPostDataManager = PostDetailInfoManager.shared
   var myPostDatas: [MyPostInfo] = []
-
+  
   var countPostNumber = 0 {
     didSet {
       totalPostCountLabel.text = "전체 \(countPostNumber)"
@@ -34,8 +34,8 @@ final class MyPostViewController: NaviHelper {
     button.addAction(UIAction { _ in
       print("tap button")
       self.confirmDeleteAll()
-      },
-      for: .touchUpInside
+    },
+                     for: .touchUpInside
     )
     return button
   }()
@@ -93,13 +93,13 @@ final class MyPostViewController: NaviHelper {
     super.viewDidLoad()
     
     view.backgroundColor = .bg30
-  
+    
     
     navigationItemSetting()
     redesignNavigationbar()
-
+    
     registerCell()
-
+    
     getMyPostData {
       self.setupLayout()
       self.makeUI()
@@ -165,8 +165,8 @@ final class MyPostViewController: NaviHelper {
       emptyLabel.setLineSpacing(spacing: 15)
       emptyLabel.textAlignment = .center
       emptyLabel.changeColor(label: emptyLabel,
-                        wantToChange: "새로운 스터디 활동을 시작해 보세요!",
-                        color: .bg60)
+                             wantToChange: "새로운 스터디 활동을 시작해 보세요!",
+                             color: .bg60)
       emptyLabel.snp.makeConstraints { make in
         make.centerX.equalTo(emptyImage)
         make.top.equalTo(emptyImage.snp.bottom).offset(20)
@@ -179,7 +179,7 @@ final class MyPostViewController: NaviHelper {
         make.height.equalTo(47)
       }
     }
-
+    
   }
   
   private func registerCell() {
@@ -187,7 +187,7 @@ final class MyPostViewController: NaviHelper {
     myPostCollectionView.dataSource = self
     
     myPostCollectionView.register(MyPostCell.self,
-                                    forCellWithReuseIdentifier: MyPostCell.id)
+                                  forCellWithReuseIdentifier: MyPostCell.id)
   }
   
   // MARK: - navigationbar 재설정
@@ -196,7 +196,7 @@ final class MyPostViewController: NaviHelper {
     self.navigationItem.title = "작성한 글"
     self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
   }
-
+  
   func getMyPostData(completion: @escaping () -> Void) {
     DispatchQueue.global().async {
       self.myPostDataManager.getMyPostDataFromApi {
@@ -255,7 +255,7 @@ final class MyPostViewController: NaviHelper {
       self.myPostCollectionView.reloadData()
     }
   }
-
+  
 }
 
 // MARK: - collectionView
@@ -267,16 +267,16 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
   
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
-
+    
     let postedVC = PostedStudyViewController()
-
+    
     // 단건조회 시 연관된 포스트도 같이 나옴
     detailPostDataManager.getPostDetailData(postID: myPostDatas[indexPath.row].postId) {
       let cellData = self.detailPostDataManager.getPostDetailData()
       postedVC.postedDate = cellData
     }
     self.navigationController?.pushViewController(postedVC, animated: true)
-
+    
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -291,7 +291,7 @@ extension MyPostViewController: UICollectionViewDelegate, UICollectionViewDataSo
     cell.infoLabel.text = myPostDatas[indexPath.row].content
     cell.remainCount = myPostDatas[indexPath.row].remainingSeat
     cell.postID = myPostDatas[indexPath.row].postId
-     
+    
     return cell
   }
 }
@@ -316,31 +316,31 @@ extension MyPostViewController: MyPostCellDelegate{
     let checkParticipateVC = CheckParticipantsVC()
     navigationController.pushViewController(checkParticipateVC, animated: true)
   }
-
+  
   
   func menuButtonTapped(in cell: MyPostCell, postID: Int) {
     let bottomSheetVC = BottomSheet(postID: postID)
     bottomSheetVC.delegate = self
     
-      if #available(iOS 15.0, *) {
-        if let sheet = bottomSheetVC.sheetPresentationController {
-          if #available(iOS 16.0, *) {
-            sheet.detents = [.custom(resolver: { context in
-              return 228.0
-            })]
-          } else {
-            // Fallback on earlier versions
-          }
-          sheet.largestUndimmedDetentIdentifier = nil
-          sheet.prefersScrollingExpandsWhenScrolledToEdge = false
-          sheet.prefersEdgeAttachedInCompactHeight = true
-          sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
-          sheet.preferredCornerRadius = 20
+    if #available(iOS 15.0, *) {
+      if let sheet = bottomSheetVC.sheetPresentationController {
+        if #available(iOS 16.0, *) {
+          sheet.detents = [.custom(resolver: { context in
+            return 228.0
+          })]
+        } else {
+          // Fallback on earlier versions
         }
-      } else {
-        // Fallback on earlier versions
+        sheet.largestUndimmedDetentIdentifier = nil
+        sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+        sheet.prefersEdgeAttachedInCompactHeight = true
+        sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+        sheet.preferredCornerRadius = 20
       }
-      present(bottomSheetVC, animated: true, completion: nil)
+    } else {
+      // Fallback on earlier versions
+    }
+    present(bottomSheetVC, animated: true, completion: nil)
   }
   
   func closeButtonTapped(in cell: MyPostCell){

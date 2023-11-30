@@ -4,8 +4,6 @@
 //
 //  Created by 최용헌 on 2023/11/19.
 //
-
-
 import Foundation
 
 // MARK: - MyPostData
@@ -64,7 +62,6 @@ struct RelatedPost: Codable {
 final class PostDetailInfoManager {
   static let shared = PostDetailInfoManager()
   private init() {}
-  
   typealias NetworkCompletion = (Result<PostDetailData, NetworkError>) -> Void
   
   // 네트워킹 요청하는 함수

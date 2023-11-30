@@ -48,6 +48,8 @@
 		EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */; };
 		EE1E44112B17222200223436 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44102B17222200223436 /* MyPostCell.swift */; };
 		EE1E44162B172ACB00223436 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44152B172ACB00223436 /* MyPostViewController.swift */; };
+		EE1E441B2B18641600223436 /* MyParticipataeStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E441A2B18641600223436 /* MyParticipataeStudyVC.swift */; };
+		EE1E441D2B18666800223436 /* MyParticipateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E441C2B18666800223436 /* MyParticipateCell.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -125,6 +127,8 @@
 		EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailManager.swift; sourceTree = "<group>"; };
 		EE1E44102B17222200223436 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostCell.swift; path = STUDYHUB2/MAIN/MyPage/MainInfo/MyPostCell.swift; sourceTree = SOURCE_ROOT; };
 		EE1E44152B172ACB00223436 /* MyPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostViewController.swift; path = STUDYHUB2/MAIN/MyPage/MyPostViewController.swift; sourceTree = SOURCE_ROOT; };
+		EE1E441A2B18641600223436 /* MyParticipataeStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParticipataeStudyVC.swift; sourceTree = "<group>"; };
+		EE1E441C2B18666800223436 /* MyParticipateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParticipateCell.swift; sourceTree = "<group>"; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -263,6 +267,15 @@
 				EE0A8B762B089729001C3F41 /* Pretendard-Thin.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		EE1E44172B18635600223436 /* MyParticipateStudy */ = {
+			isa = PBXGroup;
+			children = (
+				EE1E441A2B18641600223436 /* MyParticipataeStudyVC.swift */,
+				EE1E441C2B18666800223436 /* MyParticipateCell.swift */,
+			);
+			path = MyParticipateStudy;
 			sourceTree = "<group>";
 		};
 		EE271F212AD0584900190E7A /* Extension */ = {
@@ -473,6 +486,7 @@
 			children = (
 				EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */,
 				EEB51E842B103C2300C23AB4 /* InfoManager.swift */,
+				EE1E44172B18635600223436 /* MyParticipateStudy */,
 				EEB51E862B103C2300C23AB4 /* INFO */,
 				EEB51E892B103C2300C23AB4 /* MyPost */,
 			);
@@ -610,6 +624,7 @@
 			files = (
 				EE02B10C2B15FEEE0092082F /* MyPageViewController.swift in Sources */,
 				EE02B10E2B15FEEE0092082F /* MyPostInfoManager.swift in Sources */,
+				EE1E441D2B18666800223436 /* MyParticipateCell.swift in Sources */,
 				EE02B1112B15FEEE0092082F /* CheckParticipantsVC.swift in Sources */,
 				EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */,
 				EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */,
@@ -645,6 +660,7 @@
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,
 				EE07ADCD2AF26D360096890F /* DepartMentCell.swift in Sources */,
+				EE1E441B2B18641600223436 /* MyParticipataeStudyVC.swift in Sources */,
 				EE07ADB92AEFE6730096890F /* PostedStudyViewController.swift in Sources */,
 				EE0A8B5A2AF932FE001C3F41 /* RecruitCell.swift in Sources */,
 				EE271F262AD77CD100190E7A /* UIViewcontroller+.swift in Sources */,
