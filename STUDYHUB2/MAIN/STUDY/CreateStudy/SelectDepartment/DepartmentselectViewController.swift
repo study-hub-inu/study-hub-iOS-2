@@ -115,8 +115,8 @@ final class DepartmentselectViewController: NaviHelper {
     guard let major = selectedMajor else { return }
 
     previousVC?.addDepartmentButton(major)
-    dismiss(animated: true, completion: nil)
-    
+    self.navigationController?.popViewController(animated: true)
+
   }
   
   @objc func cancelButtonTapped(){

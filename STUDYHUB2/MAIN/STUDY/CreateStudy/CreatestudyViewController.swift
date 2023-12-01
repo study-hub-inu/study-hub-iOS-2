@@ -23,7 +23,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   }
   
   var selectDate: String? = ""
-
+  
   // MARK: - UI설정
   private lazy var completeButton: UIButton = {
     let completeButton = UIButton()
@@ -211,7 +211,8 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   private lazy var meetLabel = createLabel(title: "대면 여부",
                                            textColor: .black,
                                            fontSize: 18)
-  
+ private lazy var fineTypesTextField = createTextField(title: "지각비, 결석비 등")
+
   private lazy var fineLabel = createLabel(title: "벌금",
                                            textColor: .black,
                                            fontSize: 18)
@@ -273,8 +274,8 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   }()
   
   private lazy var countAlert = createLabel(title: "1명부터 가능해요(본인 제외)",
-                                    textColor: .r50,
-                                    fontSize: 12)
+                                            textColor: .r50,
+                                            fontSize: 12)
   
   let scrollView = UIScrollView()
   
@@ -602,17 +603,17 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   // MARK: -  선택한 학과에 대한 버튼을 생성
   func addDepartmentButton(_ department: String) {
     selectedMajor = department
-
+    
     let labelText = selectedMajor
     let labelSize = (labelText as? NSString)?.size(withAttributes: [NSAttributedString.Key.font: selectMajorLabel.font!])
-
+    
     selectMajorLabel.text = labelText
     selectMajorLabel.clipsToBounds = true
     selectMajorLabel.layer.cornerRadius = 15
     selectMajorLabel.backgroundColor = .bg30
     selectMajorLabel.textAlignment = .left
     selectMajorLabel.adjustsFontSizeToFitWidth = true
-
+    
     selectedMajor = selectMajorLabel.text ?? ""
     
     scrollView.addSubview(selectMajorLabel)
@@ -656,8 +657,6 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
                                       textColor: UIColor(hexCode: "#49545C"),
                                       fontSize: 14)
       
-      // Create a text field for chat link input
-      let fineTypesTextField = createTextField(title: "지각비, 결석비 등")
       
       // Create a text field for "얼마인가요?"
       let fineAmountLabel = createLabel(title: "얼마인가요?",
@@ -717,6 +716,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       gender: genderType ?? "null",
       major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
       penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
+      penaltyWay: fineTypesTextField.text ?? "",
       studyEndDate: endDateButton.currentTitle ?? "",
       studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
       studyStartDate: startDateButton.currentTitle ?? "",
@@ -763,7 +763,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       present(navigationController, animated: true, completion: nil)
     }
   }
-
+  
   
   // MARK: - 성별 눌렸을 때 함수
   @objc func genderButtonTapped(_ sender: UIButton) {
@@ -880,22 +880,56 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       let modifyData = self.postInfoManager.getPostDetailData()
       
       DispatchQueue.main.async {
-        self.studyproduceTextView.text = modifyData?.content
-        self.studytitleTextField.text = modifyData?.title
+        modifyData.map {
+          self.chatLinkTextField.text = $0.chatUrl
+          self.studyproduceTextView.text = $0.content
+          self.studytitleTextField.text = $0.title
+          
+          self.selectedMajor = self.convertMajor($0.major, isEnglish: false)
+          self.addDepartmentButton(self.convertMajor($0.major, isEnglish: false))
+ 
+          self.studymemberTextField.text = String($0.studyPerson)
+          
+          self.genderType = $0.filteredGender
+          if self.genderType == "FEMALE" {
+            self.femaleOnlyButton.isSelected = true
+            self.genderButtonTapped(self.femaleOnlyButton)
+          } else if self.genderType == "MALE" {
+            self.maleOnlyButton.isSelected = true
+            self.genderButtonTapped(self.maleOnlyButton)
+          } else {
+            self.allGenderButton.isSelected = true
+            self.genderButtonTapped(self.allGenderButton)
+          }
+          
+          self.contactMethod = $0.studyWay
+          if self.contactMethod == "CONTACT" {
+            self.contactButton.isSelected = true
+            self.meetButtonTapped(self.contactButton)
+          } else if self.contactMethod == "MIX" {
+            self.mixmeetButton.isSelected = true
+            self.meetButtonTapped(self.mixmeetButton)
+          } else {
+            self.untactButton.isSelected = true
+            self.meetButtonTapped(self.untactButton)
+          }
+          
+          if $0.penaltyWay == nil {
+            self.noFineButtonTapped(self.noFineButton)
+          } else {
+            self.haveFineButtonTapped(self.haveFineButton)
+          }
+          
+          self.fineAmountTextField.text = String($0.penalty)
+          
+          let startDate = "\($0.studyStartDate[0]). \($0.studyStartDate[1]). \($0.studyStartDate[2])"
+          self.startDateButton.setTitle(startDate, for: .normal)
+          let endDate = "\($0.studyEndDate[0]). \($0.studyEndDate[1]). \($0.studyEndDate[2])"
+          self.endDateButton.setTitle(endDate, for: .normal)
+        
+        }
       }
-      
-//    chatUrl: chatLinkTextField.text ?? "",
-//    close: false,
-//    content: studyproduceTextView.text ?? "",
-//    // 무관일때 안됨 null이 아닌가
-//    gender: genderType ?? "null",
-//    major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
-//    penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
-//    studyEndDate: endDateButton.currentTitle ?? "",
-//    studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
-//    studyStartDate: startDateButton.currentTitle ?? "",
-//    studyWay: contactMethod ?? "CONTACT",
-//    title: studytitleTextField.text ?? "")
+
     }
   }
 }

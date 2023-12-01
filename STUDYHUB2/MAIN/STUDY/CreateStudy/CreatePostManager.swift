@@ -12,7 +12,7 @@ struct CreateStudyRequest: Codable {
   var close: Bool
   var content, gender, major: String
   var penalty: Int
-//    let penaltyWay: String
+  let penaltyWay: String?
   var studyEndDate: String
   var studyPerson: Int
   var studyStartDate, studyWay, title: String
