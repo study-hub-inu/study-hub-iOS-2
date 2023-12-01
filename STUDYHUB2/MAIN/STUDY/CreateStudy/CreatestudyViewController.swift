@@ -9,7 +9,9 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   var contactMethod: String?
   var selectedMajor: String?
   var postDataSender: SendPostData?
-
+  var modifyPostID: Int?
+  let postInfoManager = PostDetailInfoManager.shared
+  
   // 선택한 학과를 저장할 프로퍼티
   var selectedDepartment: String? {
     didSet {
@@ -283,6 +285,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
     
     setUpLayout()
     makeUI()
+    postModify()
   }
   
   // MARK: - setUpLayout
@@ -700,7 +703,6 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       maxFineLabel.snp.makeConstraints { make in
         make.top.equalTo(fineAmountTextField.snp.bottom).offset(10)
       }
-      
     }
   }
   
@@ -752,10 +754,16 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   @objc func departmentArrowButtonTapped() {
     let departmentselectVC = DepartmentselectViewController()
     departmentselectVC.previousVC = self
-    let navigationController = UINavigationController(rootViewController: departmentselectVC)
-    navigationController.modalPresentationStyle = .fullScreen
-    present(navigationController, animated: true, completion: nil)
+    
+    if let navigationController = self.navigationController {
+      navigationController.pushViewController(departmentselectVC, animated: true)
+    } else {
+      let navigationController = UINavigationController(rootViewController: departmentselectVC)
+      navigationController.modalPresentationStyle = .fullScreen
+      present(navigationController, animated: true, completion: nil)
+    }
   }
+
   
   // MARK: - 성별 눌렸을 때 함수
   @objc func genderButtonTapped(_ sender: UIButton) {
@@ -859,6 +867,35 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       startDateButton.setTitle(data, for: .normal)
     } else if buttonTag == 2 {
       endDateButton.setTitle(data, for: .normal)
+    }
+  }
+  
+  // MARK: - 수정하기
+  func postModify(){
+    print("createpage")
+    
+    guard let postID = modifyPostID else { return }
+    createStudyLabel.text = "수정하기"
+    postInfoManager.getPostDetailData(postID: postID) {
+      let modifyData = self.postInfoManager.getPostDetailData()
+      
+      DispatchQueue.main.async {
+        self.studyproduceTextView.text = modifyData?.content
+        self.studytitleTextField.text = modifyData?.title
+      }
+      
+//    chatUrl: chatLinkTextField.text ?? "",
+//    close: false,
+//    content: studyproduceTextView.text ?? "",
+//    // 무관일때 안됨 null이 아닌가
+//    gender: genderType ?? "null",
+//    major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
+//    penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
+//    studyEndDate: endDateButton.currentTitle ?? "",
+//    studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
+//    studyStartDate: startDateButton.currentTitle ?? "",
+//    studyWay: contactMethod ?? "CONTACT",
+//    title: studytitleTextField.text ?? "")
     }
   }
 }

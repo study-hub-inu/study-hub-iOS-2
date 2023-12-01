@@ -310,7 +310,7 @@ final class SignUpViewController: UIViewController {
   
   // Function to perform email duplication check
   func performEmailDuplicationCheck(for email: String) {
-    guard let duplicationURL = URL(string: "https://study-hub.site:443/api/email/duplication") else { return }
+    guard let duplicationURL = URL(string: "https://study-hub.site:443/api/v1/email/duplication") else { return }
     
     let duplicationJSONData: [String: Any] = ["email": email]
     guard let duplicationData = try? JSONSerialization.data(withJSONObject: duplicationJSONData) else {
@@ -333,7 +333,7 @@ final class SignUpViewController: UIViewController {
         if httpResponse.statusCode == 200 {
           // Duplication check passed, now send email to the main endpoint
           // Create a URL for sending the email
-          guard let emailURL = URL(string: "https://study-hub.site:443/api/email") else {
+          guard let emailURL = URL(string: "https://study-hub.site:443/api/v1/email") else {
             return
           }
           
@@ -458,7 +458,7 @@ final class SignUpViewController: UIViewController {
     }
     
     // Create a URL for verification
-    guard let verificationURL = URL(string: "https://study-hub.site:443/api/email/valid") else {
+    guard let verificationURL = URL(string: "https://study-hub.site:443/api/v1/email/verify") else {
       return
     }
     

@@ -34,7 +34,7 @@ final class PostManager {
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/study-posts"
+    urlComponents.path = "/api/v1/study-posts"
 
     guard var token = tokenManager.loadAccessToken() else { return }
     
@@ -46,6 +46,7 @@ final class PostManager {
     getMethod(with: urlString, postData: postData, token: token, completion: completion)
   }
   
+  // method 형식만 변수로 받으면 수정하기 가능할듯
   private func getMethod(with urlString: String, postData: CreateStudyRequest,
                          token: String, completion: @escaping NetworkCompletion) {
     guard let url = URL(string: urlString) else {

@@ -128,7 +128,9 @@ class MyPageViewController: UIViewController {
     joinstudyButton.layer.cornerRadius = 5
     joinstudyButton.widthAnchor.constraint(equalToConstant: 115).isActive = true
     joinstudyButton.heightAnchor.constraint(equalToConstant: 87).isActive = true
-    
+    joinstudyButton.addAction(UIAction { _ in
+      self.joinstudyButtonTapped()
+    }, for: .touchUpInside)
     return joinstudyButton
   }()
   
@@ -351,7 +353,14 @@ class MyPageViewController: UIViewController {
   @objc func writtenButtonTapped(){
     let myPostVC = MyPostViewController()
   
-    self.navigationController?.pushViewController(myPostVC, animated: true)  }
+    self.navigationController?.pushViewController(myPostVC, animated: true)
+  }
+  
+  func joinstudyButtonTapped(){
+    let myParticipateVC = MyParticipateStudyVC()
+  
+    self.navigationController?.pushViewController(myParticipateVC, animated: true)
+  }
   
   @objc func bookmarkpageButtonTapped() {
     let bookmarkVC = BookmarkViewController()

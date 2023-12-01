@@ -7,9 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5F9DE9DF024CF7309683C4D9 /* Pods_STUDYHUB2Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF19D90E98D2A473BB1FACD /* Pods_STUDYHUB2Tests.framework */; };
-		7D888F985F7235D92986BA8C /* Pods_STUDYHUB2_STUDYHUB2UITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A3D4E6F9B68D080EFA421F2 /* Pods_STUDYHUB2_STUDYHUB2UITests.framework */; };
 		903CF32160A1EDD2ADE8AA03 /* Pods_STUDYHUB2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD0AEF76B97F2D81A35C2224 /* Pods_STUDYHUB2.framework */; };
+		EE02B10C2B15FEEE0092082F /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */; };
+		EE02B10E2B15FEEE0092082F /* MyPostInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */; };
+		EE02B1112B15FEEE0092082F /* CheckParticipantsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */; };
+		EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E972B107B7100C23AB4 /* WaitCell.swift */; };
+		EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */; };
+		EE02B1142B15FEEE0092082F /* WriteRefuseReasonVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */; };
+		EE02B1152B15FEEE0092082F /* RefusePersonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E9D2B1099CB00C23AB4 /* RefusePersonCell.swift */; };
+		EE02B1162B15FEEE0092082F /* ParticipateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */; };
+		EE02B1172B15FEEE0092082F /* RefuseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */; };
 		EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07AD8F2AE106460096890F /* CreatePostManager.swift */; };
 		EE07ADB52AEFC2B90096890F /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07ADB42AEFC2B90096890F /* UITextField+.swift */; };
 		EE07ADB92AEFE6730096890F /* PostedStudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE07ADB82AEFE6730096890F /* PostedStudyViewController.swift */; };
@@ -28,11 +35,7 @@
 		EE0A8B5E2AF9B01C001C3F41 /* UILabel+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B5D2AF9B01C001C3F41 /* UILabel+.swift */; };
 		EE0A8B602AFA7FD2001C3F41 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B5F2AFA7FD2001C3F41 /* SearchResultCell.swift */; };
 		EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B622AFCB572001C3F41 /* BookMarkCell.swift */; };
-		EE0A8B652AFDDA6E001C3F41 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */; };
 		EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B682B04FED3001C3F41 /* PostDataManager.swift */; };
-		EE0A8B6B2B07614C001C3F41 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B6A2B07614C001C3F41 /* MyPostViewController.swift */; };
-		EE0A8B6E2B076B3F001C3F41 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B6D2B076B3F001C3F41 /* MyPostCell.swift */; };
-		EE0A8B702B0790D2001C3F41 /* MyPostInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B6F2B0790D2001C3F41 /* MyPostInfoManager.swift */; };
 		EE0A8B7B2B089729001C3F41 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B722B089729001C3F41 /* Pretendard-SemiBold.otf */; };
 		EE0A8B7C2B089729001C3F41 /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B732B089729001C3F41 /* Pretendard-Bold.otf */; };
 		EE0A8B7D2B089729001C3F41 /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B742B089729001C3F41 /* Pretendard-ExtraLight.otf */; };
@@ -43,6 +46,10 @@
 		EE0A8B822B089729001C3F41 /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B792B089729001C3F41 /* Pretendard-ExtraBold.otf */; };
 		EE0A8B832B089729001C3F41 /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */; };
 		EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */; };
+		EE1E44112B17222200223436 /* MyPostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44102B17222200223436 /* MyPostCell.swift */; };
+		EE1E44162B172ACB00223436 /* MyPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E44152B172ACB00223436 /* MyPostViewController.swift */; };
+		EE1E441B2B18641600223436 /* MyParticipataeStudyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E441A2B18641600223436 /* MyParticipataeStudyVC.swift */; };
+		EE1E441D2B18666800223436 /* MyParticipateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE1E441C2B18666800223436 /* MyParticipateCell.swift */; };
 		EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1B2AD04ACE00190E7A /* TokenManager.swift */; };
 		EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1D2AD04BB300190E7A /* UserToken.swift */; };
 		EE271F202AD0584100190E7A /* UIColor+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F1F2AD0584100190E7A /* UIColor+.swift */; };
@@ -51,7 +58,11 @@
 		EE271F282AD7852900190E7A /* TapBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F272AD7852900190E7A /* TapBar.swift */; };
 		EE271F2A2AD8B9FA00190E7A /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F292AD8B9FA00190E7A /* String+.swift */; };
 		EE271F2C2AD9250F00190E7A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F2B2AD9250F00190E7A /* UIView+.swift */; };
-		EE271F2E2ADA6D3700190E7A /* InfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F2D2ADA6D3700190E7A /* InfoManager.swift */; };
+		EE35ED7B2B15F829008040E2 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */; };
+		EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */; };
+		EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */; };
+		EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E992B10931500C23AB4 /* UIButton+.swift */; };
+		EEC05ED52B15FA0E001602AE /* InfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E842B103C2300C23AB4 /* InfoManager.swift */; };
 		F80421922A7D6816006C6B87 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421912A7D6816006C6B87 /* AppDelegate.swift */; };
 		F80421942A7D6816006C6B87 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421932A7D6816006C6B87 /* SceneDelegate.swift */; };
 		F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80421952A7D6816006C6B87 /* LoginViewController.swift */; };
@@ -65,30 +76,12 @@
 		F8085D3E2A7E9E270067D4DE /* CompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8085D3D2A7E9E270067D4DE /* CompleteViewController.swift */; };
 		F8085D412A815DCD0067D4DE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8085D402A815DCD0067D4DE /* HomeViewController.swift */; };
 		F8085D442A81846C0067D4DE /* StudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8085D432A81846C0067D4DE /* StudyViewController.swift */; };
-		F8085D462A8184800067D4DE /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8085D452A8184800067D4DE /* MyPageViewController.swift */; };
 		F86E031F2A8BBAE600164976 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86E031E2A8BBAE600164976 /* SearchViewController.swift */; };
 		F86E03212A8BFC8000164976 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F86E03202A8BFC8000164976 /* DetailsViewController.swift */; };
 		F87377592AA850940055B041 /* DepartmentselectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87377582AA850940055B041 /* DepartmentselectViewController.swift */; };
 		F873775B2AACD41D0055B041 /* BookmarkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F873775A2AACD41D0055B041 /* BookmarkViewController.swift */; };
 		F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F88AB33E2A95236B001D619C /* CreatestudyViewController.swift */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		F80421A52A7D6818006C6B87 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F80421862A7D6816006C6B87 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F804218D2A7D6816006C6B87;
-			remoteInfo = STUDYHUB2;
-		};
-		F80421AF2A7D6818006C6B87 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F80421862A7D6816006C6B87 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F804218D2A7D6816006C6B87;
-			remoteInfo = STUDYHUB2;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		16AE9AD51C6A978718771E4F /* Pods-STUDYHUB2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-STUDYHUB2.release.xcconfig"; path = "Target Support Files/Pods-STUDYHUB2/Pods-STUDYHUB2.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,6 +125,10 @@
 		EE0A8B792B089729001C3F41 /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
 		EE0A8B7A2B089729001C3F41 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		EE0A8B842B0A22F7001C3F41 /* PostDetailManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostDetailManager.swift; sourceTree = "<group>"; };
+		EE1E44102B17222200223436 /* MyPostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostCell.swift; path = STUDYHUB2/MAIN/MyPage/MainInfo/MyPostCell.swift; sourceTree = SOURCE_ROOT; };
+		EE1E44152B172ACB00223436 /* MyPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPostViewController.swift; path = STUDYHUB2/MAIN/MyPage/MyPostViewController.swift; sourceTree = SOURCE_ROOT; };
+		EE1E441A2B18641600223436 /* MyParticipataeStudyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParticipataeStudyVC.swift; sourceTree = "<group>"; };
+		EE1E441C2B18666800223436 /* MyParticipateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyParticipateCell.swift; sourceTree = "<group>"; };
 		EE271F1B2AD04ACE00190E7A /* TokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenManager.swift; sourceTree = "<group>"; };
 		EE271F1D2AD04BB300190E7A /* UserToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserToken.swift; sourceTree = "<group>"; };
 		EE271F1F2AD0584100190E7A /* UIColor+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+.swift"; sourceTree = "<group>"; };
@@ -140,7 +137,20 @@
 		EE271F272AD7852900190E7A /* TapBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TapBar.swift; sourceTree = "<group>"; };
 		EE271F292AD8B9FA00190E7A /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		EE271F2B2AD9250F00190E7A /* UIView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+.swift"; sourceTree = "<group>"; };
-		EE271F2D2ADA6D3700190E7A /* InfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoManager.swift; sourceTree = "<group>"; };
+		EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParticipateCell.swift; sourceTree = "<group>"; };
+		EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseCell.swift; sourceTree = "<group>"; };
+		EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
+		EEB51E842B103C2300C23AB4 /* InfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = InfoManager.swift; path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/InfoManager.swift"; sourceTree = "<group>"; };
+		EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = ../MyPageViewController.swift; sourceTree = "<group>"; };
+		EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
+		EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditnicknameViewController.swift; sourceTree = "<group>"; };
+		EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostInfoManager.swift; sourceTree = "<group>"; };
+		EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckParticipantsVC.swift; sourceTree = "<group>"; };
+		EEB51E972B107B7100C23AB4 /* WaitCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaitCell.swift; sourceTree = "<group>"; };
+		EEB51E992B10931500C23AB4 /* UIButton+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+.swift"; sourceTree = "<group>"; };
+		EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseBottomSheet.swift; sourceTree = "<group>"; };
+		EEB51E9D2B1099CB00C23AB4 /* RefusePersonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefusePersonCell.swift; sourceTree = "<group>"; };
+		EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteRefuseReasonVC.swift; sourceTree = "<group>"; };
 		F804218E2A7D6816006C6B87 /* STUDYHUB2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = STUDYHUB2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80421912A7D6816006C6B87 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F80421932A7D6816006C6B87 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -149,8 +159,6 @@
 		F804219A2A7D6818006C6B87 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F804219D2A7D6818006C6B87 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F804219F2A7D6818006C6B87 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F80421A42A7D6818006C6B87 /* STUDYHUB2Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STUDYHUB2Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F80421AE2A7D6818006C6B87 /* STUDYHUB2UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = STUDYHUB2UITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F80421C72A7D800E006C6B87 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		F80421C92A7D9534006C6B87 /* PasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordViewController.swift; sourceTree = "<group>"; };
 		F80421CB2A7D9BC3006C6B87 /* NicknameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NicknameViewController.swift; sourceTree = "<group>"; };
@@ -176,22 +184,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F80421A12A7D6818006C6B87 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				5F9DE9DF024CF7309683C4D9 /* Pods_STUDYHUB2Tests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F80421AB2A7D6818006C6B87 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7D888F985F7235D92986BA8C /* Pods_STUDYHUB2_STUDYHUB2UITests.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -212,9 +204,6 @@
 			isa = PBXGroup;
 			children = (
 				EE07ADB82AEFE6730096890F /* PostedStudyViewController.swift */,
-				EE07ADC22AF236260096890F /* BottomSheet.swift */,
-				EE07ADC42AF2414C0096890F /* PopUpViewController.swift */,
-				EE07ADC62AF241A30096890F /* PopUpView.swift */,
 				EE07ADC02AF0D5A40096890F /* SimilarPostCell.swift */,
 			);
 			path = PostedStudy;
@@ -228,6 +217,9 @@
 				EE271F272AD7852900190E7A /* TapBar.swift */,
 				EE07ADCE2AF325F80096890F /* UILabelPadding.swift */,
 				EE07ADBC2AEFF7BD0096890F /* ConvertMajor.swift */,
+				EE07ADC22AF236260096890F /* BottomSheet.swift */,
+				EE07ADC42AF2414C0096890F /* PopUpViewController.swift */,
+				EE07ADC62AF241A30096890F /* PopUpView.swift */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -261,16 +253,6 @@
 			path = BookMark;
 			sourceTree = "<group>";
 		};
-		EE0A8B6C2B076B1E001C3F41 /* MainInfo */ = {
-			isa = PBXGroup;
-			children = (
-				EE0A8B6F2B0790D2001C3F41 /* MyPostInfoManager.swift */,
-				EE0A8B6A2B07614C001C3F41 /* MyPostViewController.swift */,
-				EE0A8B6D2B076B3F001C3F41 /* MyPostCell.swift */,
-			);
-			path = MainInfo;
-			sourceTree = "<group>";
-		};
 		EE0A8B712B0896B4001C3F41 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,12 +269,22 @@
 			path = Font;
 			sourceTree = "<group>";
 		};
+		EE1E44172B18635600223436 /* MyParticipateStudy */ = {
+			isa = PBXGroup;
+			children = (
+				EE1E441A2B18641600223436 /* MyParticipataeStudyVC.swift */,
+				EE1E441C2B18666800223436 /* MyParticipateCell.swift */,
+			);
+			path = MyParticipateStudy;
+			sourceTree = "<group>";
+		};
 		EE271F212AD0584900190E7A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
 				EE271F1F2AD0584100190E7A /* UIColor+.swift */,
 				EE271F2B2AD9250F00190E7A /* UIView+.swift */,
 				EE271F292AD8B9FA00190E7A /* String+.swift */,
+				EEB51E992B10931500C23AB4 /* UIButton+.swift */,
 				EE07ADB42AEFC2B90096890F /* UITextField+.swift */,
 				EE0A8B5D2AF9B01C001C3F41 /* UILabel+.swift */,
 				EE271F252AD77CD100190E7A /* UIViewcontroller+.swift */,
@@ -307,6 +299,80 @@
 				EE271F1B2AD04ACE00190E7A /* TokenManager.swift */,
 			);
 			path = Token;
+			sourceTree = "<group>";
+		};
+		EE35ED6D2B14B7E2008040E2 /* Participate */ = {
+			isa = PBXGroup;
+			children = (
+				EE35ED6B2B14B71A008040E2 /* ParticipateCell.swift */,
+			);
+			path = Participate;
+			sourceTree = "<group>";
+		};
+		EE35ED6E2B14BA95008040E2 /* Refuse */ = {
+			isa = PBXGroup;
+			children = (
+				EEB51E9D2B1099CB00C23AB4 /* RefusePersonCell.swift */,
+			);
+			path = Refuse;
+			sourceTree = "<group>";
+		};
+		EEB51E722B103C0100C23AB4 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				EE0A8B6A2B07614C001C3F41 /* MyPostViewController.swift */,
+				EE0A8B6F2B0790D2001C3F41 /* MyPostInfoManager.swift */,
+				EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */,
+				EE0A8B6D2B076B3F001C3F41 /* MyPostCell.swift */,
+				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		EEB51E862B103C2300C23AB4 /* INFO */ = {
+			isa = PBXGroup;
+			children = (
+				EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */,
+				EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */,
+			);
+			name = INFO;
+			path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/INFO";
+			sourceTree = "<group>";
+		};
+		EEB51E892B103C2300C23AB4 /* MyPost */ = {
+			isa = PBXGroup;
+			children = (
+				EE1E44152B172ACB00223436 /* MyPostViewController.swift */,
+				EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */,
+				EEB51E8A2B103C2300C23AB4 /* MyPostInfoManager.swift */,
+				EE1E44102B17222200223436 /* MyPostCell.swift */,
+				EEB51E962B107B5600C23AB4 /* Participants */,
+			);
+			name = MyPost;
+			path = MainInfo;
+			sourceTree = "<group>";
+		};
+		EEB51E962B107B5600C23AB4 /* Participants */ = {
+			isa = PBXGroup;
+			children = (
+				EEB51E942B1075A500C23AB4 /* CheckParticipantsVC.swift */,
+				EEB51EA22B145B8000C23AB4 /* Wait */,
+				EE35ED6D2B14B7E2008040E2 /* Participate */,
+				EE35ED6E2B14BA95008040E2 /* Refuse */,
+			);
+			name = Participants;
+			path = ../Participants;
+			sourceTree = "<group>";
+		};
+		EEB51EA22B145B8000C23AB4 /* Wait */ = {
+			isa = PBXGroup;
+			children = (
+				EEB51E972B107B7100C23AB4 /* WaitCell.swift */,
+				EEB51E9B2B10966100C23AB4 /* RefuseBottomSheet.swift */,
+				EEB51E9F2B10EF4200C23AB4 /* WriteRefuseReasonVC.swift */,
+				EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */,
+			);
+			path = Wait;
 			sourceTree = "<group>";
 		};
 		F4E2C96E19FEA11B39F5379C /* Frameworks */ = {
@@ -326,6 +392,7 @@
 				F804218F2A7D6816006C6B87 /* Products */,
 				A95864503778D56C2593BD60 /* Pods */,
 				F4E2C96E19FEA11B39F5379C /* Frameworks */,
+				EEB51E722B103C0100C23AB4 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -333,8 +400,6 @@
 			isa = PBXGroup;
 			children = (
 				F804218E2A7D6816006C6B87 /* STUDYHUB2.app */,
-				F80421A42A7D6818006C6B87 /* STUDYHUB2Tests.xctest */,
-				F80421AE2A7D6818006C6B87 /* STUDYHUB2UITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -419,26 +484,13 @@
 		F89A01662A87FAF600B4C10D /* MyPage */ = {
 			isa = PBXGroup;
 			children = (
-				EE271F2D2ADA6D3700190E7A /* InfoManager.swift */,
-<<<<<<< HEAD
-				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
-				EE0A8B6C2B076B1E001C3F41 /* MainInfo */,
-				EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */,
-=======
-				EE07ADBC2AEFF7BD0096890F /* ConvertMajor.swift */,
-				F8085D452A8184800067D4DE /* MyPageViewController.swift */,
-				F8A6E92F2B02A79E0083CF46 /* INFO */,
->>>>>>> f1ac8e610ca2cc143be0bd4221815762b77daa1a
+				EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */,
+				EEB51E842B103C2300C23AB4 /* InfoManager.swift */,
+				EE1E44172B18635600223436 /* MyParticipateStudy */,
+				EEB51E862B103C2300C23AB4 /* INFO */,
+				EEB51E892B103C2300C23AB4 /* MyPost */,
 			);
 			path = MyPage;
-			sourceTree = "<group>";
-		};
-		F8A6E92F2B02A79E0083CF46 /* INFO */ = {
-			isa = PBXGroup;
-			children = (
-				EE0A8B642AFDDA6E001C3F41 /* MyInformationViewController.swift */,
-			);
-			path = INFO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -459,48 +511,11 @@
 			dependencies = (
 			);
 			name = STUDYHUB2;
+			packageProductDependencies = (
+			);
 			productName = STUDYHUB2;
 			productReference = F804218E2A7D6816006C6B87 /* STUDYHUB2.app */;
 			productType = "com.apple.product-type.application";
-		};
-		F80421A32A7D6818006C6B87 /* STUDYHUB2Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F80421BB2A7D6818006C6B87 /* Build configuration list for PBXNativeTarget "STUDYHUB2Tests" */;
-			buildPhases = (
-				4C148D8830B6434724138CF3 /* [CP] Check Pods Manifest.lock */,
-				F80421A02A7D6818006C6B87 /* Sources */,
-				F80421A12A7D6818006C6B87 /* Frameworks */,
-				F80421A22A7D6818006C6B87 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F80421A62A7D6818006C6B87 /* PBXTargetDependency */,
-			);
-			name = STUDYHUB2Tests;
-			productName = STUDYHUB2Tests;
-			productReference = F80421A42A7D6818006C6B87 /* STUDYHUB2Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		F80421AD2A7D6818006C6B87 /* STUDYHUB2UITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F80421BE2A7D6818006C6B87 /* Build configuration list for PBXNativeTarget "STUDYHUB2UITests" */;
-			buildPhases = (
-				758E8DDF82C61A95D414E95D /* [CP] Check Pods Manifest.lock */,
-				F80421AA2A7D6818006C6B87 /* Sources */,
-				F80421AB2A7D6818006C6B87 /* Frameworks */,
-				F80421AC2A7D6818006C6B87 /* Resources */,
-				6D4C2E81E832B74BCE613BE4 /* [CP] Embed Pods Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F80421B02A7D6818006C6B87 /* PBXTargetDependency */,
-			);
-			name = STUDYHUB2UITests;
-			productName = STUDYHUB2UITests;
-			productReference = F80421AE2A7D6818006C6B87 /* STUDYHUB2UITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -515,14 +530,6 @@
 					F804218D2A7D6816006C6B87 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
-					F80421A32A7D6818006C6B87 = {
-						CreatedOnToolsVersion = 14.3.1;
-						TestTargetID = F804218D2A7D6816006C6B87;
-					};
-					F80421AD2A7D6818006C6B87 = {
-						CreatedOnToolsVersion = 14.3.1;
-						TestTargetID = F804218D2A7D6816006C6B87;
-					};
 				};
 			};
 			buildConfigurationList = F80421892A7D6816006C6B87 /* Build configuration list for PBXProject "STUDYHUB2" */;
@@ -534,13 +541,14 @@
 				Base,
 			);
 			mainGroup = F80421852A7D6816006C6B87;
+			packageReferences = (
+				EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = F804218F2A7D6816006C6B87 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				F804218D2A7D6816006C6B87 /* STUDYHUB2 */,
-				F80421A32A7D6818006C6B87 /* STUDYHUB2Tests */,
-				F80421AD2A7D6818006C6B87 /* STUDYHUB2UITests */,
 			);
 		};
 /* End PBXProject section */
@@ -565,20 +573,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F80421A22A7D6818006C6B87 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F80421AC2A7D6818006C6B87 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -598,67 +592,6 @@
 			);
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-STUDYHUB2-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4C148D8830B6434724138CF3 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-STUDYHUB2Tests-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		6D4C2E81E832B74BCE613BE4 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-STUDYHUB2-STUDYHUB2UITests/Pods-STUDYHUB2-STUDYHUB2UITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-STUDYHUB2-STUDYHUB2UITests/Pods-STUDYHUB2-STUDYHUB2UITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-STUDYHUB2-STUDYHUB2UITests/Pods-STUDYHUB2-STUDYHUB2UITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		758E8DDF82C61A95D414E95D /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-STUDYHUB2-STUDYHUB2UITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -689,16 +622,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE02B10C2B15FEEE0092082F /* MyPageViewController.swift in Sources */,
+				EE02B10E2B15FEEE0092082F /* MyPostInfoManager.swift in Sources */,
+				EE1E441D2B18666800223436 /* MyParticipateCell.swift in Sources */,
+				EE02B1112B15FEEE0092082F /* CheckParticipantsVC.swift in Sources */,
+				EE02B1122B15FEEE0092082F /* WaitCell.swift in Sources */,
+				EE02B1132B15FEEE0092082F /* RefuseBottomSheet.swift in Sources */,
+				EE02B1142B15FEEE0092082F /* WriteRefuseReasonVC.swift in Sources */,
+				EE02B1152B15FEEE0092082F /* RefusePersonCell.swift in Sources */,
+				EE02B1162B15FEEE0092082F /* ParticipateCell.swift in Sources */,
+				EE02B1172B15FEEE0092082F /* RefuseCell.swift in Sources */,
+				EEC05ED52B15FA0E001602AE /* InfoManager.swift in Sources */,
 				EE07ADD12AF632B80096890F /* Calendar.swift in Sources */,
 				F8085D442A81846C0067D4DE /* StudyViewController.swift in Sources */,
 				F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */,
 				EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */,
-				EE271F2E2ADA6D3700190E7A /* InfoManager.swift in Sources */,
+				EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */,
 				EE0A8B852B0A22F7001C3F41 /* PostDetailManager.swift in Sources */,
 				F873775B2AACD41D0055B041 /* BookmarkViewController.swift in Sources */,
+				EE35ED7B2B15F829008040E2 /* MyPageViewController.swift in Sources */,
 				EE271F1E2AD04BB300190E7A /* UserToken.swift in Sources */,
 				F80421CA2A7D9534006C6B87 /* PasswordViewController.swift in Sources */,
 				EE07ADC52AF2414C0096890F /* PopUpViewController.swift in Sources */,
+				EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */,
+				EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */,
 				EE07ADBD2AEFF7BD0096890F /* ConvertMajor.swift in Sources */,
 				EE271F242AD77C0E00190E7A /* LoginManager.swift in Sources */,
 				F80421922A7D6816006C6B87 /* AppDelegate.swift in Sources */,
@@ -710,12 +657,10 @@
 				EE271F2A2AD8B9FA00190E7A /* String+.swift in Sources */,
 				F88AB33F2A95236B001D619C /* CreatestudyViewController.swift in Sources */,
 				EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */,
-				EE0A8B6B2B07614C001C3F41 /* MyPostViewController.swift in Sources */,
-				EE0A8B702B0790D2001C3F41 /* MyPostInfoManager.swift in Sources */,
-				EE0A8B652AFDDA6E001C3F41 /* MyInformationViewController.swift in Sources */,
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,
 				EE07ADCD2AF26D360096890F /* DepartMentCell.swift in Sources */,
+				EE1E441B2B18641600223436 /* MyParticipataeStudyVC.swift in Sources */,
 				EE07ADB92AEFE6730096890F /* PostedStudyViewController.swift in Sources */,
 				EE0A8B5A2AF932FE001C3F41 /* RecruitCell.swift in Sources */,
 				EE271F262AD77CD100190E7A /* UIViewcontroller+.swift in Sources */,
@@ -723,6 +668,7 @@
 				F80421CC2A7D9BC3006C6B87 /* NicknameViewController.swift in Sources */,
 				EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */,
 				F86E031F2A8BBAE600164976 /* SearchViewController.swift in Sources */,
+				EE1E44112B17222200223436 /* MyPostCell.swift in Sources */,
 				EE0A8B5E2AF9B01C001C3F41 /* UILabel+.swift in Sources */,
 				F87377592AA850940055B041 /* DepartmentselectViewController.swift in Sources */,
 				EE07ADB52AEFC2B90096890F /* UITextField+.swift in Sources */,
@@ -731,44 +677,16 @@
 				F8085D412A815DCD0067D4DE /* HomeViewController.swift in Sources */,
 				F80421942A7D6816006C6B87 /* SceneDelegate.swift in Sources */,
 				EE271F1C2AD04ACE00190E7A /* TokenManager.swift in Sources */,
+				EE1E44162B172ACB00223436 /* MyPostViewController.swift in Sources */,
 				EE271F202AD0584100190E7A /* UIColor+.swift in Sources */,
 				EE07ADCF2AF325F80096890F /* UILabelPadding.swift in Sources */,
 				EE271F282AD7852900190E7A /* TapBar.swift in Sources */,
-				EE0A8B6E2B076B3F001C3F41 /* MyPostCell.swift in Sources */,
-				F8085D462A8184800067D4DE /* MyPageViewController.swift in Sources */,
 				EE0A8B5C2AF9330F001C3F41 /* DeadLineCell.swift in Sources */,
 				F8085D3E2A7E9E270067D4DE /* CompleteViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F80421A02A7D6818006C6B87 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F80421AA2A7D6818006C6B87 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		F80421A62A7D6818006C6B87 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F804218D2A7D6816006C6B87 /* STUDYHUB2 */;
-			targetProxy = F80421A52A7D6818006C6B87 /* PBXContainerItemProxy */;
-		};
-		F80421B02A7D6818006C6B87 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F804218D2A7D6816006C6B87 /* STUDYHUB2 */;
-			targetProxy = F80421AF2A7D6818006C6B87 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F80421972A7D6816006C6B87 /* Main.storyboard */ = {
@@ -920,7 +838,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -953,7 +871,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -967,86 +885,6 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		F80421BC2A7D6818006C6B87 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3B7F694AC03A7D0B3AD86F5E /* Pods-STUDYHUB2Tests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GFRHL8DMXA;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HYERYEONG.STUDYHUB2Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STUDYHUB2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/STUDYHUB2";
-			};
-			name = Debug;
-		};
-		F80421BD2A7D6818006C6B87 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = DCCACD447CB2D4D12DF49A45 /* Pods-STUDYHUB2Tests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GFRHL8DMXA;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HYERYEONG.STUDYHUB2Tests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/STUDYHUB2.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/STUDYHUB2";
-			};
-			name = Release;
-		};
-		F80421BF2A7D6818006C6B87 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 71A24E26719E78765C8CE193 /* Pods-STUDYHUB2-STUDYHUB2UITests.debug.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GFRHL8DMXA;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HYERYEONG.STUDYHUB2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = STUDYHUB2;
-			};
-			name = Debug;
-		};
-		F80421C02A7D6818006C6B87 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = EAB52A4B4B6D3895E3DD2852 /* Pods-STUDYHUB2-STUDYHUB2UITests.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = GFRHL8DMXA;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.HYERYEONG.STUDYHUB2UITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = STUDYHUB2;
 			};
 			name = Release;
 		};
@@ -1071,25 +909,18 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F80421BB2A7D6818006C6B87 /* Build configuration list for PBXNativeTarget "STUDYHUB2Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F80421BC2A7D6818006C6B87 /* Debug */,
-				F80421BD2A7D6818006C6B87 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F80421BE2A7D6818006C6B87 /* Build configuration list for PBXNativeTarget "STUDYHUB2UITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F80421BF2A7D6818006C6B87 /* Debug */,
-				F80421C02A7D6818006C6B87 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = F80421862A7D6816006C6B87 /* Project object */;
 }

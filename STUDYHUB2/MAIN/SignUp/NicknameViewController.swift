@@ -252,7 +252,7 @@ final class NicknameViewController: UIViewController {
         }
         
         // API 엔드포인트 URL과 쿼리 파라미터 준비
-        var urlComponents = URLComponents(string: "https://study-hub.site:443/api/users/duplication-nickname")!
+        var urlComponents = URLComponents(string: "https://study-hub.site:443/api/v1/users/duplication-nickname")!
         urlComponents.queryItems = [URLQueryItem(name: "nickname", value: nickname)]
         
         guard let url = urlComponents.url else {

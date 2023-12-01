@@ -8,8 +8,12 @@ final class PopupViewController: UIViewController {
   let myPostInfoManager = MyPostInfoManager.shared
   
   init(title: String, desc: String, postID: Int = 0,
-       bottomeSheet: BottomSheet? = nil, rightButtonTilte: String = "삭제") {
-    self.popupView = PopupView(title: title, desc: desc, rightButtonTitle: rightButtonTilte)
+       bottomeSheet: BottomSheet? = nil,
+       leftButtonTitle: String = "취소",
+       rightButtonTilte: String = "삭제") {
+    self.popupView = PopupView(title: title, desc: desc,
+                               leftButtonTitle: leftButtonTitle,
+                               rightButtonTitle: rightButtonTilte)
     super.init(nibName: nil, bundle: nil)
       
     self.view.backgroundColor = .lightGray.withAlphaComponent(0.8)

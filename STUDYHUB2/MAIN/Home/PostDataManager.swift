@@ -39,7 +39,7 @@ final class PostDataManager {
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/study-posts/find/all"
+    urlComponents.path = "/api/v1/study-posts/find/all"
     
     let queryItem1 = URLQueryItem(name: "page", value: "0")
     let queryItem2 = URLQueryItem(name: "size", value: "5")

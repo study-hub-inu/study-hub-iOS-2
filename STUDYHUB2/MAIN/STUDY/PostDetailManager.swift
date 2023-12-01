@@ -4,8 +4,6 @@
 //
 //  Created by 최용헌 on 2023/11/19.
 //
-
-
 import Foundation
 
 // MARK: - MyPostData
@@ -23,12 +21,13 @@ struct PostDetailData: Codable {
   let postedUser: PostedUser
   let relatedPost: [RelatedPost]
   let usersPost, bookmarked: Bool
-  
+  let chatUrl: String
+
   enum CodingKeys: String, CodingKey {
     case postID = "postId"
     case title, createdDate, content, major, studyPerson, filteredGender,
          studyWay, penalty, penaltyWay, studyStartDate, studyEndDate, remainingSeat,
-         postedUser, relatedPost, usersPost, bookmarked
+         postedUser, relatedPost, usersPost, bookmarked , chatUrl
   }
 }
 
@@ -63,7 +62,6 @@ struct RelatedPost: Codable {
 final class PostDetailInfoManager {
   static let shared = PostDetailInfoManager()
   private init() {}
-  
   typealias NetworkCompletion = (Result<PostDetailData, NetworkError>) -> Void
   
   // 네트워킹 요청하는 함수
@@ -72,7 +70,7 @@ final class PostDetailInfoManager {
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/study-posts/find/\(postID)"
+    urlComponents.path = "/api/v1/study-posts/\(postID)"
     
     guard let urlString = urlComponents.url?.absoluteString else {
       print("Invalid URL")
