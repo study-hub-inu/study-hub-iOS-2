@@ -119,11 +119,31 @@ final class PostDataManager {
     }.resume()
   }
   
-  // 사용자 데이터를 가져오는 메서드
-  func fetchUserData<T: Decodable>(type: String,
-                                   urlPath: String,
-                                   completion: @escaping NetworkCompletion<T>) {
-    fetchData(type: type, urlPath: urlPath, completion: completion)
+  // MARK: - new 모집 중인 스터디
+  private var newPostDatas: NewPostData?
+  
+  func getNewPostDatas() -> NewPostData? {
+    if let data = newPostDatas {
+      return data
+    } else {
+      // 처리할 값이 없는 경우에 대한 처리를 수행합니다.
+      return nil
+    }
+  }
+  
+  func getNewPostData(){
+    let postDataManager = PostDataManager.shared
+    
+    postDataManager.fetchData(type: "GET",
+                              urlPath: "/study-posts") { (result: Result<NewPostData,
+                                                          NetworkError>) in
+      switch result {
+      case .success(let postData):
+        self.newPostDatas = postData
+      case .failure(let error):
+        print("에러:", error)
+      }
+    }
   }
   
 }

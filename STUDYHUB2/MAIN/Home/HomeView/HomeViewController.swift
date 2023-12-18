@@ -4,6 +4,8 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: NaviHelper {
+  let postDataManager = PostDataManager.shared
+  
   var newPostData: [NewPostDataContent] = []
   
   // MARK: - 화면구성
@@ -147,7 +149,6 @@ final class HomeViewController: NaviHelper {
     setUpLayout()
     makeUI()
     
-    getNewPostData()
   }
   
   // MARK: - setuplayout
@@ -298,6 +299,7 @@ final class HomeViewController: NaviHelper {
     
     deadLineCollectionView.delegate = self
     deadLineCollectionView.dataSource = self
+    
   }
   
   private func registerCell() {
@@ -306,25 +308,6 @@ final class HomeViewController: NaviHelper {
     
     deadLineCollectionView.register(DeadLineCell.self,
                                     forCellWithReuseIdentifier: DeadLineCell.id)
-  }
-  
-  // MARK: - newPostData 가져오기
-  func getNewPostData(){
-    let postDataManager = PostDataManager.shared
-    
-    postDataManager.fetchUserData(type: "GET",
-                                  urlPath: "/study-posts") { (result: Result<NewPostData,
-                                                              NetworkError>) in
-      switch result {
-      case .success(let postData):
-        postData.content.map { data in
-          print(data)
-        }
-        self.newPostData = postData.content
-      case .failure(let error):
-        print("에러:", error)
-      }
-    }
   }
 }
 
@@ -370,9 +353,12 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     if collectionView.tag == 1 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecruitPostCell.id,
                                                     for: indexPath)
+      postDataManager.getNewPostData()
+      let newPostDatas = postDataManager.getNewPostDatas()
+      print(newPostDatas)
       if let cell = cell as? RecruitPostCell {
-        cell.model = newPostData
-      
+        let content = newPostDatas?.content[indexPath.row]
+        cell.model = content
       }
       return cell
       

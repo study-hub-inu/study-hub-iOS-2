@@ -7,7 +7,7 @@ final class RecruitPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: [NewPostDataContent] = [] { didSet { bind() } }
+  var model: NewPostDataContent? { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -46,7 +46,7 @@ final class RecruitPostCell: UICollectionViewCell {
     label.text = "/14"
     return label
   }()
-
+  
   private lazy var fineImageView = UIImageView(image:  UIImage(named: "MoneyImage"))
   
   private lazy var fineCountLabel: UILabel = {
@@ -66,13 +66,13 @@ final class RecruitPostCell: UICollectionViewCell {
     return label
   }()
   
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     setViewShadow(backView: self)
     addSubviews()
-  
+    
     configure()
   }
   
@@ -149,14 +149,26 @@ final class RecruitPostCell: UICollectionViewCell {
   }
   
   private func bind() {
-    for data in model {
-      majorLabel.text = data.major.convertMajor(data.major, isEnglish: false)
-      titleLabel.text = data.title
-      remainMemeber.text = "  잔여 \(data.remainingSeat)자리  "
-      countMemeberLabel.text = "\(data.studyPerson - data.remainingSeat) / \(data.studyPerson)"
-      fineCountLabel.text = String(data.penalty)
-      
-    }
+    guard let data = model else { return }
+    
+    var studyPersonCount = data.studyPerson - data.remainingSeat
+    
+    majorLabel.text = data.major.convertMajor(data.major, isEnglish: false)
+    titleLabel.text = data.title
+    remainMemeber.text = "  잔여 \(data.remainingSeat)자리  "
+    countMemeberLabel.text = "\(studyPersonCount) / \(data.studyPerson)"
+    fineCountLabel.text = String(data.penalty)
+    
+    
+    countMemeberLabel.changeColor(label: countMemeberLabel,
+                                  wantToChange: "\(studyPersonCount)",
+                                  color: .o50)
+    fineCountLabel.changeColor(label: fineCountLabel,
+                               wantToChange: "\(data.penalty)",
+                               color: .o50)
+    
   }
+  
 }
+
 
