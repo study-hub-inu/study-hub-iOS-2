@@ -7,21 +7,36 @@
 
 import Foundation
 
-// MARK: - PostData
-struct PostData: Codable {
-  let content: [Content]
+// MARK: - MyPostData
+struct NewPostData: Codable {
+  let content: [NewPostDataContent]
 }
 
 // MARK: - Content
-struct Content: Codable {
+struct NewPostDataContent: Codable {
   let postID: Int
-  let major, title, content: String
-  let leftover: Int, studyPerson: Int
+  let major, title: String
+  let studyPerson: Int
+  let penalty: Int
+  let remainingSeat: Int
   let close: Bool
+  let userData: NewPostUserData
+  let bookmarked: Bool
   
   enum CodingKeys: String, CodingKey {
     case postID = "postId"
-    case major, title, content, leftover, studyPerson, close
+    case major, title, studyPerson, penalty, remainingSeat, close, userData, bookmarked
+  }
+}
+
+// MARK: - UserData
+struct NewPostUserData: Codable {
+  let userID: Int
+  let major: String
+  
+  enum CodingKeys: String, CodingKey {
+    case userID = "userId"
+    case major
   }
 }
 
@@ -31,40 +46,53 @@ final class PostDataManager {
   static let shared = PostDataManager()
   private init() {}
   
-  typealias NetworkCompletion = (Result<PostData, NetworkError>) -> Void
+  typealias NetworkCompletion<T: Decodable> = (Result<T, NetworkError>) -> Void
   
-  // 네트워킹 요청하는 함수
-  func fetchUser(completion: @escaping NetworkCompletion) {
+  // 네트워킹 요청을 생성하는 메서드
+  private func createRequest(url: URL, method: String) -> URLRequest {
+    var request = URLRequest(url: url)
+    request.httpMethod = method
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    return request
+  }
+  
+  // API 응답을 디코딩하는 메서드
+  private func decodeResponse<T: Decodable>(data: Data, completion: NetworkCompletion<T>) {
+    do {
+      let decoder = JSONDecoder()
+      let responseData = try decoder.decode(T.self, from: data)
+      completion(.success(responseData))
+    } catch {
+      print("JSON Parsing Error:", error)
+      completion(.failure(.parseError))
+    }
+  }
+  
+  // 네트워킹 요청하는 메서드
+  private func fetchData<T: Decodable>(type: String,
+                                       urlPath: String,
+                                       completion: @escaping NetworkCompletion<T>) {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/v1/study-posts/find/all"
+    urlComponents.path = "/api/v1" + urlPath
     
-    let queryItem1 = URLQueryItem(name: "page", value: "0")
-    let queryItem2 = URLQueryItem(name: "size", value: "5")
+    let queryItem1 = URLQueryItem(name:"hot", value: "false")
+    let queryItem2 = URLQueryItem(name: "page", value: "0")
+    let queryItem3 = URLQueryItem(name: "size", value: "5")
+    let queryItem4 = URLQueryItem(name: "titleAndMajor", value: "true")
     
-    urlComponents.queryItems = [queryItem1, queryItem2]
+    urlComponents.queryItems = [queryItem1, queryItem2, queryItem3, queryItem4]
     
-    guard let urlString = urlComponents.url?.absoluteString else {
+    guard let url = urlComponents.url else {
       print("Invalid URL")
       completion(.failure(.networkingError))
       return
     }
     
-    getMethod(with: urlString, completion: completion)
-  }
-  
-  private func getMethod(with urlString: String, completion: @escaping NetworkCompletion) {
-    guard let url = URL(string: urlString) else {
-      print("Invalid URL")
-      completion(.failure(.networkingError))
-      return
-    }
-    var request = URLRequest(url: url)
-    request.httpMethod = "GET"
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("application/json", forHTTPHeaderField: "Accept")
+    let request = createRequest(url: url, method: type)
     
     URLSession.shared.dataTask(with: request) { data, response, error in
       if let error = error {
@@ -87,15 +115,15 @@ final class PostDataManager {
       
       print("Response Status Code:", httpResponse.statusCode)
       
-      do {
-        let decoder = JSONDecoder()
-        let userData = try decoder.decode(PostData.self, from: safeData)
-        completion(.success(userData))
-      } catch {
-        print("JSON Parsing Error:", error)
-        completion(.failure(.parseError))
-      }
+      self.decodeResponse(data: safeData, completion: completion)
     }.resume()
   }
+  
+  // 사용자 데이터를 가져오는 메서드
+  func fetchUserData<T: Decodable>(type: String,
+                                   urlPath: String,
+                                   completion: @escaping NetworkCompletion<T>) {
+    fetchData(type: type, urlPath: urlPath, completion: completion)
+  }
+  
 }
-

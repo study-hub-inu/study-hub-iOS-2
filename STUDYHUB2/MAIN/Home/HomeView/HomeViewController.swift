@@ -4,8 +4,8 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: NaviHelper {
-  var newPostData: [Content] = []
-
+  var newPostData: [NewPostDataContent] = []
+  
   // MARK: - 화면구성
   private lazy var mainStackView = createStackView(axis: .vertical,
                                                    spacing: 10)
@@ -147,7 +147,7 @@ final class HomeViewController: NaviHelper {
     setUpLayout()
     makeUI()
     
-//    getNewPostData()
+    getNewPostData()
   }
   
   // MARK: - setuplayout
@@ -286,7 +286,7 @@ final class HomeViewController: NaviHelper {
     }
   }
   
-
+  
   private func setupDelegate() {
     recrutingCollectionView.tag = 1
     deadLineCollectionView.tag = 2
@@ -312,31 +312,17 @@ final class HomeViewController: NaviHelper {
   func getNewPostData(){
     let postDataManager = PostDataManager.shared
     
-    postDataManager.fetchUser { result in
+    postDataManager.fetchUserData(type: "GET",
+                                  urlPath: "/study-posts") { (result: Result<NewPostData,
+                                                              NetworkError>) in
       switch result {
-      case .success(let posData):
-        let extractedData = posData.content.map { content in
-          return Content(
-            postID: content.postID,
-            major: content.major,
-            title: content.title,
-            content: content.content,
-            leftover: content.leftover,
-            studyPerson: content.studyPerson,
-            close: content.close
-          )
+      case .success(let postData):
+        postData.content.map { data in
+          print(data)
         }
-        self.newPostData = extractedData
-   
+        self.newPostData = postData.content
       case .failure(let error):
-        switch error {
-        case .networkingError:
-          print("네트워크 에러")
-        case .dataError:
-          print("데이터 에러")
-        case .parseError:
-          print("파싱 에러")
-        }
+        print("에러:", error)
       }
     }
   }

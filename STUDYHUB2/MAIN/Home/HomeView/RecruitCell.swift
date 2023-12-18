@@ -7,7 +7,7 @@ final class RecruitPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: [Content] = [] { didSet { bind() } }
+  var model: [NewPostDataContent] = [] { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -26,7 +26,8 @@ final class RecruitPostCell: UICollectionViewCell {
   
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
-    
+    label.font = UIFont(name: "Pretendard", size: 14)
+    label.textColor = .black
     return label
   }()
   
@@ -39,7 +40,6 @@ final class RecruitPostCell: UICollectionViewCell {
     return imageView
   }()
   
-  var countMember = 0
   private lazy var countMemeberLabel: UILabel = {
     let label = UILabel()
     label.textColor = .bg90
@@ -150,12 +150,13 @@ final class RecruitPostCell: UICollectionViewCell {
   
   private func bind() {
     for data in model {
-      majorLabel.text = data.title.convertMajor(data.title, isEnglish: false)
+      majorLabel.text = data.major.convertMajor(data.major, isEnglish: false)
       titleLabel.text = data.title
-//      countMemeberLabel
+      remainMemeber.text = "  잔여 \(data.remainingSeat)자리  "
+      countMemeberLabel.text = "\(data.studyPerson - data.remainingSeat) / \(data.studyPerson)"
+      fineCountLabel.text = String(data.penalty)
+      
     }
-    
   }
-  
 }
 
