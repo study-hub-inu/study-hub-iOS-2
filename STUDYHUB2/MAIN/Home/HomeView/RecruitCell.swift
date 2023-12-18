@@ -157,7 +157,7 @@ final class RecruitPostCell: UICollectionViewCell {
     titleLabel.text = data.title
     remainMemeber.text = "  잔여 \(data.remainingSeat)자리  "
     countMemeberLabel.text = "\(studyPersonCount) / \(data.studyPerson)"
-    fineCountLabel.text = String(data.penalty)
+    fineCountLabel.text = "\(data.penalty) 원"
     
     
     countMemeberLabel.changeColor(label: countMemeberLabel,

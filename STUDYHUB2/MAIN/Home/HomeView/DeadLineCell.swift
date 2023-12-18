@@ -5,7 +5,7 @@ import SnapKit
 
 final class DeadLineCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
-
+  var model: NewPostDataContent? { didSet { bind() } }
   var buttonAction: (() -> Void) = {}
   
   private lazy var profileImageView: UIImageView = {
@@ -34,7 +34,7 @@ final class DeadLineCell: UICollectionViewCell {
   
   private lazy var countLabel: UILabel = {
     let label = UILabel()
-    label.text = "29/39명"
+    label.text = "29/30명"
     label.textColor = .bg90
     label.changeColor(label: label, wantToChange: "29", color: .changeInfo)
     return label
@@ -110,7 +110,21 @@ final class DeadLineCell: UICollectionViewCell {
     self.layer.borderColor = UIColor.cellShadow.cgColor
     self.layer.cornerRadius = 10
   }
-
+  
+  private func bind() {
+    guard let data = model else { return }
+    
+    var studyPersonCount = data.studyPerson - data.remainingSeat
+    
+    titleLabel.text = data.title
+    
+    countLabel.text = "\(studyPersonCount) / \(data.studyPerson)"
+    countLabel.changeColor(label: countLabel,
+                           wantToChange: "\(studyPersonCount)",
+                           color: .o50)
+    
+    remainLabel.text = "\(data.remainingSeat)자리 남았어요!"
+  }
 }
 
 

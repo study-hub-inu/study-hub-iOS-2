@@ -7,7 +7,7 @@
 
 import Foundation
 
-// MARK: - MyPostData
+// MARK: - newPost 구조체
 struct NewPostData: Codable {
   let content: [NewPostDataContent]
 }
@@ -29,7 +29,6 @@ struct NewPostDataContent: Codable {
   }
 }
 
-// MARK: - UserData
 struct NewPostUserData: Codable {
   let userID: Int
   let major: String
@@ -72,6 +71,8 @@ final class PostDataManager {
   // 네트워킹 요청하는 메서드
   private func fetchData<T: Decodable>(type: String,
                                        urlPath: String,
+                                       hotType: String,
+                                       titleAndMajor: String,
                                        completion: @escaping NetworkCompletion<T>) {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
@@ -79,10 +80,10 @@ final class PostDataManager {
     urlComponents.port = 443
     urlComponents.path = "/api/v1" + urlPath
     
-    let queryItem1 = URLQueryItem(name:"hot", value: "false")
+    let queryItem1 = URLQueryItem(name:"hot", value: hotType)
     let queryItem2 = URLQueryItem(name: "page", value: "0")
     let queryItem3 = URLQueryItem(name: "size", value: "5")
-    let queryItem4 = URLQueryItem(name: "titleAndMajor", value: "true")
+    let queryItem4 = URLQueryItem(name: "titleAndMajor", value: titleAndMajor)
     
     urlComponents.queryItems = [queryItem1, queryItem2, queryItem3, queryItem4]
     
@@ -131,19 +132,46 @@ final class PostDataManager {
     }
   }
   
-  func getNewPostData(){
-    let postDataManager = PostDataManager.shared
-    
-    postDataManager.fetchData(type: "GET",
-                              urlPath: "/study-posts") { (result: Result<NewPostData,
-                                                          NetworkError>) in
+  func getNewPostData(completion: @escaping() -> Void){
+   fetchData(type: "GET",
+             urlPath: "/study-posts",
+             hotType: "true",
+             titleAndMajor: "false") { (result: Result<NewPostData,
+                                        NetworkError>) in
       switch result {
       case .success(let postData):
         self.newPostDatas = postData
+        completion()
       case .failure(let error):
         print("에러:", error)
       }
     }
   }
   
+  // MARK: - 마감이 임박한 스터디
+  private var deadlinePostDatas: NewPostData?
+  
+  func getDeadLinePostDatas() -> NewPostData? {
+    if let data = newPostDatas {
+      return data
+    } else {
+      return nil
+    }
+  }
+  
+  func getDeadLinePostData(completion: @escaping() -> Void){
+     fetchData(type: "GET",
+               urlPath: "/study-posts",
+               hotType: "true",
+               titleAndMajor: "true") { (result: Result<NewPostData,
+                                          NetworkError>) in
+        switch result {
+        case .success(let postData):
+          self.newPostDatas = postData
+          completion()
+        case .failure(let error):
+          print("에러:", error)
+        }
+      }
+    }
 }
