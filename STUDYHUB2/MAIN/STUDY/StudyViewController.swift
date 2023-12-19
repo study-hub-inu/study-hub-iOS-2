@@ -35,7 +35,7 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  var studyCount = 2
+  private lazy var studyCount = recentDatas?.numberOfElements
   private lazy var countLabel = createLabel(title: "\(studyCount)개",
                                             textColor: .bg80,
                                             fontSize: 14)
@@ -93,7 +93,7 @@ final class StudyViewController: NaviHelper {
     
     postDataManager.getRecentPostDatas {
       self.recentDatas = self.postDataManager.getRecentPostDatas()
-//      print(self.recentDatas)
+      print(self.recentDatas)
       DispatchQueue.main.async {
         self.setupLayout()
         self.makeUI()
@@ -103,7 +103,7 @@ final class StudyViewController: NaviHelper {
   
   // MARK: - setupLayout
   func setupLayout(){
-    if studyCount > 0 {
+    if studyCount ?? 0 > 0 {
       [
         recentButton,
         separateLine,
@@ -172,7 +172,7 @@ final class StudyViewController: NaviHelper {
       make.leading.trailing.equalToSuperview()
     }
     
-    if studyCount > 0 {
+    if studyCount ?? 0 > 0 {
       resultCollectionView.snp.makeConstraints { make in
         make.top.equalTo(contentView).offset(20)
         make.leading.trailing.equalTo(contentView)
@@ -283,7 +283,8 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 4
+    studyCount = recentDatas?.content.count ?? 0
+    return studyCount ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -302,7 +303,6 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     if let cell = cell as? SearchResultCell {
       let content = recentDatas?.content[indexPath.row]
       cell.model = content
-    
     }
     return cell
   }

@@ -204,8 +204,6 @@ final class PostDataManager {
               numOfResult: "1") { [weak self] (result: Result<PostData, NetworkError>) in
       switch result {
       case .success(let postData):
-        self?.newPostDatas = postData
-        
         // 추가 데이터 조회를 위한 변수
         var currentPage = 1
         
@@ -213,6 +211,7 @@ final class PostDataManager {
           // 추가 데이터 조회
           self?.fetchAdditionalData(currentPage: currentPage + 1, completion: completion)
         } else {
+          self?.newPostDatas = postData
           completion()
         }
       case .failure(let error):
@@ -229,13 +228,20 @@ final class PostDataManager {
               numOfResult: "\(currentPage)") { [weak self] (result: Result<PostData, NetworkError>) in
       switch result {
       case .success(let postData):
-        // 추가 데이터를 현재 데이터에 추가
-        self?.newPostDatas?.content.append(contentsOf: postData.content)
-        
         if postData.last == false {
           // 추가 데이터 조회
           self?.fetchAdditionalData(currentPage: currentPage + 1, completion: completion)
         } else {
+          // 중복된 데이터 필터링
+          let newContent = postData.content.filter { post -> Bool in
+            if let existingContent = self?.newPostDatas?.content {
+              return !existingContent.contains { $0.postID == post.postID }
+            }
+            return true
+          }
+
+          // 중복을 제거한 데이터를 추가
+          self?.newPostDatas?.content.append(contentsOf: newContent)
           completion()
         }
       case .failure(let error):
@@ -243,5 +249,6 @@ final class PostDataManager {
       }
     }
   }
+  
   
 }
