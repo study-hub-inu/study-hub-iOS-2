@@ -7,7 +7,7 @@ final class SearchResultCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: String? { didSet { bind() } }
+  var model: PostDataContent? { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -115,8 +115,8 @@ final class SearchResultCell: UICollectionViewCell {
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 15
-    imageView.image = UIImage(named: "ProfileAvatar_small")
-    imageView.contentMode = .left
+    imageView.image = UIImage(named: "ProfileAvatar_change")
+    imageView.contentMode = .scaleAspectFit
     return imageView
   }()
   
@@ -245,15 +245,16 @@ final class SearchResultCell: UICollectionViewCell {
     profileImageView.snp.makeConstraints { make in
       make.top.equalTo(infoStackView.snp.bottom).offset(20)
       make.leading.equalTo(majorLabel)
+      make.height.width.equalTo(34)
     }
     
     nickNameLabel.snp.makeConstraints { make in
-      make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+      make.leading.equalTo(profileImageView.snp.trailing).offset(20)
       make.top.equalTo(profileImageView.snp.top)
     }
     
     postedDate.snp.makeConstraints { make in
-      make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+      make.leading.equalTo(profileImageView.snp.trailing).offset(20)
       make.top.equalTo(nickNameLabel.snp.bottom)
     }
     
@@ -265,7 +266,18 @@ final class SearchResultCell: UICollectionViewCell {
   }
   
   private func bind() {
-    titleLabel.text = model
+//    titleLabel.text = model
+    guard let data = model else { return }
+    
+    majorLabel.text = " \(data.major.convertMajor(data.major, isEnglish: false)) "
+    titleLabel.text = data.title
+    periodLabel.text = "\(data.studyStartDate[1])월 \(data.studyStartDate[2])일 ~\(data.studyEndDate[1])월 \(data.studyEndDate[2])일 "
+    remainLabel.text = "\(data.remainingSeat)자리 남았어요"
+    memberCountLabel.text = "\(data.studyPerson - data.remainingSeat) / \(data.studyPerson)"
+    fineLabel.text = "\(data.penalty)원"
+    genderLabel.text = "  \(data.filteredGender)  "
+    nickNameLabel.text = data.userData.nickname
+    postedDate.text = "\(data.createdDate[0]).\(data.createdDate[1]).\(data.createdDate[2])"
   }
   
 }

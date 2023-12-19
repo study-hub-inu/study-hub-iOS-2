@@ -7,7 +7,7 @@ final class RecruitPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: NewPostDataContent? { didSet { bind() } }
+  var model: PostDataContent? { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()

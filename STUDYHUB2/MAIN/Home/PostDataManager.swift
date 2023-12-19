@@ -8,34 +8,41 @@
 import Foundation
 
 // MARK: - newPost 구조체
-struct NewPostData: Codable {
-  let content: [NewPostDataContent]
+struct PostData: Codable {
+  var content: [PostDataContent]
+  let last: Bool
+  let numberOfElements: Int
 }
 
 // MARK: - Content
-struct NewPostDataContent: Codable {
+struct PostDataContent: Codable {
   let postID: Int
   let major, title: String
+  let studyStartDate, studyEndDate, createdDate: [Int]
+  let filteredGender: String
   let studyPerson: Int
   let penalty: Int
   let remainingSeat: Int
   let close: Bool
-  let userData: NewPostUserData
+  let userData: PostUserData
   let bookmarked: Bool
   
   enum CodingKeys: String, CodingKey {
     case postID = "postId"
-    case major, title, studyPerson, penalty, remainingSeat, close, userData, bookmarked
+    case major, title, studyPerson, penalty, remainingSeat, close, userData, bookmarked,
+         studyStartDate, studyEndDate,createdDate, filteredGender
   }
 }
 
-struct NewPostUserData: Codable {
+struct PostUserData: Codable {
   let userID: Int
-  let major: String
+  let major, nickname: String
+  let imageURL: String
   
   enum CodingKeys: String, CodingKey {
     case userID = "userId"
-    case major
+    case major, nickname
+    case imageURL = "imageUrl"
   }
 }
 
@@ -73,6 +80,7 @@ final class PostDataManager {
                                        urlPath: String,
                                        hotType: String,
                                        titleAndMajor: String,
+                                       numOfResult: String,
                                        completion: @escaping NetworkCompletion<T>) {
     var urlComponents = URLComponents()
     urlComponents.scheme = "https"
@@ -82,7 +90,7 @@ final class PostDataManager {
     
     let queryItem1 = URLQueryItem(name:"hot", value: hotType)
     let queryItem2 = URLQueryItem(name: "page", value: "0")
-    let queryItem3 = URLQueryItem(name: "size", value: "5")
+    let queryItem3 = URLQueryItem(name: "size", value: numOfResult)
     let queryItem4 = URLQueryItem(name: "titleAndMajor", value: titleAndMajor)
     
     urlComponents.queryItems = [queryItem1, queryItem2, queryItem3, queryItem4]
@@ -121,9 +129,9 @@ final class PostDataManager {
   }
   
   // MARK: - new 모집 중인 스터디
-  private var newPostDatas: NewPostData?
+  private var newPostDatas: PostData?
   
-  func getNewPostDatas() -> NewPostData? {
+  func getNewPostDatas() -> PostData? {
     if let data = newPostDatas {
       return data
     } else {
@@ -133,11 +141,12 @@ final class PostDataManager {
   }
   
   func getNewPostData(completion: @escaping() -> Void){
-   fetchData(type: "GET",
-             urlPath: "/study-posts",
-             hotType: "true",
-             titleAndMajor: "false") { (result: Result<NewPostData,
-                                        NetworkError>) in
+    fetchData(type: "GET",
+              urlPath: "/study-posts",
+              hotType: "false",
+              titleAndMajor: "false",
+              numOfResult: "5") { (result: Result<PostData,
+                                   NetworkError>) in
       switch result {
       case .success(let postData):
         self.newPostDatas = postData
@@ -149,9 +158,9 @@ final class PostDataManager {
   }
   
   // MARK: - 마감이 임박한 스터디
-  private var deadlinePostDatas: NewPostData?
+  private var deadlinePostDatas: PostData?
   
-  func getDeadLinePostDatas() -> NewPostData? {
+  func getDeadLinePostDatas() -> PostData? {
     if let data = newPostDatas {
       return data
     } else {
@@ -160,18 +169,79 @@ final class PostDataManager {
   }
   
   func getDeadLinePostData(completion: @escaping() -> Void){
-     fetchData(type: "GET",
-               urlPath: "/study-posts",
-               hotType: "true",
-               titleAndMajor: "true") { (result: Result<NewPostData,
-                                          NetworkError>) in
-        switch result {
-        case .success(let postData):
-          self.newPostDatas = postData
-          completion()
-        case .failure(let error):
-          print("에러:", error)
-        }
+    fetchData(type: "GET",
+              urlPath: "/study-posts",
+              hotType: "true",
+              titleAndMajor: "true",
+              numOfResult: "4") { (result: Result<PostData,
+                                   NetworkError>) in
+      switch result {
+      case .success(let postData):
+        self.newPostDatas = postData
+        completion()
+      case .failure(let error):
+        print("에러:", error)
       }
     }
+  }
+  
+  // MARK: - 스터디 최신순 전체조회
+  private var recentPostDatas: PostData?
+  
+  func getRecentPostDatas() -> PostData? {
+    if let data = newPostDatas {
+      return data
+    } else {
+      return nil
+    }
+  }
+  
+  func getRecentPostDatas(completion: @escaping () -> Void) {
+    fetchData(type: "GET",
+              urlPath: "/study-posts",
+              hotType: "false",
+              titleAndMajor: "false",
+              numOfResult: "1") { [weak self] (result: Result<PostData, NetworkError>) in
+      switch result {
+      case .success(let postData):
+        self?.newPostDatas = postData
+        
+        // 추가 데이터 조회를 위한 변수
+        var currentPage = 1
+        
+        if postData.last == false {
+          // 추가 데이터 조회
+          self?.fetchAdditionalData(currentPage: currentPage + 1, completion: completion)
+        } else {
+          completion()
+        }
+      case .failure(let error):
+        print("에러:", error)
+      }
+    }
+  }
+  
+  func fetchAdditionalData(currentPage: Int, completion: @escaping () -> Void) {
+    fetchData(type: "GET",
+              urlPath: "/study-posts",
+              hotType: "false",
+              titleAndMajor: "false",
+              numOfResult: "\(currentPage)") { [weak self] (result: Result<PostData, NetworkError>) in
+      switch result {
+      case .success(let postData):
+        // 추가 데이터를 현재 데이터에 추가
+        self?.newPostDatas?.content.append(contentsOf: postData.content)
+        
+        if postData.last == false {
+          // 추가 데이터 조회
+          self?.fetchAdditionalData(currentPage: currentPage + 1, completion: completion)
+        } else {
+          completion()
+        }
+      case .failure(let error):
+        print("에러:", error)
+      }
+    }
+  }
+  
 }

@@ -4,11 +4,17 @@ import SnapKit
 
 // searchResultCell이랑 같은 형식 , collectionview랑 추가버튼 같이 뜨게 수정해야함
 final class StudyViewController: NaviHelper {
+  
+  let postDataManager = PostDataManager.shared
+  var recentDatas: PostData?
+  
   private lazy var recentButton: UIButton = {
     let button = UIButton()
-    button.setTitle("최신순", for: .normal)
-    button.setTitleColor(.black, for: .normal)
-    button.titleLabel?.font = .systemFont(ofSize: 16)
+    button.setTitle("   전체   ", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
+    button.backgroundColor = .black
+    button.layer.cornerRadius = 18
     button.frame = CGRect(x: 0, y: 0, width: 57, height: 30)
     button.addTarget(self, action: #selector(recentButtonTapped), for: .touchUpInside)
     
@@ -19,9 +25,10 @@ final class StudyViewController: NaviHelper {
   
   private lazy var popularButton: UIButton = {
     let button = UIButton()
-    button.setTitle("인기순", for: .normal)
-    button.setTitleColor(.bg70, for: .normal)
-    button.titleLabel?.font = .systemFont(ofSize: 16)
+    button.setTitle("   인기   ", for: .normal)
+    button.setTitleColor(.bg90, for: .normal)
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
+    button.layer.cornerRadius = 18
     button.frame = CGRect(x: 0, y: 0, width: 57, height: 30)
     button.addTarget(self, action: #selector(popularButtonTapped), for: .touchUpInside)
     
@@ -82,10 +89,16 @@ final class StudyViewController: NaviHelper {
     redesignNavigationbar()
     
     setupCollectionView()
+   
     
-    setupLayout()
-    makeUI()
-    
+    postDataManager.getRecentPostDatas {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+//      print(self.recentDatas)
+      DispatchQueue.main.async {
+        self.setupLayout()
+        self.makeUI()
+      }
+    }
   }
   
   // MARK: - setupLayout
@@ -247,15 +260,21 @@ final class StudyViewController: NaviHelper {
   
   @objc func recentButtonTapped(){
     print("1")
-    recentButton.setTitleColor(.black, for: .normal)
-    popularButton.setTitleColor(.bg70, for: .normal)
+
+    popularButton.setTitleColor(.bg90, for: .normal)
+    popularButton.backgroundColor = .bg30
     
+    recentButton.setTitleColor(.white, for: .normal)
+    recentButton.backgroundColor = .black
   }
   
   @objc func popularButtonTapped(){
     print("2")
-    recentButton.setTitleColor(.bg70, for: .normal)
-    popularButton.setTitleColor(.black, for: .normal)
+    recentButton.setTitleColor(.bg90, for: .normal)
+    recentButton.backgroundColor = .bg30
+    
+    popularButton.setTitleColor(.white, for: .normal)
+    popularButton.backgroundColor = .black
   }
 }
 
@@ -280,6 +299,11 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id,
                                                   for: indexPath)
+    if let cell = cell as? SearchResultCell {
+      let content = recentDatas?.content[indexPath.row]
+      cell.model = content
+    
+    }
     return cell
   }
 }
