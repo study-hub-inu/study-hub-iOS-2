@@ -207,8 +207,6 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     })
   }
 
-
-  
   // MARK: - 성별 to 한글
   func convertGender(gender: String) -> String {
     if gender == "FEMALE" {

@@ -269,16 +269,23 @@ final class SearchResultCell: UICollectionViewCell {
 //    titleLabel.text = model
     guard let data = model else { return }
     
+    var countMember = data.studyPerson - data.remainingSeat
     majorLabel.text = " \(data.major.convertMajor(data.major, isEnglish: false)) "
     titleLabel.text = data.title
     periodLabel.text = "\(data.studyStartDate[1])월 \(data.studyStartDate[2])일 ~\(data.studyEndDate[1])월 \(data.studyEndDate[2])일 "
+    
     remainLabel.text = "\(data.remainingSeat)자리 남았어요"
-    memberCountLabel.text = "\(data.studyPerson - data.remainingSeat) / \(data.studyPerson)"
+    countMemeberLabel.text = "\(countMember) / \(data.studyPerson)"
+    countMemeberLabel.changeColor(label: countMemeberLabel,
+                                  wantToChange: "\(countMember)",
+                                  color: .o50)
+    
     fineLabel.text = "\(data.penalty)원"
+    
     genderLabel.text = "  \(data.filteredGender)  "
+    
     nickNameLabel.text = data.userData.nickname
     postedDate.text = "\(data.createdDate[0]).\(data.createdDate[1]).\(data.createdDate[2])"
   }
-  
 }
 

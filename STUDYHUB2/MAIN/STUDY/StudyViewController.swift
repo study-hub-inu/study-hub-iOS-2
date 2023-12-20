@@ -35,8 +35,8 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  private lazy var studyCount = recentDatas?.numberOfElements
-  private lazy var countLabel = createLabel(title: "\(studyCount)개",
+  private lazy var studyCount = recentDatas?.content.count
+  private lazy var countLabel = createLabel(title: "\(studyCount ?? 0)개",
                                             textColor: .bg80,
                                             fontSize: 14)
   
@@ -81,20 +81,26 @@ final class StudyViewController: NaviHelper {
     return addButton
   }()
   
+  // 네트워킹 불러올 때
+  private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    
+    waitingNetworking()
     
     navigationItemSetting()
     redesignNavigationbar()
     
     setupCollectionView()
    
-    
     postDataManager.getRecentPostDatas {
       self.recentDatas = self.postDataManager.getRecentPostDatas()
-      print(self.recentDatas)
       DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        
         self.setupLayout()
         self.makeUI()
       }
@@ -275,6 +281,17 @@ final class StudyViewController: NaviHelper {
     
     popularButton.setTitleColor(.white, for: .normal)
     popularButton.backgroundColor = .black
+  }
+  
+  // MARK: - 네트워킹 기다릴 때
+  func waitingNetworking(){
+    view.addSubview(activityIndicator)
+    
+    activityIndicator.snp.makeConstraints {
+      $0.centerX.centerY.equalToSuperview()
+    }
+    
+    activityIndicator.startAnimating()
   }
 }
 
