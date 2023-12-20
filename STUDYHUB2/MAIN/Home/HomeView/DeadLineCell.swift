@@ -11,6 +11,9 @@ final class DeadLineCell: UICollectionViewCell {
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "ProfileAvatar")
+    imageView.layer.cornerRadius = 48
+    imageView.clipsToBounds = true
+    
     return imageView
   }()
   
@@ -77,8 +80,9 @@ final class DeadLineCell: UICollectionViewCell {
     profileImageView.snp.makeConstraints { make in
       make.leading.equalToSuperview().offset(10)
       make.centerY.equalToSuperview()
+      make.height.width.equalTo(48)
     }
-    
+   
     titleLabel.snp.makeConstraints { make in
       make.top.equalToSuperview().offset(20)
       make.leading.equalTo(profileImageView.snp.trailing).offset(10)
@@ -124,6 +128,24 @@ final class DeadLineCell: UICollectionViewCell {
                            color: .o50)
     
     remainLabel.text = "\(data.remainingSeat)자리 남았어요!"
+    
+    if let url = URL(string: data.userData.imageURL) {
+      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if let error = error {
+          print("Error: \(error)")
+        } else if let data = data {
+          let image = UIImage(data: data)
+          DispatchQueue.main.async {
+            // 다운로드한 이미지를 이미지 뷰에 설정합니다.
+            self.profileImageView.layer.cornerRadius = 15
+            self.profileImageView.image = image
+          }
+        }
+      }
+      
+      task.resume()
+    }
+    
   }
 }
 

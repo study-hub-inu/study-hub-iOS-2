@@ -6,6 +6,7 @@ import SnapKit
 final class StudyViewController: NaviHelper {
   
   let postDataManager = PostDataManager.shared
+  let detailPostDataManager = PostDetailInfoManager.shared
   var recentDatas: PostData?
   
   private lazy var recentButton: UIButton = {
@@ -95,7 +96,7 @@ final class StudyViewController: NaviHelper {
     
     setupCollectionView()
    
-    postDataManager.getRecentPostDatas {
+    postDataManager.getRecentPostDatas(hotType: "false") {
       self.recentDatas = self.postDataManager.getRecentPostDatas()
       DispatchQueue.main.async {
         self.activityIndicator.stopAnimating()
@@ -265,8 +266,17 @@ final class StudyViewController: NaviHelper {
   }
   
   @objc func recentButtonTapped(){
-    print("1")
-
+    activityIndicator.startAnimating()
+    
+    postDataManager.getRecentPostDatas(hotType: "false") {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        
+        self.resultCollectionView.reloadData()
+      }
+    }
     popularButton.setTitleColor(.bg90, for: .normal)
     popularButton.backgroundColor = .bg30
     
@@ -275,7 +285,16 @@ final class StudyViewController: NaviHelper {
   }
   
   @objc func popularButtonTapped(){
-    print("2")
+    postDataManager.getRecentPostDatas(hotType: "true") {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+      print(self.recentDatas)
+      DispatchQueue.main.async {
+        self.resultCollectionView.reloadData()
+
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+      }
+    }
     recentButton.setTitleColor(.bg90, for: .normal)
     recentButton.backgroundColor = .bg30
     
@@ -308,6 +327,11 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
                       didSelectItemAt indexPath: IndexPath) {
     
     let postedVC = PostedStudyViewController()
+  
+    detailPostDataManager.getPostDetailData(postID: recentDatas?.content[indexPath.row].postID ?? 0) {
+      let cellData = self.detailPostDataManager.getPostDetailData()
+      postedVC.postedDate = cellData
+    }
     
     self.navigationController?.pushViewController(postedVC, animated: true)
   }

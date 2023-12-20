@@ -196,10 +196,10 @@ final class PostDataManager {
     }
   }
   
-  func getRecentPostDatas(completion: @escaping () -> Void) {
+  func getRecentPostDatas(hotType: String, completion: @escaping () -> Void) {
     fetchData(type: "GET",
               urlPath: "/study-posts",
-              hotType: "false",
+              hotType: hotType,
               titleAndMajor: "false",
               numOfResult: "1") { [weak self] (result: Result<PostData, NetworkError>) in
       switch result {
@@ -209,7 +209,9 @@ final class PostDataManager {
         
         if postData.last == false {
           // 추가 데이터 조회
-          self?.fetchAdditionalData(currentPage: currentPage + 1, completion: completion)
+          self?.fetchAdditionalData(hotType: hotType,
+                                    currentPage: currentPage + 1,
+                                    completion: completion)
         } else {
           self?.newPostDatas = postData
           completion()
@@ -220,17 +222,19 @@ final class PostDataManager {
     }
   }
   
-  func fetchAdditionalData(currentPage: Int, completion: @escaping () -> Void) {
+  func fetchAdditionalData(hotType: String, currentPage: Int, completion: @escaping () -> Void) {
     fetchData(type: "GET",
               urlPath: "/study-posts",
-              hotType: "false",
+              hotType: hotType,
               titleAndMajor: "false",
               numOfResult: "\(currentPage)") { [weak self] (result: Result<PostData, NetworkError>) in
       switch result {
       case .success(let postData):
         if postData.last == false {
           // 추가 데이터 조회
-          self?.fetchAdditionalData(currentPage: currentPage + 1, completion: completion)
+          self?.fetchAdditionalData(hotType: hotType,
+                                    currentPage: currentPage + 1,
+                                    completion: completion)
         } else {
           // 중복된 데이터 필터링
           let newContent = postData.content.filter { post -> Bool in
