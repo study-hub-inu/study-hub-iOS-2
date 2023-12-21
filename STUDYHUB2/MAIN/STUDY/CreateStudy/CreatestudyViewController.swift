@@ -750,8 +750,11 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       title: studytitleTextField.text ?? "")
     
     print(studyData)
-    
-    PostManager.shared.fetchUser(postData: studyData) { [weak self] result in
+    // 수정하려면 postid도 넣어야함
+    let test = (modifyPostID == nil) ? "POST" : "PUT"
+
+    PostManager.shared.launchPost(methodType: "POST",
+                                  postData: studyData) { [weak self] result in
       guard let self = self else { return }
       switch result {
       case .success(let userData):

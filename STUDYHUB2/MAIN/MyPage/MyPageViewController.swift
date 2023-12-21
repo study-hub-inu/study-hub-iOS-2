@@ -168,15 +168,14 @@ final class MyPageViewController: NaviHelper {
       ].forEach {
         view.addSubview($0)
       }
-    }else {
-     [
-      profileImageView,
-      majorLabel,
-      nickNameLabel
-     ].forEach {
-       view.addSubview($0)
-     }
-      
+    } else {
+      [
+        profileImageView,
+        majorLabel,
+        nickNameLabel
+      ].forEach {
+        view.addSubview($0)
+      }
     }
    
     [
@@ -231,10 +230,9 @@ final class MyPageViewController: NaviHelper {
       }
     }
  
- 
     chevronButton.snp.makeConstraints {
-      $0.centerY.equalTo(loginFailTitleLabel).offset(-10)
-      $0.trailing.equalToSuperview().offset(-20)
+      $0.top.equalToSuperview().offset(40)
+      $0.trailing.equalToSuperview().offset(-25)
     }
     
     // 작성한 글 , 참여한 스터디, 북마크
@@ -248,8 +246,8 @@ final class MyPageViewController: NaviHelper {
     
     // 작성한 글
     writtenButton.snp.makeConstraints {
-      $0.leading.equalTo(loginFailLabel)
-      $0.top.equalTo(loginFailLabel.snp.bottom).offset(70)
+      $0.leading.equalToSuperview().offset(20)
+      $0.top.equalToSuperview().offset(100)
       $0.width.equalTo(105)
       $0.height.equalTo(87)
     }
@@ -267,7 +265,7 @@ final class MyPageViewController: NaviHelper {
     // 참여한 스터디
     joinstudyButton.snp.makeConstraints {
       $0.leading.equalTo(writtenButton.snp.trailing).offset(15)
-      $0.top.equalTo(loginFailLabel.snp.bottom).offset(70)
+      $0.top.equalTo(writtenButton)
       $0.width.equalTo(105)
       $0.height.equalTo(87)
     }
@@ -285,7 +283,7 @@ final class MyPageViewController: NaviHelper {
     // 북마크
     bookmarkButton.snp.makeConstraints {
       $0.leading.equalTo(joinstudyButton.snp.trailing).offset(15)
-      $0.top.equalTo(loginFailLabel.snp.bottom).offset(70)
+      $0.top.equalTo(writtenButton)
       $0.width.equalTo(105)
       $0.height.equalTo(87)
     }

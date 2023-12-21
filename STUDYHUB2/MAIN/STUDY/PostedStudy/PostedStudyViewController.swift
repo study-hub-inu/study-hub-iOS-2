@@ -309,6 +309,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     navigationItemSetting()
     setUpLayout()
     makeUI()
+    
   }
   
   // MARK: - setUpLayout
