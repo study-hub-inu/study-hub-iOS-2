@@ -104,18 +104,22 @@ final class SignUpViewController: UIViewController {
   
   private lazy var titleLabel = createLabel(title: "회원가입",
                                             textColor: .white,
+                                            fontType: "Pretendard",
                                             fontSize: 22)
   
   private lazy var progressLabel = createLabel(title: "1/4",
                                                textColor: .gray,
+                                               fontType: "Pretendard",
                                                fontSize: 20)
   
   private lazy var emailPromptLabel = createLabel(title: "이메일을 입력해주세요",
                                                   textColor: .white,
+                                                  fontType: "Pretendard",
                                                   fontSize: 22)
   
   private lazy var emailLabel = createLabel(title: "이메일",
                                             textColor: .white,
+                                            fontType: "Pretendard",
                                             fontSize: 18)
   
   lazy var nextButton: UIButton = {

@@ -53,10 +53,12 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   // 작성일, 관련학과, 제목
   private lazy var postedDateLabel = createLabel(title: "2023-10-31",
                                                  textColor: .lightGray,
+                                                 fontType: "Pretendard",
                                                  fontSize: 12)
   
   private lazy var postedMajorLabel = createLabel(title: " 세무회계학과 ",
                                                   textColor: .postedMajor,
+                                                  fontType: "Pretendard",
                                                   fontSize: 14)
   
   private lazy var postedMajorStackView = createStackView(axis: .horizontal,
@@ -64,6 +66,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   
   private lazy var postedTitleLabel = createLabel(title: "전산세무 같이 준비해요",
                                                   textColor: .white,
+                                                  fontType: "Pretendard",
                                                   fontSize: 20)
   
   private lazy var postedInfoStackView = createStackView(axis: .vertical, spacing: 10)
@@ -71,6 +74,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   // 팀원수 관련
   private lazy var memeberNumberLabel = createLabel(title: "인원수",
                                                     textColor: .lightGray,
+                                                    fontType: "Pretendard",
                                                     fontSize: 12)
   private lazy var memberImageView: UIImageView = {
     let imageView = UIImageView()
@@ -80,12 +84,14 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   
   private lazy var memeberNumberCountLabel = createLabel(title: "1" + "/30명",
                                                          textColor: .lightGray,
+                                                         fontType: "Pretendard",
                                                          fontSize: 16)
   private lazy var memberNumberStackView = createStackView(axis: .vertical,
                                                            spacing: 8)
   // 벌금 관련
   private lazy var fineLabel = createLabel(title: "벌금",
                                            textColor: .lightGray,
+                                           fontType: "Pretendard",
                                            fontSize: 12)
   private lazy var fineImageView: UIImageView = {
     let imageView = UIImageView()
@@ -96,12 +102,14 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   
   private lazy var fineCountLabel = createLabel(title: "1000"+"원",
                                                 textColor: .lightGray,
+                                                fontType: "Pretendard",
                                                 fontSize: 16)
   private lazy var fineStackView = createStackView(axis: .vertical,
                                                    spacing: 8)
   // 성별 관련
   private lazy var genderLabel = createLabel(title: "성별",
                                              textColor: .lightGray,
+                                             fontType: "Pretendard",
                                              fontSize: 12)
   private lazy var genderImageView: UIImageView = {
     let imageView = UIImageView()
@@ -112,6 +120,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   
   private lazy var fixedGenderLabel = createLabel(title: "여자",
                                                   textColor: .white,
+                                                  fontType: "Pretendard",
                                                   fontSize: 16)
   private lazy var genderStackView = createStackView(axis: .vertical,
                                                      spacing: 8)
@@ -132,9 +141,11 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   // 소개, 소개내용 , 회색구분선
   private lazy var aboutStudyLabel = createLabel(title: "소개",
                                                  textColor: .black,
+                                                 fontType: "Pretendard",
                                                  fontSize: 14)
   private lazy var aboutStudyDeatilLabel = createLabel(title: "스터디에 대해 알려주세요\n (운영 방법, 대면 여부,벌금,공부 인증 방법 등)",
                                                        textColor: .lightGray,
+                                                       fontType: "Pretendard",
                                                        fontSize: 15)
   
   private lazy var aboutStudyStackView = createStackView(axis: .vertical,
@@ -144,30 +155,38 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   // 기간,벌금,대면여부, 관련학과
   private lazy var periodTitleLabel = createLabel(title: "기간",
                                                   textColor: .black,
+                                                  fontType: "Pretendard",
                                                   fontSize: 14)
   private lazy var periodLabel = createLabel(title: "2023.9.12 ~ 2023.12.30",
                                              textColor: .lightGray,
+                                             fontType: "Pretendard",
                                              fontSize: 14)
   
   private lazy var fineTitleLabel = createLabel(title: "벌금",
                                                 textColor: .black,
+                                                fontType: "Pretendard",
                                                 fontSize: 14)
   private lazy var fineAmountLabel = createLabel(title: "결석비  " + "1000원",
                                                  textColor: .lightGray,
+                                                 fontType: "Pretendard",
                                                  fontSize: 14)
   
   private lazy var meetTitleLabel = createLabel(title: "대면여부",
                                                 textColor: .black,
+                                                fontType: "Pretendard",
                                                 fontSize: 14)
   private lazy var meetLabel = createLabel(title: "혼합",
                                            textColor: .lightGray,
+                                           fontType: "Pretendard",
                                            fontSize: 14)
   
   private lazy var majorTitleLabel = createLabel(title: "관련학과",
                                                  textColor: .black,
+                                                 fontType: "Pretendard",
                                                  fontSize: 14)
   private lazy var majorLabel = createLabel(title: " 세무회계학과 ",
                                             textColor: .lightGray,
+                                            fontType: "Pretendard",
                                             fontSize: 14)
   private lazy var majorStackView = createStackView(axis: .horizontal,
                                                     spacing: 10)
@@ -210,6 +229,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   // 작성자 정보
   private lazy var writerLabel = createLabel(title: "작성자",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 18)
   
   private lazy var profileImageView: UIImageView = {
@@ -223,10 +243,12 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   
   private lazy var writerMajorLabel = createLabel(title: "세무회계학과",
                                                   textColor: .gray,
+                                                  fontType: "Pretendard",
                                                   fontSize: 14)
   
   private lazy var nickNameLabel = createLabel(title: "비어있음",
                                                textColor: .black,
+                                               fontType: "Pretendard",
                                                fontSize: 16)
   // 학과, 닉네임 스택
   private lazy var writerInfoStackView = createStackView(axis: .vertical,
@@ -242,6 +264,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
   // 비슷한 게시글
   private lazy var similarPostLabel = createLabel(title: "이 글과 비슷한 스터디예요",
                                                   textColor: .black,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   var dataSource: [String] = []

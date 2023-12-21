@@ -90,11 +90,11 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     return textField
   }
   
-  func createLabel(title: String, textColor: UIColor, fontSize: CGFloat) -> UILabel {
+  func createLabel(title: String, textColor: UIColor, fontType: String, fontSize: CGFloat) -> UILabel {
     let label = UILabel()
     label.text = title
     label.textColor = textColor
-    label.font = UIFont(name: "Pretendard", size: fontSize)
+    label.font = UIFont(name: fontType, size: fontSize)
     return label
   }
   
@@ -117,7 +117,8 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
   func createMypageButton(title: String) -> UIButton {
     let button = UIButton(type: .system)
     button.setTitle(title, for: .normal)
-    button.setTitleColor(UIColor(hexCode: "#49545C"), for: .normal)
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 16)
+    button.setTitleColor(.bg90, for: .normal)
     return button
   }
   

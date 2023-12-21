@@ -154,7 +154,7 @@ final class MyPostViewController: NaviHelper {
         make.top.equalTo(totalPostCountLabel.snp.bottom).offset(20)
         make.leading.trailing.bottom.equalTo(view)
       }
-    }else {
+    } else {
       emptyImage.snp.makeConstraints { make in
         make.centerX.equalToSuperview()
         make.centerY.equalToSuperview().offset(-20)

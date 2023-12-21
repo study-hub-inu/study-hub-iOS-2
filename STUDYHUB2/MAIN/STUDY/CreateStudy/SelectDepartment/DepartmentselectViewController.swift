@@ -40,6 +40,7 @@ final class DepartmentselectViewController: NaviHelper {
   private lazy var describeLabel = createLabel(
     title: "- 관련학과는 1개만 선택할 수 있어요 \n- 다양한 학과와 관련된 스터디라면, '공통'을 선택해 주세요",
     textColor: .bg60,
+    fontType: "Pretendard",
     fontSize: 12)
 
   private lazy var selectMajorLabel: BasePaddingLabel = {

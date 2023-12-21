@@ -39,6 +39,7 @@ final class StudyViewController: NaviHelper {
   private lazy var studyCount = recentDatas?.content.count
   private lazy var countLabel = createLabel(title: "\(studyCount ?? 0)개",
                                             textColor: .bg80,
+                                            fontType: "Pretendard",
                                             fontSize: 14)
   
   private lazy var divideLine = createDividerLine(height: 1)
@@ -49,6 +50,7 @@ final class StudyViewController: NaviHelper {
   private lazy var describeLabel = createLabel(
     title: "관련 스터디가 없어요\n지금 스터디를 만들어\n  팀원을 구해보세요!",
     textColor: .bg80,
+    fontType: "Pretendard",
     fontSize: 12)
   
   // 스터디가 있는 경우

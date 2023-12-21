@@ -46,6 +46,7 @@ final class SearchViewController: NaviHelper {
   
   private lazy var countLabel = createLabel(title: "4개",
                                             textColor: .bg80,
+                                            fontType: "Pretendard",
                                             fontSize: 14)
   
   private lazy var resultCollectionView: UICollectionView = {

@@ -25,9 +25,11 @@ final class RefuseBottomSheet: UIViewController {
   
   private lazy var titleLabel = createLabel(title: "거절 사유",
                                             textColor: .black,
+                                            fontType: "Pretendard",
                                             fontSize: 18)
   private lazy var descibeLabel = createLabel(title: "해당 내용은 신청자에게 전송돼요",
                                               textColor: .bg70,
+                                              fontType: "Pretendard",
                                               fontSize: 12)
   
   private lazy var refuseButton: UIButton = {

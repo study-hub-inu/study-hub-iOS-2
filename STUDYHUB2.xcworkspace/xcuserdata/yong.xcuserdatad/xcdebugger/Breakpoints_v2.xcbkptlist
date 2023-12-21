@@ -14,13 +14,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "444"
-            endingLineNumber = "444"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D - 121d19c620f76b8a"
+                  uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D - 121d19c620f76b0e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -30,12 +30,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "444"
-                  endingLineNumber = "444"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
                   offsetFromSymbolStart = "356">
                </Location>
                <Location
-                  uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D - 121d19c620f76b8a"
+                  uuid = "0B0B3D0F-322A-43D7-BF02-BB590E19584D - 121d19c620f76b0e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -45,8 +45,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "444"
-                  endingLineNumber = "444"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
                   offsetFromSymbolStart = "428">
                </Location>
             </Locations>
@@ -62,13 +62,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "452"
-            endingLineNumber = "452"
+            startingLineNumber = "456"
+            endingLineNumber = "456"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4ECABD17-D359-4248-B8D0-7880F6393594 - 121d19c620f76482"
+                  uuid = "4ECABD17-D359-4248-B8D0-7880F6393594 - 121d19c620f76406"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -78,12 +78,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "452"
-                  endingLineNumber = "452"
+                  startingLineNumber = "456"
+                  endingLineNumber = "456"
                   offsetFromSymbolStart = "700">
                </Location>
                <Location
-                  uuid = "4ECABD17-D359-4248-B8D0-7880F6393594 - 121d19c620f76482"
+                  uuid = "4ECABD17-D359-4248-B8D0-7880F6393594 - 121d19c620f76406"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -93,8 +93,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "452"
-                  endingLineNumber = "452"
+                  startingLineNumber = "456"
+                  endingLineNumber = "456"
                   offsetFromSymbolStart = "784">
                </Location>
             </Locations>
@@ -110,13 +110,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "461"
-            endingLineNumber = "461"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF - 121d19c620f765b9"
+                  uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF - 121d19c620f7653d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -126,12 +126,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "461"
-                  endingLineNumber = "461"
+                  startingLineNumber = "465"
+                  endingLineNumber = "465"
                   offsetFromSymbolStart = "1076">
                </Location>
                <Location
-                  uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF - 121d19c620f765b9"
+                  uuid = "5E606E27-A752-45B2-9959-7EDABA65DAAF - 121d19c620f7653d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -141,8 +141,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "461"
-                  endingLineNumber = "461"
+                  startingLineNumber = "465"
+                  endingLineNumber = "465"
                   offsetFromSymbolStart = "1164">
                </Location>
             </Locations>
@@ -158,8 +158,8 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "466"
-            endingLineNumber = "466"
+            startingLineNumber = "470"
+            endingLineNumber = "470"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -174,8 +174,8 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "472"
-            endingLineNumber = "472"
+            startingLineNumber = "476"
+            endingLineNumber = "476"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -190,13 +190,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "485"
-            endingLineNumber = "485"
+            startingLineNumber = "489"
+            endingLineNumber = "489"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E - d6b9ae58f46e4d7a"
+                  uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E - d6b9ae58f46e4dfe"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -206,12 +206,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "485"
-                  endingLineNumber = "485"
+                  startingLineNumber = "489"
+                  endingLineNumber = "489"
                   offsetFromSymbolStart = "332">
                </Location>
                <Location
-                  uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E - d6b9ae58f46e4d7a"
+                  uuid = "4A42E5AA-5B8D-458D-83BC-2A791A6BAF9E - d6b9ae58f46e4dfe"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -221,8 +221,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "485"
-                  endingLineNumber = "485"
+                  startingLineNumber = "489"
+                  endingLineNumber = "489"
                   offsetFromSymbolStart = "764">
                </Location>
             </Locations>
@@ -238,13 +238,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81 - d6b9ae58f46e4d5b"
+                  uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81 - d6b9ae58f46e4ddf"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -254,12 +254,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "486"
-                  endingLineNumber = "486"
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
                   offsetFromSymbolStart = "800">
                </Location>
                <Location
-                  uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81 - d6b9ae58f46e4d5b"
+                  uuid = "8F31D338-9D7B-4CF8-A86A-1F01C80CBB81 - d6b9ae58f46e4ddf"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -269,8 +269,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "486"
-                  endingLineNumber = "486"
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
                   offsetFromSymbolStart = "1176">
                </Location>
             </Locations>
@@ -286,13 +286,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "488"
-            endingLineNumber = "488"
+            startingLineNumber = "492"
+            endingLineNumber = "492"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB - d6b9ae58f46e4d9d"
+                  uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB - d6b9ae58f46e4c01"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -302,12 +302,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "488"
-                  endingLineNumber = "488"
+                  startingLineNumber = "492"
+                  endingLineNumber = "492"
                   offsetFromSymbolStart = "1480">
                </Location>
                <Location
-                  uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB - ea314cadae8a7a73"
+                  uuid = "222BC22A-CF07-4C7C-BF41-64ED529A4DBB - ea314cadae8a7bef"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -317,8 +317,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "489"
-                  endingLineNumber = "489"
+                  startingLineNumber = "493"
+                  endingLineNumber = "493"
                   offsetFromSymbolStart = "392">
                </Location>
             </Locations>
@@ -334,13 +334,13 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "487"
-            endingLineNumber = "487"
+            startingLineNumber = "491"
+            endingLineNumber = "491"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22 - d6b9ae58f46e4dbc"
+                  uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22 - d6b9ae58f46e4c20"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -350,12 +350,12 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "487"
-                  endingLineNumber = "487"
+                  startingLineNumber = "491"
+                  endingLineNumber = "491"
                   offsetFromSymbolStart = "1212">
                </Location>
                <Location
-                  uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22 - d6b9ae58f46e4dbc"
+                  uuid = "A9580820-7C05-49CD-BAC4-047A011ABC22 - d6b9ae58f46e4c20"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -365,8 +365,8 @@
                   urlString = "file:///Users/yong/Desktop/study-hub-iOS-2/STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "487"
-                  endingLineNumber = "487"
+                  startingLineNumber = "491"
+                  endingLineNumber = "491"
                   offsetFromSymbolStart = "1436">
                </Location>
             </Locations>
@@ -382,8 +382,8 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "489"
-            endingLineNumber = "489"
+            startingLineNumber = "493"
+            endingLineNumber = "493"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -398,8 +398,8 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "492"
-            endingLineNumber = "492"
+            startingLineNumber = "496"
+            endingLineNumber = "496"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -414,8 +414,8 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>
@@ -430,8 +430,8 @@
             filePath = "STUDYHUB2/MAIN/SignUp/SignUpViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "491"
-            endingLineNumber = "491"
+            startingLineNumber = "495"
+            endingLineNumber = "495"
             landmarkName = "nextButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>

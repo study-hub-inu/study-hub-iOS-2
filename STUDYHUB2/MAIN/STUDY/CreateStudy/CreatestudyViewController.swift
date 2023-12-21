@@ -120,6 +120,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var createStudyLabel = createLabel(title: "스터디 만들기",
                                                   textColor: .white,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   private lazy var headerContentStackView = createStackView(axis: .vertical,
@@ -130,11 +131,13 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var chatLinkLabel = createLabel(title: "채팅방 링크",
                                                textColor: .black,
+                                               fontType: "Pretendard",
                                                fontSize: 18)
   
   
   private lazy var descriptionLabel = createLabel(title: "참여코드가 없는 카카오톡 오픈 채팅방 링크로 첨부",
                                                   textColor: .gray,
+                                                  fontType: "Pretendard",
                                                   fontSize: 14)
   
   private let chatLinkDividerLine: UIView = {
@@ -148,10 +151,12 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var studytitleLabel = createLabel(title: "스터디 제목",
                                                  textColor: .black,
+                                                 fontType: "Pretendard",
                                                  fontSize: 18)
   
   private lazy var studyproduceLabel = createLabel(title: "내용",
                                                    textColor: .black,
+                                                   fontType: "Pretendard",
                                                    fontSize: 18)
   
   private let studyinfoStackViewDividerLine: UIView = {
@@ -162,6 +167,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var associatedepartLabel = createLabel(title: "관련 학과 선택",
                                                       textColor: .black,
+                                                      fontType: "Pretendard",
                                                       fontSize: 18)
   private lazy var selectMajorLabel: BasePaddingLabel = {
     let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
@@ -180,49 +186,60 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var periodLabel = createLabel(title: "기간",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 18)
   
   private lazy var startLabel = createLabel(title: "시작하는 날",
                                             textColor: .black,
+                                            fontType: "Pretendard",
                                             fontSize: 18)
   
   
   private lazy var endLabel = createLabel(title: "종료하는 날",
                                           textColor: .black,
+                                          fontType: "Pretendard",
                                           fontSize: 18)
   
   
   private lazy var genderLabel = createLabel(title: "성별",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 18)
   
   private lazy var studymembercountLabel = createLabel(title: "인원",
                                                        textColor: .black,
+                                                       fontType: "Pretendard",
                                                        fontSize: 18)
   
   private lazy var studymemberLabel = createLabel(title: "스터디 팀원",
                                                   textColor: .black,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   private lazy var studymethodLabel = createLabel(title: "스터디 방식",
                                                   textColor: .black,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   private lazy var meetLabel = createLabel(title: "대면 여부",
                                            textColor: .black,
+                                           fontType: "Pretendard",
                                            fontSize: 18)
  private lazy var fineTypesTextField = createTextField(title: "지각비, 결석비 등")
 
   private lazy var fineLabel = createLabel(title: "벌금",
                                            textColor: .black,
+                                           fontType: "Pretendard",
                                            fontSize: 18)
   
   private lazy var haveFineLabel = createLabel(title: "있어요",
                                                textColor: .black,
+                                               fontType: "Pretendard",
                                                fontSize: 16)
   
   private lazy var noFineLabel = createLabel(title: "없어요",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 16)
   
   private lazy var associatedepartStackView = createStackView(axis: .horizontal,
@@ -239,14 +256,17 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var description4Label = createLabel(title: "최대 50명 참여 가능",
                                                    textColor: UIColor(hexCode: "#A1AAB0"),
+                                                   fontType: "Pretendard",
                                                    fontSize: 12)
   
   private lazy var countLabel = createLabel(title: "명",
                                             textColor: UIColor(hexCode: "#68737D"),
+                                            fontType: "Pretendard",
                                             fontSize: 15)
   
   private lazy var description5Label = createLabel(title: "참여자의 성별 선택",
                                                    textColor: UIColor(hexCode: "#A1AAB0"),
+                                                   fontType: "Pretendard",
                                                    fontSize: 12)
   
   
@@ -256,6 +276,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var description6Label = createLabel(title: "대면이나 혼합일 경우, 관련 내용에 대한 계획을 소개에 적어주세요",
                                                    textColor: UIColor(hexCode: "#A1AAB0"),
+                                                   fontType: "Pretendard",
                                                    fontSize: 12)
   
   private lazy var categoryStackViewDividerLine = createDividerLine(height: 10)
@@ -275,6 +296,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var countAlert = createLabel(title: "1명부터 가능해요(본인 제외)",
                                             textColor: .r50,
+                                            fontType: "Pretendard",
                                             fontSize: 12)
   
   let scrollView = UIScrollView()
@@ -655,20 +677,24 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       // Create a label for "어떤 벌금인가요?"
       let fineTypeLabel = createLabel(title:"어떤 벌금인가요?",
                                       textColor: UIColor(hexCode: "#49545C"),
+                                      fontType: "Pretendard",
                                       fontSize: 14)
       
       
       // Create a text field for "얼마인가요?"
       let fineAmountLabel = createLabel(title: "얼마인가요?",
                                         textColor: UIColor(hexCode: "#49545C"),
+                                        fontType: "Pretendard",
                                         fontSize: 14)
       // Create a label for
       let countLabel2 = createLabel(title: "원",
                                     textColor: UIColor(hexCode: "#68737D"),
+                                    fontType: "Pretendard",
                                     fontSize: 15)
       
       lazy var maxFineLabel = createLabel(title: "최대 99,999원",
                                           textColor: UIColor(hexCode: "#A1AAB0"),
+                                          fontType: "Pretendard",
                                           fontSize: 12)
       
       fineAmountTextField.addSubview(countLabel2)
