@@ -5,12 +5,14 @@ import SnapKit
 // 캘린더 커스텀하기, 캘린더 선택 버튼 수정
 final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   let tokenManager = TokenManager.shared
+  let postInfoManager = PostDetailInfoManager.shared
+  let postManager = PostManager.shared
+  
   var genderType: String?
   var contactMethod: String?
   var selectedMajor: String?
   var postDataSender: SendPostData?
   var modifyPostID: Int?
-  let postInfoManager = PostDetailInfoManager.shared
   
   // 선택한 학과를 저장할 프로퍼티
   var selectedDepartment: String? {
@@ -749,25 +751,14 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       studyWay: contactMethod ?? "CONTACT",
       title: studytitleTextField.text ?? "")
     
-    print(studyData)
     // 수정하려면 postid도 넣어야함
     let test = (modifyPostID == nil) ? "POST" : "PUT"
-
-    PostManager.shared.launchPost(methodType: "POST",
-                                  postData: studyData) { [weak self] result in
-      guard let self = self else { return }
-      switch result {
-      case .success(let userData):
-        self.postDataSender?.sendData(data: userData)
-        print(userData)
-        
-        let postVC = PostedStudyViewController()
-        self.navigationController?.pushViewController(postVC, animated: true)
-        
-      case .failure(let error):
-        print("Error: \(error)")
-      }
+    
+    postManager.createPost(createPostDatas: studyData) {
+      print("시작")
     }
+  
+  
   }
   
   

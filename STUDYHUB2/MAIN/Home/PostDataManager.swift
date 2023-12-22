@@ -52,81 +52,7 @@ final class PostDataManager {
   static let shared = PostDataManager()
   private init() {}
   
-  typealias NetworkCompletion<T: Decodable> = (Result<T, NetworkError>) -> Void
-  
-  // 네트워킹 요청을 생성하는 메서드
-  private func createRequest(url: URL, method: String) -> URLRequest {
-    var request = URLRequest(url: url)
-    request.httpMethod = method
-    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-    request.setValue("application/json", forHTTPHeaderField: "Accept")
-    return request
-  }
-  
-  // API 응답을 디코딩하는 메서드
-  private func decodeResponse<T: Decodable>(data: Data, completion: NetworkCompletion<T>) {
-    do {
-      let decoder = JSONDecoder()
-      let responseData = try decoder.decode(T.self, from: data)
-      completion(.success(responseData))
-    } catch {
-      print("JSON Parsing Error:", error)
-      completion(.failure(.parseError))
-    }
-  }
-  
-  // 네트워킹 요청하는 메서드
-  private func fetchData<T: Decodable>(type: String,
-                                       urlPath: String,
-                                       hotType: String,
-                                       titleAndMajor: String,
-                                       numOfResult: String,
-                                       completion: @escaping NetworkCompletion<T>) {
-    var urlComponents = URLComponents()
-    urlComponents.scheme = "https"
-    urlComponents.host = "study-hub.site"
-    urlComponents.port = 443
-    urlComponents.path = "/api/v1" + urlPath
-    
-    let queryItem1 = URLQueryItem(name:"hot", value: hotType)
-    let queryItem2 = URLQueryItem(name: "page", value: "0")
-    let queryItem3 = URLQueryItem(name: "size", value: numOfResult)
-    let queryItem4 = URLQueryItem(name: "titleAndMajor", value: titleAndMajor)
-    
-    urlComponents.queryItems = [queryItem1, queryItem2, queryItem3, queryItem4]
-    
-    guard let url = urlComponents.url else {
-      print("Invalid URL")
-      completion(.failure(.networkingError))
-      return
-    }
-    
-    let request = createRequest(url: url, method: type)
-    
-    URLSession.shared.dataTask(with: request) { data, response, error in
-      if let error = error {
-        print("Networking Error:", error)
-        completion(.failure(.networkingError))
-        return
-      }
-      
-      guard let safeData = data else {
-        print("No Data")
-        completion(.failure(.dataError))
-        return
-      }
-      
-      guard let httpResponse = response as? HTTPURLResponse else {
-        print("Invalid Response")
-        completion(.failure(.networkingError))
-        return
-      }
-      
-      print("Response Status Code:", httpResponse.statusCode)
-      
-      self.decodeResponse(data: safeData, completion: completion)
-    }.resume()
-  }
+  let networkingShared = Networking.networkinhShared
   
   // MARK: - new 모집 중인 스터디
   private var newPostDatas: PostData?
@@ -141,12 +67,17 @@ final class PostDataManager {
   }
   
   func getNewPostData(completion: @escaping() -> Void){
-    fetchData(type: "GET",
-              urlPath: "/study-posts",
-              hotType: "false",
-              titleAndMajor: "false",
-              numOfResult: "5") { (result: Result<PostData,
-                                   NetworkError>) in
+    let queryItems = [URLQueryItem(name: "hot", value: "false"),
+                      URLQueryItem(name: "page", value: "0"),
+                      URLQueryItem(name: "size", value: "5"),
+                      URLQueryItem(name: "titleAndMajor", value: "false")]
+    
+    networkingShared.fetchData(type: "GET",
+                               urlPath: "/study-posts",
+                               queryItems: queryItems,
+                               tokenNeed: false,
+                               createPostData: nil) { (result: Result<PostData,
+                                                          NetworkError>) in
       switch result {
       case .success(let postData):
         self.newPostDatas = postData
@@ -169,12 +100,16 @@ final class PostDataManager {
   }
   
   func getDeadLinePostData(completion: @escaping() -> Void){
-    fetchData(type: "GET",
-              urlPath: "/study-posts",
-              hotType: "true",
-              titleAndMajor: "true",
-              numOfResult: "4") { (result: Result<PostData,
-                                   NetworkError>) in
+    let queryItems = [URLQueryItem(name: "hot", value: "true"),
+                      URLQueryItem(name: "page", value: "0"),
+                      URLQueryItem(name: "size", value: "4"),
+                      URLQueryItem(name: "titleAndMajor", value: "true")]
+    networkingShared.fetchData(type: "GET",
+                               urlPath: "/study-posts",
+                               queryItems: queryItems,
+                               tokenNeed: false,
+                               createPostData: nil) { (result: Result<PostData,
+                                                          NetworkError>) in
       switch result {
       case .success(let postData):
         self.newPostDatas = postData
@@ -197,11 +132,17 @@ final class PostDataManager {
   }
   
   func getRecentPostDatas(hotType: String, completion: @escaping () -> Void) {
-    fetchData(type: "GET",
-              urlPath: "/study-posts",
-              hotType: hotType,
-              titleAndMajor: "false",
-              numOfResult: "1") { [weak self] (result: Result<PostData, NetworkError>) in
+    let queryItems = [URLQueryItem(name: "hot", value: hotType),
+                      URLQueryItem(name: "page", value: "0"),
+                      URLQueryItem(name: "size", value: "1"),
+                      URLQueryItem(name: "titleAndMajor", value: "false")]
+    
+    networkingShared.fetchData(type: "GET",
+                               urlPath: "/study-posts",
+                               queryItems: queryItems,
+                               tokenNeed: false,
+                               createPostData: nil) { [weak self] (result: Result<PostData,
+                                                                NetworkError>) in
       switch result {
       case .success(let postData):
         // 추가 데이터 조회를 위한 변수
@@ -223,11 +164,16 @@ final class PostDataManager {
   }
   
   func fetchAdditionalData(hotType: String, currentPage: Int, completion: @escaping () -> Void) {
-    fetchData(type: "GET",
-              urlPath: "/study-posts",
-              hotType: hotType,
-              titleAndMajor: "false",
-              numOfResult: "\(currentPage)") { [weak self] (result: Result<PostData, NetworkError>) in
+    let queryItems = [URLQueryItem(name: "hot", value: hotType),
+                      URLQueryItem(name: "page", value: "0"),
+                      URLQueryItem(name: "size", value: "\(currentPage)"),
+                      URLQueryItem(name: "titleAndMajor", value: "false")]
+    networkingShared.fetchData(type: "GET",
+                               urlPath: "/study-posts",
+                               queryItems: queryItems,
+                               tokenNeed: false,
+                               createPostData: nil) { [weak self] (result: Result<PostData,
+                                                                NetworkError>) in
       switch result {
       case .success(let postData):
         if postData.last == false {
@@ -243,7 +189,7 @@ final class PostDataManager {
             }
             return true
           }
-
+          
           // 중복을 제거한 데이터를 추가
           self?.newPostDatas?.content.append(contentsOf: newContent)
           completion()
