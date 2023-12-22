@@ -12,10 +12,10 @@ final class Networking {
   
   let tokenManager = TokenManager.shared
   
-  typealias NetworkCompletion<T: Codable> = (Result<T, NetworkError>) -> Void
+  typealias NetworkCompletion<T: Decodable> = (Result<T, NetworkError>) -> Void
   
   // 네트워킹 요청을 생성하는 메서드
-  func createRequest<T: Codable>(url: URL,
+  func createRequest<T: Encodable>(url: URL,
                      method: String,
                      tokenNeed: Bool,
                      createPostData: T?) -> URLRequest {
@@ -28,15 +28,17 @@ final class Networking {
      guard var token = tokenManager.loadAccessToken() else { return request}
      request.setValue("\(token)", forHTTPHeaderField: "Authorization")
      
-     guard let uploadData = try? JSONEncoder().encode(createPostData) else { return request }
-     request.httpBody = uploadData
+     if createPostData != nil {
+       guard let uploadData = try? JSONEncoder().encode(createPostData) else { return request }
+       request.httpBody = uploadData
+     }
    }
     
     return request
   }
   
   // API 응답을 디코딩하는 메서드
- func decodeResponse<T: Codable>(data: Data, completion: NetworkCompletion<T>) {
+ func decodeResponse<T: Decodable>(data: Data, completion: NetworkCompletion<T>) {
     do {
       let decoder = JSONDecoder()
       let responseData = try decoder.decode(T.self, from: data)

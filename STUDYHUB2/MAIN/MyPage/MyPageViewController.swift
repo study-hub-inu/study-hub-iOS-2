@@ -4,6 +4,8 @@ import SnapKit
 
 final class MyPageViewController: NaviHelper {
   
+  let userInfoManager = UserInfoManager.shared
+  
   var loginStatus: Bool = false
   var myPageUserData: UserData?
 
@@ -72,7 +74,7 @@ final class MyPageViewController: NaviHelper {
                                               fontType: "Pretendard",
                                               fontSize: 14)
   
-  private lazy var writtenCountLabel = createLabel(title: "0",
+  private lazy var writtenCountLabel = createLabel(title: "\(myPageUserData?.postCount ?? 0)" ,
                                                    textColor: .black,
                                                    fontType: "Pretendard-Bold",
                                                    fontSize: 18)
@@ -91,7 +93,7 @@ final class MyPageViewController: NaviHelper {
                                                 fontType: "Pretendard",
                                                 fontSize: 14)
   
-  private lazy var joinstudyCountLabel = createLabel(title: "0",
+  private lazy var joinstudyCountLabel = createLabel(title: "\(myPageUserData?.participateCount ?? 0)",
                                                      textColor: .black,
                                                      fontType: "Pretendard-Bold",
                                                      fontSize: 18)
@@ -106,7 +108,7 @@ final class MyPageViewController: NaviHelper {
   }()
   
   // 북마크
-  private lazy var bookmarkCountLabel = createLabel(title: "0",
+  private lazy var bookmarkCountLabel = createLabel(title: "\(myPageUserData?.bookmarkCount ?? 0)",
                                                     textColor: .black,
                                                     fontType: "Pretendard-Bold",
                                                     fontSize: 18)
@@ -351,28 +353,15 @@ final class MyPageViewController: NaviHelper {
   
   // MARK: - 유저 정보 가저오는 함수
   func fetchUserData() {
-    InfoManager.shared.fetchUser { [weak self] result in
-      guard let self = self else { return }
+    userInfoManager.fetchUserInfo {
+      self.myPageUserData = self.userInfoManager.getUserInfo()
       
-      switch result {
-      case .success(let userData):
-        // 사용자 정보를 사용하여 원하는 작업을 수행합니다.
-        print("Email: \(userData.email)")
-        print("Gender: \(userData.gender)")
-        
-        if userData.email != nil {
-          self.myPageUserData = userData
-          self.loginStatus = true
-        }
-        
-        DispatchQueue.main.async {
-          self.setUpLayout()
-          self.makeUI()
-        }
-        
-      case .failure(let error):
-        // 네트워크 오류 또는 데이터 파싱 오류를 처리합니다.
-        print("Error: \(error)")
+      let status = self.myPageUserData == nil ? false : true
+      self.loginStatus = status
+      
+      DispatchQueue.main.async {
+        self.setUpLayout()
+        self.makeUI()
       }
     }
   }

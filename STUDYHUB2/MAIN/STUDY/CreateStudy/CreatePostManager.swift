@@ -31,8 +31,11 @@ struct UpdateStudyRequest: Codable {
   var studyStartDate, studyWay, title: String
 }
 
+struct PostResponse: Codable {
+  let id: Int
+}
 
-//MARK: - Networking (서버와 통신하는) 클래스 모델
+
 final class PostManager {
   static let shared = PostManager()
   
@@ -40,24 +43,27 @@ final class PostManager {
   let networkingManager = Networking.networkinhShared
   
   private init() {}
-  
+
+  // 게시글 생성 및 수정, 반환값 나중에 스웨거보고 확인하기
   func createPost(createPostDatas: CreateStudyRequest,
-                  completion: @escaping () -> Void){
+                  completion: @escaping () -> Void) {
+    
     networkingManager.fetchData(type: "POST",
                                 urlPath: "/study-posts",
                                 queryItems: nil,
                                 tokenNeed: true,
                                 createPostData: createPostDatas) { (result: Result<CreateStudyRequest,
-                                                                NetworkError>) in
+                                                                    NetworkError>) in
       switch result {
-      case .success(let postData):
-        print(postData)
+      case .success(let postResponse):
+        print(postResponse) // 이제 id는 Int 타입의 값입니다.
         print("성공")
-        
+
         completion()
       case .failure(let error):
         print("Error: \(error)")
       }
     }
   }
+
 }
