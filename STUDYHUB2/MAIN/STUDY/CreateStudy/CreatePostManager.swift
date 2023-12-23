@@ -19,16 +19,24 @@ struct CreateStudyRequest: Codable {
   
 }
 
+// MARK: - UpdataePost
 struct UpdateStudyRequest: Codable {
-  var postId: Int
-  var chatUrl: String
-  var close: Bool
-  var content, gender, major: String
-  var penalty: Int
-  let penaltyWay: String?
-  var studyEndDate: String
-  var studyPerson: Int
-  var studyStartDate, studyWay, title: String
+    let chatURL: String
+    let close: Bool
+    let content, gender, major: String
+    let penalty: Int
+    let penaltyWay: String
+    let postID: Int
+    let studyEndDate: String
+    let studyPerson: Int
+    let studyStartDate, studyWay, title: String
+
+    enum CodingKeys: String, CodingKey {
+        case chatURL = "chatUrl"
+        case close, content, gender, major, penalty, penaltyWay
+        case postID = "postId"
+        case studyEndDate, studyPerson, studyStartDate, studyWay, title
+    }
 }
 
 struct PostResponse: Codable {
@@ -44,7 +52,7 @@ final class PostManager {
   
   private init() {}
 
-  // 게시글 생성 및 수정, 반환값 나중에 스웨거보고 확인하기
+  // 게시글 생성, 반환값 나중에 스웨거보고 확인하기
   func createPost(createPostDatas: CreateStudyRequest,
                   completion: @escaping () -> Void) {
     
@@ -52,8 +60,7 @@ final class PostManager {
                                 urlPath: "/study-posts",
                                 queryItems: nil,
                                 tokenNeed: true,
-                                createPostData: createPostDatas) { (result: Result<CreateStudyRequest,
-                                                                    NetworkError>) in
+                                createPostData: createPostDatas) { result in
       switch result {
       case .success(let postResponse):
         print(postResponse) // 이제 id는 Int 타입의 값입니다.
@@ -65,5 +72,24 @@ final class PostManager {
       }
     }
   }
+  
+  func updatePost(updatePostDatas: UpdateStudyRequest,
+                  completion: @escaping () -> Void) {
+    networkingManager.fetchData(type: "PUT",
+                                urlPath: "/study-posts",
+                                queryItems: nil,
+                                tokenNeed: true,
+                                createPostData: updatePostDatas) { result in
+      switch result {
+      case .success(let postResponse):
+        print(postResponse) // 이제 id는 Int 타입의 값입니다.
+        print("성공")
 
+        completion()
+      case .failure(let error):
+        print("Error: \(error)")
+      }
+    }
+    
+  }
 }

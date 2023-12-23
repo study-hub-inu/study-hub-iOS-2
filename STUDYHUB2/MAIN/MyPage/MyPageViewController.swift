@@ -121,8 +121,6 @@ final class MyPageViewController: NaviHelper {
   private lazy var bookmarkButton: UIButton = {
     // Create a button for "북마크"
     let bookmarkButton = UIButton()
-    bookmarkButton.backgroundColor = .bg20
-    bookmarkButton.layer.cornerRadius = 5
     bookmarkButton.addAction(UIAction { _ in
       self.bookmarkpageButtonTapped()
     }, for: .touchUpInside)
@@ -394,11 +392,6 @@ final class MyPageViewController: NaviHelper {
     myinformViewController.email = myPageUserData?.email
     myinformViewController.gender = myPageUserData?.gender
     
-    // If you want to present it modally, you can use the following code
-    let navigationController = UINavigationController(rootViewController: myinformViewController)
-    navigationController.modalPresentationStyle = .fullScreen
-    
-    // Present the ViewController modally
-    present(navigationController, animated: true, completion: nil)
+    self.navigationController?.pushViewController(myinformViewController, animated: true)
   }
 }

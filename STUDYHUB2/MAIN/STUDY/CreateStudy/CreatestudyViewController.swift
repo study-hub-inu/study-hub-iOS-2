@@ -311,6 +311,9 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
     setUpLayout()
     makeUI()
     postModify()
+    print("@@@@")
+    print(modifyPostID)
+
   }
   
   // MARK: - setUpLayout
@@ -735,28 +738,61 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   // MARK: - 완료버튼 누를 때 함수
   @objc func completeButtonTapped() {
-    // 과를 영어로 변경해야함
-    let studyData = CreateStudyRequest(
-      chatUrl: chatLinkTextField.text ?? "",
-      close: false,
-      content: studyproduceTextView.text ?? "",
-      // 무관일때 안됨 null이 아닌가
-      gender: genderType ?? "null",
-      major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
-      penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
-      penaltyWay: fineTypesTextField.text ?? "",
-      studyEndDate: endDateButton.currentTitle ?? "",
-      studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
-      studyStartDate: startDateButton.currentTitle ?? "",
-      studyWay: contactMethod ?? "CONTACT",
-      title: studytitleTextField.text ?? "")
-    
+  
     // 수정하려면 postid도 넣어야함
     let test = (modifyPostID == nil) ? "POST" : "PUT"
-    
-    postManager.createPost(createPostDatas: studyData) {
-      print("시작")
+    print(test)
+    if test == "PUT" {
+      let chatUrl = chatLinkTextField.text ?? ""
+      let content = studyproduceTextView.text ?? ""
+      let gender = genderType ?? "null"
+      let major = convertMajor(selectedMajor ?? "", isEnglish: true)
+      let penalty = Int(fineAmountTextField.text ?? "0") ?? 0
+      let penaltyWay = fineTypesTextField.text ?? ""
+      let studyEndDate = endDateButton.currentTitle ?? ""
+      let studyPerson = Int(studymemberTextField.text ?? "") ?? 0
+      let studyStartDate = startDateButton.currentTitle ?? ""
+      let studyWay = contactMethod ?? "CONTACT"
+      let title = studytitleTextField.text ?? ""
+
+      let updatePostData = UpdateStudyRequest(chatURL: chatUrl,
+                                              close: false,
+                                              content: content,
+                                              gender: gender,
+                                              major: major,
+                                              penalty: penalty,
+                                              penaltyWay: penaltyWay,
+                                              postID: modifyPostID ?? 0,
+                                              studyEndDate: studyEndDate,
+                                              studyPerson: studyPerson,
+                                              studyStartDate: studyStartDate,
+                                              studyWay: studyWay,
+                                              title: title)
+
+      postManager.updatePost(updatePostDatas: updatePostData) {
+        print("수정시작")
+      }
+    } else {
+      let studyData = CreateStudyRequest(
+        chatUrl: chatLinkTextField.text ?? "",
+        close: false,
+        content: studyproduceTextView.text ?? "",
+        // 무관일때 안됨 null이 아닌가
+        gender: genderType ?? "null",
+        major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
+        penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
+        penaltyWay: fineTypesTextField.text ?? "",
+        studyEndDate: endDateButton.currentTitle ?? "",
+        studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
+        studyStartDate: startDateButton.currentTitle ?? "",
+        studyWay: contactMethod ?? "CONTACT",
+        title: studytitleTextField.text ?? "")
+      
+      postManager.createPost(createPostDatas: studyData) {
+        print("생성시작")
+      }
     }
+    
   
   
   }

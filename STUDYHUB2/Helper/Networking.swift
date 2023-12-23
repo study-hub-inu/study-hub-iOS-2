@@ -15,7 +15,7 @@ final class Networking {
   typealias NetworkCompletion<T: Decodable> = (Result<T, NetworkError>) -> Void
   
   // 네트워킹 요청을 생성하는 메서드
-  func createRequest<T: Encodable>(url: URL,
+  func createRequest<T: Codable>(url: URL,
                      method: String,
                      tokenNeed: Bool,
                      createPostData: T?) -> URLRequest {
@@ -38,7 +38,7 @@ final class Networking {
   }
   
   // API 응답을 디코딩하는 메서드
- func decodeResponse<T: Decodable>(data: Data, completion: NetworkCompletion<T>) {
+ func decodeResponse<T: Codable>(data: Data, completion: NetworkCompletion<T>) {
     do {
       let decoder = JSONDecoder()
       let responseData = try decoder.decode(T.self, from: data)
