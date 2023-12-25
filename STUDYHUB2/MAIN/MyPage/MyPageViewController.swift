@@ -7,7 +7,7 @@ final class MyPageViewController: NaviHelper {
   let userInfoManager = UserInfoManager.shared
   
   var loginStatus: Bool = false
-  var myPageUserData: UserData?
+  var myPageUserData: UserDetailData?
 
   // MARK: - UI설정
   // 로그인 하면 보이는 라벨

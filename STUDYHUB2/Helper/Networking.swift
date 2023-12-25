@@ -12,7 +12,7 @@ final class Networking {
   
   let tokenManager = TokenManager.shared
   
-  typealias NetworkCompletion<T: Decodable> = (Result<T, NetworkError>) -> Void
+  typealias NetworkCompletion<T: Codable> = (Result<T, NetworkError>) -> Void
   
   // 네트워킹 요청을 생성하는 메서드
   func createRequest<T: Codable>(url: URL,
@@ -25,7 +25,7 @@ final class Networking {
     request.setValue("application/json", forHTTPHeaderField: "Accept")
    
    if tokenNeed == true {
-     guard var token = tokenManager.loadAccessToken() else { return request}
+     guard let token = tokenManager.loadAccessToken() else { return request}
      request.setValue("\(token)", forHTTPHeaderField: "Authorization")
      
      if createPostData != nil {
