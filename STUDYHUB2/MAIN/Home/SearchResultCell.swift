@@ -7,7 +7,7 @@ final class SearchResultCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: String? { didSet { bind() } }
+  var model: PostDataContent? { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -52,7 +52,7 @@ final class SearchResultCell: UICollectionViewCell {
     imageView.image = UIImage(named: "MemberNumberImage")
     return imageView
   }()
-
+  
   private lazy var memberCountLabel: UILabel = {
     let label = UILabel()
     label.text = "10/20명"
@@ -97,7 +97,7 @@ final class SearchResultCell: UICollectionViewCell {
     label.text = "무관"
     return label
   }()
-
+  
   private lazy var genderStackView: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
@@ -114,9 +114,10 @@ final class SearchResultCell: UICollectionViewCell {
   
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.layer.cornerRadius = 15
-    imageView.image = UIImage(named: "ProfileAvatar_small")
-    imageView.contentMode = .left
+    imageView.layer.cornerRadius = 48
+    imageView.clipsToBounds = true
+    imageView.image = UIImage(named: "ProfileAvatar_change")
+    imageView.contentMode = .scaleAspectFit
     return imageView
   }()
   
@@ -149,7 +150,7 @@ final class SearchResultCell: UICollectionViewCell {
     
     setViewShadow(backView: self)
     addSubviews()
-  
+    
     configure()
   }
   
@@ -245,15 +246,17 @@ final class SearchResultCell: UICollectionViewCell {
     profileImageView.snp.makeConstraints { make in
       make.top.equalTo(infoStackView.snp.bottom).offset(20)
       make.leading.equalTo(majorLabel)
+      make.height.width.equalTo(34)
+      
     }
     
     nickNameLabel.snp.makeConstraints { make in
-      make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+      make.leading.equalTo(profileImageView.snp.trailing).offset(20)
       make.top.equalTo(profileImageView.snp.top)
     }
     
     postedDate.snp.makeConstraints { make in
-      make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+      make.leading.equalTo(profileImageView.snp.trailing).offset(20)
       make.top.equalTo(nickNameLabel.snp.bottom)
     }
     
@@ -265,8 +268,42 @@ final class SearchResultCell: UICollectionViewCell {
   }
   
   private func bind() {
-    titleLabel.text = model
+    //    titleLabel.text = model
+    guard let data = model else { return }
+    
+    var countMember = data.studyPerson - data.remainingSeat
+    majorLabel.text = " \(data.major.convertMajor(data.major, isEnglish: false)) "
+    titleLabel.text = data.title
+    periodLabel.text = "\(data.studyStartDate[1])월 \(data.studyStartDate[2])일 ~\(data.studyEndDate[1])월 \(data.studyEndDate[2])일 "
+    
+    remainLabel.text = "\(data.remainingSeat)자리 남았어요"
+    countMemeberLabel.text = "\(countMember) / \(data.studyPerson)"
+    countMemeberLabel.changeColor(label: countMemeberLabel,
+                                  wantToChange: "\(countMember)",
+                                  color: .o50)
+    
+    fineLabel.text = "\(data.penalty)원"
+    
+    genderLabel.text = "  \(data.filteredGender)  "
+    
+    nickNameLabel.text = data.userData.nickname
+    postedDate.text = "\(data.createdDate[0]).\(data.createdDate[1]).\(data.createdDate[2])"
+    
+    if let url = URL(string: data.userData.imageURL) {
+      let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+        if let error = error {
+          print("Error: \(error)")
+        } else if let data = data {
+          let image = UIImage(data: data)
+          DispatchQueue.main.async {
+            // 다운로드한 이미지를 이미지 뷰에 설정합니다.
+            self.profileImageView.layer.cornerRadius = 15
+            self.profileImageView.image = image
+          }
+        }
+      }
+      task.resume()
+    }
+    
   }
-  
 }
-

@@ -45,7 +45,7 @@ final class SimilarPostCell: UICollectionViewCell {
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 15
-    imageView.image = UIImage(named: "ProfileAvatar_small")
+    imageView.image = UIImage(named: "ProfileAvatar_change")
     imageView.contentMode = .left
     imageView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
     return imageView

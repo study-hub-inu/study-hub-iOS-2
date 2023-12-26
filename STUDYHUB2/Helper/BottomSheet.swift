@@ -9,6 +9,7 @@ import UIKit
 
 import SnapKit
 
+// 이걸 다 바꿔야하나, 버튼 2개 다 delegate로 받고 쓸 때 함수 선언, 초기화 할 때 버튼 이름 받기
 protocol BottomSheetDelegate: AnyObject {
   func modifyButtonTapped(postID: Int)
 }
@@ -17,10 +18,16 @@ final class BottomSheet: UIViewController {
   weak var delegate: BottomSheetDelegate?
   
   private let postID: Int
+  private let firstButtonTitle: String
+  private let secondButtonTitle: String
   
   let detailPostDataManager = PostDetailInfoManager.shared
-  init(postID: Int) {
+  
+  init(postID: Int, firstButtonTitle: String = "삭제하기", secondButtonTitle: String = "수정하기") {
     self.postID = postID
+    self.firstButtonTitle = firstButtonTitle
+    self.secondButtonTitle = secondButtonTitle
+    
     super.init(nibName: nil, bundle: nil)
   }
   
@@ -30,16 +37,18 @@ final class BottomSheet: UIViewController {
   
   private lazy var deleteButton: UIButton = {
     let button = UIButton()
-    button.setTitle("삭제하기", for: .normal)
-    button.setTitleColor(.o50, for: .normal)
+    button.setTitle(firstButtonTitle, for: .normal)
+    
+    let buttonColor = firstButtonTitle == "삭제하기" ? UIColor.o50 : UIColor.bg80
+    button.setTitleColor(buttonColor, for: .normal)
     button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     return button
   }()
   
   private lazy var modifyButton: UIButton = {
     let button = UIButton()
-    button.setTitle("수정하기", for: .normal)
-    button.setTitleColor(.black, for: .normal)
+    button.setTitle(secondButtonTitle, for: .normal)
+    button.setTitleColor(.bg80, for: .normal)
     button.addAction(UIAction { _ in
       self.modifyButtonTapped()
     }, for: .touchUpInside)
@@ -49,7 +58,7 @@ final class BottomSheet: UIViewController {
   private lazy var dismissButton: UIButton = {
     let button = UIButton()
     button.setTitle("닫기", for: .normal)
-    button.setTitleColor(.black, for: .normal)
+    button.setTitleColor(.bg80, for: .normal)
     button.backgroundColor = .bg30
     button.addTarget(self, action: #selector(dissMissButtonTapped), for: .touchUpInside)
     return button

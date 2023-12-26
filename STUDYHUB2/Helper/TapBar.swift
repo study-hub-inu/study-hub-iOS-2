@@ -18,8 +18,10 @@ class TabBarController: UITabBarController {
     let studyVCwithNavi = UINavigationController(rootViewController: studyViewController)
 
     let myPageViewController = MyPageViewController()
+    let myPageVCwithNavi = UINavigationController(rootViewController: myPageViewController)
+
     
-    self.viewControllers = [homeVCwithNavi, studyVCwithNavi, myPageViewController]
+    self.viewControllers = [homeVCwithNavi, studyVCwithNavi, myPageVCwithNavi]
     
     homeViewController.tabBarItem = UITabBarItem(title: "홈",
                                                  image: UIImage(systemName: "house"), tag: 0)

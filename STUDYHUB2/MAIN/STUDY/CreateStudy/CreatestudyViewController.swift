@@ -5,12 +5,14 @@ import SnapKit
 // 캘린더 커스텀하기, 캘린더 선택 버튼 수정
 final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   let tokenManager = TokenManager.shared
+  let postInfoManager = PostDetailInfoManager.shared
+  let postManager = PostManager.shared
+  
   var genderType: String?
   var contactMethod: String?
   var selectedMajor: String?
   var postDataSender: SendPostData?
   var modifyPostID: Int?
-  let postInfoManager = PostDetailInfoManager.shared
   
   // 선택한 학과를 저장할 프로퍼티
   var selectedDepartment: String? {
@@ -23,7 +25,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   }
   
   var selectDate: String? = ""
-
+  
   // MARK: - UI설정
   private lazy var completeButton: UIButton = {
     let completeButton = UIButton()
@@ -120,6 +122,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var createStudyLabel = createLabel(title: "스터디 만들기",
                                                   textColor: .white,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   private lazy var headerContentStackView = createStackView(axis: .vertical,
@@ -130,11 +133,13 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var chatLinkLabel = createLabel(title: "채팅방 링크",
                                                textColor: .black,
+                                               fontType: "Pretendard",
                                                fontSize: 18)
   
   
   private lazy var descriptionLabel = createLabel(title: "참여코드가 없는 카카오톡 오픈 채팅방 링크로 첨부",
                                                   textColor: .gray,
+                                                  fontType: "Pretendard",
                                                   fontSize: 14)
   
   private let chatLinkDividerLine: UIView = {
@@ -148,10 +153,12 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var studytitleLabel = createLabel(title: "스터디 제목",
                                                  textColor: .black,
+                                                 fontType: "Pretendard",
                                                  fontSize: 18)
   
   private lazy var studyproduceLabel = createLabel(title: "내용",
                                                    textColor: .black,
+                                                   fontType: "Pretendard",
                                                    fontSize: 18)
   
   private let studyinfoStackViewDividerLine: UIView = {
@@ -162,6 +169,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var associatedepartLabel = createLabel(title: "관련 학과 선택",
                                                       textColor: .black,
+                                                      fontType: "Pretendard",
                                                       fontSize: 18)
   private lazy var selectMajorLabel: BasePaddingLabel = {
     let label = BasePaddingLabel(padding: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16))
@@ -180,48 +188,60 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var periodLabel = createLabel(title: "기간",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 18)
   
   private lazy var startLabel = createLabel(title: "시작하는 날",
                                             textColor: .black,
+                                            fontType: "Pretendard",
                                             fontSize: 18)
   
   
   private lazy var endLabel = createLabel(title: "종료하는 날",
                                           textColor: .black,
+                                          fontType: "Pretendard",
                                           fontSize: 18)
   
   
   private lazy var genderLabel = createLabel(title: "성별",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 18)
   
   private lazy var studymembercountLabel = createLabel(title: "인원",
                                                        textColor: .black,
+                                                       fontType: "Pretendard",
                                                        fontSize: 18)
   
   private lazy var studymemberLabel = createLabel(title: "스터디 팀원",
                                                   textColor: .black,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   private lazy var studymethodLabel = createLabel(title: "스터디 방식",
                                                   textColor: .black,
+                                                  fontType: "Pretendard",
                                                   fontSize: 18)
   
   private lazy var meetLabel = createLabel(title: "대면 여부",
                                            textColor: .black,
+                                           fontType: "Pretendard",
                                            fontSize: 18)
-  
+ private lazy var fineTypesTextField = createTextField(title: "지각비, 결석비 등")
+
   private lazy var fineLabel = createLabel(title: "벌금",
                                            textColor: .black,
+                                           fontType: "Pretendard",
                                            fontSize: 18)
   
   private lazy var haveFineLabel = createLabel(title: "있어요",
                                                textColor: .black,
+                                               fontType: "Pretendard",
                                                fontSize: 16)
   
   private lazy var noFineLabel = createLabel(title: "없어요",
                                              textColor: .black,
+                                             fontType: "Pretendard",
                                              fontSize: 16)
   
   private lazy var associatedepartStackView = createStackView(axis: .horizontal,
@@ -238,14 +258,17 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var description4Label = createLabel(title: "최대 50명 참여 가능",
                                                    textColor: UIColor(hexCode: "#A1AAB0"),
+                                                   fontType: "Pretendard",
                                                    fontSize: 12)
   
   private lazy var countLabel = createLabel(title: "명",
                                             textColor: UIColor(hexCode: "#68737D"),
+                                            fontType: "Pretendard",
                                             fontSize: 15)
   
   private lazy var description5Label = createLabel(title: "참여자의 성별 선택",
                                                    textColor: UIColor(hexCode: "#A1AAB0"),
+                                                   fontType: "Pretendard",
                                                    fontSize: 12)
   
   
@@ -255,6 +278,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   private lazy var description6Label = createLabel(title: "대면이나 혼합일 경우, 관련 내용에 대한 계획을 소개에 적어주세요",
                                                    textColor: UIColor(hexCode: "#A1AAB0"),
+                                                   fontType: "Pretendard",
                                                    fontSize: 12)
   
   private lazy var categoryStackViewDividerLine = createDividerLine(height: 10)
@@ -273,8 +297,9 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   }()
   
   private lazy var countAlert = createLabel(title: "1명부터 가능해요(본인 제외)",
-                                    textColor: .r50,
-                                    fontSize: 12)
+                                            textColor: .r50,
+                                            fontType: "Pretendard",
+                                            fontSize: 12)
   
   let scrollView = UIScrollView()
   
@@ -286,6 +311,9 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
     setUpLayout()
     makeUI()
     postModify()
+    print("@@@@")
+    print(modifyPostID)
+
   }
   
   // MARK: - setUpLayout
@@ -602,17 +630,17 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   // MARK: -  선택한 학과에 대한 버튼을 생성
   func addDepartmentButton(_ department: String) {
     selectedMajor = department
-
+    
     let labelText = selectedMajor
     let labelSize = (labelText as? NSString)?.size(withAttributes: [NSAttributedString.Key.font: selectMajorLabel.font!])
-
+    
     selectMajorLabel.text = labelText
     selectMajorLabel.clipsToBounds = true
     selectMajorLabel.layer.cornerRadius = 15
     selectMajorLabel.backgroundColor = .bg30
     selectMajorLabel.textAlignment = .left
     selectMajorLabel.adjustsFontSizeToFitWidth = true
-
+    
     selectedMajor = selectMajorLabel.text ?? ""
     
     scrollView.addSubview(selectMajorLabel)
@@ -654,22 +682,24 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       // Create a label for "어떤 벌금인가요?"
       let fineTypeLabel = createLabel(title:"어떤 벌금인가요?",
                                       textColor: UIColor(hexCode: "#49545C"),
+                                      fontType: "Pretendard",
                                       fontSize: 14)
       
-      // Create a text field for chat link input
-      let fineTypesTextField = createTextField(title: "지각비, 결석비 등")
       
       // Create a text field for "얼마인가요?"
       let fineAmountLabel = createLabel(title: "얼마인가요?",
                                         textColor: UIColor(hexCode: "#49545C"),
+                                        fontType: "Pretendard",
                                         fontSize: 14)
       // Create a label for
       let countLabel2 = createLabel(title: "원",
                                     textColor: UIColor(hexCode: "#68737D"),
+                                    fontType: "Pretendard",
                                     fontSize: 15)
       
       lazy var maxFineLabel = createLabel(title: "최대 99,999원",
                                           textColor: UIColor(hexCode: "#A1AAB0"),
+                                          fontType: "Pretendard",
                                           fontSize: 12)
       
       fineAmountTextField.addSubview(countLabel2)
@@ -708,37 +738,63 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   
   // MARK: - 완료버튼 누를 때 함수
   @objc func completeButtonTapped() {
-    // 과를 영어로 변경해야함
-    let studyData = CreateStudyRequest(
-      chatUrl: chatLinkTextField.text ?? "",
-      close: false,
-      content: studyproduceTextView.text ?? "",
-      // 무관일때 안됨 null이 아닌가
-      gender: genderType ?? "null",
-      major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
-      penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
-      studyEndDate: endDateButton.currentTitle ?? "",
-      studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
-      studyStartDate: startDateButton.currentTitle ?? "",
-      studyWay: contactMethod ?? "CONTACT",
-      title: studytitleTextField.text ?? "")
-    
-    print(studyData)
-    
-    PostManager.shared.fetchUser(postData: studyData) { [weak self] result in
-      guard let self = self else { return }
-      switch result {
-      case .success(let userData):
-        self.postDataSender?.sendData(data: userData)
-        print(userData)
-        
-        let postVC = PostedStudyViewController()
-        self.navigationController?.pushViewController(postVC, animated: true)
-        
-      case .failure(let error):
-        print("Error: \(error)")
+  
+    // 수정하려면 postid도 넣어야함
+    let test = (modifyPostID == nil) ? "POST" : "PUT"
+    print(test)
+    if test == "PUT" {
+      let chatUrl = chatLinkTextField.text ?? ""
+      let content = studyproduceTextView.text ?? ""
+      let gender = genderType ?? "null"
+      let major = convertMajor(selectedMajor ?? "", isEnglish: true)
+      let penalty = Int(fineAmountTextField.text ?? "0") ?? 0
+      let penaltyWay = fineTypesTextField.text ?? ""
+      let studyEndDate = endDateButton.currentTitle ?? ""
+      let studyPerson = Int(studymemberTextField.text ?? "") ?? 0
+      let studyStartDate = startDateButton.currentTitle ?? ""
+      let studyWay = contactMethod ?? "CONTACT"
+      let title = studytitleTextField.text ?? ""
+
+      let updatePostData = UpdateStudyRequest(chatURL: chatUrl,
+                                              close: false,
+                                              content: content,
+                                              gender: gender,
+                                              major: major,
+                                              penalty: penalty,
+                                              penaltyWay: penaltyWay,
+                                              postID: modifyPostID ?? 0,
+                                              studyEndDate: studyEndDate,
+                                              studyPerson: studyPerson,
+                                              studyStartDate: studyStartDate,
+                                              studyWay: studyWay,
+                                              title: title)
+
+      postManager.updatePost(updatePostDatas: updatePostData) {
+        print("수정시작")
+      }
+    } else {
+      let studyData = CreateStudyRequest(
+        chatUrl: chatLinkTextField.text ?? "",
+        close: false,
+        content: studyproduceTextView.text ?? "",
+        // 무관일때 안됨 null이 아닌가
+        gender: genderType ?? "null",
+        major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
+        penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
+        penaltyWay: fineTypesTextField.text ?? "",
+        studyEndDate: endDateButton.currentTitle ?? "",
+        studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
+        studyStartDate: startDateButton.currentTitle ?? "",
+        studyWay: contactMethod ?? "CONTACT",
+        title: studytitleTextField.text ?? "")
+      
+      postManager.createPost(createPostDatas: studyData) {
+        print("생성시작")
       }
     }
+    
+  
+  
   }
   
   
@@ -763,7 +819,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       present(navigationController, animated: true, completion: nil)
     }
   }
-
+  
   
   // MARK: - 성별 눌렸을 때 함수
   @objc func genderButtonTapped(_ sender: UIButton) {
@@ -880,22 +936,56 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       let modifyData = self.postInfoManager.getPostDetailData()
       
       DispatchQueue.main.async {
-        self.studyproduceTextView.text = modifyData?.content
-        self.studytitleTextField.text = modifyData?.title
+        modifyData.map {
+          self.chatLinkTextField.text = $0.chatUrl
+          self.studyproduceTextView.text = $0.content
+          self.studytitleTextField.text = $0.title
+          
+          self.selectedMajor = self.convertMajor($0.major, isEnglish: false)
+          self.addDepartmentButton(self.convertMajor($0.major, isEnglish: false))
+ 
+          self.studymemberTextField.text = String($0.studyPerson)
+          
+          self.genderType = $0.filteredGender
+          if self.genderType == "FEMALE" {
+            self.femaleOnlyButton.isSelected = true
+            self.genderButtonTapped(self.femaleOnlyButton)
+          } else if self.genderType == "MALE" {
+            self.maleOnlyButton.isSelected = true
+            self.genderButtonTapped(self.maleOnlyButton)
+          } else {
+            self.allGenderButton.isSelected = true
+            self.genderButtonTapped(self.allGenderButton)
+          }
+          
+          self.contactMethod = $0.studyWay
+          if self.contactMethod == "CONTACT" {
+            self.contactButton.isSelected = true
+            self.meetButtonTapped(self.contactButton)
+          } else if self.contactMethod == "MIX" {
+            self.mixmeetButton.isSelected = true
+            self.meetButtonTapped(self.mixmeetButton)
+          } else {
+            self.untactButton.isSelected = true
+            self.meetButtonTapped(self.untactButton)
+          }
+          
+          if $0.penaltyWay == nil {
+            self.noFineButtonTapped(self.noFineButton)
+          } else {
+            self.haveFineButtonTapped(self.haveFineButton)
+          }
+          
+          self.fineAmountTextField.text = String($0.penalty)
+          
+          let startDate = "\($0.studyStartDate[0]). \($0.studyStartDate[1]). \($0.studyStartDate[2])"
+          self.startDateButton.setTitle(startDate, for: .normal)
+          let endDate = "\($0.studyEndDate[0]). \($0.studyEndDate[1]). \($0.studyEndDate[2])"
+          self.endDateButton.setTitle(endDate, for: .normal)
+        
+        }
       }
-      
-//    chatUrl: chatLinkTextField.text ?? "",
-//    close: false,
-//    content: studyproduceTextView.text ?? "",
-//    // 무관일때 안됨 null이 아닌가
-//    gender: genderType ?? "null",
-//    major: convertMajor(selectedMajor ?? "", isEnglish: true) ,
-//    penalty: Int(fineAmountTextField.text ?? "0") ?? 0 ,
-//    studyEndDate: endDateButton.currentTitle ?? "",
-//    studyPerson: Int(studymemberTextField.text ?? "") ?? 0,
-//    studyStartDate: startDateButton.currentTitle ?? "",
-//    studyWay: contactMethod ?? "CONTACT",
-//    title: studytitleTextField.text ?? "")
+
     }
   }
 }

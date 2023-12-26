@@ -2,102 +2,51 @@ import UIKit
 
 import SnapKit
 
-class MyPageViewController: UIViewController {
+final class MyPageViewController: NaviHelper {
+  
+  let userInfoManager = UserInfoManager.shared
   
   var loginStatus: Bool = false
-  var myPageUserData: UserData?
-  
-  private let recentButton = UIButton(type: .system)
-  private let popularButton = UIButton(type: .system)
-  
+  var myPageUserData: UserDetailData?
+
   // MARK: - UI설정
-  private lazy var headerStackView = createStackView(axis: .horizontal,
-                                                     spacing: 8)
-  
-  private lazy var studyHubLabel = createLabel(title: "마이페이지",
-                                               textColor: .white,
-                                               fontSize: 18)
-  
-  private lazy var bellButton: UIButton = {
-    // Bell button
-    let bellButton = UIButton(type: .system)
-    bellButton.setImage(UIImage(systemName: "bell"), for: .normal)
-    bellButton.tintColor = .white
-    return bellButton
-  }()
-  
-  private let spacerView: UIView = {
-    let spacerView = UIView()
-    spacerView.setContentHuggingPriority(.defaultLow, for: .horizontal)
-    return spacerView
-  }()
-  
-  private lazy var headerContentStackView = createStackView(axis: .vertical,
-                                                            spacing: 8)
-  
-  
   // 로그인 하면 보이는 라벨
   private lazy var loginSuccessStackView = createStackView(axis: .vertical,
                                                            spacing: 5)
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 15
-    imageView.image = UIImage(named: "ProfileAvatar")
-    imageView.frame = CGRect(x: 0, y: 0, width: 56, height: 56)
-    
+    imageView.image = UIImage(named: "ProfileAvatar_change")
+ 
     return imageView
   }()
   
   private lazy var majorLabel = createLabel(title: convertMajor(myPageUserData?.major! ?? "",
                                                                 isEnglish: false),
-                                            textColor: .gray,
-                                            fontSize: 18)
+                                            textColor: .bg80,
+                                            fontType: "Pretendard",
+                                            fontSize: 14)
+  
   private lazy var nickNameLabel = createLabel(title: myPageUserData?.nickname ?? "비어있음",
                                                textColor: .black,
+                                               fontType: "Pretendard-Bold",
                                                fontSize: 18)
+  
   // 로그인 안하면 보이는 라벨
-  private lazy var loginOrStackView = createStackView(axis: .vertical,
-                                                      spacing: 8)
+  private lazy var loginFailStackView = createStackView(axis: .vertical,
+                                                        spacing: 8)
   
-  private lazy var grayTextLabel = createLabel(title: "나의 스터디 팀원을 만나보세요",
-                                               textColor: .gray,
-                                               fontSize: 16)
-  
-  private lazy var blackTextLabel = createLabel(title: "로그인 / 회원가입",
-                                                textColor: .black,
-                                                fontSize: 18)
-  // 사용자 프로필, 로그인 화면으로 가는 버튼을 담은 스택뷰
-  private lazy var gotologinStackView = createStackView(axis: .horizontal,
-                                                        spacing: 10)
-  
-  // 북마크, 글 횟수 등의 버튼을 담은 스택뷰
-  private lazy var buttonboxesStackView = createStackView(axis: .horizontal,
-                                                          spacing: 8)
-  
-  private lazy var writtenLabel = createLabel(title: "작성한 글",
-                                              textColor: .gray,
-                                              fontSize: 14)
-  
-  private lazy var writtenCountLabel = createLabel(title: "0",
-                                                   textColor: .black,
-                                                   fontSize: 16)
-  
-  private lazy var joinstudyLabel = createLabel(title: "참여한 스터디",
-                                                textColor: .gray,
-                                                fontSize: 14)
-  
-  private lazy var joinstudyCountLabel = createLabel(title: "0",
-                                                     textColor: .black,
-                                                     fontSize: 16)
-  
-  private lazy var bookmarkCountLabel = createLabel(title: "0",
-                                                    textColor: .black,
-                                                    fontSize: 16)
-  
-  private lazy var bookmarkLabel = createLabel(title: "북마크",
-                                               textColor: .gray,
+  private lazy var loginFailLabel = createLabel(title: "나의 스터디 팀원을 만나보세요",
+                                               textColor: .bg80,
+                                               fontType: "Pretendard",
                                                fontSize: 14)
   
+  private lazy var loginFailTitleLabel = createLabel(title: "로그인 / 회원가입",
+                                                     textColor: .black,
+                                                     fontType: "Pretendard-Bold",
+                                                     fontSize: 18)
+  
+  // 로그인 시 -> 정보수정, 비로그인 시 -> 로그인화면으로 이동
   private lazy var chevronButton: UIButton = {
     let chevronButton = UIButton(type: .system)
     chevronButton.setImage(UIImage(systemName: "chevron.right"),
@@ -111,241 +60,306 @@ class MyPageViewController: UIViewController {
     return chevronButton
   }()
   
+  // 사용자 프로필, 로그인 화면으로 가는 버튼을 담은 스택뷰
+  private lazy var gotologinStackView = createStackView(axis: .horizontal,
+                                                        spacing: 10)
+  
+  // 북마크, 글 횟수 등의 버튼을 담은 스택뷰
+  private lazy var mainInfoStackView = createStackView(axis: .horizontal,
+                                                       spacing: 8)
+  
+  // 작성한 글
+  private lazy var writtenLabel = createLabel(title: "작성한 글",
+                                              textColor: .bg80,
+                                              fontType: "Pretendard",
+                                              fontSize: 14)
+  
+  private lazy var writtenCountLabel = createLabel(title: "\(myPageUserData?.postCount ?? 0)" ,
+                                                   textColor: .black,
+                                                   fontType: "Pretendard-Bold",
+                                                   fontSize: 18)
   private lazy var writtenButton: UIButton = {
     let writtenButton = UIButton()
-    writtenButton.backgroundColor = UIColor(hexCode: "#F8F9F9")
-    writtenButton.layer.cornerRadius = 5
-    writtenButton.widthAnchor.constraint(equalToConstant: 115).isActive = true
-    writtenButton.heightAnchor.constraint(equalToConstant: 87).isActive = true
-    writtenButton.addTarget(self, action: #selector(writtenButtonTapped), for: .touchUpInside)
+    writtenButton.addAction(UIAction { _ in
+      self.writtenButtonTapped()
+    }, for: .touchUpInside)
+
     return writtenButton
   }()
   
+  // 참여한 스터디
+  private lazy var joinstudyLabel = createLabel(title: "참여한 스터디",
+                                                textColor: .bg80,
+                                                fontType: "Pretendard",
+                                                fontSize: 14)
+  
+  private lazy var joinstudyCountLabel = createLabel(title: "\(myPageUserData?.participateCount ?? 0)",
+                                                     textColor: .black,
+                                                     fontType: "Pretendard-Bold",
+                                                     fontSize: 18)
+
   private lazy var joinstudyButton: UIButton = {
     // Create a button for "참여한 스터디"
     let joinstudyButton = UIButton()
-    joinstudyButton.backgroundColor = UIColor(hexCode: "#F8F9F9")
-    joinstudyButton.layer.cornerRadius = 5
-    joinstudyButton.widthAnchor.constraint(equalToConstant: 115).isActive = true
-    joinstudyButton.heightAnchor.constraint(equalToConstant: 87).isActive = true
     joinstudyButton.addAction(UIAction { _ in
       self.joinstudyButtonTapped()
     }, for: .touchUpInside)
     return joinstudyButton
   }()
   
+  // 북마크
+  private lazy var bookmarkCountLabel = createLabel(title: "\(myPageUserData?.bookmarkCount ?? 0)",
+                                                    textColor: .black,
+                                                    fontType: "Pretendard-Bold",
+                                                    fontSize: 18)
+  
+  private lazy var bookmarkLabel = createLabel(title: "북마크",
+                                               textColor: .bg80,
+                                               fontType: "Pretendard",
+                                               fontSize: 14)
+
   private lazy var bookmarkButton: UIButton = {
     // Create a button for "북마크"
     let bookmarkButton = UIButton()
-    bookmarkButton.backgroundColor = UIColor(hexCode: "#F8F9F9")
-    bookmarkButton.layer.cornerRadius = 5
-    bookmarkButton.addTarget(self, action: #selector(bookmarkpageButtonTapped), for: .touchUpInside)
-    bookmarkButton.widthAnchor.constraint(equalToConstant: 115).isActive = true
-    bookmarkButton.heightAnchor.constraint(equalToConstant: 87).isActive = true
+    bookmarkButton.addAction(UIAction { _ in
+      self.bookmarkpageButtonTapped()
+    }, for: .touchUpInside)
     
     return bookmarkButton
   }()
   
   private let boxesDividerLine: UIView = {
     let boxesDividerLine = UIView()
-    boxesDividerLine.backgroundColor = UIColor(hexCode: "#F3F5F6")
+    boxesDividerLine.backgroundColor = .bg30
     boxesDividerLine.heightAnchor.constraint(equalToConstant: 10).isActive = true
     return boxesDividerLine
   }()
   
-  private lazy var normalButtonStackView = createStackView(axis: .vertical,
+  
+  private lazy var bottomButtonStackView = createStackView(axis: .vertical,
                                                            spacing: 16)
   
   private lazy var informButton = createMypageButton(title: "공지사항")
   private lazy var askButton = createMypageButton(title: "문의하기")
-  private lazy var howtouseButton = createMypageButton(title: "이용방법")
+  private lazy var howToUseButton = createMypageButton(title: "이용방법")
   private lazy var serviceButton = createMypageButton(title: "서비스 이용약관")
   private lazy var informhandleButton = createMypageButton(title: "개인정보 처리 방침")
-  let scrollView = UIScrollView()
   
   // MARK: - viewDidLoad
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = .black
-    
-    scrollView.backgroundColor = .white
-    print("@@@@@@@@@@@@@@")
+    view.backgroundColor = .white
+     
+    navigationItemSetting()
+    redesignNavigationbar()
     
     fetchUserData()
+    
+    print(loginStatus)
   }
   
   // MARK: - setUpLayout
   func setUpLayout(){
-    headerStackView.addArrangedSubview(studyHubLabel)
-    headerStackView.addArrangedSubview(spacerView)
-    headerStackView.addArrangedSubview(bellButton)
     
-    view.addSubview(headerStackView)
-    
-    if self.loginStatus == false {
-      //로그인 관련
-      print("로그인실패")
-      print(loginStatus)
-      loginOrStackView.addArrangedSubview(grayTextLabel)
-      loginOrStackView.addArrangedSubview(blackTextLabel)
-      
-      gotologinStackView.addArrangedSubview(loginOrStackView)
+    if loginStatus == false {
+      [
+        loginFailLabel,
+        loginFailTitleLabel
+      ].forEach {
+        view.addSubview($0)
+      }
     } else {
-      //로그인 관련
-      print(loginStatus)
-      print("로그인성공")
-      
-      loginSuccessStackView.addArrangedSubview(majorLabel)
-      loginSuccessStackView.addArrangedSubview(nickNameLabel)
-      
-      gotologinStackView.addArrangedSubview(profileImageView)
-      gotologinStackView.addArrangedSubview(loginSuccessStackView)
+      [
+        profileImageView,
+        majorLabel,
+        nickNameLabel
+      ].forEach {
+        view.addSubview($0)
+      }
+    }
+   
+    [
+      chevronButton,
+      writtenButton,
+      writtenCountLabel,
+      writtenLabel,
+      joinstudyButton,
+      joinstudyCountLabel,
+      joinstudyLabel,
+      bookmarkButton,
+      bookmarkCountLabel,
+      bookmarkLabel,
+      boxesDividerLine,
+      informButton,
+      askButton,
+      howToUseButton,
+      serviceButton,
+      informhandleButton
+    ].forEach {
+      view.addSubview($0)
     }
     
-    gotologinStackView.distribution = .fill
-    gotologinStackView.addArrangedSubview(chevronButton)
-    
-    headerContentStackView.addArrangedSubview(gotologinStackView)
-    headerContentStackView.addArrangedSubview(buttonboxesStackView)
-    headerContentStackView.addArrangedSubview(boxesDividerLine)
-    headerContentStackView.addArrangedSubview(normalButtonStackView)
-    
-    writtenButton.addSubview(writtenLabel)
-    writtenButton.addSubview(writtenCountLabel)
-    
-    joinstudyButton.addSubview(joinstudyLabel)
-    joinstudyButton.addSubview(joinstudyCountLabel)
-    
-    bookmarkButton.addSubview(bookmarkCountLabel)
-    bookmarkButton.addSubview(bookmarkLabel)
-    
-    buttonboxesStackView.addArrangedSubview(writtenButton)
-    buttonboxesStackView.addArrangedSubview(joinstudyButton)
-    buttonboxesStackView.addArrangedSubview(bookmarkButton)
-    
-    normalButtonStackView.addArrangedSubview(informButton)
-    normalButtonStackView.addArrangedSubview(serviceButton)
-    normalButtonStackView.addArrangedSubview(howtouseButton)
-    normalButtonStackView.addArrangedSubview(askButton)
-    normalButtonStackView.addArrangedSubview(informhandleButton)
-    
-    scrollView.translatesAutoresizingMaskIntoConstraints = false
-    scrollView.addSubview(headerContentStackView)
-    view.addSubview(scrollView)
   }
   
   // MARK: - makeUI
   func makeUI(){
-    headerStackView.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-      make.leading.equalTo(view.snp.leading).offset(16)
-      make.trailing.equalTo(view.snp.trailing).offset(-16)
-    }
-    
-    // Header content stack view constraints
-    headerContentStackView.snp.makeConstraints { make in
-      make.top.equalTo(scrollView.snp.top).offset(16)
-      make.leading.equalTo(scrollView.snp.leading)
-      make.trailing.equalTo(scrollView.snp.trailing)
-      make.bottom.equalTo(scrollView.snp.bottom)
-      make.width.equalTo(scrollView.snp.width)
-    }
-    
-    //로그인 관련
     if loginStatus == false {
-      //로그인 관련
-      grayTextLabel.snp.makeConstraints { make in
-        make.top.equalTo(loginOrStackView.snp.top).offset(16)
-        make.leading.equalTo(loginOrStackView.snp.leading).offset(16)
-        make.trailing.equalTo(loginOrStackView.snp.trailing).offset(10)
+      loginFailLabel.snp.makeConstraints {
+        $0.top.equalToSuperview().offset(30)
+        $0.leading.equalToSuperview().offset(20)
       }
-    } else {
-      //로그인 관련
-      print(loginStatus)
-      print("로그인성공")
+
+      loginFailTitleLabel.snp.makeConstraints {
+        $0.top.equalTo(loginFailLabel.snp.bottom).offset(10)
+        $0.leading.equalToSuperview().offset(20)
+      }
+    }else {
+      profileImageView.snp.makeConstraints {
+        $0.top.equalToSuperview().offset(30)
+        $0.leading.equalToSuperview().offset(20)
+      }
+      
+      majorLabel.snp.makeConstraints {
+        $0.top.equalTo(profileImageView)
+        $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
+      }
+      
+      nickNameLabel.snp.makeConstraints {
+        $0.top.equalTo(majorLabel.snp.bottom).offset(10)
+        $0.leading.equalTo(majorLabel)
+      }
+    }
+ 
+    chevronButton.snp.makeConstraints {
+      $0.top.equalToSuperview().offset(40)
+      $0.trailing.equalToSuperview().offset(-25)
     }
     
-    chevronButton.snp.makeConstraints { make in
-      make.top.equalTo(gotologinStackView.snp.top)
-      make.trailing.equalTo(gotologinStackView.snp.trailing)
+    // 작성한 글 , 참여한 스터디, 북마크
+    let buttons = [writtenButton, joinstudyButton, bookmarkButton]
+    for button in buttons {
+      button.backgroundColor = .bg20
+      button.layer.cornerRadius = 5
+      button.layer.borderColor = UIColor.bg40.cgColor
+      button.layer.borderWidth = 1
     }
     
-    buttonboxesStackView.snp.makeConstraints { make in
-      make.leading.equalTo(headerContentStackView.snp.leading).offset(10)
-      make.trailing.equalTo(headerContentStackView.snp.trailing).offset(-20)
+    // 작성한 글
+    writtenButton.snp.makeConstraints {
+      $0.leading.equalToSuperview().offset(20)
+      $0.top.equalToSuperview().offset(100)
+      $0.width.equalTo(105)
+      $0.height.equalTo(87)
     }
     
-    boxesDividerLine.snp.makeConstraints { make in
-      make.leading.equalTo(headerContentStackView.snp.leading)
-      make.trailing.equalTo(headerContentStackView.snp.trailing)
+    writtenCountLabel.snp.makeConstraints {
+      $0.top.equalTo(writtenButton.snp.top).offset(20)
+      $0.centerX.equalTo(writtenButton)
     }
     
-    normalButtonStackView.alignment = .leading
-    // 공지사항 , 서비스이용약관 , 이용방법, 문의하기 ,개인정보 처리 방침
-    normalButtonStackView.snp.makeConstraints { make in
-      make.leading.equalTo(headerContentStackView.snp.leading).offset(20)
+    writtenLabel.snp.makeConstraints {
+      $0.top.equalTo(writtenCountLabel.snp.bottom).offset(10)
+      $0.centerX.equalTo(writtenButton)
     }
     
-    writtenLabel.snp.makeConstraints { make in
-      make.centerX.centerY.equalToSuperview()
+    // 참여한 스터디
+    joinstudyButton.snp.makeConstraints {
+      $0.leading.equalTo(writtenButton.snp.trailing).offset(15)
+      $0.top.equalTo(writtenButton)
+      $0.width.equalTo(105)
+      $0.height.equalTo(87)
     }
     
-    writtenCountLabel.snp.makeConstraints { make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(writtenLabel.snp.bottom).offset(8)
+    joinstudyCountLabel.snp.makeConstraints {
+      $0.top.equalTo(joinstudyButton.snp.top).offset(20)
+      $0.centerX.equalTo(joinstudyButton)
     }
     
-    joinstudyLabel.snp.makeConstraints { make in
-      make.centerX.centerY.equalToSuperview()
+    joinstudyLabel.snp.makeConstraints {
+      $0.top.equalTo(joinstudyCountLabel.snp.bottom).offset(10)
+      $0.centerX.equalTo(joinstudyButton)
     }
     
-    joinstudyCountLabel.snp.makeConstraints {make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(joinstudyLabel.snp.bottom).offset(8)
+    // 북마크
+    bookmarkButton.snp.makeConstraints {
+      $0.leading.equalTo(joinstudyButton.snp.trailing).offset(15)
+      $0.top.equalTo(writtenButton)
+      $0.width.equalTo(105)
+      $0.height.equalTo(87)
     }
     
-    bookmarkLabel.snp.makeConstraints { make in
-      make.centerX.centerY.equalToSuperview()
+    bookmarkCountLabel.snp.makeConstraints {
+      $0.top.equalTo(bookmarkButton.snp.top).offset(20)
+      $0.centerX.equalTo(bookmarkButton)
     }
     
-    bookmarkCountLabel.snp.makeConstraints {make in
-      make.centerX.equalToSuperview()
-      make.top.equalTo(bookmarkLabel.snp.bottom).offset(8)
+    bookmarkLabel.snp.makeConstraints {
+      $0.top.equalTo(bookmarkCountLabel.snp.bottom).offset(10)
+      $0.centerX.equalTo(bookmarkButton)
     }
     
-    // Scroll view constraints
-    scrollView.snp.makeConstraints { make in
-      make.top.equalTo(headerStackView.snp.bottom).offset(16)
-      make.leading.equalTo(view.snp.leading)
-      make.trailing.equalTo(view.snp.trailing)
-      make.bottom.equalTo(view.snp.bottom)
+    boxesDividerLine.snp.makeConstraints {
+      $0.top.equalTo(writtenButton.snp.bottom).offset(40)
+      $0.leading.trailing.equalToSuperview()
     }
+    
+    // 공지사항 , 문의하기, 이용방법, 서비스 이용약관, 개인정보처리방침
+    informButton.snp.makeConstraints {
+      $0.top.equalTo(boxesDividerLine.snp.bottom).offset(20)
+      $0.leading.equalTo(writtenButton)
+    }
+    
+    askButton.snp.makeConstraints {
+      $0.top.equalTo(informButton.snp.bottom).offset(20)
+      $0.leading.equalTo(writtenButton)
+    }
+    
+    howToUseButton.snp.makeConstraints {
+      $0.top.equalTo(askButton.snp.bottom).offset(20)
+      $0.leading.equalTo(writtenButton)
+    }
+    
+    serviceButton.snp.makeConstraints {
+      $0.top.equalTo(howToUseButton.snp.bottom).offset(20)
+      $0.leading.equalTo(writtenButton)
+    }
+    
+    informhandleButton.snp.makeConstraints {
+      $0.top.equalTo(serviceButton.snp.bottom).offset(20)
+      $0.leading.equalTo(writtenButton)
+    }
+  }
+  
+  // MARK: - 네비게이션바 재설정
+  func redesignNavigationbar(){
+    let myPageImg = UIImage(named: "MyPageImg")?.withRenderingMode(.alwaysOriginal)
+    let myPage = UIBarButtonItem(image: myPageImg, style: .done, target: nil, action: nil)
+    myPage.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    myPage.isEnabled = false
+    
+    let alertBellImg = UIImage(named: "BellImgWithWhite")?.withRenderingMode(.alwaysOriginal)
+    lazy var alertBell = UIBarButtonItem(
+      image: alertBellImg,
+      style: .plain,
+      target: self,
+      action: nil)
+    alertBell.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
+    navigationItem.leftBarButtonItem = myPage
+    navigationItem.rightBarButtonItem = alertBell
   }
   
   // MARK: - 유저 정보 가저오는 함수
   func fetchUserData() {
-    InfoManager.shared.fetchUser { [weak self] result in
-      guard let self = self else { return }
+    userInfoManager.fetchUserInfo {
+      self.myPageUserData = self.userInfoManager.getUserInfo()
       
-      switch result {
-      case .success(let userData):
-        // 사용자 정보를 사용하여 원하는 작업을 수행합니다.
-        print("Email: \(userData.email)")
-        print("Gender: \(userData.gender)")
-        
-        if userData.email != nil {
-          self.myPageUserData = userData
-          self.loginStatus = true
-        }
-        
-        DispatchQueue.main.async {
-          self.setUpLayout()
-          self.makeUI()
-        }
-        
-      case .failure(let error):
-        // 네트워크 오류 또는 데이터 파싱 오류를 처리합니다.
-        print("Error: \(error)")
+      let status = self.myPageUserData == nil ? false : true
+      self.loginStatus = status
+      
+      DispatchQueue.main.async {
+        self.setUpLayout()
+        self.makeUI()
       }
     }
   }
@@ -378,16 +392,6 @@ class MyPageViewController: UIViewController {
     myinformViewController.email = myPageUserData?.email
     myinformViewController.gender = myPageUserData?.gender
     
-    
-    
-    
-    // If you want to present it modally, you can use the following code
-    let navigationController = UINavigationController(rootViewController: myinformViewController)
-    navigationController.modalPresentationStyle = .fullScreen
-    
-    // Present the ViewController modally
-    present(navigationController, animated: true, completion: nil)
+    self.navigationController?.pushViewController(myinformViewController, animated: true)
   }
-  
-  
 }

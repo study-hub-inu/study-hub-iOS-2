@@ -10,7 +10,7 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   let tokenManager = TokenManager.shared
   let loginManager = LoginManager.shared
-  let infoManager = InfoManager.shared
+  let infoManager = UserInfoManager.shared
   var window: UIWindow?
   
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

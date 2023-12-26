@@ -6,6 +6,7 @@
 //
 
 import UIKit
+
 class NaviHelper: UIViewController {
   // MARK: - navi 설정
   func navigationItemSetting() {
@@ -37,7 +38,9 @@ class NaviHelper: UIViewController {
   
   @objc func rightButtonTapped() {
     // postid관련 수정필요
-    let viewControllerToPresent = BottomSheet(postID: 1)
+    let viewControllerToPresent = BottomSheet(postID: 1,
+                                              firstButtonTitle: "삭제하기",
+                                              secondButtonTitle: "수정하기")
     if #available(iOS 15.0, *) {
       if let sheet = viewControllerToPresent.sheetPresentationController {
         if #available(iOS 16.0, *) {

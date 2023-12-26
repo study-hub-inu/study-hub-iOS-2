@@ -4,7 +4,10 @@ import UIKit
 import SnapKit
 
 final class HomeViewController: NaviHelper {
-  var newPostData: [Content] = []
+  let postDataManager = PostDataManager.shared
+  let detailPostDataManager = PostDetailInfoManager.shared
+  var newPostDatas: PostData?
+  var deadlinePostDatas: PostData?
 
   // MARK: - 화면구성
   private lazy var mainStackView = createStackView(axis: .vertical,
@@ -144,10 +147,11 @@ final class HomeViewController: NaviHelper {
     setupDelegate()
     registerCell()
     
-    setUpLayout()
-    makeUI()
+    fetchData{
+      self.setUpLayout()
+      self.makeUI()
+    }
     
-//    getNewPostData()
   }
   
   // MARK: - setuplayout
@@ -286,7 +290,7 @@ final class HomeViewController: NaviHelper {
     }
   }
   
-
+  
   private func setupDelegate() {
     recrutingCollectionView.tag = 1
     deadLineCollectionView.tag = 2
@@ -298,6 +302,7 @@ final class HomeViewController: NaviHelper {
     
     deadLineCollectionView.delegate = self
     deadLineCollectionView.dataSource = self
+    
   }
   
   private func registerCell() {
@@ -307,35 +312,20 @@ final class HomeViewController: NaviHelper {
     deadLineCollectionView.register(DeadLineCell.self,
                                     forCellWithReuseIdentifier: DeadLineCell.id)
   }
-  
-  // MARK: - newPostData 가져오기
-  func getNewPostData(){
-    let postDataManager = PostDataManager.shared
-    
-    postDataManager.fetchUser { result in
-      switch result {
-      case .success(let posData):
-        let extractedData = posData.content.map { content in
-          return Content(
-            postID: content.postID,
-            major: content.major,
-            title: content.title,
-            content: content.content,
-            leftover: content.leftover,
-            studyPerson: content.studyPerson,
-            close: content.close
-          )
-        }
-        self.newPostData = extractedData
-   
-      case .failure(let error):
-        switch error {
-        case .networkingError:
-          print("네트워크 에러")
-        case .dataError:
-          print("데이터 에러")
-        case .parseError:
-          print("파싱 에러")
+
+  // MARK: - collectionview 데이터 불러오기
+  func fetchData(completion: @escaping () -> Void) {
+    DispatchQueue.global().async {
+      self.postDataManager.getNewPostData {
+        self.newPostDatas = self.postDataManager.getNewPostDatas()
+        
+        self.postDataManager.getDeadLinePostData{
+          self.deadlinePostDatas = self.postDataManager.getDeadLinePostDatas()
+          DispatchQueue.main.async {
+            self.recrutingCollectionView.reloadData()
+            self.deadLineCollectionView.reloadData()
+            completion()
+          }
         }
       }
     }
@@ -368,15 +358,22 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     } else if collectionView.tag == 2 {
       return 4
     }
-    else  {
+    else {
       return 0
     }
   }
+  
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
+  
     let postedVC = PostedStudyViewController()
-    self.navigationController?.pushViewController(postedVC, animated: true)
     
+    detailPostDataManager.getPostDetailData(postID: newPostDatas?.content[indexPath.row].postID ?? 0) {
+      let cellData = self.detailPostDataManager.getPostDetailData()
+      postedVC.postedDate = cellData
+    }
+    
+    self.navigationController?.pushViewController(postedVC, animated: true)
   }
   
   func collectionView(_ collectionView: UICollectionView,
@@ -384,15 +381,21 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
     if collectionView.tag == 1 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecruitPostCell.id,
                                                     for: indexPath)
+
       if let cell = cell as? RecruitPostCell {
-        cell.model = newPostData
-      
+        let content = newPostDatas?.content[indexPath.row]
+        cell.model = content
       }
+
       return cell
-      
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeadLineCell.id,
                                                     for: indexPath)
+      if let cell = cell as? DeadLineCell {
+        let content = deadlinePostDatas?.content[indexPath.row]
+        cell.model = content
+      
+      }
       return cell
     }
   }

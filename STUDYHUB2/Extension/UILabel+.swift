@@ -20,7 +20,6 @@ extension UILabel {
     
     label.attributedText = attributedStr
   }
-
   
   func setLineSpacing(spacing: CGFloat) {
       guard let text = text else { return }

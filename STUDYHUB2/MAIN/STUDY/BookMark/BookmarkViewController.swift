@@ -10,6 +10,7 @@ final class BookmarkViewController: NaviHelper {
   var countNumber: Int = 4
   private lazy var totalCountLabel = createLabel(title: "전체 \(countNumber)",
                                                  textColor: .bg80,
+                                                 fontType: "Pretendard",
                                                  fontSize: 16)
   
   private lazy var deleteAllButton: UIButton = {
@@ -31,6 +32,7 @@ final class BookmarkViewController: NaviHelper {
   
   private lazy var emptyMainLabel = createLabel(title: "북마크 글이 없어요\n관심있는 스터디를 저장해 보세요!",
                                                 textColor: .bg70,
+                                                fontType: "Pretendard",
                                                 fontSize: 16)
   
   private lazy var bookMarkCollectionView: UICollectionView = {

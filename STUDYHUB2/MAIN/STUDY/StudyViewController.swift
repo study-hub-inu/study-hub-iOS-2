@@ -4,11 +4,18 @@ import SnapKit
 
 // searchResultCell이랑 같은 형식 , collectionview랑 추가버튼 같이 뜨게 수정해야함
 final class StudyViewController: NaviHelper {
+  
+  let postDataManager = PostDataManager.shared
+  let detailPostDataManager = PostDetailInfoManager.shared
+  var recentDatas: PostData?
+  
   private lazy var recentButton: UIButton = {
     let button = UIButton()
-    button.setTitle("최신순", for: .normal)
-    button.setTitleColor(.black, for: .normal)
-    button.titleLabel?.font = .systemFont(ofSize: 16)
+    button.setTitle("   전체   ", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
+    button.backgroundColor = .black
+    button.layer.cornerRadius = 18
     button.frame = CGRect(x: 0, y: 0, width: 57, height: 30)
     button.addTarget(self, action: #selector(recentButtonTapped), for: .touchUpInside)
     
@@ -19,18 +26,20 @@ final class StudyViewController: NaviHelper {
   
   private lazy var popularButton: UIButton = {
     let button = UIButton()
-    button.setTitle("인기순", for: .normal)
-    button.setTitleColor(.bg70, for: .normal)
-    button.titleLabel?.font = .systemFont(ofSize: 16)
+    button.setTitle("   인기   ", for: .normal)
+    button.setTitleColor(.bg90, for: .normal)
+    button.titleLabel?.font = UIFont(name: "Pretendard", size: 14)
+    button.layer.cornerRadius = 18
     button.frame = CGRect(x: 0, y: 0, width: 57, height: 30)
     button.addTarget(self, action: #selector(popularButtonTapped), for: .touchUpInside)
     
     return button
   }()
   
-  var studyCount = 2
-  private lazy var countLabel = createLabel(title: "\(studyCount)개",
+  private lazy var studyCount = recentDatas?.content.count
+  private lazy var countLabel = createLabel(title: "\(studyCount ?? 0)개",
                                             textColor: .bg80,
+                                            fontType: "Pretendard",
                                             fontSize: 14)
   
   private lazy var divideLine = createDividerLine(height: 1)
@@ -41,6 +50,7 @@ final class StudyViewController: NaviHelper {
   private lazy var describeLabel = createLabel(
     title: "관련 스터디가 없어요\n지금 스터디를 만들어\n  팀원을 구해보세요!",
     textColor: .bg80,
+    fontType: "Pretendard",
     fontSize: 12)
   
   // 스터디가 있는 경우
@@ -74,23 +84,35 @@ final class StudyViewController: NaviHelper {
     return addButton
   }()
   
+  // 네트워킹 불러올 때
+  private lazy var activityIndicator = UIActivityIndicatorView(style: .large)
+
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
+    
+    waitingNetworking()
     
     navigationItemSetting()
     redesignNavigationbar()
     
     setupCollectionView()
-    
-    setupLayout()
-    makeUI()
-    
+   
+    postDataManager.getRecentPostDatas(hotType: "false") {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        
+        self.setupLayout()
+        self.makeUI()
+      }
+    }
   }
   
   // MARK: - setupLayout
   func setupLayout(){
-    if studyCount > 0 {
+    if studyCount ?? 0 > 0 {
       [
         recentButton,
         separateLine,
@@ -159,7 +181,7 @@ final class StudyViewController: NaviHelper {
       make.leading.trailing.equalToSuperview()
     }
     
-    if studyCount > 0 {
+    if studyCount ?? 0 > 0 {
       resultCollectionView.snp.makeConstraints { make in
         make.top.equalTo(contentView).offset(20)
         make.leading.trailing.equalTo(contentView)
@@ -246,16 +268,51 @@ final class StudyViewController: NaviHelper {
   }
   
   @objc func recentButtonTapped(){
-    print("1")
-    recentButton.setTitleColor(.black, for: .normal)
-    popularButton.setTitleColor(.bg70, for: .normal)
+    activityIndicator.startAnimating()
     
+    postDataManager.getRecentPostDatas(hotType: "false") {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        
+        self.resultCollectionView.reloadData()
+      }
+    }
+    popularButton.setTitleColor(.bg90, for: .normal)
+    popularButton.backgroundColor = .bg30
+    
+    recentButton.setTitleColor(.white, for: .normal)
+    recentButton.backgroundColor = .black
   }
   
   @objc func popularButtonTapped(){
-    print("2")
-    recentButton.setTitleColor(.bg70, for: .normal)
-    popularButton.setTitleColor(.black, for: .normal)
+    postDataManager.getRecentPostDatas(hotType: "true") {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+      print(self.recentDatas)
+      DispatchQueue.main.async {
+        self.resultCollectionView.reloadData()
+
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+      }
+    }
+    recentButton.setTitleColor(.bg90, for: .normal)
+    recentButton.backgroundColor = .bg30
+    
+    popularButton.setTitleColor(.white, for: .normal)
+    popularButton.backgroundColor = .black
+  }
+  
+  // MARK: - 네트워킹 기다릴 때
+  func waitingNetworking(){
+    view.addSubview(activityIndicator)
+    
+    activityIndicator.snp.makeConstraints {
+      $0.centerX.centerY.equalToSuperview()
+    }
+    
+    activityIndicator.startAnimating()
   }
 }
 
@@ -264,13 +321,19 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    return 4
+    studyCount = recentDatas?.content.count ?? 0
+    return studyCount ?? 0
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
     
     let postedVC = PostedStudyViewController()
+  
+    detailPostDataManager.getPostDetailData(postID: recentDatas?.content[indexPath.row].postID ?? 0) {
+      let cellData = self.detailPostDataManager.getPostDetailData()
+      postedVC.postedDate = cellData
+    }
     
     self.navigationController?.pushViewController(postedVC, animated: true)
   }
@@ -280,6 +343,10 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id,
                                                   for: indexPath)
+    if let cell = cell as? SearchResultCell {
+      let content = recentDatas?.content[indexPath.row]
+      cell.model = content
+    }
     return cell
   }
 }

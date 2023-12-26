@@ -7,7 +7,7 @@ final class RecruitPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
   
-  var model: [Content] = [] { didSet { bind() } }
+  var model: PostDataContent? { didSet { bind() } }
   
   private lazy var majorLabel: UILabel = {
     let label = UILabel()
@@ -26,7 +26,8 @@ final class RecruitPostCell: UICollectionViewCell {
   
   private lazy var titleLabel: UILabel = {
     let label = UILabel()
-    
+    label.font = UIFont(name: "Pretendard", size: 14)
+    label.textColor = .black
     return label
   }()
   
@@ -39,14 +40,13 @@ final class RecruitPostCell: UICollectionViewCell {
     return imageView
   }()
   
-  var countMember = 0
   private lazy var countMemeberLabel: UILabel = {
     let label = UILabel()
     label.textColor = .bg90
     label.text = "/14"
     return label
   }()
-
+  
   private lazy var fineImageView = UIImageView(image:  UIImage(named: "MoneyImage"))
   
   private lazy var fineCountLabel: UILabel = {
@@ -66,13 +66,13 @@ final class RecruitPostCell: UICollectionViewCell {
     return label
   }()
   
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     setViewShadow(backView: self)
     addSubviews()
-  
+    
     configure()
   }
   
@@ -149,13 +149,27 @@ final class RecruitPostCell: UICollectionViewCell {
   }
   
   private func bind() {
-    for data in model {
-      majorLabel.text = data.title.convertMajor(data.title, isEnglish: false)
-      titleLabel.text = data.title
-//      countMemeberLabel
-    }
+    guard let data = model else { return }
+    
+    var studyPersonCount = data.studyPerson - data.remainingSeat
+    
+    majorLabel.text = data.major.convertMajor(data.major, isEnglish: false)
+    titleLabel.text = data.title
+    remainMemeber.text = "  잔여 \(data.remainingSeat)자리  "
+    countMemeberLabel.text = "\(studyPersonCount) / \(data.studyPerson)"
+    fineCountLabel.text = "\(data.penalty) 원"
+  
+
+    
+    countMemeberLabel.changeColor(label: countMemeberLabel,
+                                  wantToChange: "\(studyPersonCount)",
+                                  color: .o50)
+    fineCountLabel.changeColor(label: fineCountLabel,
+                               wantToChange: "\(data.penalty)",
+                               color: .o50)
     
   }
   
 }
+
 

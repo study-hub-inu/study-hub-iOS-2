@@ -11,6 +11,7 @@ final class WriteRefuseReasonVC: NaviHelper {
   private lazy var titleLabel: UILabel = {
     let label = createLabel(title: "해당 참여자를 거절하게 된 이유를 적어주세요 😢",
                             textColor: .black,
+                            fontType: "Pretendard",
                             fontSize: 16)
     label.numberOfLines = 0
     return label
@@ -38,6 +39,7 @@ final class WriteRefuseReasonVC: NaviHelper {
   
   private lazy var bottomLabel = createLabel(title: "- 해당 내용은 사용자에게 전송돼요",
                                              textColor: .bg60,
+                                             fontType: "Pretendard",
                                              fontSize: 12)
 
   

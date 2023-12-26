@@ -18,6 +18,7 @@ class CalendarViewController: UIViewController {
   var buttonSelect: Bool?
   private lazy var titleLabel = createLabel(title: dateFormatter.string(from: calendar!.currentPage),
                                             textColor: .black,
+                                            fontType: "Pretendard",
                                             fontSize: 18)
   
   private lazy var previousButton: UIButton = {
