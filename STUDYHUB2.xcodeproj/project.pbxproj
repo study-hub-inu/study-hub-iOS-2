@@ -60,6 +60,7 @@
 		EE271F2C2AD9250F00190E7A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F2B2AD9250F00190E7A /* UIView+.swift */; };
 		EE35ED7B2B15F829008040E2 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */; };
 		EE98B1A92B35276D0025C4F8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1A82B35276D0025C4F8 /* Networking.swift */; };
+		EE98B1AB2B3BB3F70025C4F8 /* EditMajorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1AA2B3BB3F70025C4F8 /* EditMajorViewController.swift */; };
 		EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */; };
 		EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */; };
 		EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E992B10931500C23AB4 /* UIButton+.swift */; };
@@ -142,6 +143,7 @@
 		EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseCell.swift; sourceTree = "<group>"; };
 		EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		EE98B1A82B35276D0025C4F8 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		EE98B1AA2B3BB3F70025C4F8 /* EditMajorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMajorViewController.swift; sourceTree = "<group>"; };
 		EEB51E842B103C2300C23AB4 /* UserInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoManager.swift; path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/UserInfoManager.swift"; sourceTree = "<group>"; };
 		EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = ../MyPageViewController.swift; sourceTree = "<group>"; };
 		EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +339,7 @@
 			children = (
 				EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */,
 				EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */,
+				EE98B1AA2B3BB3F70025C4F8 /* EditMajorViewController.swift */,
 			);
 			name = INFO;
 			path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/INFO";
@@ -638,6 +641,7 @@
 				EEC05ED52B15FA0E001602AE /* UserInfoManager.swift in Sources */,
 				EE07ADD12AF632B80096890F /* Calendar.swift in Sources */,
 				F8085D442A81846C0067D4DE /* StudyViewController.swift in Sources */,
+				EE98B1AB2B3BB3F70025C4F8 /* EditMajorViewController.swift in Sources */,
 				F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */,
 				EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */,
 				EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */,

@@ -73,8 +73,6 @@ final class HomeViewController: NaviHelper {
     return button
   }()
   
-  
-  
   // MARK: - collectionview
   private lazy var recrutingCollectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
@@ -151,6 +149,8 @@ final class HomeViewController: NaviHelper {
       self.setUpLayout()
       self.makeUI()
     }
+    setUpLayout()
+    makeUI()
     
   }
   
