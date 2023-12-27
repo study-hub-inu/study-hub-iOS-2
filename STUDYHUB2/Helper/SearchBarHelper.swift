@@ -8,10 +8,10 @@
 import UIKit
 
 extension UISearchBar {
-  static func createSearchBar() -> UISearchBar {
+  static func createSearchBar(placeholder: String) -> UISearchBar {
     let bar = UISearchBar()
   
-    bar.placeholder = "스터디와 관련된 학과를 입력해주세요"
+    bar.placeholder = placeholder
     bar.searchTextField.font = UIFont(name: "Pretendard", size: 20)
     
     if let searchBarTextField = bar.value(forKey: "searchField") as? UITextField {

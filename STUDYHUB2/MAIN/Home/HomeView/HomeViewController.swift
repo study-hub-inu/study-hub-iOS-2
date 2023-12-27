@@ -31,7 +31,7 @@ final class HomeViewController: NaviHelper {
   }()
   
   // MARK: - 서치바
-  private let searchBar = UISearchBar.createSearchBar()
+  private let searchBar = UISearchBar.createSearchBar(placeholder: "스터디와 관련된 학과를 입력해주세요")
   
   // MARK: - 모집 중인 스터디
   private let newStudyLabel: UILabel = {

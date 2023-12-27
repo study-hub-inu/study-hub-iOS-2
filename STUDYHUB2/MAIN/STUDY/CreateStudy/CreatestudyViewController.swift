@@ -792,11 +792,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
         print("생성시작")
       }
     }
-    
-  
-  
   }
-  
   
   // MARK: - 벌금 없을 때 함수
   @objc func noFineButtonTapped(_ sender: UIButton) {

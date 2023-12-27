@@ -25,7 +25,7 @@ final class DepartmentselectViewController: NaviHelper {
   var resultDepartments: [String] = []
   var selectedMajor: String?
   
-  private let searchController = UISearchBar.createSearchBar()
+  private let searchController = UISearchBar.createSearchBar(placeholder: "스터디와 관련된 학과를 입력해주세요")
   
   private lazy var resultTableView: UITableView = {
     let tableView = UITableView()
