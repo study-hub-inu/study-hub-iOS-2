@@ -10,10 +10,12 @@ import UIKit
 import SnapKit
 
 class MyInformViewController: UIViewController {
+
     var major: String?
     var nickname: String?
     var email: String?
     var gender: String?
+    var updatedNickname: String?
 
 
   
@@ -46,7 +48,7 @@ class MyInformViewController: UIViewController {
     private lazy var profileImageView: UIImageView = {
       let imageView = UIImageView()
       imageView.layer.cornerRadius = 15
-      imageView.image = UIImage(named: "ProfileAvatar")
+      imageView.image = UIImage(named: "ProfileAvatar_change")
       imageView.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
       
       return imageView
@@ -71,9 +73,19 @@ class MyInformViewController: UIViewController {
         editButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         editButton.setTitleColor(UIColor(hexCode: "#FF5530"), for: .normal)
         editButton.translatesAutoresizingMaskIntoConstraints = false
-//        editButton.addTarget(self, action: #selector(editButtonButtonTapped(_:)), for: .touchUpInside)
+        editButton.addTarget(self,action: #selector(editButtonTapped),for: .touchUpInside)
       return editButton
     }()
+    
+    lazy var bottomSheetController: BottomSheetController = {
+        let bottomSheet = BottomSheetController()
+        bottomSheet.addButton(title: "사진 촬영하기", action: #selector(cameraButtonTapped), backgroundColor: .white)
+        bottomSheet.addButton(title: "앨범에서 선택하기", action: #selector(albumButtonTapped), backgroundColor: .white)
+        bottomSheet.addButton(title: "닫기", action: #selector(closeButtonTapped), backgroundColor: UIColor(hexCode: "#F3F5F6"))
+        bottomSheet.setButtonTextColor(UIColor(hexCode: "#68737D"))
+        return bottomSheet
+    }()
+    
     
     //닉네임
     private lazy var nicknameStackView = createStackView(axis: .horizontal,
@@ -100,9 +112,9 @@ class MyInformViewController: UIViewController {
         nicknamechevronButton.setImage(UIImage(systemName: "chevron.right"),
                              for: .normal)
         nicknamechevronButton.tintColor = UIColor(hexCode: "#8F8F8F")
-//        nicknamechevronButton.addTarget(self,
-//                              action: #selector(nicknamechevronButtonTapped),
-//                              for: .touchUpInside)
+        nicknamechevronButton.addTarget(self,
+                              action: #selector(nicknamechevronButtonTapped),
+                              for: .touchUpInside)
         nicknamechevronButton.contentHorizontalAlignment = .trailing
  
       return nicknamechevronButton
@@ -134,7 +146,9 @@ class MyInformViewController: UIViewController {
                              for: .normal)
         departmentchevronButton.tintColor = UIColor(hexCode: "#8F8F8F")
         departmentchevronButton.contentHorizontalAlignment = .trailing
- 
+        departmentchevronButton.addTarget(self,
+                              action: #selector(departmentchevronButtonTapped),
+                              for: .touchUpInside)
       return departmentchevronButton
     }()
     
@@ -153,7 +167,9 @@ class MyInformViewController: UIViewController {
                              for: .normal)
         passwordchevronButton.tintColor = UIColor(hexCode: "#8F8F8F")
         passwordchevronButton.contentHorizontalAlignment = .trailing
- 
+        passwordchevronButton.addTarget(self,
+                              action: #selector(passwordchevronButtonTapped),
+                              for: .touchUpInside)
       return passwordchevronButton
     }()
     
@@ -215,7 +231,7 @@ class MyInformViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .black
-    
+      
     setUpLayout()
     makeUI()
   }
@@ -306,29 +322,32 @@ class MyInformViewController: UIViewController {
         make.width.equalTo(scrollView.snp.width)
       }
       
-      profileImageStackView.snp.makeConstraints { make in
-          make.leading.equalTo(headerContentStackView.snp.leading)
-          make.trailing.equalTo(headerContentStackView.snp.trailing)
-      }
+//      profileImageStackView.snp.makeConstraints { make in
+//          make.leading.equalTo(headerContentStackView.snp.leading)
+//          make.trailing.equalTo(headerContentStackView.snp.trailing)
+//      }
     
       profileImageView.snp.makeConstraints { make in
           make.centerX.equalTo(headerContentStackView.snp.centerX)
           make.width.equalTo(80)
           make.height.equalTo(80)
-          make.trailing.equalTo(profileImageStackView.snp.trailing).offset(-50)
+          make.trailing.equalTo(headerContentStackView.snp.trailing).offset(-147.5)
+          make.leading.equalTo(headerContentStackView.snp.leading).offset(147.5)
       }
       
-//      ImageeditStackView.snp.makeConstraints { make in
-//          make.centerX.equalTo(headerContentStackView.snp.centerX)
-//      }
+      ImageeditStackView.snp.makeConstraints { make in
+          make.centerX.equalTo(ImageeditStackView.snp.centerX)
+          make.top.equalTo(profileImageStackView.snp.bottom).offset(20)
+
+      }
       
       //이미지 수정 삭제
       deleteButton.snp.makeConstraints { make in
-        make.leading.equalTo(ImageeditStackView.snp.leading).offset(150)
+        make.leading.equalTo(ImageeditStackView.snp.leading).offset(154)
       }
 
       editButton.snp.makeConstraints { make in
-        make.leading.equalTo(deleteButton.snp.trailing).offset(-142)
+        make.leading.equalTo(deleteButton.snp.trailing).offset(-140)
       }
       
       //닉네임
@@ -417,5 +436,63 @@ class MyInformViewController: UIViewController {
     
     self.dismiss(animated: true, completion: nil)
   }
+    
+    @objc func nicknamechevronButtonTapped() {
+        let editnicknameViewController = EditnicknameViewController()
+        // Create a UINavigationController with HomeViewController as the root view controller
+        
+        editnicknameViewController.nickname = nickname
+
+        
+        let navigationController = UINavigationController(rootViewController: editnicknameViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        // Present the UINavigationController modally
+        present(navigationController, animated: true, completion: nil)
+      }
+    
+    @objc func departmentchevronButtonTapped() {
+        let editdepartmentViewController = EditdepartmentViewController()
+        // Create a UINavigationController with HomeViewController as the root view controller
+        
+        editdepartmentViewController.major = major
+        
+        let navigationController = UINavigationController(rootViewController: editdepartmentViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        // Present the UINavigationController modally
+        present(navigationController, animated: true, completion: nil)
+      }
+    
+    @objc func passwordchevronButtonTapped() {
+        let editpasswordViewController = EditpasswordViewController()
+        // Create a UINavigationController with HomeViewController as the root view controller
+        
+        
+        let navigationController = UINavigationController(rootViewController: editpasswordViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        // Present the UINavigationController modally
+        present(navigationController, animated: true, completion: nil)
+      }
+    
+    @objc func editButtonTapped() {
+        presentBottomSheet()
+    }
+
+    private func presentBottomSheet() {
+        bottomSheetController.present(in: self, heightMultiplier: 0.24)
+    }
+
+    @objc func cameraButtonTapped() {
+    }
+
+    @objc func albumButtonTapped() {
+    }
+
+    @objc func closeButtonTapped() {
+        bottomSheetController.dismiss()
+    }
   
+    
 }

@@ -1,3 +1,9 @@
+//
+//  MyPageViewController.swift
+//  STUDYHUB2
+//
+//  Created by HYERYEONG on 2023/11/07.
+//
 import UIKit
 
 import SnapKit
@@ -42,7 +48,7 @@ class MyPageViewController: UIViewController {
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 15
-    imageView.image = UIImage(named: "ProfileAvatar")
+    imageView.image = UIImage(named: "ProfileAvatar_change")
     imageView.frame = CGRect(x: 0, y: 0, width: 56, height: 56)
     
     return imageView
@@ -264,7 +270,7 @@ class MyPageViewController: UIViewController {
     
     chevronButton.snp.makeConstraints { make in
       make.top.equalTo(gotologinStackView.snp.top)
-      make.trailing.equalTo(gotologinStackView.snp.trailing)
+      make.trailing.equalTo(headerContentStackView.snp.trailing).offset(-20)
     }
     
     buttonboxesStackView.snp.makeConstraints { make in
@@ -373,7 +379,7 @@ class MyPageViewController: UIViewController {
     let myinformViewController = MyInformViewController()
     
     // Pass major information to MyinformViewController
-    myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", isEnglish: false)
+      myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", isEnglish: false)
     myinformViewController.nickname = myPageUserData?.nickname
     myinformViewController.email = myPageUserData?.email
     myinformViewController.gender = myPageUserData?.gender
