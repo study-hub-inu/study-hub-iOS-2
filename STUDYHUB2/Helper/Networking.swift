@@ -51,6 +51,7 @@ final class Networking {
   
   // 네트워킹 요청하는 메서드
   func fetchData<T: Codable>(type: String,
+                             apiVesrion: String,
                                urlPath: String,
                                queryItems: [URLQueryItem]?,
                                tokenNeed: Bool,
@@ -60,7 +61,7 @@ final class Networking {
     urlComponents.scheme = "https"
     urlComponents.host = "study-hub.site"
     urlComponents.port = 443
-    urlComponents.path = "/api/v1" + urlPath
+    urlComponents.path = "/api/" + apiVesrion + urlPath
     
     urlComponents.queryItems = queryItems
     

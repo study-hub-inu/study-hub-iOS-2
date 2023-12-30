@@ -6,8 +6,8 @@ import SnapKit
 final class HomeViewController: NaviHelper {
   let postDataManager = PostDataManager.shared
   let detailPostDataManager = PostDetailInfoManager.shared
-  var newPostDatas: PostData?
-  var deadlinePostDatas: PostData?
+  var newPostDatas: PostDataContent?
+  var deadlinePostDatas: PostDataContent?
 
   // MARK: - 화면구성
   private lazy var mainStackView = createStackView(axis: .vertical,
@@ -368,7 +368,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
   
     let postedVC = PostedStudyViewController()
     
-    detailPostDataManager.getPostDetailData(postID: newPostDatas?.content[indexPath.row].postID ?? 0) {
+    detailPostDataManager.getPostDetailData(postID: newPostDatas?.postDataByInquiries.content[indexPath.row].postID ?? 0) {
       let cellData = self.detailPostDataManager.getPostDetailData()
       postedVC.postedDate = cellData
     }
@@ -383,7 +383,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                                                     for: indexPath)
 
       if let cell = cell as? RecruitPostCell {
-        let content = newPostDatas?.content[indexPath.row]
+        let content = newPostDatas?.postDataByInquiries.content[indexPath.row]
         cell.model = content
       }
 
@@ -392,7 +392,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DeadLineCell.id,
                                                     for: indexPath)
       if let cell = cell as? DeadLineCell {
-        let content = deadlinePostDatas?.content[indexPath.row]
+        let content = deadlinePostDatas?.postDataByInquiries.content[indexPath.row]
         cell.model = content
       
       }
