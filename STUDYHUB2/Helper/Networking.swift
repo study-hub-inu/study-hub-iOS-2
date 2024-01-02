@@ -13,6 +13,8 @@ import UIKit
 enum networkingAPI {
   case storeImage(_image: UIImage)
   case editUserNickName(_nickname: String)
+  case editUserMaojr(_major: String)
+  case editUserPassword(_checkPassword: Bool, _password: String)
 }
 
 extension networkingAPI: TargetType {
@@ -26,8 +28,11 @@ extension networkingAPI: TargetType {
       return "/v1/users/image"
     case .editUserNickName(_nickname: _):
       return "/v1/users/nickname"
+    case .editUserMaojr(_major: _):
+      return "/v1/users/major"
+    case .editUserPassword(_checkPassword: _, _password: _):
+      return "/v1/users/password"
     }
-    
   }
   
   var method: Moya.Method {
@@ -35,6 +40,10 @@ extension networkingAPI: TargetType {
     case .storeImage(_image: _):
       return .put
     case .editUserNickName(_nickname: _):
+      return .put
+    case .editUserMaojr(_major: _):
+      return .put
+    case .editUserPassword(_checkPassword: _, _password: _):
       return .put
     }
   }
@@ -50,7 +59,13 @@ extension networkingAPI: TargetType {
       
     // 바디에 요청
     case .editUserNickName(let nickname):
-      let params = NickName(nickname: nickname)
+      let params = EditNickName(nickname: nickname)
+      return .requestJSONEncodable(params)
+    case .editUserMaojr(let major):
+      let params = EditMajor(major: major)
+      return .requestJSONEncodable(params)
+    case .editUserPassword(let checkPassword, let password):
+      let params = EditPassword(auth: checkPassword, password: password)
       return .requestJSONEncodable(params)
     }
   }
@@ -62,7 +77,6 @@ extension networkingAPI: TargetType {
             "Accept": "application/json",
             "Authorization": "\(acceessToken)"]
   }
-
 }
 
 final class Networking {

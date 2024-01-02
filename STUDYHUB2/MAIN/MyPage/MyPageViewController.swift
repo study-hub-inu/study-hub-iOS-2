@@ -8,7 +8,12 @@ final class MyPageViewController: NaviHelper {
   
   var loginStatus: Bool = false
   var myPageUserData: UserDetailData?
-
+  var changedUserNickname: String? {
+    didSet {
+      nickNameLabel.text = changedUserNickname
+    }
+  }
+  
   // MARK: - UI설정
   // 로그인 하면 보이는 라벨
   private lazy var loginSuccessStackView = createStackView(axis: .vertical,
@@ -386,12 +391,15 @@ final class MyPageViewController: NaviHelper {
 
     let myinformViewController = MyInformViewController()
     
+    myinformViewController.previousVC = self
+    
     // Pass major information to MyinformViewController
     myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", isEnglish: false)
     myinformViewController.nickname = myPageUserData?.nickname
     myinformViewController.email = myPageUserData?.email
     myinformViewController.gender = myPageUserData?.gender
     myinformViewController.profileImage = myPageUserData?.imageURL
+    
     
     self.navigationController?.pushViewController(myinformViewController, animated: true)
   }
