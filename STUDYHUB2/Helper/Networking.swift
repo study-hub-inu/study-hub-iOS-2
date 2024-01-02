@@ -7,6 +7,64 @@
 
 import Foundation
 
+import Moya
+import UIKit
+
+enum networkingAPI {
+  case storeImage(_image: UIImage)
+  case editUserNickName(_nickname: String)
+}
+
+extension networkingAPI: TargetType {
+  var baseURL: URL {
+    return URL(string: "https://study-hub.site:443/api")!
+  }
+
+  var path: String {
+    switch self {
+    case .storeImage(_image: _):
+      return "/v1/users/image"
+    case .editUserNickName(_nickname: _):
+      return "/v1/users/nickname"
+    }
+    
+  }
+  
+  var method: Moya.Method {
+    switch self {
+    case .storeImage(_image: _):
+      return .put
+    case .editUserNickName(_nickname: _):
+      return .put
+    }
+  }
+  
+  var task: Moya.Task {
+    switch self {
+    // 파라미터로 요청
+    case .storeImage(let image):
+      let imageData = image.jpegData(compressionQuality: 0.5)
+      let formData = MultipartFormBodyPart(provider: .data(imageData!), name: "image",
+                                           fileName: "image.jpg", mimeType: "image/jpeg")
+      return .uploadMultipartFormData([formData])
+      
+    // 바디에 요청
+    case .editUserNickName(let nickname):
+      let params = NickName(nickname: nickname)
+      return .requestJSONEncodable(params)
+    }
+  }
+  
+  var headers: [String : String]? {
+    guard let acceessToken = TokenManager.shared.loadAccessToken() else { return nil}
+    return ["Content-type": "application/json",
+            "Content-Type" : "multipart/form-data",
+            "Accept": "application/json",
+            "Authorization": "\(acceessToken)"]
+  }
+
+}
+
 final class Networking {
   static let networkinhShared = Networking()
   

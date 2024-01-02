@@ -391,6 +391,7 @@ final class MyPageViewController: NaviHelper {
     myinformViewController.nickname = myPageUserData?.nickname
     myinformViewController.email = myPageUserData?.email
     myinformViewController.gender = myPageUserData?.gender
+    myinformViewController.profileImage = myPageUserData?.imageURL
     
     self.navigationController?.pushViewController(myinformViewController, animated: true)
   }
