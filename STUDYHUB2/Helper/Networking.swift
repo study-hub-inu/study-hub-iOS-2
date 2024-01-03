@@ -15,6 +15,7 @@ enum networkingAPI {
   case editUserNickName(_nickname: String)
   case editUserMaojr(_major: String)
   case editUserPassword(_checkPassword: Bool, _password: String)
+  case verifyPassword(_password: String)
 }
 
 extension networkingAPI: TargetType {
@@ -32,6 +33,8 @@ extension networkingAPI: TargetType {
       return "/v1/users/major"
     case .editUserPassword(_checkPassword: _, _password: _):
       return "/v1/users/password"
+    case .verifyPassword(_password: _):
+      return "/v1/users/password/verify"
     }
   }
   
@@ -45,6 +48,8 @@ extension networkingAPI: TargetType {
       return .put
     case .editUserPassword(_checkPassword: _, _password: _):
       return .put
+    case .verifyPassword(_password: _):
+      return .post
     }
   }
   
@@ -67,6 +72,11 @@ extension networkingAPI: TargetType {
     case .editUserPassword(let checkPassword, let password):
       let params = EditPassword(auth: checkPassword, password: password)
       return .requestJSONEncodable(params)
+    case .verifyPassword(let password):
+      let params: [String: Any] = [
+        "password": password
+      ]
+      return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
     }
   }
   

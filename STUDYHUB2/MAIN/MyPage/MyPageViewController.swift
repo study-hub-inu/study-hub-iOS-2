@@ -7,10 +7,23 @@ final class MyPageViewController: NaviHelper {
   let userInfoManager = UserInfoManager.shared
   
   var loginStatus: Bool = false
-  var myPageUserData: UserDetailData?
+  var myPageUserData: UserDetailData? {
+    didSet {
+      DispatchQueue.main.async {
+        self.nickNameLabel.text = self.myPageUserData?.nickname
+        self.majorLabel.text = self.convertMajor(self.myPageUserData?.major ?? "", isEnglish: false)
+      }
+    }
+  }
   var changedUserNickname: String? {
     didSet {
       nickNameLabel.text = changedUserNickname
+    }
+  }
+  
+  var changedUserMajor: String? {
+    didSet {
+      majorLabel.text = convertMajor(changedUserMajor ?? "", isEnglish: false)
     }
   }
   
