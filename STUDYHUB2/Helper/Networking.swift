@@ -16,6 +16,9 @@ enum networkingAPI {
   case editUserMaojr(_major: String)
   case editUserPassword(_checkPassword: Bool, _password: String)
   case verifyPassword(_password: String)
+  case verifyEmail(_code: String, _email: String)
+  case checkEmailDuplication(_email: String)
+  case sendEmailCode(_email: String)
 }
 
 extension networkingAPI: TargetType {
@@ -35,6 +38,13 @@ extension networkingAPI: TargetType {
       return "/v1/users/password"
     case .verifyPassword(_password: _):
       return "/v1/users/password/verify"
+      
+    case .verifyEmail(_code:_, _email: _):
+      return "/v1/email/verify"
+    case .checkEmailDuplication(_email: _):
+      return "/v1/email/duplication"
+    case .sendEmailCode(_email: _):
+      return "/v1/email"
     }
   }
   
@@ -50,19 +60,25 @@ extension networkingAPI: TargetType {
       return .put
     case .verifyPassword(_password: _):
       return .post
+    case .verifyEmail(_code: _, _email: _):
+      return .post
+    case .checkEmailDuplication(_email: _):
+      return .post
+    case .sendEmailCode(_email: _):
+      return .post
     }
   }
   
   var task: Moya.Task {
     switch self {
-    // 파라미터로 요청
+      // 파라미터로 요청
     case .storeImage(let image):
       let imageData = image.jpegData(compressionQuality: 0.5)
       let formData = MultipartFormBodyPart(provider: .data(imageData!), name: "image",
                                            fileName: "image.jpg", mimeType: "image/jpeg")
       return .uploadMultipartFormData([formData])
       
-    // 바디에 요청
+      // 바디에 요청
     case .editUserNickName(let nickname):
       let params = EditNickName(nickname: nickname)
       return .requestJSONEncodable(params)
@@ -75,15 +91,30 @@ extension networkingAPI: TargetType {
     case .verifyPassword(let password):
       let params = VerifyPassword(password: password)
       return .requestJSONEncodable(params)
+      
+    case .verifyEmail(let code, let email):
+      let params = VerifyEmail(auth: code, email: email)
+      return .requestJSONEncodable(params)
+    case .checkEmailDuplication(let email):
+      let params = CheckEmailDuplication(email: email)
+      return .requestJSONEncodable(params)
+    case .sendEmailCode(let email):
+      let params = CheckEmailDuplication(email: email)
+      return .requestJSONEncodable(params)
     }
   }
   
   var headers: [String : String]? {
-    guard let acceessToken = TokenManager.shared.loadAccessToken() else { return nil}
-    return ["Content-type": "application/json",
-            "Content-Type" : "multipart/form-data",
-            "Accept": "application/json",
-            "Authorization": "\(acceessToken)"]
+    guard let acceessToken = TokenManager.shared.loadAccessToken() else { return nil }
+    switch self {
+    case .checkEmailDuplication(_email: _), .sendEmailCode(_email: _):
+      return ["Content-type": "application/json"]
+    default:
+      return ["Content-type": "application/json",
+              "Content-Type" : "multipart/form-data",
+              "Accept": "application/json",
+              "Authorization": "\(acceessToken)"]
+    }
   }
 }
 
