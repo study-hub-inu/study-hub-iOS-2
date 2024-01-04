@@ -73,10 +73,8 @@ extension networkingAPI: TargetType {
       let params = EditPassword(auth: checkPassword, password: password)
       return .requestJSONEncodable(params)
     case .verifyPassword(let password):
-      let params: [String: Any] = [
-        "password": password
-      ]
-      return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
+      let params = VerifyPassword(password: password)
+      return .requestJSONEncodable(params)
     }
   }
   
