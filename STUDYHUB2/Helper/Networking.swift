@@ -93,7 +93,7 @@ extension networkingAPI: TargetType {
       return .requestJSONEncodable(params)
       
     case .verifyEmail(let code, let email):
-      let params = VerifyEmail(auth: code, email: email)
+      let params = VerifyEmail(authCode: code, email: email)
       return .requestJSONEncodable(params)
     case .checkEmailDuplication(let email):
       let params = CheckEmailDuplication(email: email)
@@ -109,6 +109,9 @@ extension networkingAPI: TargetType {
     switch self {
     case .checkEmailDuplication(_email: _), .sendEmailCode(_email: _):
       return ["Content-type": "application/json"]
+      
+    case .verifyEmail(_code: _, _email: _):
+      return ["Accept" : "application/json"]
     default:
       return ["Content-type": "application/json",
               "Content-Type" : "multipart/form-data",
