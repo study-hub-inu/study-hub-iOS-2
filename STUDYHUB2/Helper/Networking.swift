@@ -12,6 +12,7 @@ import UIKit
 
 enum networkingAPI {
   case storeImage(_image: UIImage)
+  case deleteImage
   case editUserNickName(_nickname: String)
   case editUserMaojr(_major: String)
   case editUserPassword(_checkPassword: Bool, _password: String)
@@ -30,6 +31,9 @@ extension networkingAPI: TargetType {
     switch self {
     case .storeImage(_image: _):
       return "/v1/users/image"
+    case .deleteImage:
+      return "/v1/users/image"
+      
     case .editUserNickName(_nickname: _):
       return "/v1/users/nickname"
     case .editUserMaojr(_major: _):
@@ -52,6 +56,8 @@ extension networkingAPI: TargetType {
     switch self {
     case .storeImage(_image: _):
       return .put
+    case .deleteImage:
+      return .delete
     case .editUserNickName(_nickname: _):
       return .put
     case .editUserMaojr(_major: _):
@@ -76,9 +82,9 @@ extension networkingAPI: TargetType {
       let imageData = image.jpegData(compressionQuality: 0.5)
       let formData = MultipartFormBodyPart(provider: .data(imageData!), name: "image",
                                            fileName: "image.jpg", mimeType: "image/jpeg")
-      print(formData)
       return .uploadMultipartFormData([formData])
-      
+    case .deleteImage:
+      return .requestPlain
       // 바디에 요청
     case .editUserNickName(let nickname):
       let params = EditNickName(nickname: nickname)
@@ -117,6 +123,8 @@ extension networkingAPI: TargetType {
     case .storeImage(_image: _):
       return [ "Content-Type" : "multipart/form-data",
                "Authorization": "\(acceessToken)" ]
+    case .deleteImage:
+      return [ "Authorization": "\(acceessToken)"]
     default:
       return ["Content-type": "application/json",
               "Content-Type" : "multipart/form-data",
