@@ -64,6 +64,7 @@
 		EE98B1AD2B3BDE0F0025C4F8 /* EditPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1AC2B3BDE0F0025C4F8 /* EditPasswordViewController.swift */; };
 		EE98B1B02B3C387A0025C4F8 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1AF2B3C387A0025C4F8 /* FindPasswordViewController.swift */; };
 		EE98B1B22B3D4FC20025C4F8 /* EditUserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1B12B3D4FC20025C4F8 /* EditUserInfoManager.swift */; };
+		EE98B1B92B47E3930025C4F8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EE98B1B82B47E3930025C4F8 /* Kingfisher */; };
 		EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */; };
 		EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */; };
 		EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E992B10931500C23AB4 /* UIButton+.swift */; };
@@ -190,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE98B1B92B47E3930025C4F8 /* Kingfisher in Frameworks */,
 				903CF32160A1EDD2ADE8AA03 /* Pods_STUDYHUB2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -535,6 +537,7 @@
 			);
 			name = STUDYHUB2;
 			packageProductDependencies = (
+				EE98B1B82B47E3930025C4F8 /* Kingfisher */,
 			);
 			productName = STUDYHUB2;
 			productReference = F804218E2A7D6816006C6B87 /* STUDYHUB2.app */;
@@ -567,6 +570,7 @@
 			packageReferences = (
 				EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				EE98B1B32B43D9BD0025C4F8 /* XCRemoteSwiftPackageReference "Moya" */,
+				EE98B1B72B47E3930025C4F8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = F804218F2A7D6816006C6B87 /* Products */;
 			projectDirPath = "";
@@ -957,7 +961,23 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		EE98B1B72B47E3930025C4F8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE98B1B82B47E3930025C4F8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE98B1B72B47E3930025C4F8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F80421862A7D6816006C6B87 /* Project object */;
 }

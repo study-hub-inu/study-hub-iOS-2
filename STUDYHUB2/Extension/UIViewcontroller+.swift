@@ -164,7 +164,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
   }
   
   // MARK: - toast message, 이미지가 뒤에 나오고 있음 앞으로 빼기
-  func showToast(message: String, alertCheck: Bool) {
+  func showToast(message: String, alertCheck: Bool, large: Bool = false) {
     let toastContainer = UIView()
     toastContainer.backgroundColor = .g100
     toastContainer.layer.cornerRadius = 10
@@ -173,6 +173,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
     toastLabel.textColor = .g10
     toastLabel.font = UIFont(name: "Pretendard", size: 14)
     toastLabel.text = message
+    toastLabel.numberOfLines = 0
     
     let alertImage = alertCheck ? "SuccessImage" : "WarningImg"
     let imageView = UIImageView(image: UIImage(named: alertImage))
@@ -188,17 +189,20 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
       make.centerX.equalToSuperview()
       make.bottom.equalTo(keyWindow.safeAreaLayoutGuide.snp.bottom).offset(-50)
       make.width.equalTo(335)
-      make.height.equalTo(56)
+      
+      let size = large ? 74 : 56
+      make.height.equalTo(size)
     }
     
     imageView.snp.makeConstraints { make in
       make.centerY.equalTo(toastContainer)
-      make.leading.equalTo(toastContainer).offset(30)
+      make.leading.equalTo(toastContainer).offset(15)
     }
     
     toastLabel.snp.makeConstraints { make in
       make.centerY.equalTo(toastContainer)
       make.leading.equalTo(imageView.snp.trailing).offset(8)
+      make.trailing.equalTo(toastContainer).offset(-16)
     }
     
     UIView.animate(withDuration: 2.0, delay: 0.1, options: .curveEaseOut, animations: {
@@ -229,6 +233,15 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
       return "비대면"
     }
   }
+  
+  func convertImageToString(image: UIImage) -> String? {
+      guard let imageData = image.jpegData(compressionQuality: 1.0) else {
+          return nil
+      }
+      let base64String = imageData.base64EncodedString()
+      return base64String
+  }
+
 }
 
 

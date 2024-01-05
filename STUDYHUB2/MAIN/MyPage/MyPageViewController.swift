@@ -1,20 +1,42 @@
 import UIKit
 
 import SnapKit
+import Kingfisher
 
 final class MyPageViewController: NaviHelper {
   
   let userInfoManager = UserInfoManager.shared
   
   var loginStatus: Bool = false
+  
   var myPageUserData: UserDetailData? {
     didSet {
       DispatchQueue.main.async {
         self.nickNameLabel.text = self.myPageUserData?.nickname
         self.majorLabel.text = self.convertMajor(self.myPageUserData?.major ?? "", isEnglish: false)
+        if let imageURL = URL(string: self.myPageUserData?.imageURL ?? "") {
+          let processor = ResizingImageProcessor(referenceSize: CGSize(width: 56, height: 56))
+          
+          // Clear image cache before downloading new image
+          KingfisherManager.shared.cache.removeImage(forKey: imageURL.absoluteString)
+          
+          self.profileImageView.kf.setImage(with: imageURL, options: [.processor(processor)]) { result in
+            switch result {
+            case .success(let value):
+              DispatchQueue.main.async {
+                self.profileImageView.image = value.image
+                self.profileImageView.layer.cornerRadius = 20
+                self.profileImageView.clipsToBounds = true
+              }
+            case .failure(let error):
+              print("Image download failed: \(error)")
+            }
+          }
+        }
       }
     }
   }
+  
   var changedUserNickname: String? {
     didSet {
       nickNameLabel.text = changedUserNickname

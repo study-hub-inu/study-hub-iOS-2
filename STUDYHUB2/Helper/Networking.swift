@@ -76,6 +76,7 @@ extension networkingAPI: TargetType {
       let imageData = image.jpegData(compressionQuality: 0.5)
       let formData = MultipartFormBodyPart(provider: .data(imageData!), name: "image",
                                            fileName: "image.jpg", mimeType: "image/jpeg")
+      print(formData)
       return .uploadMultipartFormData([formData])
       
       // 바디에 요청
@@ -112,6 +113,10 @@ extension networkingAPI: TargetType {
       
     case .verifyEmail(_code: _, _email: _):
       return ["Accept" : "application/json"]
+      
+    case .storeImage(_image: _):
+      return [ "Content-Type" : "multipart/form-data",
+               "Authorization": "\(acceessToken)" ]
     default:
       return ["Content-type": "application/json",
               "Content-Type" : "multipart/form-data",
