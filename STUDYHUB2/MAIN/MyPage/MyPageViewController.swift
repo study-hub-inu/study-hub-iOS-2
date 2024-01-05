@@ -432,7 +432,8 @@ final class MyPageViewController: NaviHelper {
     myinformViewController.major = convertMajor(myPageUserData?.major! ?? "", isEnglish: false)
     myinformViewController.nickname = myPageUserData?.nickname
     myinformViewController.email = myPageUserData?.email
-    myinformViewController.gender = myPageUserData?.gender
+    myinformViewController.gender = convertGender(gender: myPageUserData?.gender ?? "없음")
+
     myinformViewController.profileImage = myPageUserData?.imageURL
     
     

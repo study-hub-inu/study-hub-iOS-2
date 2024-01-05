@@ -20,6 +20,7 @@ enum networkingAPI {
   case verifyEmail(_code: String, _email: String)
   case checkEmailDuplication(_email: String)
   case sendEmailCode(_email: String)
+  case deleteID
 }
 
 extension networkingAPI: TargetType {
@@ -49,6 +50,9 @@ extension networkingAPI: TargetType {
       return "/v1/email/duplication"
     case .sendEmailCode(_email: _):
       return "/v1/email"
+      
+    case .deleteID:
+      return "/v1/users"
     }
   }
   
@@ -72,6 +76,8 @@ extension networkingAPI: TargetType {
       return .post
     case .sendEmailCode(_email: _):
       return .post
+    case .deleteID:
+      return .delete
     }
   }
   
@@ -108,6 +114,9 @@ extension networkingAPI: TargetType {
     case .sendEmailCode(let email):
       let params = CheckEmailDuplication(email: email)
       return .requestJSONEncodable(params)
+      
+    case .deleteID:
+      return .requestPlain
     }
   }
   
@@ -123,7 +132,7 @@ extension networkingAPI: TargetType {
     case .storeImage(_image: _):
       return [ "Content-Type" : "multipart/form-data",
                "Authorization": "\(acceessToken)" ]
-    case .deleteImage:
+    case .deleteImage, .deleteID:
       return [ "Authorization": "\(acceessToken)"]
     default:
       return ["Content-type": "application/json",
