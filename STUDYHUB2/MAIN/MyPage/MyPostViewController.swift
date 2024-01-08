@@ -354,8 +354,17 @@ extension MyPostViewController: MyPostCellDelegate{
 }
 
 extension MyPostViewController: BottomSheetDelegate {
+  // 수정해야할수도
+  func firstButtonTapped(postID: Int?) {
+    let popupVC = PopupViewController(title: "이 글을 삭제할까요?",
+                                      desc: "삭제한 글과 참여자는 다시 볼 수 없어요",
+                                      postID: postID ?? 0)
+    popupVC.modalPresentationStyle = .overFullScreen
+    self.present(popupVC, animated: false)
+  }
+  
   // BottomSheet에서 화면을 전환할 때
-  func modifyButtonTapped(postID: Int) {
+  func secondButtonTapped(postID: Int?) {
     self.dismiss(animated: true) {
       let createVC = CreateStudyViewController()
       createVC.modifyPostID = postID

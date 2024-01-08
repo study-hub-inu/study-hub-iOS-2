@@ -5,7 +5,7 @@ import SnapKit
 
 final class DeadLineCell: UICollectionViewCell {
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
-  var model: PostDataContent? { didSet { bind() } }
+  var model: Content? { didSet { bind() } }
   var buttonAction: (() -> Void) = {}
   
   private lazy var profileImageView: UIImageView = {
@@ -117,7 +117,7 @@ final class DeadLineCell: UICollectionViewCell {
   
   private func bind() {
     guard let data = model else { return }
-    
+  
     var studyPersonCount = data.studyPerson - data.remainingSeat
     
     titleLabel.text = data.title

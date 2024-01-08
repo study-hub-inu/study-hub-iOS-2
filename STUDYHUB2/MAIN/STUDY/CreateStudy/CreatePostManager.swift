@@ -57,6 +57,7 @@ final class PostManager {
                   completion: @escaping () -> Void) {
     
     networkingManager.fetchData(type: "POST",
+                                apiVesrion: "v1",
                                 urlPath: "/study-posts",
                                 queryItems: nil,
                                 tokenNeed: true,
@@ -76,6 +77,7 @@ final class PostManager {
   func updatePost(updatePostDatas: UpdateStudyRequest,
                   completion: @escaping () -> Void) {
     networkingManager.fetchData(type: "PUT",
+                                apiVesrion: "v1",
                                 urlPath: "/study-posts",
                                 queryItems: nil,
                                 tokenNeed: true,

@@ -7,7 +7,7 @@ final class SearchViewController: NaviHelper {
   // MARK: - 화면구성, tapbar도 같이 나오게 수정해야함
   
   // MARK: - 서치바
-  private let searchBar = UISearchBar.createSearchBar()
+  private let searchBar = UISearchBar.createSearchBar(placeholder: "스터디와 관련된 학과를 입력해주세요")
   
   private lazy var resultTableView: UITableView = {
     let tableView = UITableView()

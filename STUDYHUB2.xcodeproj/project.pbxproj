@@ -60,6 +60,11 @@
 		EE271F2C2AD9250F00190E7A /* UIView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE271F2B2AD9250F00190E7A /* UIView+.swift */; };
 		EE35ED7B2B15F829008040E2 /* MyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */; };
 		EE98B1A92B35276D0025C4F8 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1A82B35276D0025C4F8 /* Networking.swift */; };
+		EE98B1AB2B3BB3F70025C4F8 /* EditMajorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1AA2B3BB3F70025C4F8 /* EditMajorViewController.swift */; };
+		EE98B1AD2B3BDE0F0025C4F8 /* EditPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1AC2B3BDE0F0025C4F8 /* EditPasswordViewController.swift */; };
+		EE98B1B02B3C387A0025C4F8 /* FindPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1AF2B3C387A0025C4F8 /* FindPasswordViewController.swift */; };
+		EE98B1B22B3D4FC20025C4F8 /* EditUserInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE98B1B12B3D4FC20025C4F8 /* EditUserInfoManager.swift */; };
+		EE98B1B92B47E3930025C4F8 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = EE98B1B82B47E3930025C4F8 /* Kingfisher */; };
 		EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */; };
 		EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */; };
 		EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEB51E992B10931500C23AB4 /* UIButton+.swift */; };
@@ -142,6 +147,10 @@
 		EE35ED6F2B14BAA9008040E2 /* RefuseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuseCell.swift; sourceTree = "<group>"; };
 		EE35ED7A2B15F829008040E2 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPageViewController.swift; sourceTree = "<group>"; };
 		EE98B1A82B35276D0025C4F8 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
+		EE98B1AA2B3BB3F70025C4F8 /* EditMajorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditMajorViewController.swift; sourceTree = "<group>"; };
+		EE98B1AC2B3BDE0F0025C4F8 /* EditPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditPasswordViewController.swift; sourceTree = "<group>"; };
+		EE98B1AF2B3C387A0025C4F8 /* FindPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordViewController.swift; sourceTree = "<group>"; };
+		EE98B1B12B3D4FC20025C4F8 /* EditUserInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoManager.swift; sourceTree = "<group>"; };
 		EEB51E842B103C2300C23AB4 /* UserInfoManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserInfoManager.swift; path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/UserInfoManager.swift"; sourceTree = "<group>"; };
 		EEB51E852B103C2300C23AB4 /* MyPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyPageViewController.swift; path = ../MyPageViewController.swift; sourceTree = "<group>"; };
 		EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyInformationViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE98B1B92B47E3930025C4F8 /* Kingfisher in Frameworks */,
 				903CF32160A1EDD2ADE8AA03 /* Pods_STUDYHUB2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -320,6 +330,17 @@
 			path = Refuse;
 			sourceTree = "<group>";
 		};
+		EE98B1AE2B3BDEB80025C4F8 /* EditInfo */ = {
+			isa = PBXGroup;
+			children = (
+				EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */,
+				EE98B1AA2B3BB3F70025C4F8 /* EditMajorViewController.swift */,
+				EE98B1AC2B3BDE0F0025C4F8 /* EditPasswordViewController.swift */,
+				EE98B1AF2B3C387A0025C4F8 /* FindPasswordViewController.swift */,
+			);
+			path = EditInfo;
+			sourceTree = "<group>";
+		};
 		EEB51E722B103C0100C23AB4 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,7 +357,8 @@
 			isa = PBXGroup;
 			children = (
 				EEB51E872B103C2300C23AB4 /* MyInformationViewController.swift */,
-				EEB51E882B103C2300C23AB4 /* EditnicknameViewController.swift */,
+				EE98B1B12B3D4FC20025C4F8 /* EditUserInfoManager.swift */,
+				EE98B1AE2B3BDEB80025C4F8 /* EditInfo */,
 			);
 			name = INFO;
 			path = "../../../../../Documents/study-hub-iOS-yongheon/STUDYHUB2/MAIN/MyPage/INFO";
@@ -515,6 +537,7 @@
 			);
 			name = STUDYHUB2;
 			packageProductDependencies = (
+				EE98B1B82B47E3930025C4F8 /* Kingfisher */,
 			);
 			productName = STUDYHUB2;
 			productReference = F804218E2A7D6816006C6B87 /* STUDYHUB2.app */;
@@ -546,6 +569,8 @@
 			mainGroup = F80421852A7D6816006C6B87;
 			packageReferences = (
 				EE1E44122B17228B00223436 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				EE98B1B32B43D9BD0025C4F8 /* XCRemoteSwiftPackageReference "Moya" */,
+				EE98B1B72B47E3930025C4F8 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = F804218F2A7D6816006C6B87 /* Products */;
 			projectDirPath = "";
@@ -638,6 +663,7 @@
 				EEC05ED52B15FA0E001602AE /* UserInfoManager.swift in Sources */,
 				EE07ADD12AF632B80096890F /* Calendar.swift in Sources */,
 				F8085D442A81846C0067D4DE /* StudyViewController.swift in Sources */,
+				EE98B1AB2B3BB3F70025C4F8 /* EditMajorViewController.swift in Sources */,
 				F80421962A7D6816006C6B87 /* LoginViewController.swift in Sources */,
 				EE0A8B692B04FED3001C3F41 /* PostDataManager.swift in Sources */,
 				EEB51E8F2B103C2300C23AB4 /* MyInformationViewController.swift in Sources */,
@@ -648,6 +674,7 @@
 				F80421CA2A7D9534006C6B87 /* PasswordViewController.swift in Sources */,
 				EE07ADC52AF2414C0096890F /* PopUpViewController.swift in Sources */,
 				EEB51E9A2B10931500C23AB4 /* UIButton+.swift in Sources */,
+				EE98B1B22B3D4FC20025C4F8 /* EditUserInfoManager.swift in Sources */,
 				EEB51E902B103C2300C23AB4 /* EditnicknameViewController.swift in Sources */,
 				EE07ADBD2AEFF7BD0096890F /* ConvertMajor.swift in Sources */,
 				EE271F242AD77C0E00190E7A /* LoginManager.swift in Sources */,
@@ -662,6 +689,7 @@
 				EE0A8B632AFCB572001C3F41 /* BookMarkCell.swift in Sources */,
 				EE07ADC32AF236260096890F /* BottomSheet.swift in Sources */,
 				F80421CE2A7DA2F3006C6B87 /* DepartmentViewController.swift in Sources */,
+				EE98B1AD2B3BDE0F0025C4F8 /* EditPasswordViewController.swift in Sources */,
 				EE07ADCD2AF26D360096890F /* DepartMentCell.swift in Sources */,
 				EE1E441B2B18641600223436 /* MyParticipataeStudyVC.swift in Sources */,
 				EE07ADB92AEFE6730096890F /* PostedStudyViewController.swift in Sources */,
@@ -669,6 +697,7 @@
 				EE271F262AD77CD100190E7A /* UIViewcontroller+.swift in Sources */,
 				EE271F2C2AD9250F00190E7A /* UIView+.swift in Sources */,
 				F80421CC2A7D9BC3006C6B87 /* NicknameViewController.swift in Sources */,
+				EE98B1B02B3C387A0025C4F8 /* FindPasswordViewController.swift in Sources */,
 				EE07AD902AE106460096890F /* CreatePostManager.swift in Sources */,
 				F86E031F2A8BBAE600164976 /* SearchViewController.swift in Sources */,
 				EE1E44112B17222200223436 /* MyPostCell.swift in Sources */,
@@ -924,7 +953,31 @@
 				kind = branch;
 			};
 		};
+		EE98B1B32B43D9BD0025C4F8 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+		EE98B1B72B47E3930025C4F8 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE98B1B82B47E3930025C4F8 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE98B1B72B47E3930025C4F8 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F80421862A7D6816006C6B87 /* Project object */;
 }

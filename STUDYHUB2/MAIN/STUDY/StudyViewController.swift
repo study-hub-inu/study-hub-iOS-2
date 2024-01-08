@@ -7,7 +7,7 @@ final class StudyViewController: NaviHelper {
   
   let postDataManager = PostDataManager.shared
   let detailPostDataManager = PostDetailInfoManager.shared
-  var recentDatas: PostData?
+  var recentDatas: PostDataContent?
   
   private lazy var recentButton: UIButton = {
     let button = UIButton()
@@ -36,7 +36,7 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  private lazy var studyCount = recentDatas?.content.count
+  private lazy var studyCount = recentDatas?.totalCount
   private lazy var countLabel = createLabel(title: "\(studyCount ?? 0)개",
                                             textColor: .bg80,
                                             fontType: "Pretendard",
@@ -321,7 +321,7 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
   
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
-    studyCount = recentDatas?.content.count ?? 0
+    studyCount = recentDatas?.totalCount ?? 0
     return studyCount ?? 0
   }
   
@@ -330,7 +330,7 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     
     let postedVC = PostedStudyViewController()
   
-    detailPostDataManager.getPostDetailData(postID: recentDatas?.content[indexPath.row].postID ?? 0) {
+    detailPostDataManager.getPostDetailData(postID: recentDatas?.postDataByInquiries.content[indexPath.row].postID ?? 0) {
       let cellData = self.detailPostDataManager.getPostDetailData()
       postedVC.postedDate = cellData
     }
@@ -344,7 +344,7 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id,
                                                   for: indexPath)
     if let cell = cell as? SearchResultCell {
-      let content = recentDatas?.content[indexPath.row]
+      let content = recentDatas?.postDataByInquiries.content[indexPath.row]
       cell.model = content
     }
     return cell

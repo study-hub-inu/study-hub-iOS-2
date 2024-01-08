@@ -85,6 +85,7 @@
 		E98DC8FB2578E76A812E0C94BA10E1B1 /* ConstraintDirectionalInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD96D60EC59B577B0E0BC27110533634 /* ConstraintDirectionalInsets.swift */; };
 		EB3C3EC822CC7B2FC9DDBE09E247B18E /* Pods-STUDYHUB2-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 18AC145C6E048A2AD46FF960260A8130 /* Pods-STUDYHUB2-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EE70FCF36D7E50885CCF0564E2BE0D1F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B1530FBFAA1690D27A135E4CC85AA07 /* Foundation.framework */; };
+		EE98B1B62B43DA460025C4F8 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = EE98B1B52B43DA460025C4F8 /* Moya */; };
 		EF21586EC3DFF6097A58EEC87376A0C1 /* ConstraintLayoutGuideDSL.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7537296D9FD7415039680301A9FAFF3 /* ConstraintLayoutGuideDSL.swift */; };
 		F1B9720240D5609A1DE32B8350FE0B5B /* FSCalendarCalculator.m in Sources */ = {isa = PBXBuildFile; fileRef = 86C9478771BC2334514C0072E1F58952 /* FSCalendarCalculator.m */; };
 		F3F18A1FEC8212A61301637E40558A13 /* FSCalendarAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = DA8D4A3187171AE659C96F15FB781077 /* FSCalendarAppearance.m */; };
@@ -202,7 +203,7 @@
 		98104394058D14EDB55FBA11980E395E /* FSCalendarSeparatorDecorationView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = FSCalendarSeparatorDecorationView.h; path = FSCalendar/FSCalendarSeparatorDecorationView.h; sourceTree = "<group>"; };
 		999FF0AACE17C39AA61B686C072C482B /* ConstraintItem.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ConstraintItem.swift; path = Sources/ConstraintItem.swift; sourceTree = "<group>"; };
 		9B409BFD0632EDBF0AAFFE2E0234231C /* Pods-STUDYHUB2-STUDYHUB2UITests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-STUDYHUB2-STUDYHUB2UITests-dummy.m"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9E30F37C28B359509F4394FF04EB0A6D /* Pods-STUDYHUB2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-STUDYHUB2.release.xcconfig"; sourceTree = "<group>"; };
 		9FE46B11FEBCBB7C689EB07A5E57BD38 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
 		A1C2F8BC2C8E059E3914BE3A500E8D3E /* Pods-STUDYHUB2Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-STUDYHUB2Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
@@ -275,6 +276,7 @@
 			files = (
 				60CFDC4002EA677B53ECC413F67C149D /* Foundation.framework in Frameworks */,
 				C6ED706364847164CB566CEA1A6FFDD6 /* QuartzCore.framework in Frameworks */,
+				EE98B1B62B43DA460025C4F8 /* Moya in Frameworks */,
 				4683418880504CD2212FE56C4F1E8F80 /* UIKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,7 +461,6 @@
 				0886317505ACEEE812975641B7B021D6 /* UILayoutSupport+Extensions.swift */,
 				2D171EB38D362C63E48DB4C5463F2B57 /* Support Files */,
 			);
-			name = SnapKit;
 			path = SnapKit;
 			sourceTree = "<group>";
 		};
@@ -520,7 +521,6 @@
 				7706E5DE96F5B12A02187F7C1BEEC79C /* FSCalendarWeekdayView.m */,
 				9CB9E9E2683EA3980AC6D91D248C07CC /* Support Files */,
 			);
-			name = FSCalendar;
 			path = FSCalendar;
 			sourceTree = "<group>";
 		};
@@ -620,6 +620,9 @@
 			dependencies = (
 			);
 			name = FSCalendar;
+			packageProductDependencies = (
+				EE98B1B52B43DA460025C4F8 /* Moya */,
+			);
 			productName = FSCalendar;
 			productReference = 95209B8BB966524BC76543F99C75F5FE /* FSCalendar */;
 			productType = "com.apple.product-type.framework";
@@ -699,6 +702,9 @@
 				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			packageReferences = (
+				EE98B1B42B43DA460025C4F8 /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 19F72D5281AF695A6D489E1147732E29 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1430,6 +1436,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		EE98B1B42B43DA460025C4F8 /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		EE98B1B52B43DA460025C4F8 /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EE98B1B42B43DA460025C4F8 /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

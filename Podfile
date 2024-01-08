@@ -15,7 +15,8 @@ pod 'FSCalendar'
   target 'STUDYHUB2UITests' do
     # Pods for testing
   end
-
+pod 'Moya'
+  target 'STUDYHUB2UITests' do
 end
 post_install do |installer|
     installer.generated_projects.each do |project|

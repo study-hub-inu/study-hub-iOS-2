@@ -11,7 +11,8 @@ import SnapKit
 
 // 이걸 다 바꿔야하나, 버튼 2개 다 delegate로 받고 쓸 때 함수 선언, 초기화 할 때 버튼 이름 받기
 protocol BottomSheetDelegate: AnyObject {
-  func modifyButtonTapped(postID: Int)
+  func firstButtonTapped(postID: Int?)
+  func secondButtonTapped(postID: Int?)
 }
 
 final class BottomSheet: UIViewController {
@@ -41,7 +42,9 @@ final class BottomSheet: UIViewController {
     
     let buttonColor = firstButtonTitle == "삭제하기" ? UIColor.o50 : UIColor.bg80
     button.setTitleColor(buttonColor, for: .normal)
-    button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
+    button.addAction(UIAction { _ in
+      self.firstButtonTapped()
+    }, for: .touchUpInside)
     return button
   }()
   
@@ -50,7 +53,7 @@ final class BottomSheet: UIViewController {
     button.setTitle(secondButtonTitle, for: .normal)
     button.setTitleColor(.bg80, for: .normal)
     button.addAction(UIAction { _ in
-      self.modifyButtonTapped()
+      self.secondButtonTapped()
     }, for: .touchUpInside)
     return button
   }()
@@ -107,6 +110,10 @@ final class BottomSheet: UIViewController {
     }
   }
   
+  func firstButtonTapped(){
+    delegate?.firstButtonTapped(postID: postID)
+  }
+  
   @objc func deleteButtonTapped(){
     let popupVC = PopupViewController(title: "이 글을 삭제할까요?",
                                       desc: "삭제한 글과 참여자는 다시 볼 수 없어요",
@@ -120,7 +127,7 @@ final class BottomSheet: UIViewController {
     dismiss(animated: true, completion: nil)
   }
   
-  func modifyButtonTapped(){
-    delegate?.modifyButtonTapped(postID: postID)
+  func secondButtonTapped(){
+    delegate?.secondButtonTapped(postID: postID)
   }
 }
