@@ -6,55 +6,58 @@
 //
 import Foundation
 
+import Moya
+
 // MARK: - MyPostData
 struct PostDetailData: Codable {
-  let postID: Int
-  let title: String
-  let createdDate: [Int]
-  let content, major: String
-  let studyPerson: Int
-  let filteredGender, studyWay: String
-  let penalty: Int
-  let penaltyWay: String? = nil
-  let studyStartDate, studyEndDate: [Int]
-  let remainingSeat: Int
-  let postedUser: PostedUser
-  let relatedPost: [RelatedPost]
-  let usersPost, bookmarked: Bool
-  let chatUrl: String
+    let postID: Int
+    let title: String
+    let createdDate: [Int]
+    let content, major: String
+    let studyPerson: Int
+    let filteredGender, studyWay: String
+    let penalty: Int
+    let penaltyWay: String?
+    let studyStartDate, studyEndDate: [Int]
+    let remainingSeat: Int
+    let chatURL: String
+    let postedUser: PostedUser
+    let relatedPost: [RelatedPost]
+    let usersPost, bookmarked: Bool
 
-  enum CodingKeys: String, CodingKey {
-    case postID = "postId"
-    case title, createdDate, content, major, studyPerson, filteredGender,
-         studyWay, penalty, penaltyWay, studyStartDate, studyEndDate, remainingSeat,
-         postedUser, relatedPost, usersPost, bookmarked , chatUrl
-  }
+    enum CodingKeys: String, CodingKey {
+        case postID = "postId"
+        case title, createdDate, content, major, studyPerson, filteredGender,
+             studyWay, penalty, penaltyWay, studyStartDate, studyEndDate, remainingSeat
+        case chatURL = "chatUrl"
+        case postedUser, relatedPost, usersPost, bookmarked
+    }
 }
 
 // MARK: - PostedUser
 struct PostedUser: Codable {
-  let userID: Int
-  let major, nickname: String
-  let imageURL: String? = nil
-  
-  enum CodingKeys: String, CodingKey {
-    case userID = "userId"
-    case major, nickname
-    case imageURL = "imageUrl"
-  }
+    let userID: Int
+    let major, nickname: String
+    let imageURL: String
+
+    enum CodingKeys: String, CodingKey {
+        case userID = "userId"
+        case major, nickname
+        case imageURL = "imageUrl"
+    }
 }
 
 // MARK: - RelatedPost
 struct RelatedPost: Codable {
-  let postID: Int
-  let title, major: String
-  let remainingSeat: Int
-  let postedUser: PostedUser
-  
-  enum CodingKeys: String, CodingKey {
-    case postID = "postId"
-    case title, major, remainingSeat, postedUser
-  }
+    let postID: Int
+    let title, major: String
+    let remainingSeat: Int
+    let userData: PostedUser
+
+    enum CodingKeys: String, CodingKey {
+        case postID = "postId"
+        case title, major, remainingSeat, userData
+    }
 }
 
 
@@ -139,6 +142,30 @@ final class PostDetailInfoManager {
         completion()
       case .failure(let error):
         print("Network Error:", error)
+      }
+    }
+  }
+  
+  func searchSinglePostData(postId: Int, completion: @escaping () -> Void){
+    let provider = MoyaProvider<networkingAPI>()
+    provider.request(.searchSinglePost(_postId: postId)) {
+      switch $0 {
+      case .success(let response):
+        do {
+          let postDataContent = try JSONDecoder().decode(PostDetailData.self, from: response.data)
+          print(postDataContent)
+          self.postDetailData = postDataContent
+        } catch {
+          print("Failed to decode JSON: \(error)")
+        }
+//        let res = String(data: response.data, encoding: .utf8) ?? "No data"
+//        print(res)
+//        print(response)
+        
+        completion()
+      case .failure(let response):
+        print(response)
+        
       }
     }
   }

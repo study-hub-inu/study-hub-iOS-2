@@ -143,10 +143,13 @@ final class PostDataManager {
     }
   }
   
-  func getRecentPostDatas(hotType: String, completion: @escaping () -> Void) {
+  func getRecentPostDatas(hotType: String,
+                          page: Int = 0,
+                          size: Int = 5,
+                          completion: @escaping () -> Void) {
     let queryItems = [URLQueryItem(name: "hot", value: hotType),
-                      URLQueryItem(name: "page", value: "0"),
-                      URLQueryItem(name: "size", value: "1"),
+                      URLQueryItem(name: "page", value: "\(page)"),
+                      URLQueryItem(name: "size", value: "\(size)"),
                       URLQueryItem(name: "titleAndMajor", value: "false")]
     
     networkingShared.fetchData(type: "GET",
@@ -154,65 +157,17 @@ final class PostDataManager {
                                urlPath: "/study-posts",
                                queryItems: queryItems,
                                tokenNeed: false,
-                               createPostData: nil) { [weak self] (result: Result<PostDataContent,
-                                                                NetworkError>) in
+                               createPostData: nil) { [weak self] (result: Result<PostDataContent, NetworkError>) in
       switch result {
       case .success(let postData):
-        // 추가 데이터 조회를 위한 변수
-        var currentPage = 1
-        
-        if postData.postDataByInquiries.last == false {
-          // 추가 데이터 조회
-          self?.fetchAdditionalData(hotType: hotType,
-                                    currentPage: currentPage + 1,
-                                    completion: completion)
-        } else {
-          self?.newPostDatas = postData
-          completion()
-        }
+        print(postData)
+        self?.newPostDatas = postData
+        completion()
+
       case .failure(let error):
         print("에러:", error)
       }
     }
   }
-  
-  func fetchAdditionalData(hotType: String, currentPage: Int, completion: @escaping () -> Void) {
-    let queryItems = [URLQueryItem(name: "hot", value: hotType),
-                      URLQueryItem(name: "page", value: "0"),
-                      URLQueryItem(name: "size", value: "\(currentPage)"),
-                      URLQueryItem(name: "titleAndMajor", value: "false")]
-    networkingShared.fetchData(type: "GET",
-                               apiVesrion: "v2",
-                               urlPath: "/study-posts",
-                               queryItems: queryItems,
-                               tokenNeed: false,
-                               createPostData: nil) { [weak self] (result: Result<PostDataContent,
-                                                                NetworkError>) in
-      switch result {
-      case .success(let postData):
-        if postData.postDataByInquiries.last == false {
-          // 추가 데이터 조회
-          self?.fetchAdditionalData(hotType: hotType,
-                                    currentPage: currentPage + 1,
-                                    completion: completion)
-        } else {
-          // 중복된 데이터 필터링
-          let newContent = postData.postDataByInquiries.content.filter { post -> Bool in
-            if let existingContent = self?.newPostDatas?.postDataByInquiries.content {
-              return !existingContent.contains { $0.postID == post.postID }
-            }
-            return true
-          }
-          
-          // 중복을 제거한 데이터를 추가
-          self?.newPostDatas?.postDataByInquiries.content.append(contentsOf: newContent)
-          completion()
-        }
-      case .failure(let error):
-        print("에러:", error)
-      }
-    }
-  }
-  
-  
+
 }

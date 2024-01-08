@@ -933,7 +933,7 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
       
       DispatchQueue.main.async {
         modifyData.map {
-          self.chatLinkTextField.text = $0.chatUrl
+          self.chatLinkTextField.text = $0.chatURL
           self.studyproduceTextView.text = $0.content
           self.studytitleTextField.text = $0.title
           

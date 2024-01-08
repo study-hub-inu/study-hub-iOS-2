@@ -140,9 +140,8 @@ final class SimilarPostCell: UICollectionViewCell {
                                                 isEnglish: false)
     titleLabel.text = model?.title
     remainMemberNum = model?.remainingSeat ?? 0
-    writerMajorLabel.text = model?.postedUser.major.convertMajor(model?.postedUser.major ?? "공통",
-                                                                 isEnglish: false)
-    nickNameLabel.text = model?.postedUser.nickname
+    writerMajorLabel.text = model?.major.convertMajor(model?.major ?? "없음", isEnglish: false)
+    nickNameLabel.text = model?.userData.nickname
     postID = model?.postID
   }
   

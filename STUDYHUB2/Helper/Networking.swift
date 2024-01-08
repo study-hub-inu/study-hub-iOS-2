@@ -21,6 +21,7 @@ enum networkingAPI {
   case checkEmailDuplication(_email: String)
   case sendEmailCode(_email: String)
   case deleteID
+  case searchSinglePost(_postId: Int)
 }
 
 extension networkingAPI: TargetType {
@@ -53,19 +54,30 @@ extension networkingAPI: TargetType {
       
     case .deleteID:
       return "/v1/users"
+      
+    case .searchSinglePost(let postId):
+      return "/v1/study-posts/\(postId)"
     }
   }
   
   var method: Moya.Method {
     switch self {
-    case .storeImage(_image: _), .editUserNickName(_nickname: _),
-        .editUserMaojr(_major: _), .editUserPassword(_checkPassword: _, _password: _):
+    case .searchSinglePost(_postId: _):
+      return .get
+      
+    case .storeImage(_image: _),
+        .editUserNickName(_nickname: _),
+        .editUserMaojr(_major: _),
+        .editUserPassword(_checkPassword: _, _password: _):
       return .put
+      
     case .deleteImage, .deleteID:
       return .delete
 
-    case .verifyPassword(_password: _), .verifyEmail(_code: _, _email: _),
-        .checkEmailDuplication(_email: _), .sendEmailCode(_email: _):
+    case .verifyPassword(_password: _),
+        .verifyEmail(_code: _, _email: _),
+        .checkEmailDuplication(_email: _),
+        .sendEmailCode(_email: _):
       return .post
     }
   }
@@ -106,13 +118,18 @@ extension networkingAPI: TargetType {
       
     case .deleteID:
       return .requestPlain
+      
+    case .searchSinglePost(_postId: _):
+      return .requestPlain
     }
   }
   
   var headers: [String : String]? {
     guard let acceessToken = TokenManager.shared.loadAccessToken() else { return nil }
     switch self {
-    case .checkEmailDuplication(_email: _), .sendEmailCode(_email: _):
+    case  .checkEmailDuplication(_email: _),
+          .sendEmailCode(_email: _),
+          .searchSinglePost(_postId: _):
       return ["Content-type": "application/json"]
       
     case .verifyEmail(_code: _, _email: _):

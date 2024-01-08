@@ -3,7 +3,8 @@ import UIKit
 import SnapKit
 
 // searchResultCell이랑 같은 형식 , collectionview랑 추가버튼 같이 뜨게 수정해야함
-final class StudyViewController: NaviHelper {
+final class
+StudyViewController: NaviHelper {
   
   let postDataManager = PostDataManager.shared
   let detailPostDataManager = PostDetailInfoManager.shared
@@ -36,7 +37,12 @@ final class StudyViewController: NaviHelper {
     return button
   }()
   
-  private lazy var studyCount = recentDatas?.totalCount
+  private lazy var studyCount: Int = recentDatas?.totalCount ?? 0 {
+    didSet {
+      countLabel.text = "\(recentDatas?.totalCount ?? 0)개"
+    }
+  }
+  
   private lazy var countLabel = createLabel(title: "\(studyCount ?? 0)개",
                                             textColor: .bg80,
                                             fontType: "Pretendard",
@@ -314,6 +320,20 @@ final class StudyViewController: NaviHelper {
     
     activityIndicator.startAnimating()
   }
+  
+  // MARK: - 스크롤해서 네트워킹
+  func fectMoreData(hotType: String){
+    postDataManager.getRecentPostDatas(hotType: hotType,
+                                       size: (recentDatas?.totalCount ?? 0) + 5) {
+      self.recentDatas = self.postDataManager.getRecentPostDatas()
+      DispatchQueue.main.async {
+        self.activityIndicator.stopAnimating()
+        self.activityIndicator.removeFromSuperview()
+        
+        self.resultCollectionView.reloadData()
+      }
+    }
+  }
 }
 
 // MARK: - collectionView
@@ -329,12 +349,12 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
                       didSelectItemAt indexPath: IndexPath) {
     
     let postedVC = PostedStudyViewController()
-  
-    detailPostDataManager.getPostDetailData(postID: recentDatas?.postDataByInquiries.content[indexPath.row].postID ?? 0) {
+    guard let postId = recentDatas?.postDataByInquiries.content[indexPath.row].postID else { return }
+    detailPostDataManager.searchSinglePostData(postId: postId) {
       let cellData = self.detailPostDataManager.getPostDetailData()
       postedVC.postedDate = cellData
     }
-    
+
     self.navigationController?.pushViewController(postedVC, animated: true)
   }
   
@@ -346,6 +366,7 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
     if let cell = cell as? SearchResultCell {
       let content = recentDatas?.postDataByInquiries.content[indexPath.row]
       cell.model = content
+      
     }
     return cell
   }
@@ -362,3 +383,16 @@ extension StudyViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
+// MARK: - 스크롤할 때 네트워킹 요
+extension StudyViewController {
+  func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    if (resultCollectionView.contentOffset.y > (resultCollectionView.contentSize.height - resultCollectionView.bounds.size.height)){
+      
+      guard let last = recentDatas?.postDataByInquiries.last else { return }
+      
+      if !last {
+        fectMoreData(hotType: "false")
+      }
+    }
+  }
+}

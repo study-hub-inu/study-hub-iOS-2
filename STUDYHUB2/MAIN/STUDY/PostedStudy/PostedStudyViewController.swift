@@ -559,6 +559,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     self.nickNameLabel.text = self.postedDate?.postedUser.nickname
   }
 }
+
 // MARK: - collectionView
 extension PostedStudyViewController: UICollectionViewDelegate, UICollectionViewDataSource {
   
