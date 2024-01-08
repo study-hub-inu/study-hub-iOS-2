@@ -58,26 +58,15 @@ extension networkingAPI: TargetType {
   
   var method: Moya.Method {
     switch self {
-    case .storeImage(_image: _):
+    case .storeImage(_image: _), .editUserNickName(_nickname: _),
+        .editUserMaojr(_major: _), .editUserPassword(_checkPassword: _, _password: _):
       return .put
-    case .deleteImage:
+    case .deleteImage, .deleteID:
       return .delete
-    case .editUserNickName(_nickname: _):
-      return .put
-    case .editUserMaojr(_major: _):
-      return .put
-    case .editUserPassword(_checkPassword: _, _password: _):
-      return .put
-    case .verifyPassword(_password: _):
+
+    case .verifyPassword(_password: _), .verifyEmail(_code: _, _email: _),
+        .checkEmailDuplication(_email: _), .sendEmailCode(_email: _):
       return .post
-    case .verifyEmail(_code: _, _email: _):
-      return .post
-    case .checkEmailDuplication(_email: _):
-      return .post
-    case .sendEmailCode(_email: _):
-      return .post
-    case .deleteID:
-      return .delete
     }
   }
   
@@ -132,7 +121,7 @@ extension networkingAPI: TargetType {
     case .storeImage(_image: _):
       return [ "Content-Type" : "multipart/form-data",
                "Authorization": "\(acceessToken)" ]
-    case .deleteImage, .deleteID:
+    case .deleteImage, .deleteID , .verifyPassword(_):
       return [ "Authorization": "\(acceessToken)"]
     default:
       return ["Content-type": "application/json",

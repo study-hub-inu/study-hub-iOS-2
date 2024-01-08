@@ -8,6 +8,7 @@
 import UIKit
 
 import SnapKit
+import Moya
 
 final class DeleteIDViewContoller: NaviHelper {
   
@@ -52,6 +53,9 @@ final class DeleteIDViewContoller: NaviHelper {
 
     return label
   }()
+  
+  private lazy var buttonStackView = createStackView(axis: .horizontal,
+                                                     spacing: 8)
   
   private lazy var continueButton: UIButton = {
     let button = UIButton()
@@ -98,9 +102,9 @@ final class DeleteIDViewContoller: NaviHelper {
     let button = UIButton()
     button.setTitle("탈퇴하기", for: .normal)
     button.setTitleColor(.white, for: .normal)
-    button.backgroundColor = .o50
+    button.backgroundColor = .o30
     button.addAction(UIAction { _ in
-      self.quitButtonTapped()
+      self.checkValidPassword()
     }, for: .touchUpInside)
     button.layer.cornerRadius = 10
     return button
@@ -121,14 +125,16 @@ final class DeleteIDViewContoller: NaviHelper {
   
   // MARK: - setupLayout
   func setupLayout(){
+    buttonStackView.addArrangedSubview(continueButton)
+    buttonStackView.addArrangedSubview(cancelButton)
+    
     [
       titleLabel,
       mainView,
       infoTitleLabel,
       infoDescriptionLabel1,
       infoDescriptionLabel2,
-      continueButton,
-      cancelButton
+      buttonStackView
     ].forEach {
       view.addSubview($0)
     }
@@ -151,7 +157,7 @@ final class DeleteIDViewContoller: NaviHelper {
       $0.top.equalTo(titleLabel.snp.bottom).offset(20)
       $0.leading.equalTo(titleLabel.snp.leading)
       $0.trailing.equalToSuperview().offset(-20)
-      $0.height.equalTo(335)
+      $0.height.equalTo(300)
     }
     
     infoTitleLabel.snp.makeConstraints {
@@ -163,7 +169,7 @@ final class DeleteIDViewContoller: NaviHelper {
     infoDescriptionLabel1.snp.makeConstraints {
       $0.top.equalTo(infoTitleLabel.snp.bottom).offset(35)
       $0.leading.equalTo(infoTitleLabel.snp.leading)
-      $0.trailing.equalTo(mainView.snp.trailing).offset(-20)
+      $0.trailing.equalTo(mainView.snp.trailing).offset(-30)
     }
     
     infoDescriptionLabel2.snp.makeConstraints {
@@ -172,19 +178,12 @@ final class DeleteIDViewContoller: NaviHelper {
       $0.trailing.equalTo(mainView.snp.trailing).offset(-20)
     }
     
-    continueButton.snp.makeConstraints {
+    buttonStackView.distribution = .fillEqually
+    buttonStackView.snp.makeConstraints {
       $0.bottom.equalToSuperview().offset(-60)
       $0.leading.equalTo(mainView.snp.leading)
+      $0.trailing.equalTo(mainView.snp.trailing)
       $0.height.equalTo(55)
-      $0.width.equalTo(163)
-    }
-    
-    cancelButton.snp.makeConstraints {
-      $0.bottom.equalToSuperview().offset(-60)
-      $0.leading.equalTo(continueButton.snp.trailing).offset(10)
-      $0.trailing.equalTo(mainView)
-      $0.height.equalTo(55)
-      $0.width.equalTo(163)
     }
   }
   
@@ -195,14 +194,14 @@ final class DeleteIDViewContoller: NaviHelper {
     navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
   }
   
+  // MARK: - 탈퇴 계속 진행 시
   func continueButtonTapped(){
     titleLabel.isHidden = true
     mainView.isHidden = true
     infoTitleLabel.isHidden = true
     infoDescriptionLabel1.isHidden = true
     infoDescriptionLabel2.isHidden = true
-    continueButton.isHidden = true
-    cancelButton.isHidden = true
+    buttonStackView.isHidden = true
     
     [
       enterPasswordLabel,
@@ -218,6 +217,9 @@ final class DeleteIDViewContoller: NaviHelper {
       $0.leading.equalToSuperview().offset(20)
     }
     
+    enterPassowrdTextField.addTarget(self,
+                                   action: #selector(textFieldDidChange(_:)),
+                                   for: .editingChanged)
     enterPassowrdTextField.isSecureTextEntry = true
     enterPassowrdTextField.snp.makeConstraints {
       $0.top.equalTo(enterPasswordLabel.snp.bottom).offset(10)
@@ -232,14 +234,11 @@ final class DeleteIDViewContoller: NaviHelper {
     }
     
     quitButton.snp.makeConstraints {
-      $0.top.equalTo(enterPassowrdTextField.snp.bottom).offset(10)
+      $0.top.equalTo(enterPassowrdTextField.snp.bottom).offset(30)
       $0.leading.equalToSuperview().offset(20)
       $0.trailing.equalToSuperview().offset(-20)
       $0.height.equalTo(55)
-
-      
     }
-    
   }
   
   func cancelButtonTapped(){
@@ -256,9 +255,75 @@ final class DeleteIDViewContoller: NaviHelper {
     sender.isSelected = !isPasswordVisible
   }
   
+  // MARK: - 비밀번호 일치여부 확인
+  func checkValidPassword(){
+    guard let password = enterPassowrdTextField.text else { return }
+    print(password)
+    let provider = MoyaProvider<networkingAPI>()
+    provider.request(.verifyPassword(_password: password)) { result in
+      switch result {
+      case .success(let response):
+        // 성공시 - 확인 버튼 활성화, 실패 시 - 토스트 팝업 띄우기케이스를 나눠야할듯 200
+        print(response.response)
+        switch response.statusCode{
+        case 200:
+          self.quitButton.addAction(UIAction { _ in
+            self.quitButtonTapped()
+          }, for: .touchUpInside)
+        default:
+          self.showToast(message: "비밀번호가 일치하지 않아요. 다시 입력해주세요.", alertCheck: false)
+        }
+      case .failure(let response):
+        print(response.response)
+        self.showToast(message: "비밀번호가 일치하지 않아요. 다시 입력해주세요.", alertCheck: false)
+      }
+    }
+  }
+  
   func quitButtonTapped(){
+    print("탈퇴하기 활성화")
+//    let provider = MoyaProvider<networkingAPI>()
+//    provider.request(.deleteID) {
+//      switch $0 {
+//      case .success(let response):
+//        print(response)
+//      case .failure(let response):
+//        print(response)
+//      }
+//    }
+    let popupVC = PopupViewController(title: "탈퇴가 완료됐어요",
+                                      desc: "지금까지 스터디허브를 이용해 주셔서 감사합니다.",
+                                      leftButtonTitle: "아니요",
+                                      rightButtonTilte: "네",
+                                      checkEndButton: true)
     
+    popupVC.modalPresentationStyle = .overFullScreen
+    self.present(popupVC, animated: false)
+    
+    popupVC.popupView.endButtonAction = { [weak self] in
+      if let navigationController = self?.navigationController {
+        navigationController.dismiss(animated: true)
+        navigationController.popToRootViewController(animated: false)
+       
+        let loginVC = LoginViewController()
+        loginVC.modalPresentationStyle = .overFullScreen
+        navigationController.present(loginVC, animated: true, completion: nil)
+      }
+    }
   }
 }
 
+extension DeleteIDViewContoller{
+  @objc func textFieldDidChange(_ textField: UITextField) {
+    print(enterPassowrdTextField.text?.isEmpty)
+    if enterPassowrdTextField.text?.isEmpty == false {
+      quitButton.backgroundColor = .o50
+      quitButton.isEnabled = true
 
+    } else {
+      quitButton.backgroundColor = .o30
+      quitButton.isEnabled = false
+
+    }
+  }
+}

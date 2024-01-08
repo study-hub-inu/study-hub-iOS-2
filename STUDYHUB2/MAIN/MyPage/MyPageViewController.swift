@@ -17,7 +17,6 @@ final class MyPageViewController: NaviHelper {
         if let imageURL = URL(string: self.myPageUserData?.imageURL ?? "") {
           let processor = ResizingImageProcessor(referenceSize: CGSize(width: 56, height: 56))
           
-          // Clear image cache before downloading new image
           KingfisherManager.shared.cache.removeImage(forKey: imageURL.absoluteString)
           
           self.profileImageView.kf.setImage(with: imageURL, options: [.processor(processor)]) { result in

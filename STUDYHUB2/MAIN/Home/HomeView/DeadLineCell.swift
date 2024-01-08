@@ -136,7 +136,6 @@ final class DeadLineCell: UICollectionViewCell {
         } else if let data = data {
           let image = UIImage(data: data)
           DispatchQueue.main.async {
-            // 다운로드한 이미지를 이미지 뷰에 설정합니다.
             self.profileImageView.layer.cornerRadius = 15
             self.profileImageView.image = image
           }

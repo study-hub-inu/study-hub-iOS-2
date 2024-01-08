@@ -6,12 +6,14 @@
 //
 
 import UIKit
+
 import SnapKit
 
-class PopupView: UIView {
+final class PopupView: UIView {
   var leftButtonAction: (() -> Void)?
   var rightButtonAction: (() -> Void)?
-  var selectButtonAction: (() -> Void)?
+  var endButtonAction: (() -> Void)?
+  var checkEndButton: Bool = false
   
   private let popupView: UIView = {
     let view = UIView()
@@ -58,6 +60,16 @@ class PopupView: UIView {
     return button
   }()
   
+  private lazy var endButton: UIButton = {
+    let button = UIButton()
+    button.backgroundColor = .o50
+    button.setTitleColor(.white, for: .normal)
+    button.setTitle("종료", for: .normal)
+    button.addTarget(self, action: #selector(endButtonTapped), for: .touchUpInside)
+    button.layer.cornerRadius = 8
+    return button
+  }()
+  
   private lazy var buttonStack: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
@@ -69,7 +81,8 @@ class PopupView: UIView {
   init(title: String,
        desc: String,
        leftButtonTitle: String = "취소",
-       rightButtonTitle: String = "삭제") {
+       rightButtonTitle: String = "삭제",
+       checkEndButton: Bool = false) {
     
     self.titleLabel.text = title
     self.descLabel.text = desc
@@ -82,8 +95,14 @@ class PopupView: UIView {
     
     self.addSubview(self.popupView)
     
-    self.buttonStack.addArrangedSubview(self.leftButton)
-    self.buttonStack.addArrangedSubview(self.rightButton)
+    if checkEndButton {
+      self.checkEndButton = true
+      
+      self.buttonStack.addArrangedSubview(self.endButton)
+    } else {
+      self.buttonStack.addArrangedSubview(self.leftButton)
+      self.buttonStack.addArrangedSubview(self.rightButton)
+    }
     
     self.popupView.addSubview(self.titleLabel)
     self.popupView.addSubview(self.descLabel)
@@ -125,6 +144,10 @@ class PopupView: UIView {
       make.left.equalTo(popupView).offset(10)
       make.right.equalTo(popupView).offset(-10)
       make.bottom.equalTo(popupView).offset(-15)
+      
+      if checkEndButton {
+        make.height.equalTo(47)
+      }
     }
 
   }
@@ -137,7 +160,7 @@ class PopupView: UIView {
     rightButtonAction?()
   }
   
-  @objc private func selectButtonTapped() {
-    selectButtonAction?()
+  @objc private func endButtonTapped() {
+    endButtonAction?()
   }
 }

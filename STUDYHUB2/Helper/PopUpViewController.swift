@@ -10,10 +10,12 @@ final class PopupViewController: UIViewController {
   init(title: String, desc: String, postID: Int = 0,
        bottomeSheet: BottomSheet? = nil,
        leftButtonTitle: String = "취소",
-       rightButtonTilte: String = "삭제") {
+       rightButtonTilte: String = "삭제",
+       checkEndButton: Bool = false) {
     self.popupView = PopupView(title: title, desc: desc,
                                leftButtonTitle: leftButtonTitle,
-                               rightButtonTitle: rightButtonTilte)
+                               rightButtonTitle: rightButtonTilte,
+                               checkEndButton: checkEndButton)
     super.init(nibName: nil, bundle: nil)
       
     self.view.backgroundColor = .lightGray.withAlphaComponent(0.8)
@@ -47,6 +49,10 @@ final class PopupViewController: UIViewController {
           print("게시글 삭제 실패: \(error)")
         }
       }
+    }
+    
+    self.popupView.endButtonAction = {
+      self.dismiss(animated: true)
     }
   }
   
