@@ -138,7 +138,9 @@ extension networkingAPI: TargetType {
     case .storeImage(_image: _):
       return [ "Content-Type" : "multipart/form-data",
                "Authorization": "\(acceessToken)" ]
-    case .deleteImage, .deleteID , .verifyPassword(_):
+    case .deleteImage,
+         .deleteID ,
+         .verifyPassword(_):
       return [ "Authorization": "\(acceessToken)"]
     default:
       return ["Content-type": "application/json",

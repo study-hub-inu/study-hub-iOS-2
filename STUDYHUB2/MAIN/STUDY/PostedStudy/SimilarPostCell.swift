@@ -8,6 +8,8 @@
 import UIKit
 
 import SnapKit
+import Kingfisher
+
 final class SimilarPostCell: UICollectionViewCell {
   
   static var id: String { NSStringFromClass(Self.self).components(separatedBy: ".").last ?? "" }
@@ -143,6 +145,24 @@ final class SimilarPostCell: UICollectionViewCell {
     writerMajorLabel.text = model?.major.convertMajor(model?.major ?? "없음", isEnglish: false)
     nickNameLabel.text = model?.userData.nickname
     postID = model?.postID
+    
+    
+    if let imageURL = URL(string: model?.userData.imageURL ?? "") {
+      let processor = ResizingImageProcessor(referenceSize: CGSize(width: 40, height: 40))
+            
+      self.profileImageView.kf.setImage(with: imageURL, options: [.processor(processor)]) { result in
+        switch result {
+        case .success(let value):
+          DispatchQueue.main.async {
+            self.profileImageView.image = value.image
+            self.profileImageView.layer.cornerRadius = 20
+            self.profileImageView.clipsToBounds = true
+          }
+        case .failure(let error):
+          print("Image download failed: \(error)")
+        }
+      }
+    }
   }
   
 }

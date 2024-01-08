@@ -367,6 +367,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                       didSelectItemAt indexPath: IndexPath) {
   
     let postedVC = PostedStudyViewController()
+    postedVC.hidesBottomBarWhenPushed = true
     
     detailPostDataManager.getPostDetailData(postID: newPostDatas?.postDataByInquiries.content[indexPath.row].postID ?? 0) {
       let cellData = self.detailPostDataManager.getPostDetailData()

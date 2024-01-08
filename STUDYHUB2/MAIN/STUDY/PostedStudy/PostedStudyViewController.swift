@@ -8,12 +8,10 @@
 import UIKit
 
 import SnapKit
+import Kingfisher
 
-final class PostedStudyViewController: NaviHelper, SendPostData {
+final class PostedStudyViewController: NaviHelper {
   let detailPostDataManager = PostDetailInfoManager.shared
-  func sendData(data: CreateStudyRequest) {
-    print("11")
-  }
   
   // 여기에 데이터가 들어오면 관련 UI에 데이터 넣어줌
   var postedDate: PostDetailData? {
@@ -226,18 +224,18 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     imageView.frame = CGRect(x: 0, y: 0, width: 10, height: 10)
     return imageView
   }()
+  
+  private lazy var grayDividerLine2 = createGrayDividerLine(8.0)
+
   // 작성자 정보
   private lazy var writerLabel = createLabel(title: "작성자",
                                              textColor: .black,
-                                             fontType: "Pretendard",
+                                             fontType: "Pretendard-SemiBold",
                                              fontSize: 18)
   
   private lazy var profileImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.layer.cornerRadius = 15
     imageView.image = UIImage(named: "ProfileAvatar")
-    imageView.contentMode = .left
-    imageView.frame = CGRect(x: 0, y: 0, width: 28, height: 28)
     return imageView
   }()
   
@@ -252,23 +250,48 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
                                                fontSize: 16)
   // 학과, 닉네임 스택
   private lazy var writerInfoStackView = createStackView(axis: .vertical,
-                                                         spacing: 1)
+                                                         spacing: 10)
   // 학과 닉네임 이미지 스택
   private lazy var writerInfoWithImageStackView = createStackView(axis: .horizontal,
-                                                                  spacing: 5)
+                                                                  spacing: 10)
   // 학과 닉네임 이미지 작성자 스택
   private lazy var totalWriterInfoStackView = createStackView(axis: .vertical,
-                                                              spacing: 10)
+                                                              spacing: 20)
   private lazy var spaceView1 = UIView()
   
+  private lazy var grayDividerLine3 = createGrayDividerLine(8.0)
+
+  // 댓글
+  private lazy var commentLabel = createLabel(title: "댓글 0",
+                                              textColor: .black,
+                                              fontType: "Pretendard-SemiBold",
+                                              fontSize: 16)
+  
+  private lazy var commentLabelStackView = createStackView(axis: .vertical, spacing: 10)
+  
+  private lazy var grayDividerLine4 = createGrayDividerLine(1.0)
+
+  private lazy var commentTextField = createTextField(title: "댓글을 입력해주세요")
+  
+  private lazy var commentButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("등록", for: .normal)
+    button.setTitleColor(UIColor.white, for: .normal)
+    button.backgroundColor = .o30
+    button.layer.cornerRadius = 15
+    return button
+  }()
+  
+  private lazy var commentStackView = createStackView(axis: .horizontal, spacing: 8)
+  
+  private lazy var grayDividerLine5 = createGrayDividerLine(8.0)
+
   // 비슷한 게시글
   private lazy var similarPostLabel = createLabel(title: "이 글과 비슷한 스터디예요",
                                                   textColor: .black,
-                                                  fontType: "Pretendard",
+                                                  fontType: "Pretendard-SemiBold",
                                                   fontSize: 18)
-  
-  var dataSource: [String] = []
-  
+    
   private lazy var collectionView: UICollectionView = {
     let flowLayout = UICollectionViewFlowLayout()
     flowLayout.scrollDirection = .horizontal
@@ -368,8 +391,6 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     }
     
     // 기간, 벌금, 대면여부, 관련학과
-    let grayDividerLine2 = createGrayDividerLine(8.0)
-    
     let periodData = [periodImageView, periodLabel, spaceView6]
     for view in periodData {
       periodStackView.addArrangedSubview(view)
@@ -396,8 +417,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     let detailInfo = [periodTitleLabel, periodStackView,
                       fineTitleLabel, fineInfoStackView,
                       meetTitleLabel, meetStackView,
-                      majorTitleLabel, majorStackView,
-                      grayDividerLine2]
+                      majorTitleLabel, majorStackView]
     
     for view in detailInfo {
       detailInfoStackView.addArrangedSubview(view)
@@ -414,14 +434,20 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
       writerInfoWithImageStackView.addArrangedSubview(view)
     }
     
+    commentLabelStackView.addArrangedSubview(commentLabel)
+    
+    let commentInfo = [commentTextField, commentButton]
+    for view in commentInfo {
+      commentStackView.addArrangedSubview(view)
+    }
+    
     let spaceView8 = UIView()
-    let grayDividerLine3 = createGrayDividerLine(8.0)
     let totalWriterData = [writerLabel, writerInfoWithImageStackView,
-                           spaceView8, grayDividerLine3]
+                           spaceView8]
     for view in totalWriterData {
       totalWriterInfoStackView.addArrangedSubview(view)
     }
-    
+        
     // 유사 스터디 추천
     let spaceView11 = UIView()
     let collectionView = [similarPostLabel,collectionView, spaceView11]
@@ -430,17 +456,28 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     }
     
     // 전체 페이지
-    let pageData = [topInfoStackView, aboutStudyStackView,
-                    detailInfoStackView, totalWriterInfoStackView,
-                    similarPostStackView]
-    for view in pageData {
-      pageStackView.addArrangedSubview(view)
+    [
+      topInfoStackView,
+      aboutStudyStackView,
+      detailInfoStackView,
+      grayDividerLine2,
+      totalWriterInfoStackView,
+      grayDividerLine3,
+      commentLabelStackView,
+      grayDividerLine4,
+      commentStackView,
+      grayDividerLine5,
+      similarPostStackView
+    ].forEach {
+      pageStackView.addArrangedSubview($0)
     }
+    
     
     scrollView.addSubview(pageStackView)
     
     view.addSubview(scrollView)
   }
+  
   // MARK: - makeUI
   func makeUI(){
     coreInfoStackView.distribution = .fillProportionally
@@ -491,16 +528,27 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     writerInfoWithImageStackView.distribution = .fillProportionally
     
     totalWriterInfoStackView.backgroundColor = .white
-    totalWriterInfoStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 20, right: 10)
+    totalWriterInfoStackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 10)
     totalWriterInfoStackView.isLayoutMarginsRelativeArrangement = true
     
     spaceView1.snp.makeConstraints { make in
       make.width.equalTo(200)
     }
+  
+    commentLabelStackView.layoutMargins = UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 20)
+    commentLabelStackView.isLayoutMarginsRelativeArrangement = true
+    
+    commentStackView.distribution = .fillProportionally
+    commentStackView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+    commentStackView.isLayoutMarginsRelativeArrangement = true
+    
+    commentTextField.snp.makeConstraints {
+      $0.height.equalTo(42)
+    }
     
     // 비슷한 게시글
     similarPostStackView.backgroundColor = .white
-    similarPostStackView.layoutMargins = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
+    similarPostStackView.layoutMargins = UIEdgeInsets(top: 0, left: 20, bottom: 10, right: 10)
     similarPostStackView.isLayoutMarginsRelativeArrangement = true
     
     collectionView.snp.makeConstraints { make in
@@ -521,6 +569,7 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     
   }
 
+  // MARK: - collectionview 관련
   private func setupDelegate() {
     collectionView.delegate = self
     collectionView.dataSource = self
@@ -531,13 +580,15 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
                             forCellWithReuseIdentifier: SimilarPostCell.id)
   }
   
+  // MARK: - 데이터 받아오고 ui다시 그리는 함수
   func redrawUI(){
     if let postDate = self.postedDate?.createdDate {
       self.postedDateLabel.text = "\(postDate[0]). \(postDate[1]). \(postDate[2])"
     }
     
-    self.postedMajorLabel.text = self.convertMajor(self.postedDate?.major ?? "",
-                                              isEnglish: false)
+    let major = self.convertMajor(self.postedDate?.major ?? "",
+                                 isEnglish: false)
+    self.postedMajorLabel.text = "   \(major)   "
     self.postedTitleLabel.text = self.postedDate?.title
     self.memberNumberCount = self.postedDate?.remainingSeat ?? 0
     self.fineCount = self.postedDate?.penalty ?? 0
@@ -557,6 +608,25 @@ final class PostedStudyViewController: NaviHelper, SendPostData {
     self.writerMajorLabel.text = self.convertMajor(self.postedDate?.postedUser.major ?? "",
                                                    isEnglish: false)
     self.nickNameLabel.text = self.postedDate?.postedUser.nickname
+    
+    if let imageURL = URL(string: postedDate?.postedUser.imageURL ?? "") {
+      let processor = ResizingImageProcessor(referenceSize: CGSize(width: 50, height: 50))
+            
+      self.profileImageView.kf.setImage(with: imageURL, options: [.processor(processor)]) { result in
+        switch result {
+        case .success(let value):
+          DispatchQueue.main.async {
+            self.profileImageView.image = value.image
+            self.profileImageView.layer.cornerRadius = 20
+            self.profileImageView.clipsToBounds = true
+          }
+        case .failure(let error):
+          print("Image download failed: \(error)")
+        }
+      }
+    }
+    
+    collectionView.reloadData()
   }
 }
 

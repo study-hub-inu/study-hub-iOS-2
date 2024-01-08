@@ -11,7 +11,6 @@ final class CreateStudyViewController: UIViewController, ChangeDateProtocol {
   var genderType: String?
   var contactMethod: String?
   var selectedMajor: String?
-  var postDataSender: SendPostData?
   var modifyPostID: Int?
   
   // 선택한 학과를 저장할 프로퍼티
@@ -1008,12 +1007,6 @@ extension CreateStudyViewController {
     }
   }
 }
-
-// 다음 페이지로 데이터 전달할 delegate
-protocol SendPostData {
-  func sendData(data: CreateStudyRequest)
-}
-
 
 
 

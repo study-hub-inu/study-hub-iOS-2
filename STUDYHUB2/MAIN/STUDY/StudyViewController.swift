@@ -342,17 +342,20 @@ extension StudyViewController: UICollectionViewDelegate, UICollectionViewDataSou
   func collectionView(_ collectionView: UICollectionView,
                       numberOfItemsInSection section: Int) -> Int {
     studyCount = recentDatas?.totalCount ?? 0
-    return studyCount ?? 0
+    return studyCount
   }
   
   func collectionView(_ collectionView: UICollectionView,
                       didSelectItemAt indexPath: IndexPath) {
     
     let postedVC = PostedStudyViewController()
+    postedVC.hidesBottomBarWhenPushed = true
+
     guard let postId = recentDatas?.postDataByInquiries.content[indexPath.row].postID else { return }
     detailPostDataManager.searchSinglePostData(postId: postId) {
       let cellData = self.detailPostDataManager.getPostDetailData()
       postedVC.postedDate = cellData
+      print(cellData)
     }
 
     self.navigationController?.pushViewController(postedVC, animated: true)
@@ -383,7 +386,7 @@ extension StudyViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
-// MARK: - 스크롤할 때 네트워킹 요
+// MARK: - 스크롤할 때 네트워킹 요청
 extension StudyViewController {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     if (resultCollectionView.contentOffset.y > (resultCollectionView.contentSize.height - resultCollectionView.bounds.size.height)){
